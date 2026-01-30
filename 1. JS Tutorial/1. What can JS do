@@ -1,0 +1,43 @@
+What can JS DO? (see test.html)
+
+1) JavaScript Can Change HTML Content:
+    - One of many JavaScript HTML methods is getElementById().
+    - The example below "finds" an HTML element (with id="demo"), and changes the element content
+        (innerHTML) to "Hello JS":
+
+            document.getElementById("demo").innerHTML = "Hello JS";
+        
+        💡 JS accept both double and single quotes:
+
+            document.getElementById('demo').innerHTML = 'Hello JS';
+
+2) JS can change HTML attribute values:
+
+        <button 
+        onclick="document.getElementById('bulb').src='light_on_bulb_image'"
+        style="width:100px">Turn on light</button>
+
+        <img id="bulb" src="light_off_bulb_image" style="width:100px">
+
+        <button
+        onclick="document.getElementById('bulb').src='light_off_bulb_image'"
+        style="width:100px">Turn off light</button>
+
+    - Here if we click on button 'Turn on light', it will change the value of the src attribute
+        of an image. That is, it will replace the image(light_off_bulb_image) with new image
+        (light_on_bulb_image). And same goes for 'Turn off light' button.
+    - The working procedure is same as before, 
+        (i) First usinmg JS method getElementById(), we find HTML element with id = "bulb"
+            which is <image>.
+        (ii) Then we change the source attribute of <image>
+
+3) JS can change HTML styles(CSS):
+    - Changing the style of an HTML element, is a variant of changing an HTML attribute:
+
+        <p id="chng">style of this sentence will change if you click.</p>
+        <button type="button" onclick="document.getElementById('chng').style.fontSize='35px'">
+            Click Me!
+        </button>
+
+4) JS can hide HTML elements:
+    - Hiding HTML elements can be done by changing the display style:

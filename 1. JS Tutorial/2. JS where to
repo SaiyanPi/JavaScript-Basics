@@ -1,0 +1,99 @@
+JS where to?
+
+1) The <script> tag:
+    - In HTML, JavaScript code is inserted between <script> and </script> tags.
+
+            <script>
+                document.getElementById("demo").innerHTML = "Hello JS";
+            </script>
+    - Old JavaScript examples may use a type attribute: <script type="text/javascript">.
+        The type attribute is not required. JavaScript is the default scripting language in HTML.
+
+2) JavaScript Functions and Events:
+    - A JavaScript function is a block of JavaScript code, that can be executed when "called" for.
+        For example, a function can be called when an event occurs, like when the user clicks a
+        button.
+    - We will learn much more about functions and events in later chapters.
+
+3) JavaScript in <head> or <body>:
+    - we can place any number of scripts in an HTML document.
+    - Scripts can be placed in the <body>, or in the <head> section of an HTML page, or in both.
+        
+        (i) JavaScript in <head>:
+
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <script>
+                        function myFunction() {
+                            document.getElementById("demo").innerHTML = "Paragraph changed.";
+                        }
+                    </script>
+                </head>
+                <body>
+
+                    <h2>Demo JavaScript in Head</h2>
+
+                    <p id="demo">A Paragraph.</p>
+
+                    <button type="button" onclick="myFunction()">Try it</button>
+
+                </body>
+            </html> 
+
+        (ii) JavaScript in <body>:
+
+            <!DOCTYPE html>
+            <html>
+            <head></head>
+            <body>
+
+                <h2>Demo JavaScript in Body</h2>
+
+                <p id="demo">A Paragraph</p>
+
+                <button type="button" onclick="myFunction()">Try it</button>
+
+                <script>
+                    function myFunction() {
+                        document.getElementById("demo").innerHTML = "Paragraph changed.";
+                    }
+                </script>
+
+            </body>
+            </html>
+
+4) External JavaScript:
+    - Scripts can also be placed in external files:
+        (html file)
+            <body> 
+                <div>
+                    <h2> JS from external file:</h2>
+                    <p id="boom">I will change color using external js file if you click.</p>
+                    <button type="button" onclick="myFunction()">
+                        Click Me!
+                    </button>
+                    <!-- external script -->
+                    <script src="testScript.js"></script>
+                </div>
+            </body>
+        
+        (external script file)
+            function myFunction() {
+                document.getElementById("boom").style.color='red';
+            }
+
+    - Placing scripts in external files has some advantages:
+        -> It separates HTML and code
+        -> It makes HTML and JavaScript easier to read and maintain
+        -> Cached JavaScript files can speed up page loads
+
+    - An external script can be referenced in 3 different ways:
+        i) With a full URL (a full web address)
+            eg: <script src="https://www.w3schools.com/js/myScript.js"></script>
+            
+        ii) With a file path (like /js/)
+            eg: <script src="/js/myScript.js"></script>
+
+        iii) Without any path
+            eg: <script src="myScript.js"></script>

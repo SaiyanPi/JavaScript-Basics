@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test code</title>
+</head>
+<body>
+    <div>
+        <!-- JS can change HTML content ------------------------------------------------------ -->
+        <h2> 1. JS can change HTML content:</h2>
+        <p id="demo">some html paragraph.</p>
+        <script>
+            document.getElementById("demo").innerHTML = "Hello JS";
+        </script>
+    </div>
+    
+    <div>
+        <!-- JS can change HTML attribute values---------------------------------------------- -->
+        <h2> 2. JS can change HTML atrribute value:</h2>
+        <p>In this case JS changes the value of the src attribute of an image.</p>
+
+        <button 
+        onclick="document.getElementById('bulb').src='https://toppng.com/uploads/preview/light-bulb-on-off-png-11553940171g57vp25a8k.png'"
+        style="width:100px"> Turn on light</button>
+
+        <img id="bulb" src="https://toppng.com/uploads/preview/light-bulb-on-off-png-115539402943y50vxr5yi.png"
+        style="width:100px">
+
+        <button
+        onclick="document.getElementById('bulb').src='https://toppng.com/uploads/preview/light-bulb-on-off-png-115539402943y50vxr5yi.png'"
+        style="width:100px"> Turn off light</button>
+    </div>
+
+    <div>
+        <!-- JS can change the style of an HTML element--------------------------------------- -->
+        <h2> 3. JS can change the style of an HTML element:</h2>
+        <p id="chng">My style will change if you click.</p>
+        <button type="button" onclick="document.getElementById('chng').style.fontSize='20px'">
+            Click Me!
+        </button>
+    </div>
+
+    <div>
+        <!-- JS can hide HTML element ----------------------------------------------------------->
+        <h2> 4. JS can hide HTML element:</h2>
+        <p id="tadaa">I will dissapear if you click.</p>
+        <button type="button" onclick="document.getElementById('tadaa').style.display='none'">
+            Click Me!
+        </button>
+    </div>
+
+    <div>
+        <!-- JS from external file -------------------------------------------------------------->
+        <h2> JS from external file:</h2>
+        <p id="boom">I will change color using external js file if you click.</p>
+        <button type="button" onclick="myFunction()">
+            Click Me!
+        </button>
+        <!-- external script -->
+        <script src="testScript.js"></script>
+    </div>
+
+    <div>
+        <!-- using window.alert() to display data -------------------------------------------- -->
+        <h2>we can use alert box to display data</h2>
+        <script> window.alert(5 + 6); </script>
+    </div>
+</body>
+</html>
