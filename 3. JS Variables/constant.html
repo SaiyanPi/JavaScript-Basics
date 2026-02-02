@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Code</title>
+</head>
+<body>
+    <h1>Constant</h1>
+     <!-- const variable scope --------------------------------------------------------------->
+    <div>
+        <h1>Constant Redeclaration</h1>
+        <h2>1. JavaScript const can not be redeclared (same as let)</h2>
+
+        <script>
+            const  a = 10;
+            // const a = 11;   // ❌ cannot redeclare
+        </script>
+        <hr>
+    </div>
+
+    <!-- const variable scope --------------------------------------------------------------->
+    <div>
+        <h1>Constant Scope</h1>
+        <h2>1. JavaScript const has block scope (same as let)</h2>
+
+        <script>
+            const  x = 10;
+            // Here x is 10
+
+            {  
+                const x = 2;
+                console.log("Value of x inside block: " , x);
+                // Here x is 2
+            }
+
+            // Here x is 10
+            console.log("Value of x outside block: " , x);
+        </script>
+        <hr>
+    </div>
+   
+     <!-- const arrays and objects ----------------------------------------------------------->
+    <div>
+        <h1>Constant Array and Object behavior</h1>
+        <h2>Constant Array: </h2>
+        <h3>1. value of constant array can be changed</h3>
+        <h3>2. new value can be added in constant array</h3>
+        <h3>3. But constant array can't be reassigned</h3>
+        <h2>Constant Objects</h2>
+        <h3>1. property of constant object can be changed</h3>
+        <h3>2. new property can be added in constant object</h3>
+        <h3>3. But constant object can't be reassigned</h2>
+
+        <script>
+            // Array --------------
+            const cars = ["Toyota", "Suzuki"];
+            console.log("cars[0]: " , cars[0])
+            console.log("Original Cars: " , cars);
+            cars[1] = "BYD";    // ✅ can change change value
+            console.log("Cars after changing element with index 1: " , cars);
+            cars.push("Audi");  // ✅can add new value
+            console.log("Cars after adding new element 'Audi': " , cars);  
+            // cars = ["Ferrari", "Hyundai"];  // ❌ can't reassign 
+
+            // Object -------------
+            const company = { name : "Apple", product : "Phone", colors: ["Blue", "Black"] }
+            console.log("Object: ", company);
+            company.product = "Laptop"; // ✅ can change property
+            console.log("Object after changing property product: ", company);
+            company.model = "MN001" // ✅ can add new property
+            console.log("Object after adding new property model: ", company);
+            company.location = ["NY", "Tokyo"];
+            console.log("Object after adding new property(array type) location: ", company);
+            // company = { country: "Nepal", cities: ["Pokhara", "Kathmandu"] }    // ❌ can't reassign
+
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+JS Syntax:
+
+1) Syntax rules:
+    // How to Declare variables:
+    let x = 5;
+    let y = 6;
+
+    // How to Compute values:
+    let z = x + y;
+
+    // I am a Comment. I do Nothing
+
+2) JavaScript Values:
+    - The JavaScript syntax defines two types of values:
+        (i) Literals (Fixed values)
+        (ii) Variables (Variable values)
+    
+3) JavaScript Literals:
+    - The most important syntax rules for literals (fixed values) are:
+
+        (i) Numbers are written with or without decimals:
+            eg, 10.50 or 1001
+
+        (ii) Strings are text, written within double or single quotes:
+            eg, "John Doe" or 'John Doe'
+
+4) JavaScript Keywords:
+    - JavaScript keywords are used to defines actions to be performed.
+    - The let and const keywords create variables:
+
+            let x = 5;
+            const fname = "John";
+
+    - JavaScript keywords are case-sensitive.
+        JavaScript does not interpret LET or Let as the keyword let.
+
+5) JavaScript Variables:
+    - Variables are containers for storing data values.
+    - Variables must be identified with unique names.
+
+            // Define x as a variable
+            let x;
+
+            // Assign the value 6 to x
+            x = 6;

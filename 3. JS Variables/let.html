@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test code</title>
+</head>
+<body>
+    <h1>Let keyword</h1>
+
+     <!-- Redeclaration and reassign ----------------------------------------------------------->
+    <div>
+        <h1>Let Redeclaration and reassign </h1>
+        <h2>1. Let cannot be redclared but can be reassign </h2>
+        <script>
+            let x = 10;
+            // let x = 11; // ❌ cannot redclare
+            x = 11  // ✅ let can be reassigned
+            console.log("value of x after reassign: ", x)   // 11
+        </script>
+    </div>
+    <div>
+        <h2>2. Var can be redclared and reassigned</h2>
+        <script>
+            var y = 10;
+            var y = 11; // ✅ can be redclare
+            y = 12; // ✅ let can be reassigned
+            console.log("value of y after reassign", y);    // 12
+        </script>
+        <hr>
+    </div>
+    
+    <!-- Scope ----------------------------------------------------------->
+    <div>
+        <h1>Let Scope</h1>
+        <h2>1. Let has a Block Scope </h2>
+        <script>
+           let a = 10;
+           {
+            let a = 20;
+            console.log("Value of varaible a inside block: ", a);   // 20
+           }
+            console.log("Value of varaible a outside block: ", a);  // 10
+        </script>
+    </div>
+    <div>
+        <h2>2. var has a Global Scope </h2>
+        <script>
+           var b = 10;
+            console.log("Value of varaible b outside block: ", b);  // 10
+           {
+            var b = 20;
+            console.log("Value of varaible b inside block: ", b);   // 20
+           }
+            console.log("Value of varaible b outside block after redeclaration: ", b);  // 20 because of redeclaration
+        </script>
+    </div>
+
+</body>
+</html>
