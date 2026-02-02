@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS if-else</title>
+</head>
+<body>
+    <div>
+        <h3>JS else if statement : <br>
+            If time is less than 10:00, create a "Good morning" greeting, if not, but time is less than
+            20:00, create a "Good day" greeting, otherwise a "Good evening":
+        </h3>
+        <p id = "message"></p>
+
+        <script>
+            let currentHour = new Date().getHours();
+            if(currentHour < 10){
+                document.getElementById("message").innerHTML = "Good morning!";
+            } else if(currentHour < 20) {
+                document.getElementById("message").innerHTML = "Good day!";
+            } else {
+                document.getElementById("message").innerHTML = "Good evening!";
+            }
+        </script>
+    </div>
+</body>
+</html>

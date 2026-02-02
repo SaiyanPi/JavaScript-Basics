@@ -1,0 +1,16 @@
+JS if:
+
+- Use the JavaScript if statement to execute a block of code when a condition is true.
+- syntax:
+            if (condition) {
+                // code to execute if the condition is true
+            }
+
+- ⚠️ Note that if is in lowercase letters. Uppercase letters (If or IF) will generate a
+    JavaScript error.
+    
+- eg: Make a "Good day" greeting if the hour is less than 18:00:
+            
+            if (new Date().getHours() < 18) {
+                document.getElementById("demo").innerHTML = "Good day!";
+            }

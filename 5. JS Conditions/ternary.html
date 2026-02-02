@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Ternary</title>
+</head>
+<body>
+    <div>
+        <h3>JS Ternary : <br>
+            If the value of age is < 18, set the value of text to "Minor", otherwise to "Adult":</h3>
+        <p id = "message"></p>
+        <input id="age" value="Enter your age here" />
+        <button onclick="myFunction()">Try it</button>
+
+        <script>
+            function myFunction(){
+                let age = Number(document.getElementById("age").value);
+                let message;
+
+                if(isNaN(age)){
+                    document.getElementById("message").innerHTML = "Input is not a valid number";
+                } else{
+                    // (age < 18) ? document.getElementById("message").innerHTML = "Minor" : 
+                    //     document.getElementById("message").innerHTML = "Adult";
+
+                    let text = (age < 18) ? "Minor" : "Adult";
+                    document.getElementById("message").innerHTML = text;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

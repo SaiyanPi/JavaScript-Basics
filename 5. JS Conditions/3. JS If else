@@ -1,0 +1,18 @@
+JS if else:
+
+- Use the else statement to specify a block of code to be executed if a condition is false.
+- syntax:
+            if (condition) {
+                // code to execute if the condition is true
+            } else {
+                // code to execute if the condition is false
+            }
+
+- eg, If the hour is less than 18, create a "Good day" greeting, otherwise "Good evening":
+
+    let currentHour = new Date().getHours();
+    if(currentHour < 18){
+        document.getElementById("message").innerHTML = "Good day!";
+    } else {
+        document.getElementById("message").innerHTML = "Good evening!";
+    }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS switch</title>
+</head>
+<body>
+    <div>
+        <h3>JS switch : <br>
+            uses the weekday number to calculate the weekday name:
+        </h3>
+        <p id = "message"></p>
+        <input id="day" value="Enter number" />
+        <button onclick="myFunction()">Try it</button>
+
+        <script>
+            function myFunction(){
+                let day = Number(document.getElementById("day").value);
+                let weekDay;
+                let message;
+
+                if(isNaN(day)){
+                    document.getElementById("message").innerHTML = "Input is not a valid number";
+                } else{
+                    switch(day){
+                        case 1:
+                            weekDay = "Sunday";
+                            break;
+                        case 2:
+                            weekDay = "Monday";
+                            break;
+                        case 3:
+                            weekDay = "Tuesday";
+                            break;
+                        case 4:
+                            weekDay = "Wednesday";
+                            break;
+                        case 5:
+                            weekDay = "Thursday";
+                            break;
+                        case 6:
+                            weekDay = "Friday";
+                            break;
+                        case 7:
+                            weekDay = "Saturday";
+                            break;
+                    }
+                    document.getElementById("message").innerHTML = "Today is " + weekDay;
+                }
+            }
+
+            let day;
+            let date = new Date().getDay();
+            switch (date) {
+                case 0:
+                    day = "Sunday";
+                    break;
+                case 1:
+                    day = "Monday";
+                    break;
+                case 2:
+                    day = "Tuesday";
+                    break;
+                case 3:
+                    day = "Wednesday";
+                    break;
+                case 4:
+                    day = "Thursday";
+                    break;
+                case 5:
+                    day = "Friday";
+                    break;
+                case  6:
+                    day = "Saturday";
+            }
+            document.getElementById("message").innerHTML = "Today is " + day;
+        </script>
+    </div>
+</body>
+</html>

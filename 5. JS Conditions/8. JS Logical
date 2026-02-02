@@ -1,0 +1,43 @@
+JS Logical:
+
+- Logical operators are used to combine boolean expressions.
+- Logical operators can be used to modify the results of comparisons.
+- Typically, you will use a comparison operator to check a condition, and a logical operator to combine
+    conditions into more complex logic.
+
+#) JavaScript Logical Operators:
+    - Logical operators are used to determine the logic between variables or values.
+    - Given that x = 6 and y = 3, the table below explains the logical operators:
+
+            Oper	            Name	            Example	                            Returns
+        ------------------------------------------------------------------------------------------
+            &&	                AND	                (x < 10 && y > 1)                   true	
+            ||	                OR	                (x === 5 || y === 5)                false	
+            !	                NOT	                !(x === y)                          true
+
+    - JavaScript Logical AND (&&)
+        -> The && operator returns true if both expressions are true, otherwise false
+
+    - JavaScript Logical OR
+        -> The || operator returns true if one or both expressions are true, otherwise false
+    
+    - JavaScript Logical NOT
+        -> The NOT operator (!) returns true for false expressions and false for true expressions.
+
+#) The Nullish Coalescing Operator (??):
+    - ?? is an ES2020 feature.
+    - The nullish coalescing operator ?? allows you to provide a default value only if the left-hand
+        side is null or undefined.
+
+            let result = value ?? defaultValue;
+
+            👉 If value is not nullish(null or undefined), result = value.
+            👉 If value is nullish, result = defaultValue.
+        
+        ⚠️
+        -> When programming, a lot of values can be falsey (like 0, empty strings, false, undefined,
+            null, NaN).
+        -> However, sometimes you want to check if a variable is nullish (either undefined or null),
+            like when it is okay for a variable to be an empty string, or a false value. Then you can
+            use the nullish coalescing operator.
+        

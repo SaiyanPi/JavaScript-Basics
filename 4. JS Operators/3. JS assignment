@@ -78,7 +78,14 @@ JS Assignment:
             let x = 10;
             let y = 5;
             x ??= y;    // 10
+    
+    ⚠️ The nullish coalescing operator ?? allows you to provide a default value only if the left-hand
+        side is null or undefined.
 
+            let result = value ?? defaultValue;
+
+            -> If value is not nullish(null or undefined), result = value.
+            -> If value is nullish, result = defaultValue.
 
 #) The Spread (...) Operator:
     - The ... operator splits iterables into individual elements.

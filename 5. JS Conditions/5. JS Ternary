@@ -1,0 +1,14 @@
+JS Ternary:
+
+- Use (? :) (ternary) as a shorthand for if...else.
+- 💡 It is called a ternary operator because it takes three operands.
+- syntax:
+            condition ? expression1 : expression2
+
+- eg, If the value of age is < 18, set the value of text to "Minor", otherwise to "Adult":
+
+            let text = (age < 18) ? "Minor" : "Adult";
+            document.getElementById("message").innerHTML = text;
+
+- The conditional operator is a shorthand for writing conditional if...else statements.
+- 🚦 The conditional (ternary) operator is the only JavaScript operator that takes three operands.
