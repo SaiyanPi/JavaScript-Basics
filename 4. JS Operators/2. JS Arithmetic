@@ -1,0 +1,57 @@
+JS Arithmetic:
+
+#) Arithmetic Operations:
+    - A typical arithmetic operation operates on two numbers.
+        1. The two numbers can be literals:
+
+            let x = 100 + 50;
+        
+        2. or variables:
+
+            let x = a + b;
+        
+        3. or expressions:
+
+            let x = (100 + 50) * a;
+
+
+#) Incrementing/Decrementing:
+    - The increment operator (++) increments numbers.
+    - The decrement operator (--) decrements numbers.
+
+            let x = 5;
+            x++;
+            let z = x;  // 6
+
+            let a = 5;
+            a--;
+            let b = a;  // 4
+
+
+#) Exponentiation:
+    - The exponentiation operator (**) raises the first operand to the power of the second operand.
+        eg,
+            let x = 5;
+            let z = x ** 2; // z = 25
+    
+    - x ** y produces the same result as Math.pow(x,y):
+        eg,
+            let x = 5;
+            let z = Math.pow(x,2);  // z = 25
+
+
+#) Operator Precedence:
+    - Operator precedence describes the order in which operations are performed in an arithmetic
+        expression.
+        -> Multiplication (*) and division (/) have higher precedence than addition (+) and 
+            ubtraction (-).
+        -> When using parentheses, the operations inside the parentheses are computed first:
+
+            let x = (100 + 50) * 3; // 450
+            let x = 100 + 50 * 3;   // 250
+        
+        -> When many operations have the same precedence (like addition and subtraction or
+            multiplication and division), they are computed from left to right:
+
+            let x = 100 + 50 - 3;   // 150-3 = 147
+            let x = 100 / 50 * 3;   // 2 * 3 = 6

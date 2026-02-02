@@ -1,0 +1,89 @@
+JS Assignment:
+
+#) JavaScript Assignment Operators:
+    - Assignment operators assign values to JavaScript variables.
+        Given that x = 10 and y = 5, the table below explains the assignment operators:
+
+            
+            Operator	    Example	        Same As	        Result
+            =	            x = y	        x = y	        x = 5
+            +=	            x += y	        x = x + y	    x = 15
+            -=	            x -= y	        x = x - y	    x = 5
+            *=	            x *= y	        x = x * y	    x = 50
+            **=	            x **= y	        x = x ** y	    x = 100000
+            /=	            x /= y	        x = x / y	    x = 2
+            %=	            x %= y	        x = x % y	    x = 0
+            :	            x: 45	        size.x = 45	    x = 45
+
+
+#) Logical AND assignment operator(&&=):
+    - The Logical AND assignment operator is used between two values.
+    - The &&= operator is an ES2020 feature.
+    - IF THE FIRST VALUE IS TRUE, THE SECOND VALUE IS ASSIGNED.
+
+            let x = true;
+            let y = x &&= 10;   // 10
+
+            let x = false;
+            let y = x &&= 10;   // false
+
+            let x = 1;
+            let y = x &&= 10;   // 10
+
+            let x = 0;
+            let y = x &&= 10;   // 0
+
+            let x = undefined;
+            let y = x &&= 10;   // undefined
+
+            let x = null;
+            let y = x &&= 10;   // null
+
+
+#) Logical OR assignment operator(||=):
+    - The Logical OR assignment operator is used between two values.
+    - The ||= operator is an ES2020 feature.
+    - IF THE FIRST VALUE IS FALSE, THE SECOND VALUE IS ASSIGNED.
+
+            let x = false;
+            let y = x ||= 10;   // 10
+
+            let x = true;
+            let y = x ||= 10;   // true
+
+            let x = null;
+            let y = x ||= 10;   // 10
+
+            let x = undefined;
+            let y = x ||= 10;   // 10
+
+
+#) Nullish coalescing assignment operator(??=):
+    - The Nullish coalescing assignment operator is used between two values.
+    - The ??= operator is an ES2020 feature.
+    - IF THE FIRST VALUE IS UNDEFINED OR NULL, THE SECOND VALUE IS ASSIGNED.
+
+            let x;
+            x ??= 10;   // 10
+
+            let x = 0;
+            x ??= 10;   // 0
+
+            let x = null;
+            x ??= 10;   // 10
+
+            let x = undefined;
+            x ??= 10;   // 10
+
+            let x = 10;
+            let y = 5;
+            x ??= y;    // 10
+
+
+#) The Spread (...) Operator:
+    - The ... operator splits iterables into individual elements.
+
+            let text = "12345";
+
+            let min = Math.min(...text);    // 1
+            let max = Math.max(...text);    // 5

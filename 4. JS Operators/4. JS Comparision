@@ -1,0 +1,111 @@
+JS Comparision:
+
+#) Comparison Operators:
+    - Comparison operators are used to compare two values.
+    - Comparison operators always return true or false.
+        Given that x = 5, the table below explains the comparison operators:
+
+        Operator	    Description	                        Comparing	        Returns	
+    ---------------------------------------------------------------------------------------
+        ==	            equal to	                        x == 8	            false	
+                                                            x == 5	            true	
+                                                            x == "5"	        true
+
+        ===	            equal value and equal type	        x === 5	            true	
+                                                            x === "5"	        false	
+
+        !=	            not equal	                        x != 8	            true	
+
+        !==	            not equal value or not equal type	x !== 5	            false	
+                                                            x !== "5"	        true	
+                                                            x !== 8	            true	
+
+        >	            greater than	                    x > 8	            false
+
+        <	            less than	                        x < 8	            true	
+
+        >=	            greater than or equal to	        x >= 8	            false	
+
+        <=	            less than or equal to	            x <= 8	            true
+    
+    - Comparison operators can be used in conditional statements to compare values and take action
+        depending on the result:
+
+            if (age < 18) text = "Too young to buy alcohol";
+
+
+#) JavaScript String Comparison:
+    - All the comparison operators above can also be used on strings:
+    - ⚠️ Note that strings are compared alphabetically:
+
+            let text1 = "A";
+            let text2 = "B";
+            let result = text1 < text2; // true
+
+            let text1 = "20";
+            let text2 = "5";
+            let result = text1 < text2; // true
+        
+        🚦 Explanation:
+        JavaScript compares from left to right, one character at a time.
+        Step 1: compare first characters
+                '2' vs '5'
+                Unicode values: '2' => 50, '5' => 53
+                since 50 < 53, result is true
+
+
+#) Comparing Different Types:
+    - Comparing data of different types may give unexpected results.
+    - ⚠️ When comparing a string with a number, JavaScript will convert the string to a number when
+        doing the comparison.
+      ⚠️ An empty string converts to 0. A non-numeric string converts to NaN (Not-a-Number) which is
+        always false.
+
+        Case	            Value	    Explanation
+    ---------------------------------------------------------------------------------------------
+        2 < 12	            true	
+
+        2 < "12"	        true        converting string '12' to a number is 12 and 2 < 12   
+
+        2 < "John"	        false	    2 < NaN
+
+        2 > "John"	        false	    2 > NaN
+
+        2 == "John"	        false	    2 == NaN
+
+        "2" < "12"	        false	    Unicode value of 2 is 50, Unicode value of 1 is 49 so 50 < 49
+
+        "2" > "12"	        true	    50 > 49
+
+        "2" == "12"	        false       50 == 49
+
+    ⚠️ When both comparing operands are string, js compares character by character from left to right.
+        Each character is converted to Unicode and compares the unicode value
+            
+            eg:  "2" < "12" is equivalent to 50 < 49
+
+    ⚠️ When two comparing operands are of different type say number and string, first string is converted
+        into a number and then the comparision is done.
+            
+            eg: 2 < "12" is equivalent to 2 < 12
+    
+    - To secure a proper result, variables should be converted to the proper type before comparison:
+
+            <p id = "body"></p>
+            <input id = "age" value = "18" />
+            <button onClick = "myFunction()"> Try it </button>
+
+            <script>
+                function myFunction(){
+                    let voteable;
+                    let age = Number(document.getElementById("age").value);
+
+                    if(isNaN(age)){
+                        voteable = "Input is not a number"
+                    } else {
+                        voteable = (age < 18) ? "Too young" : "Old enough";
+                    }
+                    document.getElementById("body").innerHTML = voteable + "to vote";
+                }
+            </script>
+        

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Comparisions</title>
+</head>
+<body>
+    <div>
+        <h3>To secure a proper result, variables should be converted to the proper type before comparison:</h3>
+        <input id = "age" value = "18" />
+        <button onclick="myFunction()"> Try it </button>
+        <p id = "response"></p>
+
+        <script>
+            function myFunction() {
+                let message;
+                let age = Number(document.getElementById("age").value);
+
+                if(isNaN(age)){
+                    message = "Input is not a valid number";
+                } else {
+                    message = (age < 18) ? "Too young" : "old enough";
+                }
+                document.getElementById("response").innerHTML = message + " to vote";
+            }
+        </script>
+    </div>
+    
+    
+</body>
+</html>
