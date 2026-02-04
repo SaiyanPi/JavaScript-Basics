@@ -1,0 +1,91 @@
+JS Continue:
+
+- The continue statement skips the current iteration in a loop.
+- The remaining code in the iteration is skipped and processing moves to the next iteration.
+    eg:
+        for(let i = 0; i < 5; i++){
+            if(i === 3){
+                continue;
+            }
+            text += `The number is ${i} <br>`;
+        }
+
+        o/p:    The number is 0
+                The number is 1
+                The number is 2
+                The number is 4
+
+
+#) Continue to label name:
+    - syntax:
+            continue labelname;
+    
+    - Continue to loop1:  (output will be similar to 'break to loop 1')
+
+            loop1: for(let i = 0; i < 5; i++){
+                text2 += `Outer loop iteration: ${i} <br>`;
+                loop2: for(let j = 0; j < 5; j++){
+                    if(j === 2){
+                        continue loop1;
+                    }
+                    text3 += `Inner loop iteration: ${j} <br>` ;
+                }
+            }
+
+            o/p:    Outer loop iteration: 0
+                    Outer loop iteration: 1
+                    Outer loop iteration: 2
+                    Outer loop iteration: 3
+                    Outer loop iteration: 4
+
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+    
+    - Continue to loop2:
+
+            loop1: for(let i = 0; i < 5; i++){
+                text2 += `Outer loop iteration: ${i} <br>`;
+                loop2: for(let j = 0; j < 5; j++){
+                    if(j === 2){
+                        continue loop2;
+                    }
+                    text3 += `Inner loop iteration: ${j} <br>` ;
+                }
+            }
+
+            o/p:    Outer loop iteration: 0
+                    Outer loop iteration: 1
+                    Outer loop iteration: 2
+                    Outer loop iteration: 3
+                    Outer loop iteration: 4
+
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 3
+                    Inner loop iteration: 4
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 3
+                    Inner loop iteration: 4
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 3
+                    Inner loop iteration: 4
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 3
+                    Inner loop iteration: 4
+                    Inner loop iteration: 0
+                    Inner loop iteration: 1
+                    Inner loop iteration: 3
+                    Inner loop iteration: 4
+
+⚠️ break and continue are the only JavaScript statements that can "jump out of" a code block.

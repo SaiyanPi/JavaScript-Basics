@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While loops</title>
+</head>
+<body>
+    <div>
+        <h3>1. While loop</h3>
+        <p id="while"></p>
+        <script>
+            const pots = ["Ceramic", "Clay", "Plastic", "Paper"];
+            let text1 = "";
+            let a = 0;
+  
+            while(a < pots.length){
+                text1 += `${pots[a]} <br>`
+                a++;
+            } 
+
+            document.getElementById("while").innerHTML = text1;   
+        </script>
+    </div>
+    <div>
+        <h3>2. Do While loop</h3>
+        <p id="doWhile"></p>
+        <script>
+            const cars = ["Toyota", "BMW", "Volvo", "Ford"];
+            let text2 = "";
+            let i = 0;
+  
+            do{
+                text2 += `${cars[i]} <br>`
+                i++;
+            } while(i < cars.length)
+
+            document.getElementById("doWhile").innerHTML = text2;   
+        </script>
+    </div>
+</body>
+</html>

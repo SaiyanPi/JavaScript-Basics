@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break</title>
+</head>
+<body>
+    <div>
+        <h3>Break in loops</h3>
+        <p id="inLoop"></p>
+
+        <script>
+            let text1 = "";
+
+            for(let i = 0; i < 10; i++){
+                if(i === 3){
+                    break;
+                }
+                text1 += "The number is " + i + "<br>";
+            }
+            document.getElementById("inLoop").innerHTML = text1;
+        </script>
+    </div>
+
+    <div>
+        <h3>Break in a Switch</h3>
+        <p id="inSwitch"></p>
+        <script>
+            let day = "";
+            switch (new Date().getDay()) {
+                case 0:
+                    day = "Sunday";
+                    break;
+                case 1:
+                    day = "Monday";
+                    break;
+                case 2:
+                    day = "Tuesday";
+                    break;
+                case 3:
+                    day = "Wednesday";
+                    break;
+                case 4:
+                    day = "Thursday";
+                    break;
+                case 5:
+                    day = "Friday";
+                    break;
+                case 6:
+                    day = "Saturday";
+            }
+            document.getElementById("inSwitch").innerHTML = "Today is " + day;
+        </script>
+    </div>
+        <h3>Labeled break</h3>
+        <p id="outer"></p>
+        <p id="inner"></p>
+        <script>
+            let text2 = "";
+            let text3 = "";
+
+            loop1: for(let i = 0; i < 5; i++){
+                text2 += `Outer loop iteration: ${i} <br>`;
+                loop2: for(let j = 0; j < 5; j++){
+                    if(j === 2){
+                        break loop2;
+                    }
+                    text3 += `Inner loop iteration: ${j} <br>` ;
+                }
+            }
+            document.getElementById("outer").innerHTML = text2
+            document.getElementById("inner").innerHTML = text3;
+        </script>
+    <div>
+
+    </div>
+</body>
+</html>

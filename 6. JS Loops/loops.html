@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Loops</title>
+</head>
+<body>
+    <div>
+        <h3>For loops without let </h3>
+        <p id="forInside"></p>
+        <p id="forOutside"></p>
+
+        <script>
+            let i = 5;
+            let text1 = "";
+            for(i = 0; i < 10; i++){
+                text1 += "The number is " + i + "<br>";
+            }
+            document.getElementById("forInside").innerHTML = "value of i inside loop is: " + "<br>" + text1; 
+            document.getElementById("forOutside").innerHTML = "value of i outside loop is " + i;   // 10
+        </script>
+    </div>
+    <div>
+        <h3>For loops with let </h3>
+        <p id="inside"></p>
+        <p id="outside"></p>
+        <script>
+            let a = 5;
+            let text2 = "";
+            for(let a = 0; a < 10; a++){
+               text2 += "The number is " + a + "<br>";
+            }
+            document.getElementById("inside").innerHTML = "value of a inside loop is: " + "<br>" + text2; 
+            document.getElementById("outside").innerHTML = "value of a outside loop is " + a;   // 5
+        </script>
+    </div>
+
+    <div>
+        <h3>while loop </h3>
+        <p id="whileInside"></p>
+        <p id="whileOutside"></p>
+        <script>
+            let b = 0;
+            let text3 = "";
+            while(b < 10){
+                text3 += "The number is " + b + "<br>";
+                b++;
+            }
+            document.getElementById("whileInside").innerHTML = "value of b inside while loop: " + "<br>" + text3;
+            document.getElementById("whileOutside").innerHTML = "value of b outside while loop is " + b;   // 10
+        </script>
+    </div>
+
+     <div>
+        <h3>do while loop </h3>
+        <p id="in"></p>
+        <p id="out"></p>
+        <script>
+            let c = 0;
+            let text4 = "";
+            do {
+                text4 += "The number is " + c + "<br>";
+                c++;
+            } while(c < 10)
+            document.getElementById("in").innerHTML = "value of c inside while loop: " + "<br>" + text4;
+            document.getElementById("out").innerHTML = "value of c outside while loop is " + c;   // 10
+        </script>
+    </div>
+    
+</body>
+</html>

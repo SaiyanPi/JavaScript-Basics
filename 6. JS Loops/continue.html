@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Continue</title>
+</head>
+<body>
+    <div>
+        <h3>Skip the value 3</h3>
+        <p id="continue"></p>
+
+        <script>
+            let text = "";
+
+            for(let i = 0; i < 5; i++){
+                if(i === 3){
+                    continue;
+                }
+                text += `The number is ${i} <br>`;
+            }
+            document.getElementById("continue").innerHTML = text;
+        </script>
+    </div>
+
+    <div>
+        <h3>Continue to Labelname</h3>
+        <p id="outer"></p>
+        <p id="inner"></p>
+        <script>
+            let text2 = "";
+            let text3 = "";
+
+            loop1: for(let i = 0; i < 5; i++){
+                text2 += `Outer loop iteration: ${i} <br>`;
+                loop2: for(let j = 0; j < 5; j++){
+                    if(j === 2){
+                        continue loop2;
+                    }
+                    text3 += `Inner loop iteration: ${j} <br>` ;
+                }
+            }
+            document.getElementById("outer").innerHTML = text2
+            document.getElementById("inner").innerHTML = text3;
+        </script>
+    </div>
+</body>
+</html>

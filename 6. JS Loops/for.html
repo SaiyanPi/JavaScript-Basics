@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>for loop in js</h2>
+        <h3>displaying array element(object) using for-of</h3>
+        <p id="message1"></p>
+        <h3>displaying array element(object) using for loop</h3>
+        <p id="message2"></p>
+        <h3>displaying array element(object) only with done: true</h3>
+        <p id="message3"></p>
+        <script>
+            let toDoByForOf = "";
+            let toDoByFor = "";
+            let toDoDone = "";
+            const tasks = [
+                { id: 1, title: "Exercise", done: true } ,
+                { id: 2, title: "Code", done: true },
+                { id: 3, title: "play game", done: false }
+            ];
+            
+            // display array element(array) using for-of
+            for( const task of tasks){
+                toDoByForOf += `${task.id},  ${task.title}, ${task.done} <br>`;
+            }
+            document.getElementById("message1").innerHTML = toDoByForOf;
+            
+            // display array element(array) using for loop
+        for( let i = 0; i < tasks.length; i++){                                         // tasks.length = 3
+                toDoByFor += `${tasks[i].id},  ${tasks[i].title}, ${tasks[i].done} <br>`;
+            }
+            document.getElementById("message2").innerHTML = toDoByFor;
+            
+            // display array element(array) only with done: true
+            for( let i = 0; i < tasks.length; i++){
+                if(tasks[i].done){
+                    toDoDone += `${tasks[i].id},  ${tasks[i].title}, ${tasks[i].done} <br>`;
+                }
+            }
+            document.getElementById("message3").innerHTML = toDoDone;
+        </script>
+    </div>
+
+    <div>
+        <h3>exp 1 can be omitted in for loop if the value is set before loop starts</h3>
+        <p id="omit"></p>
+        <script>
+            const cars = ["Toyota", "BMW", "Volvo", "Ford"];
+            let text = "";
+            let i = 2;
+            for( ; i < cars.length; i++){
+                text += `${cars[i]} <br>`
+            }
+            document.getElementById("omit").innerHTML = text;   
+        </script>
+    </div>
+
+    <div>
+        <h3>exp 3 can be omitted in for loop if we increment the value inside the loop</h3>
+        <p id="omit3"></p>
+        <script>
+            const pots = ["Ceramic", "Clay", "Plastic", "Paper"];
+            let text3 = "";
+            for( let i = 0; i < cars.length; ){
+                text3 += `${pots[i]} <br>`
+                i++;
+            }
+            document.getElementById("omit3").innerHTML = text3;   
+        </script>
+    </div>
+</body>
+</html>

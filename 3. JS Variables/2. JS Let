@@ -41,7 +41,14 @@ JS Let:
 
         var x = 0;  ✅
 
-4) Redeclaring Variables in var:
+4) Both let and var can be reassign:
+        let a = 1;
+        a = 2;   // ✅ allowed
+
+        var b = 1;
+        b = 2;   // ✅ allowed
+
+5) Redeclaring Variables in var:
     - Redeclaring a variable using the var keyword can impose problems.
     - Redeclaring a variable inside a block will also redeclare the variable outside the block:
 
