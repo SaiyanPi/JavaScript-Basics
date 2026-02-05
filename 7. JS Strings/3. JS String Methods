@@ -1,0 +1,70 @@
+JS String Methods:
+
+#) Basic string methods:
+    - Javascript strings are primitive and immutable: All string methods produce a new string without
+        altering the original string.
+
+        String length               // returns a length of a string.
+
+        String charAt()             // returns the character at a specified index(position) in a string. 
+
+        String charCodeAt()         // returns the code of the character at a specified index in a string.
+
+        String codePointAt()        // returns the code point value at the specified index in a string.
+
+        String concat()             // joins two or more strings.
+
+        String at()                 // returns an idexed element from a string.
+
+        String [ ]                  // returns an indexed element from a string.
+
+        String slice()              // extracts a part of a string and returns the extracted part in a new 
+                                        string.
+
+        String substring()          // similar to slice. difference is that start and end values less than
+                                        0 are treated as 0
+
+        String substr()             // similar to slice. difference is that the second parameter specifies
+                                        the length of the extracted part.
+                                        ⚠️ substr() method is removed (deprecated) in the latest JavaScript
+                                        standard.
+
+
+        String toUpperCase()        // string is converted to upper case 
+
+        String toLowerCase()        // string is converted to lower case 
+
+        String isWellFormed()       // returns true if a string is well formed. Otherwise it returns false.
+        
+        String toWellFormed()       // returns a new string where all "lone surrogates" are replaced with 
+                                        the Unicode replacement character (U+FFFD).
+
+        String trim()               // removes whitespace from both sides of a string:
+
+        String trimStart()          // works like trim(), but removes whitespace only from the start of a
+                                        string.
+
+        String trimEnd()            // like trim(), but removes whitespace only from the end of a string.
+        
+        String padStart()           // pads a string from the start.
+        
+        String padEnd()             // pads a string from the end.
+
+        String repeat()             // returns a string with a number of copies of a string. It doesn'tag   
+                                        change original string.
+
+        String replace()            // replaces a specified value with another value in a string.
+
+        String replaceAll()         // allows you to specify a regular expression instead of a string to
+                                        be replaced
+
+        String split()              // converts the string to an Array by splitting.    
+                                        If the separator is omitted, the returned array will contain the whole
+                                        string in index [0].
+                                        If the separator is "", the returned array will be an array of single
+                                        characters:
+
+
+    🚦Lone Surrogates:
+        A lone surrogate is a Unicode surrogate code point that is not part of a valid surrogate pair used to
+        represent characters in UTF-16 encoding.

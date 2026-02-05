@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS strings</title>
+</head>
+<body>
+    <div>
+        <h3> string length</h3>
+        <p id="length"></p>
+
+        <script>
+            let text = `People call me "JavaScript"`; // template string
+            let length = text.length;
+            document.getElementById("length").innerHTML = `length = ${length}`;
+        </script>
+    </div>
+    <div>
+        <h3>with template string</h3>
+        <p id="template"></p>
+        <script>
+            let text1 = `We are the so called "Vikings" from the north`;    // template string
+            document.getElementById("template").innerHTML = text1;
+        </script>
+    </div>
+
+    <div>
+        <h3>with escape character</h3>
+        <p id="escape"></p>
+        <script>
+            let text2 = "We are the so called \"Vikings\" from the north";    // esacape character
+            document.getElementById("escape").innerHTML = text2;
+        </script>
+    </div>
+
+    <div>
+        <h3>String as object</h3>
+        <p id="asString"></p>
+        <p id="asObject"></p>
+        <script>
+            let x = "John";
+            let y = new String("John");
+
+            if( x == y){
+                console.log(true);  // true
+            }
+
+            if( x === y){
+                console.log(true);
+            } else {
+                console.log(false); // false
+            }
+
+            document.getElementById("asString").innerHTML = typeof x;  // string
+            document.getElementById("asObject").innerHTML = typeof y;  // object
+        </script>
+    </div>
+
+    <div>
+        <h3>Template string allows variables in string: Interpolation</h3>
+        <p id="name"></p>
+        <script>
+            let firstName = "John";
+            let lastName = "Wick";
+            
+            document.getElementById("name").innerHTML = `full name is ${firstName} ${lastName}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Template string allows interpolation of expressions in strings</h3>
+        <p id="exp"></p>
+        <script>
+            let price = 10;
+            let VAT = 0.25;
+
+            let total = `Total: ${(price * (1 + VAT)).toFixed(2)}`;
+        
+            document.getElementById("exp").innerHTML = total;
+        </script>
+    </div>
+
+    <div>
+        <p id="body"></p>
+        <script>
+            let header = "Template strings";
+            let tags = ["template strings", "js", "es6"];
+
+            let html = `<h3> ${header} </h3> <ul>`; // <ul> tag started after header
+            for(tag of tags){
+                html += `<li>${tag}</li>`;
+            }
+            html += `</ul>` // <ul> tag closed after listing
+
+            document.getElementById("body").innerHTML = html;
+        </script>
+    </div>
+    
+</body>
+</html>

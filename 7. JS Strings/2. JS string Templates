@@ -1,0 +1,37 @@
+JS String Templates / Template string / Template Literals:
+
+- we've already briefly talked what template strings do ihe previous section.
+
+#) Interpolation:
+    - Template Strings allow variables in strings.
+    - Template strings provide an easy way to interpolate variables in strings.
+        eg:
+            let firstName = "John";
+            let lastName = "Wick";
+            
+            document.getElementById("name").innerHTML = `full name is ${firstName} ${lastName}`;
+
+
+#) Expression Substitution:
+    - Template Strings allow interpolation of expressions in strings:
+        eg:
+            let price = 10;
+            let VAT = 0.25;
+
+            let total = `Total: ${(price * (1 + VAT)).toFixed(2)}`;
+        
+            document.getElementById("exp").innerHTML = total;
+
+
+#) HTML Templates:
+
+            let header = "Template strings";
+            let tags = ["template strings", "js", "es6"];
+
+            let html = `<h3> ${header} </h3> <ul>`; // <ul> tag started after header
+            for(tag of tags){
+                html += `<li>${tag}</li>`;
+            }
+            html += `</ul>` // <ul> tag closed after listing
+
+            document.getElementById("body").innerHTML = html;

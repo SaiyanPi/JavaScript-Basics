@@ -1,0 +1,67 @@
+JS Strings:
+
+- Strings are for storing text
+- Strings are written with single or double quotes
+    eg:
+        let answer1 = "It's alright";
+        let answer2 = "He is called 'Johnny'";
+        let answer3 = 'He is called "Johnny"';
+
+
+#) Template Strings:
+    - Templates were introduced with ES6 (JavaScript 2016).
+    - Templates are strings enclosed in backticks (`This is a template string`).
+    - Templates allow single and double quotes inside a string:
+        eg:
+            let text = `He's often called "Johnny"`;
+
+
+#) String Length:
+    - To find the length of a string, use the built-in length property:
+        eg:
+            let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let length = text.length;
+
+
+#) Escape Characters:
+    - Because strings must be written within quotes, JavaScript will misunderstand this string:
+        eg:
+            let text = "We are the so-called "Vikings" from the north.";
+        
+        -> The string will be chopped to "We are the so-called "
+        -> To solve this problem, you can use an backslash escape character.
+        -> The backslash escape character (\) turns special characters into string characters:
+
+            let text = "We are the so-called \"Vikings\" from the north.";
+        
+        Code	        Result	        Description
+    ----------------------------------------------------
+        \'	            '	            Single quote
+        \"	            "	            Double quote
+        \\	            \	            Backslash
+    
+
+    - Six other escape sequences are valid in JavaScript:
+        Code	        Result
+    ----------------------------------------------------
+        \b	            Backspace
+        \f	            Form Feed
+        \n	            New Line
+        \r	            arriage Return
+        \t	            Horizontal Tabulator
+        \v	            Vertical Tabulator
+    
+    ⚠️ The 6 escape characters above were originally designed to control typewriters, teletypes,
+        and fax machines. They do not make any sense in HTML.
+
+
+#) JavaScript Strings as Objects:
+    - Normally, JavaScript strings are primitive values, created from literals:
+        let x = "John";
+    
+    - But strings can also be defined as object with the keyword new:
+        let y = new String("John");
+
+        ⚠️ Do not create String objects.The new keyword complicates the code and slows down execution speed.
+        String objects can produce unexpected results:
+
