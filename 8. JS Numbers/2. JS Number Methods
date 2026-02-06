@@ -1,0 +1,58 @@
+JS Number Methods:
+
+
+#) Basic Methods
+    - Basic number methods can be used on any number:
+
+        toString()          // returns a number as a string
+
+        toExponential()     // returns a string, with a number rounded and written using exponential notation.
+
+        toFixed()           //  returns a string, with the number written with a specified number of decimals:
+        
+        toPrecision()       // returns a string, with a number written with a specified length:
+
+        valueOf()           // returns a number as a number.
+
+#) Static Methods
+    - ⚠️ Static methods can only be used on Number cannot be used on variables:
+
+        Number.isFinite()       // returns true if the argument is not Infinity, -iInfinity, nor Nan.
+
+        Number.isInteger()      // returns true if the argument is an integer.
+
+        Number.isNan()          // returns true if the argument is NaN (Not a Number).
+
+        Number.isSafeInteger()  // returns true if the argument is a safe integer.
+
+        Number.parseInt()       // arses a string and returns a whole number. Spaces are allowed. Only the
+                                    first number is returned:
+
+        Number.parseFloat()     // parses a string and returns a number. Spaces are allowed. Only the first
+                                    number is returned:
+    
+
+💡Safe Integers:
+        Safe integers are all integers from -(253 - 1) to +(253 - 1).
+        This is safe: 9007199254740991.
+        This is not safe: 9007199254740992.
+
+
+#) The Number() Method:
+    - The Number() method can be used to convert JavaScript variables to numbers:
+        eg:
+            Number(true);       // 1
+            Number(false);      // 0
+            Number("10");       // 10
+            Number("  10");     // 10
+            Number("10  ");     // 10
+            Number(" 10  ");    // 10
+            Number("10.33");    // 10.33
+            Number("10,33");    // NaN
+            Number("10 33");    // NaN
+            Number("John");     // NaN
+    
+    - Number() can also convert a date to a number.
+        eg:
+            Number(new Date("1970-01-01"))  // 0
+            Number(new Date("1970-03-01"))  // 5097600000

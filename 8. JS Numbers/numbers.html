@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Numbers</title>
+</head>
+<body>
+    <div>
+        <h3>Numeric string: JavaScript will try to convert strings to numbers in all numeric operations:</h3>
+        <p id="numeric"></p>
+        <script>
+            let x = "50";
+            let y = "10";
+            let z = x / y;
+            document.getElementById("numeric").innerHTML = `"50" / "10" = ${z} ✅ This works`;
+        </script>
+    </div>
+
+    <div>
+        <p id="numeric1"></p>
+        <script>
+            let a = x - y;
+            document.getElementById("numeric1").innerHTML = `"50" - "10" = ${a} ✅ This works`;
+        </script>
+    </div>
+
+    <div>
+        <p id="numeric2"></p>
+        <script>
+            let b = x * y;
+            document.getElementById("numeric2").innerHTML = `"50" * "10" = ${b} ✅ This works`;
+        </script>
+    </div>
+
+    <div>
+        <p id="numeric3"></p>
+        <script>
+            let c = x + y;
+            document.getElementById("numeric3").innerHTML = `"50" + "10" = ${c} ❌ But this doesn't works because the type is string`;
+        </script>
+    </div>
+
+    <div>
+        <h3>NaN: Trying to do arithmetic with a non-numeric string will result in NaN (Not a Number):</h3>
+        <p id="nan"></p>
+        <script>
+            let i = 50;
+            let j = "Apple";
+            let k = i / j;
+            document.getElementById("nan").innerHTML = `50 / "Apple" = ${k}`;
+        </script>
+    </div>
+
+    <div>
+        <p id="nan1"></p>
+        <script>
+            let l = 50;
+            let m = "10";
+            let n = l / m;
+            document.getElementById("nan1").innerHTML = `50 / "10" = ${k}`;
+        </script>
+    </div>
+
+    <div>
+        <h4>We can use the global JavaScript function isNaN() to find out if a value is a not a number:</h4>
+        <p id="check"></p>
+        <script>
+            document.getElementById("check").innerHTML = `let x = 50 / "Apple"; <br> isNaN(x);  // ${k}`;
+        </script>
+    </div>
+
+    <div>
+        <h4>Or the result might be a concatenation like NaN5:</h4>
+        <p id="check1"></p>
+        <script>
+            let p = NaN + 5
+            document.getElementById("check1").innerHTML = `NaN + 5 =  ${p}`;
+        </script>
+    </div>
+
+    <div>
+        <h3> Number as Object</h3>
+        <p id="object"></p>
+        <script>
+            let r = 50;
+            let s = new Number(50); // number as object
+
+            
+            document.getElementById("object").innerHTML =
+                ` let r = 50; <br>
+                let s = new Number(50); <br>
+                <br>
+                r == s  // ${r == s} but <br>
+                r === s // ${r === s} Comparing two JavaScript objects always returns false.`;
+
+        </script>
+    </div>
+</body>
+</html>

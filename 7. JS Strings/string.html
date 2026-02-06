@@ -96,6 +96,23 @@
             document.getElementById("body").innerHTML = html;
         </script>
     </div>
+
+    <div>
+        <h3> String as Object</h3>
+        <p id="object"></p>
+        <script>
+            let r = "John";
+            let s = new String("John"); // string as object
+            
+            document.getElementById("object").innerHTML =
+                ` let r = 50; <br>
+                let s = new String(50); <br>
+                <br>
+                r == s  // ${r == s} but <br>
+                r === s // ${r === s} Comparing two JavaScript objects always returns false.`;
+
+        </script>
+    </div>
     
 </body>
 </html>

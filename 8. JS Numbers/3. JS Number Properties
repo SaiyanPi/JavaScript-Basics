@@ -1,0 +1,65 @@
+JS Number Properties:
+
+        Number.EPSILON             
+        Number.MAX_VALUE
+        Number.MIN_VALUE
+        Number.MAX_SAFE_INTEGER
+        Number.MIN_SAFE_INTEGER
+        Number.POSITIVE_INFINITY
+        Number.NEGATIVE_INFINITY
+        Number.NaN
+
+    - ⚠️ Number Properties Cannot be Used on Variables
+    - Number properties belong to the JavaScript Number Object.
+    - These properties can only be accessed as Number.MAX_VALUE. Using x.MAX_VALUE, where x is a variable
+        or a value, will return undefined:
+        eg:
+            let x = 6;
+            x.MAX_VALUE // undefined
+
+
+#) Number.EPSILON:
+    - Number.EPSILON is the difference between the smallest floating point number greater than 1 and 1.
+        eg:
+            let x = Number.EPSILON; // 2.220446049250313e-16
+
+    - Number.EPSILON is an ES6 feature.
+    - It does not work in Internet Explorer.
+
+#) Number.MAX_VALUE:
+    - Number.MAX_VALUE is a constant representing the largest possible number in JavaScript.
+        eg:
+            let x = Number.MAX_VALUE;   // 1.7976931348623157e+308
+
+#) Number.MIN_VALUE:
+    - Number.MIN_VALUE is a constant representing the lowest possible number in JavaScript.
+        eg:
+            let x = Number.MIN_VALUE;   // 5e-324
+
+#) Number.MAX_SAFE_INTEGER:
+    - represents the maximum safe integer in JavaScript. whic is (2^53 - 1).
+        eg:
+            let x = Number.MAX_SAFE_INTEGER;    // 9007199254740991
+
+#) Number.MIN_SAFE_INTEGER:
+    - represents the minimum safe integer in JavaScript. which is -(2^53 - 1).
+        eg:
+            let x = Number.MIN_SAFE_INTEGER;    // -9007199254740991
+
+#) Number.POSITIVE_INFINITY:
+    - let x = Number.POSITIVE_INFINITY;   // Infinity
+    - POSITIVE_INFINITY is returned on overflow:
+        eg:
+            let x = 1 / 0;  // Infinity
+
+#) Number.NEGATIVE_INFINITY:
+    - let x = Number.NEGATIVE_INFINITY; // -Infinity
+    - NEGATIVE_INFINITY is returned on overflow:
+        eg:
+            let x = -1 / 0; // -Infinity
+
+#) Number.NaN:
+    - NaN is a JavaScript reserved word for a number that is not a legal number.
+    - let x = Number.NaN;   // NaN
+        eg:
+            let x = 100 / "Apple";  // NaN

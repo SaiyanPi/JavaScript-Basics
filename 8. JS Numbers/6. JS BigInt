@@ -1,0 +1,78 @@
+JS BigInt
+
+- BigInt is a JavaScript data type for handling and storing big integer values.
+- BigInt allows you to work with integers larger than the limit of Numbers.
+- BigInt can represent an integer of any size, limited only by available memory.
+- With BigInt the total number of supported data types in JavaScript is 8:
+    1. String
+    2. Number
+    3. Bigint
+    4. Boolean
+    5. Undefined
+    6. Null
+    7. Symbol
+    8. Object
+
+- BigInt supports standard JavaScript arithmetic operators.(+, -, ++, --, *, /, %, **)
+
+
+#) JavaScript Accuracy:
+    - JavaScript Numbers are only accurate up to 15 digits:
+        eg:
+            // 15 digits:
+            let x = 999999999999999;    // Accurate: 999999999999999
+
+            // 16 digits:
+            let y = 9999999999999999;   // Inaccurate: 10000000000000000
+
+
+#) How to Create a BigInt:
+    - You can create a BigInt in two ways:
+        1. Using an integer literal with an n suffix
+            eg:
+                // Using an integer literal with an n suffix:
+                let x = 999999999999999n;   // x = 9999999999999999
+
+        2. Using the BigInt() constructor with a string
+            eg:
+                // Using the BigInt() constructor with a string:
+                let y = BigInt("999999999999999");  // x = 9999999999999999
+
+
+#) Mixing BigInt and Numbers ⚠️:
+    - Arithmetic between a BigInt and a Number is not allowed (will result in a TypeError).
+
+        let x = 10n;
+        let y = 5;
+
+        let z = x + y; // ❌ TypeError
+    
+    - To fix that, explicitly convert one:
+
+        let x = 10n;
+        let y = 5;
+
+        let z = Number(x) + y;  // ✅ works
+
+
+#) BigInt / Number Conversions:
+    - BigInt to Number: Use the Number() constructor.
+        eg:
+            // Create a BigInt
+            let largeNumber = BigInt("12345678901234567890");
+
+            // Conversions
+            let num = Number(largeNumber);
+
+    - Number to BigInt: Use the BigInt() constructor.
+
+
+#) BigInt Decimals:
+    - A BigInt can not have decimals.
+        eg:
+            let x = 1.5n; // ❌ TypeError
+
+
+#) Comparison Operators
+    - Bigint supports standard JavaScript comparison operators. (<, > ==, ===, !==, <=, >=)
+    - BigInts can also be compared with Numbers using standard comparison operators.
