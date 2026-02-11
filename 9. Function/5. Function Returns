@@ -1,0 +1,171 @@
+5. JavaScript Function Return:
+
+- A function can return a value back to the code that called it.
+- The return statement is used to send a value out of a function.
+- A function can return any type of value (not only numbers).
+
+
+#) The return Statement:
+    - When a function reaches a return statement, the function stops executing.
+    - The value after the return keyword is sent back to the caller.
+    - Most functions return the result of a calculation or an operation.
+
+#) Using Return Values in Expressions:
+    - The returned value can be used anywhere a value is expected.
+    - You can use a function call inside another expression.
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        let total = multiply(2, 3) * 10;
+
+
+#) Return Statements Stop Execution:
+    - Code written after a return statement will NOT be executed.
+
+        function multiply(a, b) {
+            return "Done";
+            // Next line will never run
+            return a * b;
+        }
+
+        let result = multiply(4, 3);    // Done
+
+
+#) Functions Without return:
+    - ⚠️ IF A FUNCTION DOES NOT RETURN A VALUE, THE RETURN VALUE WILL BE UNDEFINED.
+
+        function multiply(a, b) {
+            let x = a * b;
+        }
+
+        let result = multiply(4, 3);    // result = undefined
+
+
+#) Returning Values Early:
+    - You can use return to stop a function early, based on a condition.
+
+        function vote(age) {
+            if(age < 18) {  // stopping the function early if condition meet
+                return "Too Young to vote";
+            }
+            return "Old enough to vote";
+        }
+
+        let message3 = vote(16);
+
+
+⚠️) Common Mistakes
+    - Forgetting Return
+        A function without return sends back undefined.
+    - Confusing console.log() with Return
+        console.log() shows output but does not return a value.
+    - Expecting Return
+        If your function does not return a value, storing it in a variable will give undefined.
+
+
+--------------------------------------------------------------------------------------------------
+
+
+Code 1: ⚠️
+
+    function vote(age) {
+        if(age < 18) {
+            return "Too Young to vote";
+        }
+        return "Old enough to vote";
+    }
+    let message = vote(16);
+    console.log(message);
+
+    Output(in console): 
+        Too young to vote
+    
+    Reason:
+    1) There is return statement, which means if the condition is meet early, execution gets 
+        terminated early but the exection eventually gets terminated regardless of condition.
+    2) Depending on where execution terminates, we get the respective return statement.
+
+
+Code 2: ⚠️⚠️
+
+    function vote(age) {
+        if(age < 18) {
+            console.log("Too Young to vote");
+        }
+        console.log("Old enough to vote");
+    }
+    let message = vote(16);
+    console.log(message);
+
+    Output(in console): 
+        Too Young to vote
+        Old enough to vote
+        undefined
+    
+    Reason:
+    1) There is no return statement to terminate the execution so wvery log gets outputed
+    2) And since there is not return statement in the function, we also get undefined.
+
+
+Code 3: ⚠️⚠️⚠️
+    
+    function vote(age) {
+        if(age < 18) {
+            console.log("Too Young to vote");
+        }
+        console.log("Old enough to vote");
+    }
+    let message = vote(21);
+    console.log(message);
+
+    Output(in console): 
+        Old enough to vote
+        undefined
+    
+    Reason:
+    1) the first condition is never met so the respective log will not get outputed.
+
+
+Code 4: ⚠️⚠️⚠️⚠️
+    
+    function vote(age) {
+        if(age < 18) {
+            console.log("Too Young to vote");
+        }
+        console.log("Old enough to vote");
+    }
+    vote(16);
+  
+
+    Output(in console): 
+        Too Young to vote
+        Old enough to vote
+    
+    Reason:
+    1) Even though the first condition is met execution never stopped because of not having return.
+        so both logs gets outputed.
+    2) if (age < 18) condition were not meet, only second log would'ce been outputed.
+
+
+Code 5: ⚠️⚠️⚠️⚠️⚠️
+    
+    function vote(age) {
+        if(age < 18) {
+            console.log("Too Young to vote");
+        }
+        console.log("Old enough to vote");
+    }
+    console.log(vote(16));
+  
+
+    Output(in console): 
+        Too Young to vote
+        Old enough to vote
+        undefined
+    
+    Reason:
+    1) Even though the first condition is met execution never stopped because of not having return.
+        so both logs gets outputed.
+    2) And undefined because of missing return statement

@@ -1,0 +1,62 @@
+4. Function Parameters(Fuinction Input):
+
+- Parameters allow you to pass (send) values to a function.
+- Parameters are listed inside the parentheses in the function definition.
+
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        let result = multiply(4, 5);
+
+
+#) Functions with One Parameter:
+
+        function sayHello(name) {
+            return "Hello " + name;
+        }
+
+        let greeting = sayHello("John");
+
+
+#) Functions with Multiple Parameters:
+
+        function fullName(firstName, lastName) {
+            return firstName + " " + lastName;
+        }
+
+        let name = fullName("John", "Doe");
+
+
+#) Parameters vs. Arguments
+    - In JavaScript, function parameters and arguments are distinct concepts:
+        -> ⚠️ Parameters are the names listed in the function definition.
+        -> ⚠️ Arguments are the real values passed to, and received by the function.
+
+
+#) Function Parameter Rules:
+    - JavaScript function definitions do not specify data types for parameters.
+    - JavaScript functions do not perform type checking on the arguments.
+    - JavaScript functions do not check the number of arguments received.
+
+
+⚠️) Incorrect Parameters:
+    - Accessing a function with an incorrect parameter can return an incorrect answer:
+
+        function toCelsius(fahrenheit) {
+            return (5/9) * (fahrenheit-32);
+        }
+
+        let value = toCelsius();
+
+
+💡) Default Parameter Values:
+    - ECMAScript 2015 allows function parameters to have default values.
+    - The default value is used if no argument is provided.
+
+        function myFunction(x, y = 10) {
+            return x + y;
+        }
+        myFunction(5);
+    
+    - If y is not passed or undefined, then y = 10.

@@ -1,0 +1,103 @@
+8. Arrow Function
+
+- Arrow Functions allow a shorter syntax for function expressions.
+- Arrow Functions were introduced in ES6 and are commonly used in modern JavaScript.
+
+#) Shorter Syntax:
+    - 💡 If the function body contains only one statement, You can remove the word function,
+        the curly brackets and the return keyword.
+
+        Before Arrow:
+
+            const add = function(a, b) {return a * b;};
+        
+        With Arrow:
+
+            const add = (a, b) => a * b;
+    
+    - 💡 If the function signature contains only one parameter, you can omit the parentheses.
+
+        Before Arrow:
+
+            const discount = function(price) { return (price/100) * 15; };
+        
+        With Arrow:
+
+            const discount = price => (price/100) * 15;
+    
+    - 💡 If there are no parameters, parentheses are required.
+
+        Before Arrow:
+
+            const hello = function() { return "Hello"; };
+        
+        After Arrow:
+
+            const hello = () => "Hello";
+    
+    - ⚠️ You can only omit the return keyword and the curly brackets if the function is a single
+        statement. Because of this, it might be a good habit to always keep them:
+
+            const add = (a, b) => { return a * b };
+            const discount = price => { return (price/100) * 15 };
+            const hello = () => { return "Hello" };
+
+
+
+⚠️) Arrow Functions Are Not Declarations:
+    - Arrow functions are always expressions (not simply a function/declaration) and must be
+        assigned to a variable.
+    - So just like the function expression, arrow function cannot be used before they are defined.
+        No hoisting.
+
+            hello();    ❌ error
+
+            const hello = () => "Hello";
+    
+    - Arrow function must be defined before they are used.
+
+
+
+⚠️⚠️) Arrow Functions and the this Keyword:
+    - Arrow functions do not have their own this value.
+    - They inherit this from the surrounding code.
+
+        // regular function inside an object as an object method
+            const person = {    
+                name: "John",
+                greet: function() { 
+                    return "Hello " + this.name;    //✅ John
+                }
+            }
+            document.getElementById("regular").innerHTML = person.greet();  // ✅ Hello John
+
+            -> here this refers to the object
+            -> if we console.log(this) inside function before retuyrn statement, we will get
+                the object 
+
+
+
+        // arrow function inside an object as an object method
+            const dog = {   // dog object
+                name: "Coco",
+                call: () => {   // arrow function as object property
+                    return "Hello " + this.name;    // ❌ nothing
+                }
+            }
+            document.getElementById("arrow").innerHTML = dog.call();    // ❌ Hello
+        
+            -> here, this refers to the window.
+            -> if we console.log(this) inside function before retuyrn statement, we will get
+                the owindow.
+
+
+#) When to use and when not to use arrow function:
+    - Use:
+        -> For short functions
+        -> For callbacks and array methods
+        -> When you do not need your own this
+    
+    - Not use:
+        -> As object methods
+        -> When you need your own this
+        -> When using function declarations

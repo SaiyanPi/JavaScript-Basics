@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Parameters</title>
+</head>
+<body>
+    <div>
+        <script>
+            function greetUser(name) {
+                // return "Hello " + name;
+                return `Hello ${name} !`;
+            }
+
+            function greetName(first, last) {
+                return `Hello ${first} ${last} !`;
+            }
+
+            function add(a, b = 5) {
+                return a + b;
+            }
+        </script>
+    </div>
+
+    <div>
+        <h3>Function with one parameter</h3>
+        <p id="message"></p>
+        <script>
+            let message = greetUser("Saiyan");
+            document.getElementById("message").innerHTML = message;
+        </script>
+    </div>
+    
+    <div>
+        <h3>Function with multiple parameters</h3>
+        <p id="message1"></p>
+        <script>
+            let message1 = greetName("Saiyan", "Pi");
+            document.getElementById("message1").innerHTML = message1;
+        </script>
+    </div>
+
+    <div>
+        <h3>Default Parameter value</h3>
+        <p id="message2"></p>
+        <script>
+            let result = add(2);    // 2 + 5 = 7
+            document.getElementById("message2").innerHTML = result;
+        </script>
+    </div>
+
+    <div>
+        <h3>Return to stop function early, based on a condition</h3>
+        <p id="message3"></p>
+        <script>
+            function vote(age) {
+                if(age < 18) {
+                    return "Too Young to vote";
+                }
+                return "Old enough to vote";
+            }
+            let message3 = vote(16);
+            document.getElementById("message3").innerHTML = message3;
+        </script>
+    </div>
+</body>
+</html>

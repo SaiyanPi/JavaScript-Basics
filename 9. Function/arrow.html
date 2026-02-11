@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow function</title>
+</head>
+<body>
+    <div>
+        <h3>Regular function/ function declaration have their own this value.</h3>
+        <p id="regular"></p>
+
+        <script>
+            const person = {    // person object
+                name: "John",
+                greet: function() { // regular function as object method
+                    return "Hello " + this.name;
+                }
+            };
+  
+            document.getElementById("regular").innerHTML = person.greet();
+        </script>
+    </div>
+    <div>
+        <h3>Arrow Functions do not have their own this value, they inherit this from the sorrounding code.</h3>
+        <p id="arrow"></p>
+
+        <script>
+            const dog = {   // dog object
+                name: "Coco",
+                call: () => {   // arrow function as object method
+                    return "Hello " + this.name; 
+                }
+            };
+
+            document.getElementById("arrow").innerHTML = dog.call();
+        </script>
+    </div>
+    
+</body>
+</html>

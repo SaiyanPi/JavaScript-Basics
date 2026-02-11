@@ -1,0 +1,117 @@
+3. Invoking JavaScript Functions
+
+- A JavaScript function runs when it is called.
+- To call a function, write the name followed by parentheses like name().
+
+#) Function Invocation:
+    - The code inside a function will execute when "something" invokes the function:
+        -> When it is called from JavaScript code
+        -> When an event occurs (a user clicks a button)
+        -> Automatically (self invoked)
+    
+    - The code below invokes the function. But it does not use the result.
+
+            <script>
+                function sayHello() {
+                    return "Hello User";
+                }
+                sayHello();
+            </script>
+
+        -> expected result is  'Hello user' but you'll get nothing because the returned result is
+            not being used.
+    - ✅ To use the returned value, you can store it in a variable or display it.
+
+            <p id="demo1"></p>
+            <script>
+                function sayHello() {
+                    return "Hello User";
+                }
+                let message = sayHello();
+                document.getElementById("demo1").innerHTML = message;
+            </script>
+
+            or,
+
+            <p id="demo1"></p>
+            <script>
+                function sayHello() {
+                    return "Hello User";
+                }
+                document.getElementById("demo1").innerHTML = sayHello();
+            </script>
+
+
+#) Calling a Function Many Times:
+    - You can call the same function whenever you need it.
+
+            function sayHello() {
+                return "Hello World";
+            }
+
+            let a = sayHello();
+            let b = sayHello();
+            let c = sayHello();
+
+
+#) Functions are Invoked with ():
+    - 💡 THE () OPERATOR INVOKES A FUNCTION.
+
+            // Convert Fahrenheit to Celsius:
+            function toCelsius(fahrenheit) {
+                return (5/9) * (fahrenheit-32);
+            }
+
+            // Call the toCelcius() function
+            let value = toCelsius(77);
+    
+    - ⚠️ ACCESSING THE FUNCTION WITHOUT (), RETURNS THE FUNCTION ITSELF AND NOT THE RESULT.
+
+            let result = toCelcius;
+            document.getElementById("demo3").innerHTML = result;
+
+            o/p: function toCelsius(farenheit) { return (5/9) * (farenheit-32); }
+
+
+#) Calling vs Referencing a Function:
+    - sayHello refers to the function itself. It returns the function.
+    - sayHello() refers to the function result. It returns the result
+
+
+#) Functions Can Be Called from Anywhere:
+    - You can call functions from other functions, from events, or from any code block.
+        eg: Calling a function from another function =>
+
+            // function 1
+            function greeting() {               
+                return "Hello Saiyan.";
+            }
+
+            // function 2: calling function 1 from function 2
+            function showGreeting() {
+                document.getElementById("demo1").innerHTML = greeting();    // calling
+            }
+
+            showGreeting(); // calling function 2
+        
+
+        eg: Calling a function from event =>
+
+            // invoking function 2 by button clicking event
+            <button onclick="displayGreeting()">Click me!</button>
+            <script>
+                // function 1
+                function greeting() {               
+                    return "Hello Saiyan.";
+                }
+
+                // function 2: calling function 1 from function 2
+                function showGreeting() {
+                    document.getElementById("demo1").innerHTML = greeting();    // calling
+                }
+            </script>
+            
+
+#) Common Mistakes:
+    - Expecting Return = Some functions does not return a value.
+    - Expecting Output = If a function returns a value, but you must display it to see it.

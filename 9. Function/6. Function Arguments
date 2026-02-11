@@ -1,0 +1,146 @@
+6. Function Arguments:
+
+- JavaScript function definitions do not specify data types for arguments.
+- JavaScript functions do not perform type checking on the passed arguments.
+- JavaScript functions do not check the number of arguments received.
+
+#) Parameters vs. Arguments:
+    - In JavaScript, function parameters and arguments are distinct concepts:
+    - Parameters are the names listed in the function definition.
+    - Arguments are the real values passed to, and received by the function.
+
+        function multiply(a, b) {
+            return a * b;
+        }
+        let result = multiply(4, 5);
+
+        -> Here, a and b are parameters
+        -> and 4 and 5 are arguments
+        -> The argument 4 is assigned to the parameter a.
+        -> The argument 5 is assigned to the parameter b.
+
+
+#) The Arguments Object:
+    - JavaScript functions have a built-in object called the arguments object
+    - The argument object contains an array of the arguments used when the function was called(invoked).
+    - This way you can simply use a function to find (for instance) the highest value in a list of
+        numbers:
+
+            function findMax() {
+                let max = -Infinity;
+                for (let i = 0; i < arguments.length; i++) {
+                    if (arguments[i] > max) {
+                        max = arguments[i];
+                    }
+                }
+                return max;
+            }
+            findMax(2, 3, 34, 43, 33, 21, 45, 65, 4);    // 65
+        
+        Or create a function to sum all input values:
+
+            function findSum() {
+                let sum = 0;
+                for ( let i = 0; i < arguments.length; i++) {
+                    // sum = sum + arguments[i];
+                    sum += arguments[i];
+                }
+                return sum;
+            }
+            findSum(2, 3, 34, 43, 33, 21, 45, 65, 4);   // 250
+    
+    - 💡 If a function is called with too many arguments (more than declared), these arguments can
+        be reached using the arguments object.
+
+
+#) The Order of Arguments Matters:
+    - Arguments are assigned to parameters in the order they appear.
+
+            function subtract(a, b) {
+                return a - b;
+            }
+
+            let x1 = subtract(10, 5);   // 5
+            let x2 = subtract(5, 10);   // -5
+
+
+#) Arguments Can Be Variables:
+    - Arguments do not have to be values. They can also be variables.
+
+            let x = 5;
+            let y = 6;
+
+            function multiply(a, b) {
+                return a * b;
+            }
+
+            multiply(x, y);
+
+
+#) Arguments Errors:
+    - Incorrect Arguments:
+
+        function toCelsius(fahrenheit) {
+            return (5/9) * (fahrenheit-32);
+        }
+        let value = toCelsius("John");  // ❌ NaN
+
+    - Missing Arguments:
+
+        function multiply(a, b) {
+            return a * b;   
+        }
+
+        multiply(4);    // ❌ 4 * undefined = NaN
+
+
+#) Default Parameters:
+    - If a function is called with missing arguments (less than declared), the missing values are
+        set to undefined.
+    - Sometimes this is acceptable, but sometimes it is better to assign a default value to the
+        parameter:
+
+            function myFunction(x, y) {
+                if (y === undefined) {
+                    y = 2;
+                }
+            }
+
+
+#) Default Parameter Values:
+    - ECMAScript 2015 allows function parameters to have default values.
+    - You can now set a default value for a parameter.
+    - The default value is used if no argument is provided.
+
+            function myFunction(x, y = 10) {
+                return x + y;
+            }
+            myFunction(5);  // 5 + 10 = 15
+
+
+💡) Function Rest Parameter:
+    - The rest parameter (...) allows a function to treat an indefinite number of arguments as an
+        array.
+
+            function sum(...args) {
+                let sum = 0;
+                for (let arg of args) sum += arg;
+                return sum;
+            }
+
+            let x = sum(4, 9, 16, 25, 29, 100, 66, 77);
+
+
+#) Arguments are Passed by Value:
+    - The parameters, in a function call, are the function's arguments.
+    - JavaScript arguments are passed by value: The function only gets to know the values, not the
+        argument's locations.
+    - If a function changes an argument's value, it does not change the parameter's original value.
+    - Changes to arguments are not visible (reflected) outside the function.
+
+
+#) Objects are Passed by Reference:
+    - In JavaScript, object references are values.
+    - Because of this, objects will behave like they are passed by reference:
+    - If a function changes an object property, it changes the original value.
+    - Changes to object properties are visible (reflected) outside the function.

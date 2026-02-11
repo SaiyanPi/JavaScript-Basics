@@ -1,0 +1,116 @@
+7. Function Expression:
+
+- A function expression is a function stored in a variable
+
+    // Standard Function
+    function multiply(a, b) {
+        return a * b;
+    }
+
+    // Function Expression
+    const multiply = function(a, b) {
+        return a * b;
+    };
+
+    const multiply = function (a, b) {return a * b};
+
+
+- 💡 AFTER A FUNCTION EXPRESSION HAS BEEN STORED IN A VARIABLE, THE VARIABLE CAN BE USED AS A
+    FUNCTION:
+
+        const multiply = function (a, b) {return a * b};    // function expression
+
+        let z = multiply(4, 3);                             // variable used as a function
+
+- ⚠️ Function expression does not need a variable by default.
+        
+        setTimeout(function () {
+            console.log("Hello");
+        }, 1000);
+
+
+#) Anonymous Functions:
+    - Function expressions are commonly used to create anonymous functions.
+    - 💡 The function above is actually function without a name.
+    - 💡 Functions stored in variables do not need names because
+    - 💡 The variable name is used to call the function.
+    - ⚠️ But function expression can also be named. So the function above can also be written as:
+        
+        const multiply = function multiply(a, b) { return a * b; };
+
+
+#) Function Expressions Use Semicolons:
+    - A function expression is a JavaScript statement. That is why it usually end with a semicolon.
+
+#) Functions Stored in Variables:
+    - Because a function expression is stored in a variable, it can be used like a value.
+        This is useful when PASSING FUNCTIONS TO OTHER FUNCTIONS (callbacks).
+    - A function expression can be assigned to a variable, passed as an argument to another function,
+        or returned from a function.
+
+            // function expression 
+            function sayHello = function() {
+                return "Hello";
+            };
+
+            // another function
+            function run(fn) {
+                return fn();
+            }
+
+            // passing function expression as an argument to another function.
+            run(sayHello);  // Hello
+
+
+#) Functions vs. Function Expressions:
+    - In JavaScript, function declarations(simply a function) and function expression refer to
+        different ways of defining functions, their different syntax and how they are handled:
+    - They both work the same when you call them.
+    - The difference is when they become available in your code(hoisting).
+
+
+    ⚠️⚠️ Hoisting:
+    - Function declarations(simply a function) can be called before they are defined.
+    - Function expressions can not be called before they are defined.
+
+    - Function declarations are "hoisted" to the top of their scope. This means you can call a
+        function before it is defined in the code:
+
+            let sum = add(2, 3); // ✅ Will work
+            
+            function add(a, b) {return a + b;}
+
+    - Function expressions are not hoisted in the same way as function declarations. They are
+        created when the execution reaches their definition, and cannot be called before that point:
+
+            let sum = add(2, 3); // ❌ Will generate error
+
+            const add = function (a, b) {return a + b;};
+    
+    ⚠️ Key Differences:
+    - Syntax:
+        Function declarations require a name. Function expressions can be anonymous.
+    - Hoisting:
+        Function declarations are hoisted. Function expressions are not.
+    - Flexibility:
+        Function declarations offer more flexibility in how and where they are used.
+    
+    ⚠️ When to Use Each:
+    - Use function declarations for general-purpose functions
+    - Use function expressions when assigning functions to variables
+    - Use function expressions in callbacks and event handlers
+
+
+#) Common Mistakes: 
+    - Forgetting the Semicolon
+        Function expressions are statement and should end with ; (semicolon).
+        
+    - Expecting Hoisting
+        Function expression are not hoisted.
+        You cannot call a function expression before it is defined.
+        
+    - Confusing Reference and Call
+        sayHello is the function. sayHello() calls the function.
+
+    - Confusing Function Names and Variables
+        In expressions, the variable name is the function reference.

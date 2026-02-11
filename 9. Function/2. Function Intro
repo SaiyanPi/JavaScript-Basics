@@ -1,0 +1,104 @@
+2. Function Intro
+
+- Functions are reusable code blocks designed to perform a particular task.
+- Functions are executed when they are called or invoked.
+- Functions are fundamental in all programming.
+
+#) Why Use Functions?
+    - Functions help you to:
+        -> Reuse code (write once, run many times)
+        -> Organize code into smaller parts
+        -> Make code easier to read and maintain
+
+
+#) What Does a Function Look Like?
+    - A function can be created with the function keyword, a name, and parentheses.
+        The code to run is written inside curly brackets.
+
+        function sayHello() {
+            return "Hello World";
+        }
+
+
+#) Functions Run When You Call Them
+    - To run a function, you call it by using its name followed by parentheses like sayHello():
+
+        function sayHello() {
+            return "Hello World";
+        }
+
+        let message = sayHello();   // Hello World
+
+        -> () means execute now.
+
+
+#) JavaScript Function Syntax:
+    - syntax: 
+            function name( p1, p2, ... ) {
+                // code to be executed
+            }
+        
+        -> The function name follows the naming rules for variables.
+        -> Optional parameters are listed inside parentheses: ( p1, p2, ... )
+        -> Code to be executed is listed inside curly brackets: { }
+        -> Functions can return an optional value back to the caller.
+
+            function multiply(a, b) {
+                return a * b;
+            }
+        
+        ⚠️ A function definition is not an executable statement.
+        ⚠️ It is not common to end a function definition with a semicolon.
+        ⚠️ Semicolons are used to separate executable JavaScript statements.
+
+
+#) A Function Can Be Used Many Times:
+    - A big benefit is that you can call the same function whenever you need it.
+
+            function add(a, b) {
+                return a + b;
+            }
+
+            let sum1 = add(5, 5);   
+            let sum2 = add(50, 50);
+
+        ⚠️ Note that values returned from functions can be stored in variables.
+
+
+#) Local Variables:
+    - Variables declared within a JavaScript function, become LOCAL to the function.
+    - Local variables can only be accessed from within the function.
+
+            // code here can NOT use carName
+
+            function myFunction() {
+                let carName = "Volvo";
+                // code here CAN use carName
+            }
+
+            // code here can NOT use carName
+    
+    - Since local variables are only recognized inside their functions, variables with the same
+        name can be used in different functions.
+
+
+#) Functions Used as Variables:
+    - Functions can be used as variables, in all types of formulas, assignments, and calculations.
+        eg: 
+            Instead of using a variable to store the return value of a function:
+
+                let x = toCelsius(77);
+                let text = "The temperature is " + x + " Celsius";
+
+            You can use the function directly, as a variable value:
+
+                let text = "The temperature is " + toCelsius(77) + " Celsius";
+
+
+#) Function Input and Output:
+    - The most useful functions work like this:
+        -> Parameter Input - some parameters go into the function   
+        -> Function Code - some work is done inside the function
+        -> Return Output - some value is returned from the function
+
+    In the next three chapters, you will learn more about input and return values.

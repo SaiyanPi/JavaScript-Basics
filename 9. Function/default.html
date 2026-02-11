@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Default parameter</title>
+</head>
+<body>
+    <div>
+        <h3>Setting a default value to a function parameter.</h3>
+        <p id="mul"></p>
+        <p id="add"></p>
+
+        <script>
+            function mul(a, b) {
+                if(b === undefined) {
+                    b = 3;
+                }
+                return a * b;
+            }
+            document.getElementById("mul").innerHTML = "multiply = " + mul(2); // 2 * 3 = 6
+
+            function add(a, b = 3) {
+                return a + b;
+            }
+            document.getElementById("add").innerHTML = "addition = " + add(2);  // 2 + 3 = 5
+        </script>
+    </div>
+    
+</body>
+</html>

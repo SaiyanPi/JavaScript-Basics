@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function expression</title>
+</head>
+<body>
+    <div>
+        <h3>In the function expression, variable can be used as a function.</h3>
+        <p id="demo"></p>
+        <script>
+            const add = function (a, b) {return a + b};
+            // using variable add as a function
+            let sum = add(2, 3);
+            document.getElementById("demo").innerHTML = sum;
+        </script>
+    </div>
+    
+    <div>
+        <h3>Function expression assigned to a variable, passed as an argument to another function.</h3>
+        <p id="demo2"></p>
+        <script>
+            // function expression assigned to a variable
+            const sayHello = function() {
+                return "Hello";
+            };
+
+            // another function
+            function run(fn) {
+                return fn();
+            }
+
+            // passsing function expression assigned variable as an argument to another function
+            // run(sayHello);
+
+            document.getElementById("demo2").innerHTML = run(sayHello);
+        </script>
+    </div>
+</body>
+</html>

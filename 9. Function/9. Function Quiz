@@ -1,0 +1,88 @@
+Function Quiz
+
+1) What is returned in the text variable?
+
+            function sayHello() {
+                return "Hello World";
+            }
+            let text = sayHello();
+
+        A. sayHello
+        B. Hello World  ✅
+        C. undefined
+
+2) Which line calls the function?
+
+            function test() {
+                return 5;
+            }
+            let x = test;
+            let y = test();
+
+        A. function test() { }
+        B. let x = test;
+        C. let y = test();  ✅
+
+3) In the function below, what are a and b?
+
+            function multiply(a, b) {
+                return a * b;
+            }
+
+        A. Arguments
+        B. Parameters ✅
+        C. Return values
+
+4) What is returned by this function call?
+
+            function add(a, b) {
+                return a + b;
+            }
+            add(2, 3) * 10;
+
+        A. 5
+        B. 10
+        C. 50   ✅
+
+5) What value is returned if a function has no return statement?
+
+        A. null
+        B. false
+        C. undefined    ✅
+
+6) Which type of function can be called before it is defined?
+
+        A. Function declaration ✅
+        B. Function expression
+        C. Arrow function
+
+7) Which arrow function is correct?
+
+        A. const add = (a, b) => return a + b;
+        B. const add = a, b => a + b;
+        C. const add = (a, b) => a + b; ✅
+
+8) What does this refer to inside an object method?
+
+            const person = {
+                name: "John",
+                getName: function() {
+                    return this.name;
+                }
+            };
+
+        A. The function itself
+        B. The global object
+        C. The object that owns the method  ✅
+
+9) Why does this code not work as expected?
+
+            const person = {
+                name: "John",
+                greet: () => this.name
+            };
+        
+        A. Arrow functions cannot return values
+        B. Arrow functions do not have their own this   ✅
+        C. The object syntax is wrong
+
