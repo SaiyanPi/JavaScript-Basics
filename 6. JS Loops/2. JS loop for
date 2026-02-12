@@ -50,3 +50,114 @@ JS Loop for:
 
 
 #) Loop Scope
+    - Using var in a loop:
+        
+        var i = 5;
+        for (var i = 0; i < 10; i++) {
+            // some code
+        }
+        // Here i is 10
+    
+
+    - Using let in a loop:
+
+        let i = 5;
+        for (let i = 0; i < 10; i++) {
+            // some code
+        }
+        // Here i is 5
+
+
+___________________________________________________________________________________________________
+
+(for-in) vs (for-of)
+
+⚠️) for-in
+- Iterates over keys(property names in object)
+- Works on objects
+- Also works on arrays (but shouldn’t be used for them)
+
+    eg: On Object:
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                id: 5566,
+                getId: function() {
+                    return this.id;
+                }
+            };
+
+            // display object properties and methods
+            let props = "";
+            for(const key in person) {
+                props += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("4").innerHTML = props;
+
+            o/p: 
+                firstName: "John",
+                lastName: "Doe",
+                id: 5566,
+                getId: function() { return this.id; }
+            
+    eg: on Array:
+            const cars = ["Toyota", "Porsche", "Tesla"];
+
+            // display array values
+            let val = "";
+            for(const index in cars) {
+                val += `${index}: ${cars[index]} <br>`;
+            }
+            document.getElementById("2").innerHTML = val;
+
+            o/p:
+                0: Toyota
+                1: Porsche
+                2: Tesla
+            
+            -> you can't just display values instead you get the values with the indexes
+            -> indexes act as a keys.
+    
+⚠️) For-of 
+- iterates over values (iterables only)
+- works on Arrays, Strings, Maps, Sets.
+- doesn't work on object because object are not iterable by default.
+
+    eg: on Array:
+            const cars = ["Toyota", "Porsche", "Tesla"];
+
+            // display array values
+            let val1 = "";
+            for(const value of cars) {
+                val1 += `${value} <br>`;
+            }
+            document.getElementById("3").innerHTML = val1;
+
+            o/p:
+                Toyota
+                Porsche
+                Tesla
+    
+    eg: on object:
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                id: 5566,
+                getId: function() {
+                    return this.id;
+                }
+            };
+
+            // display object properties and methods
+            let props1 = "";
+            for(const key of person) {
+                props1 += `${key} <br>`;    // ❌ TypeError: person is not iterable
+            }
+            document.getElementById("4").innerHTML = props1;
+
+            o/p:
+                Nothing
+
+
+
+

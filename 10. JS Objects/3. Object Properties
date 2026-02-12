@@ -1,0 +1,107 @@
+JavaScript Object Properties:
+
+- Properties are key:value Pairs
+- Properties can be changed, added, and deleted.
+
+#) Accessing JavaScript Properties:
+    - You can access object properties in these ways:
+        1. Dot notation
+            // objectName.property
+            let age = person.age;
+
+        2. Bracket notation
+            //objectName["property"]
+            let age = person["age"];
+
+        3. Expression
+            //objectName[expression]
+            let age = person[x];
+    
+    - Given that the following object:
+            const person = {
+                first: "Saiyan",
+                last: "Pi",
+                age: 30,
+                bio: function() { 
+                    return "Hello developers, I am " + this.first;
+                }
+            }
+        
+        1. Dot notation would be:
+
+            let age = person.age;
+            let bio = person.bio();
+            document.getElementById("demo").innerHTML = `${bio} and i am ${age}.`;
+        
+        2. Bracket notation would be:
+
+            let age = person["age"];
+            let bio = person["bio"]();  👈⚠️
+            document.getElementById("demo").innerHTML = `${bio} and i am ${age}.`;
+        
+        3. Expression would be:
+
+            let x = "age";
+            let y = "bio";
+            document.getElementById("demo3").innerHTML = `${person[y]()} and i am ${person[x]}.`;
+
+            -> This is same as the bracket notation except property/method name is stored in
+                variable expression
+
+                person["age"] is same as person[x] where variable x = "age"
+    
+    - 💡 In general, dot notation is preferred for readability and simplicity.
+    - ⚠️ Bracket notation is necessary in some cases:
+        -> The property name is stored in a variable: person[myVariable]
+        -> The property name is not a valid identifier: person["last-name"]
+
+
+#) Changing Properties:
+    - You can change the value of a property:
+        
+        person.age = 35;
+
+#) Adding New Properties:
+    - You can add a new property by simply giving it a value:
+
+        person.address = "Diding";
+
+#) Deleting Properties:
+    - The delete keyword deletes a property from an object:
+
+        delete person.age;
+        or,
+        delete person["age"];
+    
+    - ⚠️ The delete keyword deletes both the value and the property. After deleting, the property
+        is removed. Accessing it will return undefined.
+
+#) Check if a Property Exists:
+    - Use the in operator to check if a property exists in an object:
+
+        let result = ("address" in person); // returns true or false
+
+#) Nested Objects:
+    - Property values in an object can be other objects:
+        myObj = {
+            name:"John",
+            age:30,
+            myCars: {
+                car1:"Ford",
+                car2:"BMW",
+                car3:"Fiat"
+            }
+        }
+    
+    - 💡💡 You can access nested objects using the dot notation or the bracket notation:
+        Dot notation: 
+            myObj.myCars.car1;
+
+        Bracket notation: 
+            myObj.myCars["car1"];
+            or,
+            myObj["myCars"]["car1"];
+            or,
+            let p1 = "myCars";
+            let p2 = "car1";
+            myObj[p1][p2];

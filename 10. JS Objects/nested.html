@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nested Object</title>
+</head>
+<body>
+    <div>
+        <h3>Displaying nested object properties</h3>
+        <p id="1"></p>
+        <script>
+            const car = {
+                company: "Toyota",
+                model: "Corolla",
+                year: 2020,
+                owner: {
+                    name: "John Doe",
+                    age: 30,
+                    license: "B1234567"
+                },
+                getCarInfo: function() {
+                    return `${this.company} ${this.model} (${this.year}) owned by ${this.owner.name}`;
+                }
+            };
+
+            // ⚠️⚠️⚠️ display section -------------------------------------
+            // document.getElementById("1").textContent = JSON.stringify(car, null, 2);
+            function displayObject(car, indent = "") {  // Indent is purely for formatting (visual nesting).
+                let props = "";
+                for(let key in car) {
+                    const value = car[key];
+
+                    if(typeof value === "object" && value !== null) {
+                        props +=  key + ":<br>"; 
+                        props += displayObject(value, indent + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    } else{
+                        props += indent + key + ":" + value + "<br>";
+                    }
+                }
+                return props;
+            }
+           
+            document.getElementById("1").innerHTML = displayObject(car);
+        </script>
+    </div>
+
+
+    <div>
+        <h3>Accessing nested objects using Dot notation: </h3>
+        <p id="2"></p>
+        <script>
+            let ownerName = car.owner.name;
+            document.getElementById("2").innerHTML = `Owner name is ${ownerName}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Accessing nested objects using Bracket notation: </h3>
+        <p id="3"></p>
+        <script> 
+            let ownerAge = car.owner["age"];
+            let ownerLisc = car["owner"]["license"];
+        
+            document.getElementById("3").innerHTML = `Owner is aged ${ownerAge} with liscense ${ownerLisc}`;
+        </script>
+    </div>
+    
+</body>
+</html>

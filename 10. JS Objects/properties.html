@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object properties</title>
+</head>
+<body>
+    <div>
+        <script>
+            const person = {
+                fname: "John",
+                lname: "Wick",
+                age: "45",
+                bio: () => { return "retired assasin";}
+            };
+        </script>
+    </div>
+
+    <div>
+        <h3>1. Display object properties</h3>
+        <p id="1"></p>
+        <script>
+            // document.getElementById("1").innerHTML = JSON.stringify(person, null, 2);
+
+            let props = "";
+            for(let key in person) {
+                props += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("1").innerHTML = props;
+        </script>
+    </div>
+
+    <div>
+        <h3>2. Adding a new property to an object</h3>
+        <p id="2"></p>
+        <script>
+            // adding new property
+            person.nationality = "American";
+            
+            // displaying
+            let props2 = "";
+            for(let key in person) {
+                props2 += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("2").innerHTML = props2;
+        </script>
+    </div>
+
+    <div>
+        <h3>3. Changing/Modifying property</h3>
+        <p id="3"></p>
+        <script>
+            // changing proerty
+            person.age = 49;
+
+            // displaying
+            let props3 = "";
+            for(let key in person) {
+                props3 += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("3").innerHTML = props3;
+        </script>
+    </div>
+
+    <div>
+        <h3>4. Deleting property</h3>
+        <p id="4"></p>
+        <script>
+            // deleting property
+            delete person.age;
+
+            // displaying
+            let props4 = "";
+            for(let key in person) {
+                props4 += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("4").innerHTML = props4;
+        </script>
+    </div>
+    
+    <div>
+        <h3>5. Check if the property 'nationality' exists</h3>
+        <p id="5"></p>
+        <script>
+            // let result = ("nationality" in person); // true
+            let result = "nationality" in person? "Property exists" : "Property does not exist";
+            document.getElementById("5").innerHTML = result;
+        </script>
+    </div>
+</body>
+</html>

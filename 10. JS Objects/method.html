@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Methods</title>
+</head>
+<body>
+    <div>
+        <script>
+            const person = {
+                name: "John",
+                bio: function() {
+                    return "retired assasin";
+                }
+            };
+        </script>
+    </div>
+    
+    <div>
+        <h3>To call an object method, add parentheses ()</h3>
+        <p id="1"></p>
+        <script>
+            document.getElementById("1").innerHTML = person.bio();  // method
+        </script>
+    </div>
+
+    <div>
+        <h3>without parentheses, we get the function itself</h3>
+        <p id="2"></p>
+        <script>
+            document.getElementById("2").innerHTML = person.bio;    // function itself
+        </script>
+    </div>
+
+    <div>
+        <h3>Adding method(review) to an object</h3>
+        <p id="3"></p>
+        <p id="4"></p>
+        <script>
+            // adding method
+            person.review = function() {
+                return '"'+ this.name + ' is someone you should not mess arround with"';
+            };
+            // accessing newly added method
+            document.getElementById("3").innerHTML = person.review();
+
+            // display object properties and methods
+            let props = "";
+            for(const key in person) {
+                props += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("4").innerHTML = props;
+        </script>
+    </div>
+    
+</body>
+</html>

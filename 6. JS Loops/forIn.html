@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- ----------------------------For - in--------------------------------------------------------------- -->
+
+    <div>
+        <h2>For-in iterates over keys (property names) - Objects </h2>
+        <h2>For-of iterates over values (iterables only) - Arrays, Strings, Maps, Sets </h2>
+        <script>
+            const person = {
+                fname: "John",
+                lname: "Wick",
+                bio: function() {
+                    return "I am " + this.fname + " " + this.lname;
+                }
+            };
+            const cars = ["Toyota", "Porsche", "Tesla"];
+        </script>
+    </div>
+
+    <div>
+        <h3>For-in works on object: ✅ display every properties and methods</h3>
+        <p id="1"></p>
+        <script>
+            let props = "";
+            for(const key in person) {
+                props += `${key}: ${person[key]} <br>`;
+            }
+            document.getElementById("1").innerHTML = props;
+        </script>
+    </div>
+
+    <div>
+        <h3>for-in works on array too: ⚠️ but shouldn't be used because it gives indexes as string </h3>
+        <p id="2"></p>
+        <script>
+            let val = "";
+            for(const index in cars) {
+                val += `${index}: ${cars[index]} <br>`;
+            }
+            document.getElementById("2").innerHTML = val;
+        </script>
+    </div>
+
+
+<!-- ----------------------------For - of--------------------------------------------------------------- -->
+    <div>
+       <h3>for-of works on Arrays, Strings, Maps, Sets (gives you value directly)</h3>
+       <p id="3"></p>
+       <script>
+        let val1 = "";
+        for(const value of cars) {
+            val1 += `${value} <br>`;
+        }
+        document.getElementById("3").innerHTML = val1;
+       </script>
+    </div>
+
+    <div>
+       <h3>for-of does not work on Object (objects are not iterable by default)</h3>
+       <p id="4"></p>
+       <script>
+        let props1 = "";
+        for(const key of person) {
+            props1 += `${key} <br>`;    // ❌ TypeError: person is not iterable
+        }
+        document.getElementById("4").innerHTML = props1;
+       </script>
+    </div>
+    
+</body>
+</html>

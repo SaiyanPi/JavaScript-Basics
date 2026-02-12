@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object constructor with methods</title>
+</head>
+<body>
+    <div>
+        <h3>Object constructor with methods</h3>
+        <p id="1"></p>
+        <script>
+            // constructor function with method for Person objects
+            function Person(first, last, age, city) {
+                this.firstName = first;
+                this.lastName = last;
+                this.age = age;
+                this.city = city;
+                this.fullName = function(){
+                    return this.firstName + " " + this.lastName;
+                };
+            }
+
+            // create a Person object
+            const asian = new Person("Kim", "Jung", 45, "Seoul");
+            const indian = new Person("Ram", "Gupta", 55, "Delhi");
+            
+
+            // Display method
+            document.getElementById("1").innerHTML = `His name is  ${asian.fullName()}.`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Adding a method to an object</h3>
+        <p id="2"></p>
+        <p id="3"></p>
+        <script>
+            // adding new method 'bio' to an object asian
+            asian.bio = function() {
+                return `Hi i am ${this.firstName} from ${this.city}.`;
+            }
+            // adding a new method 'changeLastName' with parameter lName to object asian
+            asian.changeLastName = function (lName) {
+                this.lastName = lName;
+            }
+            // changing name by calling method with argument
+            asian.changeLastName("Yung");
+
+            document.getElementById("2").innerHTML = asian.bio();
+            document.getElementById("3").innerHTML = `His name is  ${asian.fullName()}.`;
+        </script>
+    </div>
+
+    <div>
+        <h3>You cannot add a new method to an object constructor function.</h3>
+        <p id="4"></p>
+
+        <script>
+            // adding a new method 'changeFirstName' with parameter fName to object constructor
+            Person.changeFirstName = function (fName) {
+                this.firstName = fName;
+            }
+            // changing name by calling method with argument
+            indian.changeFirstName("Manoj");
+
+            document.getElementById("4").innerHTML = `His name is  ${indian.fullName()}.`;  
+            // ❌ does not work. TypeError: indian.changeFirstName is not a function.
+        </script>
+    </div>
+
+    <div>
+        <h3>Adding a new method to a constructor must be done to the constructor function prototype:</h3>
+        <p id="5"></p>
+
+        <script>
+            Person.prototype.changeFirstName = function (fName) {
+                this.firstName = fName;
+            }
+
+            indian.changeFirstName("Manoj");
+
+            document.getElementById("5").innerHTML = `His name is  ${indian.fullName()}.`;  
+            // ✅ His name is Manoj Gupta.
+        </script>
+    </div>
+</body>
+</html>

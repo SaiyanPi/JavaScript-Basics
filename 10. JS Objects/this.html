@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object this</title>
+</head>
+<body>
+    <div>
+        <h3>When used alone, this refers to the global object. In a browser, the global object is the window object.</h3>
+        <p id="1"></p>
+
+        <script>
+            let x = this;
+            document.getElementById("1").innerHTML = `this = ${x}`; // [object Window]
+        </script>
+    </div>
+
+    <div>
+        <h3>In a regular function, this also refers to the global object.</h3>
+        <p id="2"></p>
+
+        <script>
+            function myFunction() {
+                return this;
+            }
+            document.getElementById("2").innerHTML = `this in the function = ${myFunction()}`; // [object Window]
+        </script>
+    </div>
+
+    <div>
+        <h3>this as a object property refers to the global object.</h3>
+        <p id="3"></p>
+
+        <script>
+            const cup = {
+                material: "ceramic",
+                this: this,
+            }
+            document.getElementById("3").innerHTML = 
+                `this as an object property = ${cup.this}`; // [object Window]
+          
+        </script>
+    </div>
+
+      <div>
+        <h3>In object method(this inside object method), this also refers to the global object.</h3>
+        <p id="4"></p>
+        <p id="5"></p>
+
+        <script>
+            const vase = {
+                material: "ceramic",
+                desc: function() {
+                    // console.log(this);
+                    return this;
+                }
+            }
+           
+            document.getElementById("4").innerHTML = 
+                "this in the object method = " + vase.desc(); // [object Object]
+            document.getElementById("5").innerHTML = 
+                "this in the object method(stringified) = " + JSON.stringify(vase.desc()); 
+                // {"material":"ceramic"}
+        
+                // ⚠️⚠️⚠️⚠️ wait.... why method desc is not included in the stringified object?
+                // and yet when we console.log(this), method is also included in the object.
+                // Reason: JSON supports only:
+                            //             Strings
+                            //             Numbers
+                            //             Booleans
+                            //             null
+                            //             Arrays
+                            //             Objects (containing the above)
+                    // It does NOT support:
+                            //             Functions
+                            //             undefined
+                            //             Symbols
+        </script>
+    </div>
+    
+</body>
+</html>

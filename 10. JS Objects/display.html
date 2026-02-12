@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Object</title>
+</head>
+<body>
+    <div>
+        <h3>Displaying a JavaScript object will output [object Object].</h3>
+        <p id="1"></p>
+
+        <script>
+            const person = {
+                name: "John",
+                age: 30,
+                city: "Nepal"
+            };
+            let text = person;
+            document.getElementById("1").innerHTML = `Displaying object person: ${text}`;
+        </script>
+    </div>
+    
+    <div>
+        <h3>1. Displaying Object Properties</h3>
+        <p id="2"></p>
+
+        <script>
+            let text1 = `${person.name}, ${person.age}, ${person.city}`;
+            document.getElementById("2").innerHTML = text1;
+        </script>
+    </div>
+
+    <div>
+        <h3>2. Using a For .. In Loop</h3>
+        <p id="3"></p>
+
+        <script>
+            let text2 = "";
+            for(const key in person) {
+                text2 += person[key] + " ";
+            }
+            document.getElementById("3").innerHTML = text2
+        </script>
+    </div>
+
+    <div>
+        <h3>3. Using Object.values()</h3>
+        <p id="4"></p>
+
+        <script>
+            // 1. create an array
+            const personArray = Object.values(person);
+            // console.log(personArray);
+            // 2. stringify the array
+            let text3 = personArray.toString();
+            //console.log(text3);
+            document.getElementById("4").innerHTML = text3;
+        </script>
+    </div>
+
+    <div>
+        <h3>4. Using Object.entries()</h3>
+        <p id="5"></p>
+
+        <script>
+            let text4 = "";
+            for(let [key, value] of Object.entries(person)) {
+                text4 += `${key}: ${value} <br>`;
+            }
+            document.getElementById("5").innerHTML = text4;
+        </script>
+    </div>
+
+    <div>
+        <h3>5. Using JSON.stringify()</h3>
+        <p id="6"></p>
+
+        <script>
+            // stringify object
+            let text5 = JSON.stringify(person);
+            document.getElementById("6").innerHTML = text5;
+        </script>
+    </div>
+    
+</body>
+</html>

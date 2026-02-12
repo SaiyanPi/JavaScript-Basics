@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object constructor function</title>
+</head>
+<body>
+    <div>
+        <h3>Object constructor function</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+        <p id="3"></p>
+        <script>
+            // constructor function for Person objects
+            function Person(first, last, age, city) {
+                this.firstName = first;
+                this.lastName = last;
+                this.age = age;
+                this.city = city;
+                this.planet = "Earth";  // default value for all objetcs created by the constructor
+            }
+
+            // create a Person object
+            const asian = new Person("Kim", "Jung", 45, "Seoul");
+            const indian = new Person("Ram", "Gupta", 55, "Delhi");
+            // const martian = new Person("sbhcd", "xvgh", 105, "Neburo", "Mars");
+
+            // Display property
+            document.getElementById("1").innerHTML =
+                `He is ${asian.firstName} from ${asian.city} in planet ${asian.planet}.`;
+            document.getElementById("2").innerHTML =
+                `He is ${indian.firstName} from ${indian.city} in plane ${indian.planet}.`;
+            // document.getElementById("3").innerHTML =
+            //     `He is ${martian.firstName} from ${martian.city} in plane ${martian.planet}.`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Adding property to an object created from constructor function(similar like a regular function)</h3>
+        <p id="4"></p>
+
+        <script>
+            asian.eye = "brown";
+            document.getElementById("4").innerHTML =
+                `${asian.firstName} from ${asian.city} has a ${asian.eye} eye.`;
+
+        </script>
+    </div>
+    
+    <div>
+        <h3>We cannot add property to an object constructor.</h3>
+        <p id="5"></p>
+
+        <script>
+           Person.language = "Hindi";  // ❌ does not work. undefined
+            document.getElementById("5").innerHTML =
+                `${indian.firstName} from ${indian.city} speaks ${indian.language}.`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3>To add a new property, you must add it to the constructor function prototype</h3>
+        <p id="6"></p>
+        <p id="7"></p>
+
+        <script>
+            Person.prototype.language = "Hindi";  // ✅ language will have a default value Hindi
+            asian.language = "Korean";  // overriding 
+
+            document.getElementById("6").innerHTML =
+                `${indian.firstName} from ${indian.city} speaks ${indian.language}.`;
+            document.getElementById("7").innerHTML =
+                `${asian.firstName} from ${asian.city} speaks ${asian.language}.`;
+
+        </script>
+    </div>
+</body>
+</html>

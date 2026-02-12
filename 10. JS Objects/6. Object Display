@@ -1,0 +1,107 @@
+Object Display:
+
+#) How to Display JavaScript Objects?
+    - Displaying a JavaScript object will output [object Object].
+
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        let text = person;
+        document.getElementById("1").innerHTML = `Displaying object person: ${text}`;
+        // Displaying object person: [object Object]
+
+#) Why do I See [object Object]?
+    - [Object Object] appears when you try to put an object (a data structure with properties)
+        into a context where a string is expected.
+    - Some solutions to display JavaScript objects are:
+        -> Displaying the Object Properties by name
+        -> Displaying the Object Properties in a Loop
+        -> Displaying the Object using Object.values()
+        -> Displaying the Object using JSON.stringify()
+
+
+1) Displaying Object Properties:
+        
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        let text1 = `${person.name}, ${person.age}, ${person.age}`;
+        document.getElementById("2").innerHTML = text1;
+
+        o/p: John, 30, Nepal
+
+
+2) Using a For .. In Loop:
+    - The properties of an object can be collected in a loop:
+        
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        let text2 = "";
+        for(const key in person) {
+            text2 += person[key] + " ";
+        }
+        document.getElementById("3").innerHTML = text2
+
+        o/p: John 30 Nepal
+
+
+3) Using Object.values():
+    - Object.values() creates an array from the property values:
+
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        // create an array
+        const personArray = Object.values(person);
+        // stringify the array
+        let text3 = personArray.toString();
+        document.getElementById("4").innerHTML = text3;
+
+        o/p: John,30,Nepal
+
+    ⚠️ we create an array of values in the object. In the same way we can create array of keys 
+        
+        const personArray = Object.keys(person);    // name,age,city
+
+
+4) Using Object.entries():
+    - Object.entries() makes it simple to use objects in loops:
+
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        let text4 = "";
+        for(let [key, value] of Object.entries(person)) {
+            text4 += `${key}: ${value} <br>`;
+        }
+        document.getElementById("5").innerHTML = text4;
+
+        o/p:    name: John
+                age: 30
+                city: Nepal
+
+
+5) Using JSON.stringify():
+    - JavaScript objects can be converted to a string with JSON method JSON.stringify().
+    - JSON.stringify() is included in JavaScript and supported in all browsers.
+
+        const person = {
+            name: "John",
+            age: 30,
+            city: "Nepal"
+        };
+        let text5 = JSON.stringify(person);
+        document.getElementById("6").innerHTML = text5;
+
+        o/p: {"name":"John","age":30,"city":"Nepal"}

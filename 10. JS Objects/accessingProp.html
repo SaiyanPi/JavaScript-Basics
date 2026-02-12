@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessing properties</title>
+</head>
+<body>
+    <div>
+        <script>
+            const person = {
+                first: "Saiyan",
+                last: "Pi",
+                age: 30,
+                bio: function() { 
+                    return "Hello developers, I am " + this.first;
+                }
+            };
+        </script>
+    </div>
+    
+    <div>
+        <h3>1. Accessing with dot notation.</h3>
+        <p id="demo"></p>
+        <script>
+            let age = person.age;
+            let bio = person.bio();
+            document.getElementById("demo").innerHTML = `${bio} and i am ${age}.`;
+        </script>
+    </div>
+    
+    <div>
+        <h3>2. Accessing with Bracket Notation</h3>
+        <p id="demo2"></p>
+
+        <script>
+            let age1 = person["age"];
+            let bio1 = person["bio"]();
+            document.getElementById("demo2").innerHTML = `${bio1} and i am ${age1}.`;
+
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>2. Accessing with variable expression</h3>
+        <p id="demo3"></p>
+        <script>
+
+            let age2 = "age";
+            let bio2 = "bio";
+            document.getElementById("demo3").innerHTML = `${person[bio2]()} and i am ${person[age2]}.`;
+        </script>
+    </div>
+</body>
+</html>

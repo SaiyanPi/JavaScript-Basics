@@ -1,0 +1,56 @@
+Object this:
+
+- The this keyword refers to an object.
+- In JavaScript, this is used to access the object that is calling a method.
+
+
+#) this in an Object Method:
+    - When used inside an object method, this refers to the object.
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        -> this.firstName refers to the firstName property of the person object
+        -> this.lastName refers to the lastName property of the person object
+
+#) Why Use this?
+    - The this keyword makes it possible to use the same method with different objects.
+
+        const person1 = {
+            name: "John",
+            hello: function() {
+                return "Hello " + this.name;
+            }
+            };
+
+        const person2 = {
+            name: "Anna",
+            hello: function() {
+                return "Hello " + this.name;
+            }
+        };
+
+        document.getElementById("demo").innerHTML = person1.hello();
+
+#) this Alone:
+    - When used alone, this refers to the global object.
+    - In a browser, the global object is the window object.
+    - ⚠️ Note: In strict mode, this is undefined when used alone.
+
+        let x = this;
+        document.getElementById("1").innerHTML = `this = ${x}`; // [object Window]
+
+#) this in a Function:
+    - In a regular function, this also refers to the global object.
+
+        function myFunction() {
+            return this;
+        }
+        document.getElementById("2").innerHTML = `this in the function = ${myFunction()}`; // [object Window]
+

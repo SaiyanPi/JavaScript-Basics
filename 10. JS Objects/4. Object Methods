@@ -1,0 +1,61 @@
+Object Methods:
+
+- Methods are actions that can be performed on objects.
+- Methods are functions stored as property values.
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+            
+    Property	    Value
+    --------------------------------------
+    firstName	    John
+    lastName	    Doe
+    age	            50
+    fullName	    function() {
+                        return this.firstName + " " + this.lastName;
+                    }
+
+
+⚠️) The this Keyword:
+    - In an object method, this refers to the object.
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            id: 5566,
+            getId: function() {
+                return this.id; // 5566
+            }
+        };
+        let number = person.getId();
+    
+    -> In the example above, this refers to the person object.
+    -> this.id means the id property of the person object.
+
+
+#) Accessing Object Methods:
+    - syntax: objectName.methodName()
+    - To call an object method, add parentheses ():
+    - ⚠️⚠️ Without parentheses you get the function itself.
+
+        const person = {
+            name: "John",
+            bio: function() {
+                return "retired assasin";
+            }
+        }
+        person.bio; // function() { return "retired assasin"; }
+
+#) Adding a Method to an Object:
+    - You can add a method to an object by assigning a function to a property:
+
+        // Assign person.name to a function
+        person.name = function() {
+            return this.firstName + " " + this.lastName;
+        };
