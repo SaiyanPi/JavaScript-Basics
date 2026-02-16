@@ -1,0 +1,57 @@
+JS Code Blocks:
+
+#) Curly Braces:
+    - A code block or block statement is a group of statements enclosed within curly braces { }.
+    - Code blocks are important for controlling the flow of execution and defining variable scope
+        within a JavaScript program.
+
+
+#) Code Blocks and Statements:
+    - Code blocks allows for multiple statements to be treated as a single unit.
+    - The body of a JavaScript function is always enclosed within a code block:
+
+        function myFunction() {
+            // This is a code block
+        }
+    
+    - Code blocks are essential for if statements:
+        if (condition) {
+            // This is a code block
+        } else {
+            // This is a code block
+        }
+    
+    - Code blocks are essential for loop statements:
+        for (expression 1; expression 2; expression 3) {
+            // This is a code block
+        }
+
+        while (condition) {
+            // This is a code block
+        }
+
+
+#) Defining Scope:
+    - Variables declared with let and const inside a code block are "block-scoped," meaning they
+        are only accessible within that specific block.
+    - This helps prevent unintended variable overwrites and promotes better code organization:
+
+        {
+        let x = 10;
+            // x is accessible here
+        }
+
+        // x is not accessible here
+
+
+⚠️) Standalone Blocks:
+    - Code blocks can also exist independently without being attached to an if statement, a function
+        or a loop.
+    - This can be used to create a scope for let and const variables.
+
+        {
+            let x = 10;
+            let y = 100;
+            let areal = x * y;
+        }
+        this code demonstrates how a standalone block can be used to limit the scope of variables.

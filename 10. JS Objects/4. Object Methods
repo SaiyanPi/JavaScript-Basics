@@ -55,7 +55,18 @@ Object Methods:
 #) Adding a Method to an Object:
     - You can add a method to an object by assigning a function to a property:
 
-        // Assign person.name to a function
-        person.name = function() {
-            return this.firstName + " " + this.lastName;
+        // Assign person.review to a function
+        person.review = function() {
+            return '"'+ this.name + ' is someone you should not mess arround with"';
         };
+
+        or,
+
+        // assign person.changeName to a function with parameter
+        person.changeName = function(n) {
+            this.name = n;
+        }
+        and later
+        // calling method. this overrides the name property
+        person.changeName("Bob");
+            

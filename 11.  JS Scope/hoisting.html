@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+</head>
+<body>
+    <div>
+        <h3>1. VARIABLES DEFINED WITH VAR ARE HOISTED TO THE TOP OF THE BLOCK, AND INITIALIAZED WITH 
+        UNDEFINED.</h3>
+        <p id="1"></p>
+        <script>
+            try {
+                console.log(x); // undefined
+                var x = "Hilux";
+            }
+            catch(err1) {
+                document.getElementById("1").innerHTML = err1;  // no error
+            }
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>2. VARIABLES DEFINED WITH LET AND CONST ARE HOISTED TO THE TOP OF THE BLOCK, BUT NOT
+        INITIALIZED.</h3>
+        <p id="2"></p>
+        <script>
+            try {
+                console.log(a); 
+                let a = "Toyota";
+            }
+            catch(err2) {
+                document.getElementById("2").innerHTML = err2;  // ReferenceError
+            }
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>let: Using a let variable before it is declared will result in a ReferenceError.</h3>
+        <p id="3"></p>
+        <script>
+            try {
+                b = "Toyota" 
+                let b;
+            }
+            catch(err3) {
+                document.getElementById("3").innerHTML = err3;  // ReferenceError
+            }
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>const: Using a const variable before it is declared, is a syntax error, so the code will
+            simply not run.</h3>
+        <p id="4"></p>
+        <script>
+            // code will not run
+            try {
+                c = "Toyota" 
+                // const b;    // syntax error
+            }
+            catch(err4) {
+                document.getElementById("4").innerHTML = err4;
+            }
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>JavaScript Initializations are Not Hoisted</h3>
+        <p id="5"></p>
+        <p id="6"></p>
+        <script>
+            var d = 5;
+            var e = 6;
+            document.getElementById("5").innerHTML = d + " " + e;   // 5 6
+
+            var f = 5;
+            document.getElementById("6").innerHTML = f + " " + g;   // 5 undefined
+            var g = 6;
+        </script>
+    </div>
+    
+</body>
+</html>

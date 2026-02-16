@@ -42,6 +42,14 @@
             person.review = function() {
                 return '"'+ this.name + ' is someone you should not mess arround with"';
             };
+
+            // adding method with parameter
+            person.changeName = function(n) {
+                this.name = n;
+            }
+            // calling method. this overrides the name property
+            person.changeName("Bob");
+            
             // accessing newly added method
             document.getElementById("3").innerHTML = person.review();
 
