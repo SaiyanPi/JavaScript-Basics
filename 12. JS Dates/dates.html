@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Dates</title>
+</head>
+<body>
+    <div>
+        <h3>JS Date</h3>
+        <p id="year" class="box"></p>
+        <p id="month"></p>
+        <p id="day"></p>
+        <p id="hours"></p>
+        <p id="minutes"></p>
+        <p id="seconds"></p>
+    
+        <script>
+            const d = new Date();
+
+            function updateSeconds() {
+                const date = new Date();
+                document.getElementById("seconds").innerHTML = `Seconds: ${date.getSeconds()}`;
+                // this doesn't work
+                // document.getElementById("seconds").innerHTML = d.getSeconds();
+            }
+            setInterval(updateSeconds, 1000);
+
+            document.getElementById("year").innerHTML = `Year: ${d.getFullYear()}`;
+            document.getElementById("month").innerHTML = `Month: ${d.getMonth()+1}`;
+            document.getElementById("day").innerHTML = `Day: ${d.getDate()}`;
+            document.getElementById("hours").innerHTML = `Hour: ${d.getHours()}`;
+            document.getElementById("minutes").innerHTML = `Minute: ${d.getMinutes()}`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3></h3>
+        <p id="1"></p>
+        <script>
+            const date = new Date();
+            document.getElementById("1").innerHTML = date;
+        </script>
+    </div>
+    
+</body>
+</html>

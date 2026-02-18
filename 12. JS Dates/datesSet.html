@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Set</title>
+</head>
+<body>
+    <div>
+        <h3>setFullYear(): sets the year of a date object. In this example to 2020:</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+        <script>
+            const d = new Date("January 01, 2026");
+            let n = d.setFullYear(2020);   // n = number of milliseconds since Jan 1, 1970 for Jan 1, 2020
+            document.getElementById("1").innerHTML = n;
+            document.getElementById("2").innerHTML = d; // expected set result (Jan 01 2020)
+
+        </script>
+    </div>
+
+    <div>
+        <h3>setFullYear(): sets the year of a date object. In this example to 2020:</h3>
+        <p id="3"></p>
+        <script>
+            const e = new Date("Feb 06, 2026");
+            e.setFullYear(2020, 11, 3);
+            document.getElementById("3").innerHTML = e;
+        </script>
+    </div>
+
+    <div>
+        <h3>setDate(): method can also be used to add days to a date:</h3>
+        <p id="4"></p>
+        <script>
+            const f = new Date("Feb 06, 2026");
+            // f.setDate(19);
+            f.setDate(f.getDate() + 13);
+            document.getElementById("4").innerHTML = f;
+        </script>
+    </div>
+
+    <div>
+        <h3>setHours(): method sets the hours of a date object (0-23):</h3>
+        <p id="5"></p>
+        <script>
+            const g = new Date("Feb 06, 2026");
+            // g.setHours(22);
+            g.setHours(22, 10, 20);
+            document.getElementById("5").innerHTML = g;
+        </script>
+    </div>
+    
+    <div>
+        <h3>Compare Dates: compares today's date with January 14, 2100:</h3>
+        <p id="6"></p>
+        <script>
+            let text = "";
+            let today = new Date();
+            let someday = new Date();
+            someday.setFullYear(2100, 0, 14);
+
+            if(someday > today) {
+                text = "Today is before jan 14, 2100";
+            } else {
+                text = "Today is after jan 14, 2100";
+            }
+            
+            document.getElementById("6").innerHTML = text;
+        </script>
+    </div>
+</body>
+</html>

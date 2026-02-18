@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsing Date</title>
+</head>
+<body>
+    <div>
+        <h3>Date.parse() returns the number of milliseconds between the date and January 1, 1970:</h3>
+        <p id="1"></p>
+        <script>
+            let ms = Date.parse("Feb 17, 2026");
+            document.getElementById("1").innerHTML = `parsing Feb 17, 2026 = ${ms}`;
+        </script>
+    </div>
+    
+    <div>
+        <h3>You can then use the number of milliseconds to convert it to a date object:</h3>
+        <p id="2"></p>
+        <script>
+            let msec = Date.parse("Feb 17, 2026");  // 1771265700000
+            const date = new Date(msec);
+            document.getElementById("2").innerHTML = 
+                `converting 1771265700000 milliseconds to date object = ${date}`;
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display date</title>
+</head>
+<body>
+    <div>
+        <h3>When you display a date object in HTML, it is automatically converted to a string, with the
+            toString() method.</h3>
+            <p id="1"></p>
+            <script>
+                const d = new Date();
+                document.getElementById("1").innerHTML = d;
+            </script>
+    </div>
+
+    <div>
+        <h3>converting a date object to a string doesn't make any cdifference.</h3>
+            <p id="2"></p>
+            <script>
+                const e = new Date();
+                document.getElementById("2").innerHTML = e.toString();
+            </script>
+    </div>
+
+    <div>
+        <h3>The toDateString() method converts a date to a more readable format.</h3>
+            <p id="3"></p>
+            <script>
+                const f = new Date();
+                document.getElementById("3").innerHTML = f.toDateString();
+            </script>
+    </div>
+
+    <div>
+        <h3>The toUTCString() method converts a date to a string using the UTC standard:</h3>
+            <p id="4"></p>
+            <script>
+                const g = new Date();
+                document.getElementById("4").innerHTML = g.toUTCString();   
+            </script>
+    </div>
+
+    <div>
+        <h3>The toISOString() method converts a date to a string using the ISO standard:</h3>
+            <p id="5"></p>
+            <script>
+                const h = new Date();
+                document.getElementById("5").innerHTML = g.toISOString();   
+            </script>
+    </div>
+    
+</body>
+</html>

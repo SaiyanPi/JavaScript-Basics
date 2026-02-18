@@ -1,0 +1,129 @@
+JavaScript Dates:
+
+- JavaScript Date Objects let us work with dates:
+
+    <script>
+        const d = new Date();
+        function updateSeconds() {
+            const date = new Date();
+            document.getElementById("seconds").innerHTML = `Seconds: ${date.getSeconds()}`;
+            // this doesn't work
+            // document.getElementById("seconds").innerHTML = d.getSeconds();
+        }
+        setInterval(updateSeconds, 1000);
+        document.getElementById("year").innerHTML = `Year: ${d.getFullYear()}`;
+        document.getElementById("month").innerHTML = `Month: ${d.getMonth()+1}`;
+        document.getElementById("day").innerHTML = `Day: ${d.getDate()}`;
+        document.getElementById("hours").innerHTML = `Hour: ${d.getHours()}`;
+        document.getElementById("minutes").innerHTML = `Minute: ${d.getMinutes()}`;
+    </script>
+
+- Date objects are static. The "clock" is not "running". The computer clock is ticking, date objects
+    are not. Meaning, When you create a Date object in JavaScript, it captures a snapshot of time at that
+    exact moment.
+
+#) JavaScript Date Output:
+    - By default, JavaScript will use the browser's time zone and display a date as a full text string:
+        
+        Tue Feb 17 2026 08:36:52 GMT+0545 (Nepal Time)
+
+#) Creating Date Objects:
+    - Date objects are created with the new Date() constructor.
+    - There are 9 ways to create a new date object:
+       
+        new Date()
+        new Date(date string)
+        new Date(year,month)
+        new Date(year,month,day)
+        new Date(year,month,day,hours)
+        new Date(year,month,day,hours,minutes)
+        new Date(year,month,day,hours,minutes,seconds)
+        new Date(year,month,day,hours,minutes,seconds,ms)
+        new Date(milliseconds)
+
+    1. new Date():
+        - new Date() creates a date object with the current date and time:
+            
+            const d = new Date();   // Tue Feb 17 2026 08:49:56 GMT+0545 (Nepal Time)
+    
+    2. new Date(date string):
+        - new Date(date string) creates a date object from a date string:
+
+            const d = new Date("October 13, 2014 11:13:00");
+            // Mon Oct 13 2014 11:13:00 GMT+0545 (Nepal Time)
+
+            const d = new Date("2022-03-25");   // Fri Mar 25 2022 05:45:00 GMT+0545 (Nepal Time)            
+    
+    3. new Date(year, month, ...):
+        - new Date(year, month, ...) creates a date object with a specified date and time.
+        - 7 numbers specify year, month, day, hour, minute, second, and millisecond (in that order):
+
+            const d = new Date(2018, 11, 24, 10, 33, 30, 0);
+            // Mon Dec 24 2018 10:33:30 GMT+0545 (Nepal Time)
+        
+        - ⚠️ JavaScript counts months from 0 to 11:
+            January = 0.
+            December = 11.
+
+        - Specifying a month higher than 11, will not result in an error but add the overflow to the next
+            year:
+
+            const d = new Date(2018, 15, 24, 10, 33, 30, 0);
+            // Wed Apr 24 2019 10:33:30 GMT+0545 (Nepal Time)
+            
+            this is same as the const d = new Date(2019, 3, 24, 10, 33, 30);
+
+        - Specifying a day higher than max, will not result in an error but add the overflow to the next
+            month:
+
+            const d = new Date(2018, 5, 35, 10, 33, 30);
+            Is the same as:
+            const d = new Date(2018, 6, 5, 10, 33, 30);
+
+        - You cannot omit month. If you supply only one parameter it will be treated as milliseconds.
+
+            const d = new Date(2018);   // Thu Jan 01 1970 05:30:02 GMT+0530 (Nepal Time)
+
+
+#) Previous Century:
+    - One and two digit years will be interpreted as 19xx:
+
+            const d = new Date(99, 11, 24); // Fri Dec 24 1999 00:00:00 GMT+0545 (Nepal Time)
+            const d = new Date(9, 11, 24);  // Fri Dec 24 1909 00:00:00 GMT+0541 (Nepal Time)
+
+⚠️ JavaScript Stores Dates as Milliseconds
+    - JavaScript stores dates as number of milliseconds since January 01, 1970.
+        -> Zero time is January 01, 1970 00:00:00 UTC.
+        -> One day (24 hours) is 86 400 000 milliseconds.
+
+
+#) new Date(milliseconds):
+    - new Date(milliseconds) creates a new date object as milliseconds plus zero time:
+        
+        const d = new Date(100000000000);   // Sat Mar 03 1973 15:16:40 GMT+0530 (Nepal Time)
+        const d = new Date(-100000000000);  // Mon Oct 31 1966 19:43:20 GMT+0530 (Nepal Time)
+        const d = new Date(86400000);       // Fri Jan 02 1970 05:30:00 GMT+0530 (Nepal Time)
+            -> 86400000 ms = 24 hrs. so Jan 02
+
+
+#) Displaying Dates:
+    - JavaScript will (by default) output dates using the toString() method. This is a string
+        representation of the date, including the time zone. The format is specified in the
+        ECMAScript specification:
+
+        const d = new Date();   // Tue Feb 17 2026 12:10:10 GMT+0545 (Nepal Time)
+    
+    - The toDateString() method converts a date to a more readable format:
+
+        const f = new Date();
+        document.getElementById("3").innerHTML = f.toDateString();  // Tue Feb 17 2026
+    
+    - The toUTCString() method converts a date to a string using the UTC standard:
+
+        const g = new Date();
+        document.getElementById("4").innerHTML = g.toUTCString();   // Tue, 17 Feb 2026 07:47:20 GMT
+    
+    - The toISOString() method converts a date to a string using the ISO standard:
+
+        const h = new Date();
+        document.getElementById("5").innerHTML = g.toISOString();   // 2026-02-17T08:13:09.608Z

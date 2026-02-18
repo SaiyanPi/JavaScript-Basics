@@ -1,0 +1,82 @@
+JavaScript Set Date Methods
+
+- Set Date methods let you set date values (years, months, days, hours, minutes, seconds, milliseconds)
+    for a Date Object.
+
+    
+    Method	            Description
+--------------------------------------------------------------------------------
+    setDate()       	Set the day as a number (1-31)
+    setFullYear()	    Set the year (yyyy)
+    setHours()	        Set the hour (0-23)
+    setMilliseconds()	Set the milliseconds (0-999)
+    setMinutes()	    Set the minutes (0-59)
+    setMonth()	        Set the month (0-11)
+    setSeconds()	    Set the seconds (0-59)
+    setTime()	        Set the time (milliseconds since January 1, 1970)
+
+
+#) The setFullYear() Method:
+    - The setFullYear() method sets the year of a date object. In this example to 2020:
+
+        const d = new Date("January 01, 2026");
+        let n = d.setFullYear(2020);   //⚠️ n = number of milliseconds since Jan 1, 1970 for Jan 1,2020
+        document.getElementById("1").innerHTML = n;
+        document.getElementById("2").innerHTML = d; // ✅expected set result (Jan 01 2020)
+    
+    - The setFullYear() method can optionally set month and day:
+
+        const e = new Date("Feb 06, 2026");
+        e.setFullYear(2020, 11, 3);
+        document.getElementById("3").innerHTML = e;
+
+
+#) The setMonth() Method:
+    - The setMonth() method sets the month of a date object (0-11):
+
+        const d = new Date("January 01, 2025");
+        d.setMonth(11); // Mon Dec 01 2025 00:00:00 GMT+0545 (Nepal Time)
+
+
+#) The setDate() Method:
+    - The setDate() method sets the day of a date object (1-31):
+
+        const d = new Date("January 01, 2025");
+        d.setDate(15);  // Wed Jan 15 2025 00:00:00 GMT+0545 (Nepal Time)
+    
+    - The setDate() method can also be used to add days to a date:
+
+        const d = new Date("January 01, 2025");
+        d.setDate(d.getDate() + 50);    // Thu Feb 20 2025 00:00:00 GMT+0545 (Nepal Time)
+
+
+#) The setHours() Method:
+    - The setHours() method sets the hours of a date object (0-23):
+
+        const g = new Date("Feb 06, 2026");
+        g.setHours(22);
+        document.getElementById("5").innerHTML = g; // Fri Feb 06 2026 22:00:00 GMT+0545 (Nepal Time)
+    
+    - The setHours() method can also be used to set minutes and seconds.
+
+        const g = new Date("Feb 06, 2026");
+        g.setHours(22, 10, 20);
+        document.getElementById("5").innerHTML = g; // Fri Feb 06 2026 22:10:20 GMT+0545 (Nepal Time)
+
+
+#) Compare Dates:
+    - Dates can easily be compared. The following example compares today's date with
+        January 14, 2100:
+
+        let text = "";
+        let today = new Date();
+        let someday = new Date();
+        someday.setFullYear(2100, 0, 14);
+
+        if(someday > today) {
+            text = "Today is before jan 14, 2100";
+        } else {
+            text = "Today is after jan 14, 2100";
+        }
+        
+        document.getElementById("6").innerHTML = text;

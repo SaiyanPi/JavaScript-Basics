@@ -1,0 +1,118 @@
+JavaScript Date Formats :
+
+#)  JavaScript Date Formats:
+    - There are generally 3 types of JavaScript date input formats:
+
+        Type	        Example
+        --------------------------------------------------------------
+        ISO Date	    "2015-03-25" (The International Standard)
+        Short Date	    "03/25/2015"
+        Long Date	    "Mar 25 2015" or "25 Mar 2015"
+    
+    - The ISO format follows a strict standard in JavaScript.
+    - The other formats are not so well defined and might be browser specific.
+
+
+#) JavaScript Date Output:
+    - Independent of input format, JavaScript will (by default) output dates in full text string format:
+
+        Tue Feb 17 2026 13:58:21 GMT+0545 (Nepal Time)
+
+
+#) JavaScript ISO Dates:
+    - ISO 8601 is the international standard for the representation of dates and times.
+    - The ISO 8601 syntax (YYYY-MM-DD) is also the preferred JavaScript date format:
+
+        const d = new Date("2015-03-25");   // Wed Mar 25 2015 05:45:00 GMT+0545 (Nepal Time)
+
+
+#) ISO Dates (Year and Month):
+    - ISO dates can be written without specifying the day (YYYY-MM):
+
+        const d = new Date("2015-03");  // Sun Mar 01 2015 05:45:00 GMT+0545 (Nepal Time)
+
+    - ⚠️ Time zones will vary the result above between February 28 and March 01.
+    
+
+#) ISO Dates (Only Year):
+    - ISO dates can be written without month and day (YYYY):
+
+        const d = new Date("2015"); // Thu Jan 01 2015 05:45:00 GMT+0545 (Nepal Time)
+    
+    - ⚠️ Time zones will vary the result above between December 31 2014 and January 01 2015.
+
+
+#) ISO Dates (Date-Time):
+    - ISO dates can be written with added hours, minutes, and seconds (YYYY-MM-DDTHH:MM:SSZ):
+
+        const d = new Date("2015-03-25T12:00:00Z"); // Wed Mar 25 2015 17:45:00 GMT+0545 (Nepal Time)
+    
+    - Wed Mar 25 2015 17:45:00 GMT+0545 (Nepal Time)
+    - UTC time is defined with a capital letter Z.
+    - If you want to modify the time relative to UTC, remove the Z and add +HH:MM or -HH:MM instead:
+
+        const d = new Date("2015-03-25T12:00:00-06:30");    // Wed Mar 25 2015 23:45:00 GMT+0545 (Nepal Time)
+    
+    - ⚠️ UTC (Universal Time Coordinated) is the same as GMT (Greenwich Mean Time).
+    - 💀 Omitting T or Z in a date-time string can give different results in different browsers.
+
+
+#) Time Zones:
+    - When setting a date, without specifying the time zone, JavaScript will use the browser's time
+        zone.
+    - When getting a date, without specifying the time zone, the result is converted to the browser's
+        time zone.
+    - In other words: If a date/time is created in GMT (Greenwich Mean Time), the date/time will be
+        converted to CDT (Central US Daylight Time) if a user browses from central US.
+
+
+#) JavaScript Short Dates.
+    - Short dates are written with an "MM/DD/YYYY" syntax like this:
+
+        const d = new Date("03/25/2015");   // const d = new Date("03/25/2015");
+
+
+💀💀💀
+- In some browsers, months or days with no leading zeroes may produce an error:
+
+    const d = new Date("2015-3-25");
+
+- The behavior of "YYYY/MM/DD" is undefined. Some browsers will try to guess the format. Some will
+    return NaN.
+
+    const d = new Date("2015/03/25");
+
+- The behavior of  "DD-MM-YYYY" is also undefined. Some browsers will try to guess the format. Some
+    will return NaN.
+
+    const d = new Date("25-03-2015");
+
+
+#) JavaScript Long Dates.:
+    - Long dates are most often written with a "MMM DD YYYY" syntax like this:
+
+        const d = new Date("Mar 25 2015");  // Wed Mar 25 2015 00:00:00 GMT+0545 (Nepal Time)
+    
+    - Month and day can be in any order:
+
+        const d = new Date("25 Mar 2015");  // Wed Mar 25 2015 00:00:00 GMT+0545 (Nepal Time)
+    
+    - And, month can be written in full (January), or abbreviated (Jan):
+
+        const d = new Date("January 25 2015");  // Sun Jan 25 2015 00:00:00 GMT+0545 (Nepal Time)
+    
+    - Commas are ignored. Names are case insensitive:
+
+        const d = new Date("JANUARY, 25, 2015");    // Sun Jan 25 2015 00:00:00 GMT+0545 (Nepal Time)
+
+
+#) Date Input - Parsing Dates:
+    - If you have a valid date string, you can use the Date.parse() method to convert it to
+        milliseconds.
+    - Date.parse() returns the number of milliseconds between the date and January 1, 1970:
+
+        let ms = Date.parse("Feb 17, 2026");    // 1771265700000
+    
+    - You can then use the number of milliseconds to convert it to a date object:
+
+        const d = new Date(1771265700000);  // Tue Feb 17 2026 00:00:00 GMT+0545 (Nepal Time)

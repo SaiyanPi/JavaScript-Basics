@@ -1,0 +1,96 @@
+JavaScript Get Date Methods:
+
+- In JavaScript, date objects are created with new Date().
+- new Date() returns a date object with the current date and time.
+
+        Method	                Description
+        ---------------------------------------------------------------------
+        getFullYear()	        Get year as a four digit number (yyyy)
+        getMonth()	            Get month as a number (0-11)
+        getDate()	            Get day as a number (1-31)
+        getDay()	            Get weekday as a number (0-6)
+        getHours()	            Get hour (0-23)
+        getMinutes()	        Get minute (0-59)
+        getSeconds()	        Get second (0-59)
+        getMilliseconds()	    Get millisecond (0-999)
+        getTime()	            Get time (milliseconds since January 1, 1970)
+
+    -> The get methods above return Local time.
+    -> The get methods return information from existing date objects. In a date object, the time is
+        static. The "clock" is not "running". The time in a date object is NOT the same as current
+        time.
+    
+
+#) The getMonth() Method:
+    - In JavaScript, January is month number 0, February is number 1, ... Finally, December is month
+        number 11.
+    - To get the correct month number, you must add 1:
+            
+            const d = new Date("2021-03-25");
+            d.getMonth() + 1;   // 3
+
+            const d = new Date();
+            d.getMonth() + 1;   // current month is feb so 2
+    
+    - You can use an array of names to return the month as a name:
+
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August",
+                        "September", "October", "November", "December"];
+            const d = new Date("2021-03-25");
+            or,
+            const d = new Date();
+
+            let month = months[d.getMonth()];
+            document.getElementById("1").innerHTML = month;
+
+
+#) The getDay() Method:
+    - The getDay() method returns the weekday of a date as a number (0-6).
+    - ⚠️ In JavaScript, the first day of the week (day 0) is Sunday. Some countries in the world
+        consider the first day of the week to be Monday.
+    - You can use an array of names, and getDay() to return weekday as a name:
+
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+            const date = new Date("2021-03-25");
+            or
+            const date = new Date();
+
+            let day = days[d.getDay()];
+            document.getElementById("2").innerHTML = day;
+
+
+#) The Date.now() Method:
+    - Date.now() returns the number of milliseconds since January 1, 1970.
+
+        let msec = Date.now();  // 1771334281849
+
+    - Date.now() is a static method of the Date object.
+    - You cannot use it on a date object like myDate.now().
+    - The syntax is always Date.now().
+    
+
+#) UTC Date Get Methods:
+    
+        Method	            Same As	                Description
+    -----------------------------------------------------------------------------------
+    getUTCDate()	        getDate()	            Returns the UTC date
+    getUTCFullYear()	    getFullYear()	        Returns the UTC year
+    getUTCMonth()	        getMonth()	            Returns the UTC month
+    getUTCDay()	            getDay()	            Returns the UTC day
+    getUTCHours()	        getHours()	            Returns the UTC hour
+    getUTCMinutes()	        getMinutes()	        Returns the UTC minutes
+    getUTCSeconds()	        getSeconds()	        Returns the UTC seconds
+    getUTCMilliseconds()	getMilliseconds()	    Returns the UTC milliseconds
+
+    - UTC methods use UTC time (Coordinated Universal Time).
+    - UTC time is the same as GMT (Greenwich Mean Time).
+    - The difference between Local time and UTC time can be up to 24 hours.
+
+
+#) The getTimezoneOffset() Method:
+    - The getTimezoneOffset() method returns the difference (in minutes) between local time an UTC
+        time:
+
+        const d = new Date();
+        d.getTimezoneOffset();  // -345

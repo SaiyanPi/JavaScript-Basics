@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Dates Set</title>
+</head>
+<body>
+    <div>
+        <h3>The getMonth() Method: You can use an array of names to return the month as a name</h3>
+        <p id="1"></p>
+        <script>
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August",
+                            "September", "October", "November", "December"];
+
+            // const d = new Date("2021-03-25");
+            const d = new Date();
+            let month = months[d.getMonth()];
+
+            document.getElementById("1").innerHTML = month;
+        </script>
+    </div>
+
+    <div>
+        <h3>The getDay() Method: You can use an array of names, and getDay() to return weekday as a name</h3>
+        <p id="2"></p>
+        <script>
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+            // const date = new Date("2021-03-25");
+            const date = new Date();
+            let day = days[d.getDay()];
+
+            document.getElementById("2").innerHTML = day;
+        </script>
+    </div>
+
+    <div>
+        <h3>Date.now() returns the number of milliseconds since January 1, 1970.</h3>
+        <p id="3"></p>
+        <script>
+           
+            let msec = Date.now();
+
+            document.getElementById("3").innerHTML = msec;
+        </script>
+    </div>
+
+    <div>
+        <h3>Calculate the number of years since 1970/01/01:.</h3>
+        <p id="4"></p>
+        <script>
+            // milliseconds in a minute(60 seconds)
+            let minute = 1000 * 60;
+            // milliseconds in a hour(60 minutes)
+            let hour = minute * 60;
+            // milliseconds in a day(24 hrs)
+            let dayy = hour * 24;
+            // milliseconds in a year(365 days)
+            let year = dayy * 365;
+
+            // number of milliseconds since January 1, 1970.
+            let milliseconds = Date.now();
+
+            // number of year since January 1, 1970.
+            let years = Math.round(milliseconds / year);
+
+            document.getElementById("4").innerHTML = years;
+        </script>
+    </div>
+</body>
+</html>
