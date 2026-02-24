@@ -1,0 +1,95 @@
+JavaScript Array Search:
+
+#) Array Search Methods
+    Array indexOf()
+    Array lastIndexOf()
+    Array includes()
+    Array find()
+    Array findIndex()
+    Array findLast()
+    Array findLastIndex()
+
+
+#) JavaScript Array indexOf():
+    - The indexOf() method searches an array for an element value and returns its position.
+            const fruits = ["Apple", "Orange", "Apple", "Mango"];
+            let position = fruits.indexOf("Apple"); // 0
+    
+    - ⚠️  The first item has position 0, the second item has position 1, and so on.
+    - Syntax: array.indexOf(item, start)
+        -> item:	Required. The item to search for.
+        -> start:	Optional. Where to start the search. Negative values will start at the given
+                    position counting from the end, and search to the end.
+            let position = fruits.indexOf("Apple", 1);  // 2
+
+    - ⚠️ Array.indexOf() returns -1 if the item is not found.
+    - If the item is present more than once, it returns the position of the first occurrence.
+
+
+#) JavaScript Array lastIndexOf():
+    - Array.lastIndexOf() is the same as Array.indexOf(), but returns the position of the last
+        occurrence of the specified element.
+            const fruits = ["Apple", "Orange", "Apple", "Mango"];
+            let position = fruits.lastIndexOf("Apple"); // 2
+    
+    - Syntax: array.lastIndexOf(item, start)
+        -> item:    Required. The item to search for
+        -> start:   Optional. Where to start the search. Negative values will start at the given
+                    position counting from the end, and search to the beginning
+
+
+#) JavaScript Array includes():
+    - ECMAScript 2016 introduced Array.includes() to arrays. This allows us to check if an element
+        is present in an array (including NaN, unlike indexOf).
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.includes("Mango"); // is true
+    
+    - Syntax: array.includes(search-item)
+    - ⚠️ Array.includes() allows to check for NaN values. Unlike Array.indexOf().
+
+
+#) JavaScript Array find():
+    - The find() method returns the value of the first array element that passes a test function.
+            const numbers = [4, 9, 16, 25, 29];
+            let first = numbers.find(myFunction);
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+            document.getElementById("5").innerHTML = first; // 25
+        
+    - Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+    - find() is an ES6 feature.
+
+
+#) JavaScript Array findIndex():
+    - The findIndex() method returns the index of the first array element that passes a test function.
+            const numbers = [4, 9, 16, 25, 29];
+            let first = numbers.findIndex(myFunction);
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+            document.getElementById("5").innerHTML = first; // 3
+
+    -  Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+
+
+#) JavaScript Array findLast() Method:
+    - ES2023 added the findLast() method that will start from the end of an array and return the value
+        of the first element that satisfies a condition.
+            const temp = [27, 28, 30, 40, 42, 35, 41, 30];
+            let high = temp.findLast(x => x > 40);  // 41
+
+
+#) JavaScript Array findLastIndex() Method:
+    - The findLastIndex() method finds the index of the last element that satisfies a condition.
+            const temp = [27, 28, 30, 40, 42, 35, 41, 30];
+            let pos = temp.findLastIndex(x => x > 40);  // 6
+    
+    - findLastIndex() is an ECMAScript 2023 feature.

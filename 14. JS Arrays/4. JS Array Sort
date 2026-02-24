@@ -1,0 +1,274 @@
+JavaScript Array Sort:
+
+- Alphabetic Sort:
+    Array sort()
+    Array reverse()
+    Array toSorted()
+    Array toReversed()
+    Sorting Objects
+
+- Numeric Sort:
+    Numeric Sort
+    Random Sort
+    Math.min()
+    Math.max()
+    Home made Min()
+    Home made Max()
+
+
+#) Sorting an Array:
+    - The sort() method sorts an array alphabetically:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.sort();
+            document.getElementById("demo").innerHTML = fruits; // Apple,Banana,Mango,Orange
+
+
+#) Reversing an Array:
+    - The reverse() method reverses the elements in an array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.reverse();
+            document.getElementById("demo").innerHTML = fruits; // Mango,Apple,Orange,Banana
+    
+    - ⚠️ By combining sort() and reverse(), you can sort an array in descending order:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.sort();  // Apple,Banana,Mango,Orange
+            fruits.reverse();   // Orange,Mango,Banana,Apple
+            document.getElementById("demo").innerHTML = fruits;
+
+
+#) JavaScript Array toSorted() Method:
+    - ES2023 added the toSorted() method as a safe way to sort an array without altering the
+        original array.
+    - The difference between toSorted() and sort() is that:
+        ⚠️ toSorted() the first method creates a new array, keeping the original array unchanged.
+        ⚠️ sort() method alters the original array.
+            const cars = ["Toyota", "Honda", "Tesla", "Porsche"];
+            const tosorted = fruits.toSorted();
+            document.getElementById("4").innerHTML = `Array after toSorting:<br> ${tosorted}`;
+            document.getElementById("5").innerHTML = `Original Array:<br> ${cars}`;
+
+            o/p:    Array after toSorting:
+                    Apple,Banana,Mango,Orange
+
+                    Original Array:
+                    Toyota,Honda,Tesla,Porsche
+
+
+#) JavaScript Array toReversed() Method:
+    - ES2023 added the toReversed() method as a safe way to reverse an array without altering
+        the original array.
+    - The difference between toReversed() and reverse() is that 
+        ⚠️ toReversed() method creates a new array, keeping the original array unchanged
+        ⚠️ reverse() method alters the original array.
+            const pcs = ["Dell", "Lenevo", "Mac", "Acer"];
+            const toreversed = pcs.toReversed();
+            document.getElementById("8").innerHTML = `Array after toReversed:<br> ${toreversed}`;
+            document.getElementById("9").innerHTML = `Original Array:<br> ${pcs}`;
+
+            o/p:    Array after toReversed:
+                    Acer,Mac,Lenevo,Dell
+
+                    Original Array:
+                    Dell,Lenevo,Mac,Acer
+
+
+#) Numeric Sort:
+    - By default, the sort() function sorts values as strings. This works well for strings
+        ("Apple" comes before "Banana").
+    - If numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
+        Because of this, the sort() method will produce incorrect result when sorting numbers.
+    - You can fix this by providing a compare function:
+            const points = [40, 100, 1, 5, 25, 10];
+            points.sort(function(a, b){return a - b});  // 1,5,10,25,40,100
+
+
+#) The Compare Function
+    - The purpose of the compare function is to define an alternative sort order.
+    - The compare function should return a negative, zero, or positive value, depending on the
+        arguments:
+            function(a, b){return a - b}
+        
+        👉 When the sort() function compares two values, it sends the values to the compare
+            function, and sorts the values according to the returned (negative, zero, positive) value.
+        👉 If the result is negative, a is sorted before b.
+        👉 If the result is positive, b is sorted before a.
+        👉 If the result is 0, no changes are done with the sort order of the two values.
+            for example, When comparing 40 and 100, the sort() method calls the compare 
+            function(40, 100). The function calculates 40 - 100 (a - b), and since the result is
+            negative (-60),  the sort function will sort 40 as a value lower than 100.
+
+            <div style="text-align: center;">
+                <h2>JS Compare Function</h2>
+                <p id="1"></p>
+                <button onclick="sortAlpha()">Sort Alphabetically</button>
+                <button onclick="sortNumer()">Sort Numerically</button>
+                <p id="2"></p>
+                <script>
+                    const points = [40, 100, 1, 5, 25, 10];
+
+                    function sortAlpha() {
+                        points.sort();
+                        document.getElementById("2").innerHTML = `<b> Alphabetically sorted: </b> ${points}`;
+                    }
+
+                    function sortNumer() {
+                        points.sort(function(a, b) { return a - b});
+                        document.getElementById("2").innerHTML = `<b> Numerically sorted: </b> ${points}`;
+                    }
+
+                    document.getElementById("1").innerHTML = `<b> Initial Array: </b> ${points}`;
+                </script>
+            </div>
+
+
+#) Sorting an Array in Random Order:
+    - Using a sort function, like explained above, you can sort a numeric array in random order
+            const numbers = [40, 100, 1, 5, 25, 10];
+            numbers.sort(function(){return 0.5 - Math.random()});
+            document.getElementById("13").innerHTML = `after random sort:<br> ${numbers}`;
+
+
+#) The Fisher Yates Method:
+    - The points.sort() method in the example above(Random Order) is not accurate. It will favor some
+        numbers over others.
+    - The most popular correct method, is called the Fisher Yates shuffle, and was introduced in data
+        science as early as 1938!
+            const digits = [40, 100, 1, 5, 25, 10];
+            for (let i = digits.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                let k = digits[i];
+                digits[i] = digits[j];
+                digits[j] = k;
+            }
+            document.getElementById("15").innerHTML = `after Fisher Yates Method sort:<br> ${digits}`;
+
+
+#) Find the Lowest (or Highest) Array Value:
+    - There are no built-in functions for finding the max or min value in an array.
+        To find the lowest or highest value you have 3 options:
+        1. Sort the array and read the first or last element
+        2. Use Math.min() or Math.max()
+        3. Write a home made function
+
+    1. Sort the array and read the first or last element:
+        -> After you have sorted an array, you can use the index to obtain the highest and lowest
+            values.
+        -> Sort Ascending:
+            const points = [40, 100, 1, 5, 25, 10];
+            points.sort(function(a, b){return a - b});
+            // now points[0] contains the lowest value
+            // and points[points.length-1] contains the highest value
+        
+        -> Sort Descending:
+            const points = [40, 100, 1, 5, 25, 10];
+            points.sort(function(a, b){return b - a});
+            // now points[0] contains the highest value
+            // and points[points.length-1] contains the lowest value
+    
+    2. Use Math.min() or Math.max():
+        -> You can use Math.min.apply to find the lowest number in an array:
+        -> Math.min():
+            const points = [40, 100, 1, 5, 25, 10];
+            document.getElementById("demo").innerHTML = myArrayMin(points);
+            function myArrayMin(arr) {
+                return Math.min.apply(null, arr);
+            }
+        
+        -> Math.max():
+            const points = [40, 100, 1, 5, 25, 10];
+            document.getElementById("demo").innerHTML = myArrayMax(points);
+
+            function myArrayMax(arr) {
+                return Math.max.apply(null, arr);
+            }
+        
+        -> ⚠️ Math.min.apply(null, [1, 2, 3]) is equivalent to Math.min(1, 2, 3).
+        -> ⚠️ Math.max.apply(null, [1, 2, 3]) is equivalent to Math.max(1, 2, 3).
+    
+    3. Write a home made function:
+        -> Minimum Method: function loops through an array comparing each value with the lowest value
+                            found:
+            function myArrayMin(arr) {
+                let len = arr.length;
+                let min = Infinity;
+                while (len--) {
+                    if (arr[len] < min) {
+                    min = arr[len];
+                    }
+                }
+                return min;
+            }
+        
+        -> Maximum Method: function loops through an array comparing each value with the highest value
+                            found:
+            function myArrayMax(arr) {
+                let len = arr.length;
+                let max = -Infinity;
+                while (len--) {
+                    if (arr[len] > max) {
+                    max = arr[len];
+                    }
+                }
+                return max;
+            }
+
+
+#) Sorting Object Arrays:
+    - JavaScript arrays often contain objects:
+            const cars = [
+                {type:"Volvo", year:2016},
+                {type:"Saab", year:2001},
+                {type:"BMW", year:2010}
+            ];
+    - Even if objects have properties of different data types, the sort() method can be used to sort
+        the array.
+    - 💡 The solution is to write a compare function to compare the property values:
+            cars.sort(function(a, b){return a.year - b.year});  // sort by year
+
+            cars.sort(function(a, b){                           // sort by type
+                let x = a.type.toLowerCase();
+                let y = b.type.toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                return 0;
+            });
+
+
+#) Stable Array sort():
+    - ES2019 revised the Array sort() method.
+    - Before 2019, the specification allowed unstable sorting algorithms such as QuickSort.
+    - After ES2019, browsers must use a stable sorting algorithm:
+    - When sorting elements on a key, the elements must keep their relative position to other
+        elements with the same key. for example,
+            const myArr = [
+                {name:"X00",price:100 },
+                {name:"X01",price:100 },
+                {name:"X02",price:100 },
+                {name:"X03",price:100 },
+                {name:"X04",price:110 },
+                {name:"X05",price:110 },
+                {name:"X06",price:110 },
+                {name:"X07",price:110 }
+            ];
+        
+        when sorting on price, the result is not allowed to come out with the names in an other relative
+        position like this:
+
+            X01 100
+            X03 100
+            X00 100
+            X02 100
+            X05 110
+            X04 110
+            X06 110
+            X07 110
+    
+    - Stable array sort can be done:
+            myArr.sort((a, b) => (a.price - b.price));
+                or,
+            myArr.sort((a, b) => {
+                if (a.price > b.price) return 1;
+                if (a.price < b.price) return -1;
+                return 0;
+
+            });

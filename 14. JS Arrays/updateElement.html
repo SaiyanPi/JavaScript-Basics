@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with()</title>
+</head>
+<body>
+    <div>
+        <h3>with(): update elements in an array without altering the original array.</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+
+        <script>
+            const months = ["Januar", "Februar", "Mar", "April"]; 
+            months[0] = "January";
+
+            const updatedMonths = months.with(1, "February");
+
+            document.getElementById("1").innerHTML = months;
+            document.getElementById("2").innerHTML = updatedMonths;
+        </script>
+    </div>
+    
+</body>
+</html>

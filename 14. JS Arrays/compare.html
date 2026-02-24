@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h2>JS Compare Function</h2>
+        <p id="1"></p>
+        <button onclick="sortAlpha()">Sort Alphabetically</button>
+        <button onclick="sortNumer()">Sort Numerically</button>
+        <p id="2"></p>
+        <script>
+            const points = [40, 100, 1, 5, 25, 10];
+
+            function sortAlpha() {
+                points.sort();
+                document.getElementById("2").innerHTML = `<b> Alphabetically sorted: </b> ${points}`;
+            }
+
+            function sortNumer() {
+                points.sort(function(a, b) { return a - b});
+                document.getElementById("2").innerHTML = `<b> Numerically sorted: </b> ${points}`;
+            }
+
+            document.getElementById("1").innerHTML = `<b> Initial Array: </b> ${points}`;
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array Iteration</title>
+</head>
+<body>
+    <div>
+        <h3>forEach()</h3>
+        <p id="1"></p>
+        <script>
+            const numbers = [45, 4, 9, 16, 25];
+            let text = "";
+            numbers.forEach(myFunction);
+            function myFunction(value, index, array) {
+                text += "Index: " + index + ", Value: " + value + "<br>";
+            }
+
+            document.getElementById("1").innerHTML = text;
+        </script>
+    </div>
+
+    <div>
+        <h3>map(): doesn't change original array.</h3>
+        <p id="2"></p>
+        <p id="3"></p>
+
+        <script>
+            const numbers1 = [45, 4, 9, 16, 25];
+            const numbers2 = numbers1.map(myFunction);
+            function myFunction(value, index, array) {
+                return value * 2;
+            }
+
+            document.getElementById("2").innerHTML = `Original Array: ${numbers1}`;
+            document.getElementById("3").innerHTML = `mapped Array: ${numbers2}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>filter(): creates a new array with array elements that pass a test.</h3>
+        <p id="4"></p>
+        <p id="5"></p>
+
+        <script>
+            const over18 = numbers.filter(myFunction);
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            document.getElementById("4").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("5").innerHTML = `Filtered Array: ${over18}`;
+        </script>
+    </div>
+    
+    <div>
+        <h3>reduce(): runs a function on each array element to produce a single value.<br>
+        1) The reduce() method works from left-to-right in the array. </h3>
+        <p id="6"></p>
+        <p id="7"></p>
+
+        <script>
+            let sum = numbers.reduce(myFunction);
+            function myFunction(total, value, index, array) {
+                return total + value;
+            }
+
+            document.getElementById("6").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("7").innerHTML = `sum of all numbers in an array: ${sum}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>2) The reduceRight() works from right-to-left in the array.</h3>
+        <p id="8"></p>
+        <p id="9"></p>
+
+        <script>
+            let sum1 = numbers.reduceRight(myFunction);
+            function myFunction(total, value, index, array) {
+                return total + value;
+            }
+
+            document.getElementById("8").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("9").innerHTML = `sum of all numbers in an array: ${sum1}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>every(): checks if all array values pass a test.</h3>
+        <p id="10"></p>
+        <p id="11"></p>
+
+        <script>
+            let allOver18 = numbers.every(myFunction);
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            document.getElementById("10").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("11").innerHTML = `all numbers over 18?: ${allOver18}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>some(): checks if some array values pass a test.</h3>
+        <p id="12"></p>
+        <p id="13"></p>
+
+        <script>
+            let someOver18 = numbers.some(myFunction);
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            document.getElementById("12").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("13").innerHTML = `some numbers over 18?: ${someOver18}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Array.from(): returns an Array object from:</h3>
+        <p id="14"></p>
+        <p id="15"></p>
+
+        <script>
+            let text1 = "ABCDEFG";
+            const textArray = Array.from(text1);
+
+            document.getElementById("14").innerHTML = `string: ${text1}`;
+            document.getElementById("15").innerHTML = `Array from string: ${textArray}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>Array.keys(): returns an Array Iterator object with the keys of an array.</h3>
+        <p id="16"></p>
+        <p id="17"></p>
+
+        <script>
+            const fruits = ["Apple", "Orange", "Mango", "Banana"];
+            let keys = fruits.keys();
+            let op = "";
+            for(let key of keys) {
+                op += `${key} <br>`
+            }
+
+            document.getElementById("16").innerHTML = op;
+        </script>
+    </div>
+
+    <div>
+        <h3>entries(): returns an Array Iterator object with key/value pairs:</h3>
+        <p id="18"></p>
+
+        <script>
+            let f =fruits.entries();
+            let dis = "";
+            for(let x of f) {
+                dis += `${x} <br>`
+            }
+
+            document.getElementById("18").innerHTML = dis;
+        </script>
+    </div>
+</body>
+</html>

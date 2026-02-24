@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array Methods</title>
+</head>
+<body>
+    <div>
+        <h3>copyWithin():  copies array elements to another position in an array:</h3>
+        <h4>1. Copy to index 2, all elements from index 0:</h4>
+        <p id="1"></p>
+        <p id="2"></p>
+        <script>
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("1").innerHTML = `array before copy: ${fruits}`;
+            fruits.copyWithin(2, 0);
+            document.getElementById("2").innerHTML = `array after copy: ${fruits}`;
+        </script>
+    </div>
+
+    <div>
+        <h4>2. Copy to index 2, the elements from index 0 to 2:</h4>
+        <p id="3"></p>
+        <p id="4"></p>
+        <script>
+            const foods = ["Banana", "Orange", "Apple", "Mango", "Kiwi", "Papaya"];
+            document.getElementById("3").innerHTML = `array before copy: ${foods}`;
+            foods.copyWithin(2, 0, 2);
+            document.getElementById("4").innerHTML = `array after copy: ${foods}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>flat() method creates a new array with sub-array elements concatenated to a specified depth.</h3>
+        <p id="5"></p>
+        <p id="6"></p>
+        <script>
+            const myArr = [[1,2],[3,4],[5,6]];
+            const newArr = myArr.flat();
+            document.getElementById("5").innerHTML = `array before: ${JSON.stringify(myArr)}`;
+            document.getElementById("6").innerHTML = `array after flattening: ${newArr}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>flatMap() method first maps all elements of an array and then creates a new array by flattening the array.</h3>
+        <p id="7"></p>
+        <p id="8"></p>
+        <script>
+            const myArray = [1, 2, 3, 4, 5, 6];
+            const newArray = myArray.flatMap(x => [x, x * 10]);
+            document.getElementById("7").innerHTML = `array before: ${myArray}`;
+            document.getElementById("8").innerHTML = `array after flatMap: ${newArray}`;
+        </script>
+    </div>
+    
+    <div>
+        <h3>The splice() method can be used to add new items to an array:</h3>
+        <p id="9"></p>
+        <p id="10"></p>
+        <script>
+            cars = ["Toyota", "Tata", "Suzuki", "Honda"]
+            document.getElementById("9").innerHTML = `array before: ${cars}`;
+            let removed = cars.splice(2, 1, "Tesla", "BYD")
+            document.getElementById("10").innerHTML = `array after splice(): ${cars}`;
+        </script>
+    </div>
+    <div>
+        <h3>The splice() method returns an array with the deleted items:</h3>
+        <p id="11"></p>
+        <script>
+            document.getElementById("11").innerHTML =  removed;
+        </script>
+    </div>
+    <div>
+        <h3>you can use splice() to remove elements without leaving "holes" in the array:</h3>
+        <p id="12"></p>
+        <p id="13"></p>
+        <script>
+            document.getElementById("12").innerHTML =  `array before splice: ${cars}`;
+            cars.splice(0, 2)
+            document.getElementById("13").innerHTML =  `array after splice: ${cars}`;
+        </script>
+    </div>
+    <div>
+        <h3>toSpliced() method is a safe way to splice an array without altering the original array.</h3>
+        <p id="14"></p>
+        <p id="15"></p>
+        <p id="16"></p>
+        <p id="17"></p>
+        <script>
+            const months = ["Jan", "Feb", "Mar", "Apr"];
+            const spliced = months.toSpliced(0, 1);
+            document.getElementById("14").innerHTML =  `array before toSpliced() : ${months}`;
+            document.getElementById("15").innerHTML =  `array after toSpliced(0, 1) : ${spliced}`;
+
+            const mahina = ["Jan", "Feb", "Mar", "Apr"];
+            const splice = mahina.splice(0, 1);
+            document.getElementById("16").innerHTML =  `array before splice() : ${mahina}`;
+            document.getElementById("17").innerHTML =  `array after splice(0, 1): ${splice}`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3>slice() method slices out a piece of an array into a new array:</h3>
+        <p id="18"></p>
+        <p id="19"></p>
+
+        <script>
+            const laptop = ["dell", "lenevo", "acer", "hp", "mac"]
+            document.getElementById("18").innerHTML =  `array before slice: ${laptop}`;
+            const sliced = laptop.slice(2);
+            document.getElementById("19").innerHTML =  `array after slice(2) : ${sliced}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>slice(x, y) selects elements from the start argument, and up to (but not including) the end argument.</h3>
+        <p id="20"></p>
+
+        <script>
+
+            const sliced1 = laptop.slice(1, 3);
+            document.getElementById("20").innerHTML =  `array after slice(1, 3) : ${sliced1}`;
+        </script>
+    </div>
+    
+</body>
+</html>

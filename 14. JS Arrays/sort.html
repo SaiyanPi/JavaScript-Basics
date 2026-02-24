@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Sort</title>
+</head>
+<body>
+    <div>
+        <h3>sort() method alters the original array.</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+        <script>
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            const sorted = fruits.sort();
+            document.getElementById("1").innerHTML = `Array after Sorting:<br> ${sorted}`;
+            document.getElementById("2").innerHTML = `Original Array:<br> ${fruits}`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3>toSorted() the first method creates a new array, keeping the original array unchanged.</h3>
+        <p id="3"></p>
+        <p id="4"></p>
+        <p id="5"></p>
+        <script>
+            const cars = ["Toyota", "Honda", "Tesla", "Porsche"];
+            const tosorted = fruits.toSorted();
+            document.getElementById("4").innerHTML = `Array after toSorting:<br> ${tosorted}`;
+            document.getElementById("5").innerHTML = `Original Array:<br> ${cars}`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3>reverse() method alters the original array.</h3>
+        <p id="6"></p>
+        <p id="7"></p>
+        <script>
+            const phones = ["Samsung", "Apple", "Xaiomi", "Nokia"];
+            const reversed = phones.reverse();
+            document.getElementById("6").innerHTML = `Array after reverse:<br> ${reversed}`;
+            document.getElementById("7").innerHTML = `Original Array:<br> ${phones}`;
+
+        </script>
+    </div>
+
+    <div>
+        <h3>toReversed() method creates a new array, keeping the original array unchanged.</h3>
+        <p id="8"></p>
+        <p id="9"></p>
+        <script>
+            const pcs = ["Dell", "Lenevo", "Mac", "Acer"];
+            const toreversed = pcs.toReversed();
+            document.getElementById("8").innerHTML = `Array after toReversed:<br> ${toreversed}`;
+            document.getElementById("9").innerHTML = `Original Array:<br> ${pcs}`;
+
+        </script>
+    </div>
+    
+    <div>
+        <h3>Numeric Sort</h3>
+        <p id="10"></p>
+        <p id="11"></p>
+        <script>
+            const points = [40, 100, 1, 5, 25, 10];
+            document.getElementById("10").innerHTML = `Original Array:<br> ${points}`;
+            points.sort(function(a, b){return a - b});  
+            document.getElementById("11").innerHTML = `after sort:<br> ${points}`;
+            
+
+        </script>
+    </div>
+
+    <div>
+        <h3>Sorting an Array in Random Order</h3>
+        <p id="12"></p>
+        <p id="13"></p>
+        <script>
+            const numbers = [40, 100, 1, 5, 25, 10];
+            document.getElementById("12").innerHTML = `Original Array:<br> ${numbers}`;
+            numbers.sort(function(){return 0.5 - Math.random()});
+            document.getElementById("13").innerHTML = `after random sort:<br> ${numbers}`;
+        </script>
+    </div>
+
+    <div style="text-align: center;">
+        <h3>The Fisher Yates Method</h3>
+        <p id="14"></p>
+        <button onclick="fisherYate()">Try again</button>
+        <p id="15"></p>
+        <script>
+            const digits = [40, 100, 1, 5, 25, 10];
+            document.getElementById("14").innerHTML = `Original Array:<br> ${digits}`;
+            function fisherYate() {
+                for (let i = digits.length - 1; i > 0; i--) {
+                    let j = Math.floor(Math.random() * (i + 1));
+                    let k = digits[i];
+                    digits[i] = digits[j];
+                    digits[j] = k;
+                }
+                document.getElementById("15").innerHTML = `after Fisher Yates Method sort:<br> ${digits}`;
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random sort</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h3>The Fisher Yates Method</h3>
+        <p id="1"></p>
+        <button onclick="fisherYate()">Shuffle</button>
+        <p id="2"></p>
+
+        <script>
+            const points = [1, 11, 7, 21, 67, 4, 65, 111, 97, 0];
+            document.getElementById("1").innerHTML = `Array before random sort <br> ${points}`;
+            function fisherYate() {
+                for(let i = points.length - 1; i > 0; i --) {
+                    let j = Math.floor(Math.random() * (i + 1));
+                    let k = points[i];
+                    points[i] = points[j];
+                    points[j] = k;
+                }
+                document.getElementById("2").innerHTML = `Fisher Yates method <br> ${points}`;
+            }
+
+        </script>
+    </div>
+    
+</body>
+</html>

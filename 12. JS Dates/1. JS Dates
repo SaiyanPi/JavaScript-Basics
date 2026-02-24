@@ -107,7 +107,7 @@ JavaScript Dates:
 
 
 #) Displaying Dates:
-    - JavaScript will (by default) output dates using the toString() method. This is a string
+    - 💡 JavaScript will (by default) output dates using the toString() method. This is a string
         representation of the date, including the time zone. The format is specified in the
         ECMAScript specification:
 

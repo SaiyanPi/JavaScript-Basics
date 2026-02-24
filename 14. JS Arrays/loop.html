@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array loop</title>
+</head>
+<body>
+    <div>
+        <h3>One way to loop through an array, is using a for loop:</h3>
+        <p id="1"></p>
+
+        <script>
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            let fLen = fruits.length;
+
+            let text = "";
+            for(let i = 0; i < fLen; i ++) {
+                text += `<li> ${fruits[i]} </li>`;
+            }
+
+            document.getElementById("1").innerHTML = text;
+        </script>
+    </div>
+
+    <div>
+        <h3>One way to loop through an array, is using a for loop:</h3>
+        <p id="2"></p>
+
+        <script>
+            let text1 = "";
+            fruits.forEach(myFunction);
+
+            function myFunction(value) {
+                text1 += `<li> ${value} </li>`
+            }
+
+            document.getElementById("2").innerHTML = text1;
+        </script>
+    </div>
+
+    <div>
+        <h3>Nested Arrays and Objects: To access arrays inside arrays, use a for-in loop for each array</h3>
+        <p id="3"></p>
+
+        <script>
+            const myObj = {
+                name: "John",
+                age: 30,
+                cars: [
+                    {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},
+                    {name:"BMW", models:["320", "X3", "X5"]},
+                    {name:"Fiat", models:["500", "Panda"]}
+                ]
+            }
+
+            let text3 = "";
+            for(let i in myObj.cars) {
+                text3 += `<br><b> ${myObj.cars[i].name} </b><br>`;
+                for(let j in myObj.cars[i].models) {
+                    text3 += `${myObj.cars[i].models[j]} <br>`
+                }
+            }
+
+            document.getElementById("3").innerHTML = text3;
+        </script>
+    </div>
+    
+</body>
+</html>

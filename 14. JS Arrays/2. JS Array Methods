@@ -1,0 +1,274 @@
+JavaScript Array Methods:
+
+#) Basic Array Methods:
+
+    Array length
+    Array toString()
+    Array at()
+    Array join()
+    Array pop()
+    Array push()
+    Array shift()
+    Array unshift()
+    Array isArray()
+    Array delete()
+    Array concat()
+    Array copyWithin()
+    Array flat()
+    Array slice()
+    Array splice()
+    Array toSpliced()
+
+#) JavaScript Array length:
+    - The length property returns the length (size) of an array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            let size = fruits.length;   // 4
+    
+    - ⚠️ The length property can also be used to set the length of an array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.length = 2;
+            document.getElementById("demo").innerHTML = fruits; // Banana,Orange
+
+
+#) JavaScript Array at():
+    - ES2022 introduced the array method at():
+        eg: Get the third element of fruits using at():
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            let fruit = fruits.at(2);
+            document.getElementById("demo").innerHTML = fruit;  // Apple
+        
+        eg: Get the third element of fruits using []:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            let fruit = fruits[2];
+            document.getElementById("demo").innerHTML = fruit;  // Apple
+    
+    - The at() method returns an indexed element from an array.
+    - The at() method returns the same as [].
+
+    📃
+    Many languages allow negative bracket indexing like [-1] to access elements from the end of an
+    object / array / string.
+    This is not possible in JavaScript, because [] is used for accessing both arrays and objects.
+    obj[-1] refers to the value of key -1, not to the last property of the object.
+    The at() method was introduced in ES2022 to solve this problem.
+
+
+#) JavaScript Array join():
+    - The join() method also joins all array elements into a string.
+    - It behaves just like toString(), but in addition you can specify the separator:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("demo").innerHTML = fruits.join(" * ");
+            
+            o/p:    Banana * Orange * Apple * Mango
+
+
+#) Popping and Pushing:
+    - When you work with arrays, it is easy to remove elements and add new elements.
+    - This is what popping and pushing is:
+        Popping items out of an array, or pushing items into an array.
+    - The pop() method removes the last element from an array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.pop();   // removes Mango
+
+    - ⚠️ The pop() method returns the value that was "popped out":
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("demo").innerHTML = fruits.pop();   // Mango
+
+    - The push() method adds a new element to an array (at the end):
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.push("Kiwi");    // added new element Kiwi
+    
+    - ⚠️ The push() method returns the new array length:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("demo").innerHTML = fruits.push("Tomato");  // 5
+
+
+#) Shifting Elements:
+    - Shifting is equivalent to popping, but working on the first element instead of the last.
+    - The shift() method removes the first array element and "shifts" all other elements to a
+        lower index.
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.shift();
+            document.getElementById("demo").innerHTML = `array after shifting:<br> ${fruits}`;
+
+            o/p:    Orange,Apple,Mango
+    
+    - ⚠️ The shift() method returns the value that was "shifted out":
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            let fruit = fruits.shift(); // Banana
+
+
+#) JavaScript Array unshift():
+    - The unshift() method adds a new element to an array (at the beginning), and "unshifts" older
+        elements:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.unshift("Lemon");
+            document.getElementById("demo").innerHTML = `array after unshift:<br> ${fruits}`;
+
+            o/p:    Lemon,Banana,Orange,Apple,Mango
+
+    - ⚠️ The unshift() method returns the new array length:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("demo").innerHTML = fruits.unshift("Lemon");  // 5
+
+
+#) JavaScript Array length:
+    - The length property provides an easy way to append a new element to an array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits[fruits.length] = "Kiwi";
+            document.getElementById("demo1").innerHTML = fruits;
+
+            o/p:    Banana,Orange,Apple,Mango,Kiwi
+
+
+#) Array.isArray():
+    - ECMAScript 5 (JavaScript 2009) added the new method Array.isArray() to JavaScript:
+            const person = {
+                name: "saiyan",
+                age: 30
+            };
+            const foods = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("15").innerHTML = Array.isArray(person);    // false
+            document.getElementById("16").innerHTML = Array.isArray(foods);    // true
+           
+
+#) JavaScript Array delete():
+    - 💀 Using delete() leaves undefined holes in the array. Use pop() or shift() instead.
+            const cars = ["Toyota", "Tata", "Suzuki"];
+            document.getElementById("17").innerHTML = `before deleting:<br> ${cars}`;  // Toyota,Tata,Suzuki
+            delete cars[0];
+            document.getElementById("18").innerHTML =
+                `accessing first(index 0) element after delete: ${cars[0]}`;  // undefined
+
+
+#) JavaScript Array concat():
+    - The concat() method creates a new array by merging (concatenating) existing arrays:
+            const myGirls = ["Cecilie", "Lone"];
+            const myBoys = ["Emil", "Tobias", "Linus"];
+            const myChildren = myGirls.concat(myBoys);  // Cecilie,Lone,Emil,Tobias,Linus
+    
+    - ⚠️ The concat() method does not change the existing arrays. It always returns a new array.
+        The concat() method can take any number of array arguments.
+        eg: Merging Three Arrays
+            const arr1 = ["Cecilie", "Lone"];
+            const arr2 = ["Emil", "Tobias", "Linus"];
+            const arr3 = ["Robin", "Morgan"];
+            const myChildren = arr1.concat(arr2, arr3); // Cecilie,Lone,Emil,Tobias,Linus,Robin,Morgan
+    
+    - The concat() method can also take strings as arguments:
+            const arr3 = ["Robin", "Morgan"];
+            const myChildren = arr3.concat("Peter");    // Robin,Morgan,Peter          
+
+
+#) Array copyWithin():
+    - The copyWithin() method copies array elements to another position in an array:
+        eg: Copy to index 2, all elements from index 0:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("1").innerHTML = fruits.copyWithin(2, 0);
+            or,
+            fruits.copyWithin(2,0);
+            document.getElementById("2").innerHTML = `array after copy: ${fruits}`;
+
+            o/p:    Banana,Orange,Banana,Orange
+        
+        eg: Copy to index 2, the elements from index 0 to 2:
+            const foods = ["Banana", "Orange", "Apple", "Mango", "Kiwi", "Papaya"];
+            document.getElementById("3").innerHTML =  foods.copyWithin(2, 0, 2);
+            or,
+            foods.copyWithin(2, 0, 2);
+            document.getElementById("4").innerHTML = `array after copy: ${foods}`;
+
+            o/p:    Banana,Orange,Banana,Orange,Kiwi,Papaya
+    
+    - ⚠️ The copyWithin() method overwrites the existing values.
+    - ⚠️ The copyWithin() method does not add items to the array.
+    - ⚠️ The copyWithin() method does not change the length of the array.
+
+
+#) Flattening an Array:
+    - Flattening an array is the process of reducing the dimensionality of an array.
+    - Flattening is useful when you want to convert a multi-dimensional array into a one-dimensional
+        array.
+    - ES2019 Introduced the Array flat() method.
+    - The flat() method creates a new array with sub-array elements concatenated to a specified depth.
+            const myArr = [[1,2],[3,4],[5,6]];
+            const newArr = myArr.flat();
+            document.getElementById("5").innerHTML = `array before: ${JSON.stringify(myArr)}`;
+            document.getElementById("6").innerHTML = `array after flattening: ${newArr}`;
+
+            o/p:    array before: [[1,2],[3,4],[5,6]]
+                    array after flattening: 1,2,3,4,5,6
+
+
+#) JavaScript Array flatMap():
+    - ES2019 added the Array flatMap() method to JavaScript.
+    - The flatMap() method first maps all elements of an array and then creates a new array by
+        flattening the array.
+            const myArray = [1, 2, 3, 4, 5, 6];
+            const newArray = myArray.flatMap(x => [x, x * 10]);
+            document.getElementById("7").innerHTML = `array before: ${myArray}`;
+            document.getElementById("8").innerHTML = `array after flatMap: ${newArray}`;
+
+            o/p:    array before: 1,2,3,4,5,6
+                    array after flatMap: 1,10,2,20,3,30,4,40,5,50,6,60
+
+
+#) Splicing and Slicing Arrays:
+    1. Array splice()
+        - ⚠️ The splice() method can be used to add new items to an array:
+            cars = ["Toyota", "Tata", "Suzuki", "Honda"]
+            document.getElementById("9").innerHTML = `array before: ${cars}`;
+            cars.splice(2, 1, "Tesla", "BYD")
+            document.getElementById("10").innerHTML = `array after splice(): ${cars}`;
+
+            o/p:    array before: Toyota,Tata,Suzuki,Honda
+                    array after splice(): Toyota,Tata,Tesla,BYD,Honda
+        
+            💡The first parameter (2) defines the position where new elements should be added (spliced in).
+            💡The second parameter (1) defines how many elements should be removed. (Suzuki is removed)
+            💡The rest of the parameters ("Lemon" , "Kiwi") define the new elements to be added.
+    
+        -  ⚠️The splice() method returns an array with the deleted items:
+            cars = ["Toyota", "Tata", "Suzuki", "Honda"]
+            let removed = cars.splice(2, 1, "Tesla", "BYD")
+            document.getElementById("11").innerHTML =  removed; // Suzuki
+        
+        - ⚠️ With clever parameter setting, you can use splice() to remove elements without leaving "holes"
+            in the array:
+                const fruits = ["Banana", "Orange", "Apple", "Mango"];
+                fruits.splice(0, 2);
+                document.getElementById("demo").innerHTML =  fruits;    // Apple,Mango
+    
+    2. Array toSpliced()
+        - ES2023 added the Array toSpliced() method as a safe way to splice an array without altering
+            the original array.
+        - The difference between the new toSpliced() method and the old splice() method is that the
+            new method creates a new array, keeping the original array unchanged, while the old
+            method altered the original array.
+                const months = ["Jan", "Feb", "Mar", "Apr"];
+                const spliced = months.toSpliced(0, 1);
+                document.getElementById("demo").innerHTML = spliced;    // Feb,Mar,Apr
+            
+    3. Array slice()
+        - The slice() method slices out a piece of an array into a new array:
+            const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+            const citrus = fruits.slice(2);
+            document.getElementById("demo1").innerHTML = fruits;    // Banana,Orange,Lemon,Apple,Mango
+            document.getElementById("demo2").innerHTML = citrus;    // Lemon,Apple,Mango
+        
+        - ⚠️ The slice() method creates a new array.
+        - ⚠️ The slice() method does not remove any elements from the source array.
+        - ⚠️ The slice() method can take two arguments like slice(1, 3).
+            -> The method then selects elements from the start argument, and up to (but not including)
+                the end argument.
+                                    0        1         2        3        4
+                const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+                const citrus = fruits.slice(1, 3);
+                document.getElementById("demo").innerHTML = citrus; // Orange,Lemon
+
+            -> If the end argument is omitted, like in the first examples, the slice() method slices out
+                the rest of the array.
+                                    0        1         2        3        4
+                const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+                const citrus = fruits.slice(2);
+                document.getElementById("demo").innerHTML = citrus; // Lemon,Apple,Mango

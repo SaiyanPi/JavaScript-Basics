@@ -1,0 +1,236 @@
+JavaScript Array Iterations:
+
+#) Array Iteration Methods
+    - Array iteration methods operate on every array item.
+        Array forEach
+        Array map()
+        Array flatMap()
+        Array filter()
+        Array reduce()
+        Array reduceRight()
+        Array every()
+        Array some()
+        Array from()
+        Array keys()
+        Array entries()
+        Array with()
+        Array Spread (...)
+        Array Rest (...)
+
+#) JavaScript Array forEach():
+    - The forEach() method calls a function (a callback function) once for each array element.
+            const numbers = [45, 4, 9, 16, 25];
+            let txt = "";
+            numbers.forEach(myFunction);
+
+            function myFunction(value, index, array) {
+                txt += value + "<br>";
+            }
+
+    - ⚠️ Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+    - The example above uses only the value parameter. The example can be rewritten to:
+            const numbers = [45, 4, 9, 16, 25];
+            let txt = "";
+            numbers.forEach(myFunction);
+
+            function myFunction(value) {
+                txt += value + "<br>";
+            }
+
+
+#) JavaScript Array map():
+    - The map() method creates a new array by performing a function on each array element.
+    - The map() method does not execute the function for array elements without values.
+    - 💡 The map() method does not change the original array.
+    - This example multiplies each array value by 2:
+            const numbers1 = [45, 4, 9, 16, 25];
+            const numbers2 = numbers1.map(myFunction);
+            function myFunction(value, index, array) {
+                return value * 2;
+            }
+    
+    - ⚠️ Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+
+
+#) JavaScript Array flatMap():
+    - ES2019 added the Array flatMap() method to JavaScript.
+    - The flatMap() method first maps all elements of an array and then creates a new array by
+        flattening the array. (already discussed in section 2. JS Array methods)
+
+
+#) JavaScript Array filter():
+    - The filter() method creates a new array with array elements that pass a test.
+    - This example creates a new array from elements with a value larger than 18:
+            const numbers = [45, 4, 9, 16, 25];
+            const over18 = numbers.filter(myFunction);
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+    
+    - ⚠️ Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+
+
+#) JavaScript Array reduce():
+    - The reduce() method runs a function on each array element to produce a single value.
+    - The reduce() method works from left-to-right in the array.
+    - ⚠️ The reduce() method does not reduce the original array.
+        This example finds the sum of all numbers in an array:
+            const numbers = [45, 4, 9, 16, 25];                 // 99
+            let sum = numbers.reduce(myFunction);
+            function myFunction(total, value, index, array) {
+                return total + value;
+            }
+    
+    - ⚠️ Note that the function takes 4 arguments:
+        1. The total (the initial value / previously returned value)
+        2. The item value
+        3. The item index
+        4. The array itself
+    - 💡 The reduce() method can accept an initial value:
+            const numbers = [45, 4, 9, 16, 25];                 // 199
+            let sum = numbers.reduce(myFunction, 100);
+            function myFunction(total, value) {
+                return total + value;
+            }
+
+
+#) JavaScript Array reduceRight():
+    - The reduceRight() method runs a function on each array element to produce a single value.
+    - The reduceRight() works from right-to-left in the array.
+    - ⚠️ The reduceRight() method does not reduce the original array.
+        This example finds the sum of all numbers in an array:
+            const numbers = [45, 4, 9, 16, 25];
+            let sum = numbers.reduceRight(myFunction);
+            function myFunction(total, value, index, array) {
+                return total + value;
+            }
+    
+    - ⚠️ Note that the function takes 4 arguments:
+        1. The total (the initial value / previously returned value)
+        2. The item value
+        3. The item index
+        4. The array itself
+
+
+#) JavaScript Array every():
+    - The every() method checks if all array values pass a test.
+    - return true if all array values pass a test else false.
+        This example checks if all array values are larger than 18:
+            const numbers = [45, 4, 9, 16, 25];
+            let allOver18 = numbers.every(myFunction);  // false
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+    
+    - ⚠️ Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+
+
+#) JavaScript Array some():
+    - The some() method checks if some array values pass a test.
+    - return true if some of the array values pass a test else false.
+        This example checks if some array values are larger than 18:
+            const numbers = [45, 4, 9, 16, 25];
+            let someOver18 = numbers.some(myFunction);
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+    
+    - ⚠️ Note that the function takes 3 arguments:
+        1. The item value
+        2. The item index
+        3. The array itself
+
+
+#) JavaScript Array.from():
+    - The Array.from() method returns an Array object from:
+        1. Any iterable object
+        2. Any object with a length property
+    - eg: Create an Array from a String:
+            let text = "ABCDEFG";
+            Array.from(text);                                   // A,B,C,D,E,F,G
+    
+    - Array.from() has an optional parameter which allows you to execute a function on each element
+        of the new array:
+            const myNumbers = [1,2,3,4];
+            const myArr = Array.from(myNumbers, (x) => x * 2);  // 2,4,6,8
+
+
+#) JavaScript Array keys():
+    - The Array.keys() method returns an Array Iterator object with the keys of an array.
+        eg: Create an Array Iterator object, containing the keys of the array:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            const keys = fruits.keys();
+            for (let x of keys) {
+                text += x + "<br>";
+            }
+
+            o/p:    0
+                    1
+                    2
+                    3
+
+
+#) JavaScript Array entries():
+    - The entries() method returns an Array Iterator object with key/value pairs:
+    - ⚠️ The entries() method does not change the original array.
+        eg: Create an Array Iterator, and then iterate over the key/value pairs:
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            const f = fruits.entries();
+            for (let x of f) {
+                document.getElementById("demo").innerHTML += x;
+            }
+
+            o/p:    [0, "Banana"]
+                    [1, "Orange"]
+                    [2, "Apple"]
+                    [3, "Mango"]
+
+
+#) JavaScript Array with() Method:
+    - ES2023 added the Array with() method as a safe way to update elements in an array without
+        altering the original array.
+            const months = ["Januar", "Februar", "Mar", "April"];
+            const myMonths = months.with(2, "March");
+
+
+#) JavaScript Array Spread (...):
+    - The ... operator expands an array into individual elements.
+    - 💡 This can be used to join arrays:
+            const arr1 = [1, 2, 3];
+            const arr2 = [4, 5, 6];
+            const arr3 = [...arr1, ...arr2];    // 1,2,3,4,5,6
+    
+    - 💡 The spread operator (...) can be used to copy an array:
+            const arr1 = [1, 2, 3];
+            const arr2 = [...arr1]; // 1,2,3
+    
+    - 💡 The spread operator (...) can be used to pass arguments to a function:
+            const numbers = [23,55,21,87,56];
+            let minValue = Math.min(...numbers);    // 21
+            let maxValue = Math.max(...numbers);    // 87
+
+
+#) Destruct Array with Rest (...):
+    - 💡 The rest operator (...) allows us to destruct an array and collect the leftovers:
+            let b, c, remaining;
+            const numbers = [1, 2, 3, 4, 5, 6, 7];
+            [b, c, ...remaining] = numbers;
+
+            document.getElementById("3").innerHTML = `b gets the element: ${b}`;    // 1
+            document.getElementById("4").innerHTML = `c gets the element: ${c}`;    // 2
+            document.getElementById("5").innerHTML = `Leftover array elements: ${remaining}`;   // 3,4,5,6,7
+
+    - ⚠️ The rest element must be at the end. Always.
+             [...remaining, b, c ]  ❌SynatxError

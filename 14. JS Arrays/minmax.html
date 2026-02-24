@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min and Max value</title>
+</head>
+<body>
+    <div>
+        <h3>1. Sort the array and read the first or last element:</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+        <p id="3"></p>
+
+        <script>
+            const points = [40, 100, 1, 5, 25, 10];
+            document.getElementById("1").innerHTML = ` Original Array: ${points}`;
+            points.sort(function(a, b) { return a - b });
+            document.getElementById("2").innerHTML = `Min: ${points[0]}`;
+            document.getElementById("3").innerHTML = `Max: ${points[points.length - 1]}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>2. Use Math.min() or Math.max():</h3>
+        <p id="4"></p>
+        <p id="5"></p>
+        <p id="6"></p>
+
+        <script>
+            const numbers = [40, 100, 1, 5, 25, 10];
+            document.getElementById("4").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("5").innerHTML = `Min: ${minNum(numbers)}`;
+            document.getElementById("6").innerHTML = `Max: ${maxNum(numbers)}`;
+
+            function minNum(array) {
+                return Math.min.apply(null, array);
+            }
+
+            function maxNum(array) {
+                return Math.max.apply(null, array);
+            }
+        </script>
+    </div>
+
+    <div>
+        <h3>3. Function that loops through an array comparing each value with the highest value found</h3>
+        <p id="7"></p>
+        <p id="8"></p>
+        <p id="9"></p>
+
+        <script>
+            document.getElementById("7").innerHTML = `Original Array: ${numbers}`;
+            document.getElementById("8").innerHTML = `Min: ${minNumber(numbers)}`;
+            document.getElementById("9").innerHTML = `Max: ${maxNumber(numbers)}`;
+
+            function minNumber(array) {
+                let length = array.length;
+                let min = Infinity;
+                while(length--) {
+                    if(array[length] < min) {
+                        min = array[length];
+                    }
+                }
+                return min;
+            }
+
+            function maxNumber(array) {
+                let length = array.length;
+                let max = -Infinity;
+                while(length--) {
+                    if(array[length] > max) {
+                        max = array[length];
+                    }
+                }
+                return max;
+            }
+        </script>
+    </div>
+    
+</body>
+</html>

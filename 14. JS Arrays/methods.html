@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array Methods</title>
+</head>
+<body>
+    <div>
+        <h3>join(): behaves just like toString(), but in addition you can specify the separator:</h3>
+        <p id="1"></p>
+        <script>
+            const fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById("1").innerHTML = fruits.join(" * ");
+        </script>
+    </div>
+    
+    <div>
+        <h3>pop(): removes the last element from an array:</h3>
+        <p id="2"></p>
+        <p id="3"></p>
+        <script>
+            document.getElementById("2").innerHTML = `array before poping:<br> ${fruits}`;
+            fruits.pop();
+            document.getElementById("3").innerHTML = `array after poping:<br> ${fruits}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>push(): adds a new element to an array (at the end):</h3>
+        <p id="4"></p>
+        <p id="5"></p>
+        <p id="6"></p>
+        <script>
+            document.getElementById("4").innerHTML = `array before pushing:<br> ${fruits}`;
+            fruits.push("Kiwi");
+            document.getElementById("5").innerHTML = `array after pushing:<br> ${fruits}`;
+            document.getElementById("6").innerHTML = 
+                `push() method returns the new array length:<br> fruits.push("Tomato") = ${fruits.push("Tomato")}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>shift(): removes the first array element and "shifts" all other elements to a lower index.</h3>
+        <p id="7"></p>
+        <p id="8"></p>
+        <p id="9"></p>
+        <script>
+            document.getElementById("7").innerHTML = `array before shifting:<br> ${fruits}`;
+            fruits.shift();
+            document.getElementById("8").innerHTML = `array after shifting:<br> ${fruits}`;
+            document.getElementById("9").innerHTML = 
+                `shift() method returns the value that was "shifted out":<br> fruits.shift = ${fruits.shift()}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>unshift(): adds a new element to an array (at the beginning), and "unshifts" older elements:</h3>
+        <p id="10"></p>
+        <p id="11"></p>
+        <p id="12"></p>
+        <script>
+            document.getElementById("10").innerHTML = `array before unshift:<br> ${fruits}`;
+            fruits.unshift("Lemon");
+            document.getElementById("11").innerHTML = `array after unshift:<br> ${fruits}`;
+            document.getElementById("12").innerHTML = 
+                `unshift() method returns the new array length:<br> fruits.unshift("Pineapple") = ${fruits.unshift("Pineapple")}`;
+            
+        </script>
+    </div>
+
+    <div>
+        <h3>length property provides an easy way to append a new element to an array:</h3>
+        <p id="13"></p>
+        <p id="14"></p>
+        <script>
+            document.getElementById("13").innerHTML = `array before :<br> ${fruits}`;
+            fruits[fruits.length] = "Peach";
+            document.getElementById("14").innerHTML = `array after :<br> ${fruits}`;
+           
+        </script>
+    </div>
+
+    <div>
+        <h3>Array.isArray(): recognizing array</h3>
+        <p id="15"></p>
+        <p id="16"></p>
+        <script>
+            const person = {
+                name: "saiyan",
+                age: 30
+            };
+            const foods = ["Banana", "Orange", "Apple", "Mango"];
+
+            document.getElementById("15").innerHTML = Array.isArray(person);    // false
+            document.getElementById("16").innerHTML = Array.isArray(foods);    // true
+           
+        </script>
+    </div>
+
+    <div>
+        <h3>delete(): Using delete() leaves undefined holes in the array. Use pop() or shift() instead.</h3>
+        <p id="17"></p>
+        <p id="18"></p>
+        <script>
+          
+            const cars = ["Toyota", "Tata", "Suzuki"];
+            document.getElementById("17").innerHTML = `before deleting:<br> ${cars}`;  
+            delete cars[0];
+            document.getElementById("18").innerHTML = `accessing first(index 0) element after delete: ${cars[0]}`;  
+        </script>
+    </div>
+
+    <div>
+        <h3>concat(): creates a new array by merging (concatenating) existing arrays:</h3>
+        <p id="19"></p>
+        <script>
+          
+            const myGirls = ["Cecilie", "Lone"];
+            const myBoys = ["Emil", "Tobias", "Linus"];
+            const myChildren = myGirls.concat(myBoys);
+            document.getElementById("19").innerHTML = `new array from concat: ${myChildren}`;  
+        </script>
+    </div>
+
+    <div>
+        <h3>The concat() method can take any number of array arguments. for eg, concating 3 array</h3>
+        <p id="20"></p>
+        <script>
+            const arr = ["Robin", "Morgan"];
+            const myChildren1 = myGirls.concat(myBoys, arr);
+            document.getElementById("20").innerHTML = `new array from concat: ${myChildren1}`;  
+        </script>
+    </div>
+
+    <div>
+        <h3>The concat() method can also take strings as arguments:</h3>
+        <p id="21"></p>
+        <script>
+            const myChildren2 = arr.concat("Peter");
+            document.getElementById("21").innerHTML = `new array from concat: ${myChildren2}`;  
+        </script>
+    </div>
+</body>
+</html>

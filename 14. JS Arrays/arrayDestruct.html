@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destruct Array with Rest(...) operator</title>
+</head>
+<body>
+    <div>
+        <h3>The rest operator (...) allows us to destruct an array and collect the leftovers:</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+        <script>
+            let a, rest;
+            const arr = [1, 2, 3, 4, 5, 6, 7];
+            [a, ...rest] = arr;
+
+            document.getElementById("1").innerHTML = `a gets the element: ${a}`;
+            document.getElementById("2").innerHTML = `Leftover array elements: ${rest}`;
+        </script>
+    </div>
+
+    <div>
+        <p id="3"></p>
+        <p id="4"></p>
+        <p id="5"></p>
+        <script>
+            let b, c, remaining;
+            const numbers = [1, 2, 3, 4, 5, 6, 7];
+            [b, c, ...remaining] = numbers;
+
+            document.getElementById("3").innerHTML = `b gets the element: ${b}`;
+            document.getElementById("4").innerHTML = `c gets the element: ${c}`;
+            document.getElementById("5").innerHTML = `Leftover array elements: ${remaining}`;
+        </script>
+    </div>
+    
+</body>
+</html>

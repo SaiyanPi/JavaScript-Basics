@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Array Search</title>
+</head>
+<body>
+    <div>
+        <h3>indexOf(): searches an array for an element value and returns its position.</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+
+        <script>
+            const fruits = ["Apple", "Orange", "Apple", "Mango", "Orange", "Tomato"];
+            let positionA = fruits.indexOf("Apple");
+            let positionO = fruits.indexOf("Orange", 2);
+            document.getElementById("1").innerHTML = `position of Apple: ${positionA}`;  // 0
+            document.getElementById("2").innerHTML = `position of Orange after index 2: ${positionO}`;  // 4
+        </script>
+    </div>
+
+    <div>
+        <h3>lastIndexOf(): returns the position of the last occurrence of the specified element.</h3>
+        <p id="3"></p>
+
+        <script>
+            let positionAp = fruits.lastIndexOf("Apple");
+            document.getElementById("3").innerHTML =
+                `position of the last occurence of Apple: ${positionAp}`;  // 2
+        </script>
+    </div>
+
+    <div>
+        <h3>includes(): allows us to check if an element is present in an array (including NaN, unlike indexOf).</h3>
+        <p id="4"></p>
+
+        <script>
+            let exist = fruits.includes("Mango");
+            document.getElementById("4").innerHTML = `Mango exists?: ${exist}`;  // true
+        </script>
+    </div>
+
+    <div>
+        <h3>find(): returns the value of the first array element that passes a test function.</h3>
+        <p id="5"></p>
+
+        <script>
+            const numbers = [4, 9, 16, 25, 29];
+            let first = numbers.find(myFunction);
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            document.getElementById("5").innerHTML = `first element that passes afunction: ${first}`;  // 25
+        </script>
+    </div>
+    
+</body>
+</html>
