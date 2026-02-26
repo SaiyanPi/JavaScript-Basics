@@ -1,0 +1,115 @@
+JavaScript Temporal.Duration:
+
+- A Temporal.Duration represents a length of time.
+- It can include years, months, weeks, days, hours, minutes, seconds, and more.
+
+
+#) Duration Formats:
+    - Duration objects can be parsed as a string using the ISO 8601 duration format.
+    - It has the following form (spaces are only for readability):
+        +P nY nM nW nD T nH nM nS
+    -💡 for eg, For example, "P3Y6M4DT12H30M5S" represents a duration of "three years, six months,
+        four days, twelve hours, thirty minutes, and five seconds".
+
+        Code	Description
+    ------------------------------------------------------------------------------------------
+        +	    Optional +/- sign for positive/negative duration. Default is +.
+        P	    Duration designator (for period)
+        nY	    Number of calendar years
+        nM	    Number of calendar months
+        nW	    Number of weeks
+        nD	    Number of calendar days
+        T	    Time designator (precedes time components)
+        nH	    Number of hours
+        nM	    Number of minutes
+        nS	    Number of seconds
+
+
+#) Create a Duration:
+    - 1️⃣ You can create a Duration using an object
+            const duration = Temporal.Duration.from({ days: 7, hours: 2 }); // P7DT2H
+    
+    - 2️⃣ You can create a Duration using numeric values.
+        In this example, the duration is 7 days:
+            const duration = new Temporal.Duration(0, 0, 0, 7); // P7D
+
+        ->💡 The parameters represent:
+            Years
+            Months
+            Weeks
+            Days
+            Hours
+            Minutes
+            Seconds
+            Milliseconds
+            Microseconds
+            Nanoseconds
+
+
+#) Add and subtract a Duration:
+    - You can add a Duration to a date or date-time.
+    - You can subtract a Duration using the subtract() method.
+    - 💡The original value does not change.
+            const date = Temporal.PlainDate.from("2026-02-17");
+            const duration = Temporal.Duration.from({ days: 7 });
+            const result = date.add(duration);                      // 2026-02-24
+
+            const date = Temporal.PlainDate.from("2026-02-17");
+            const duration = Temporal.Duration.from({ days: 7 });
+            const result = date.subtract(duration);                 // 2026-02-10
+
+
+#) Calculate the Difference Between Two Dates:
+    - You can calculate the duration between two dates using until() or since().
+    1️⃣ since():
+        - The since() method calculates the duration between two temporal date/time values.
+        - ⚠️The since() method is effectively the inverse of the until() method.
+        - Syntax: temporal.since(temporal, options)
+        - The since() method returns a Temporal.Duration Object representing the elapsed time.
+        - ⚠️ The duration is positive if the "other" date is in the past, or negative if it is in the
+            future. eg:
+            const wedding = Temporal.PlainDate.from('2026-05-17');
+            const today = Temporal.Now.plainDateISO();
+            const duration = today.since(wedding);      // -P80D (-80 days)
+        
+        - The since() method returns the total number of days, but you can use the largestUnit option
+            to break it down into years and months:
+
+            const wedding = Temporal.PlainDate.from('2026-05-17');
+            const today = Temporal.Now.plainDateISO();
+            const duration = today.since(wedding, {largestUnit:'years'});   // -P2M21D (0 year, -2 month, -32 days)
+    
+    2️⃣ until():
+        - The until() method calculates the duration between two temporal date/time values.
+        - The until() method is effectively the inverse of the since() method.
+        - Syntax: temporal.until(temporal, options)
+            const wedding = Temporal.PlainDate.from('2026-05-17');
+            const today = Temporal.Now.plainDateISO();
+            const duration = today.until(wedding);      // P80D 
+
+            const wedding = Temporal.PlainDate.from('2026-05-17');
+            const today = Temporal.Now.plainDateISO();
+            const duration = today.until(wedding,  { largestUnit: 'years' });   // P2M21D   
+
+            const start = Temporal.PlainDate.from("2026-05-01");
+            const end = Temporal.PlainDate.from("2026-05-17");
+            const difference = start.until(end);        // P16D
+
+        - ⚠️The since() method does this - other.
+        - ⚠️The until() method does other - this.
+
+
+#) Duration vs Date Math:
+    - With Date, you often calculate time differences manually using milliseconds.
+            const start = new Date("2026-05-01");
+            const end = new Date("2026-05-17");
+            const diff = end - start;               // 1382400000
+    
+    - Temporal provides built-in methods that are clearer and safer.
+
+
+#) When to Use Duration
+    👉 Adding or subtracting time.
+    👉 Calculating age.
+    👉 Measuring differences between dates.
+    👉 Working with time spans (hours, days, months).

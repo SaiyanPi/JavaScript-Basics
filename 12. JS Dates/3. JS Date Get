@@ -19,7 +19,15 @@ JavaScript Get Date Methods:
     -> The get methods return information from existing date objects. In a date object, the time is
         static. The "clock" is not "running". The time in a date object is NOT the same as current
         time.
-    
+
+
+#) The getFullYear() Method:
+    - The getFullYear() method returns the year of a date as a four digit number:
+            const d = new Date("2021-03-25");
+            d.getFullYear();    // 2021
+
+            const d = new Date();
+            d.getFullYear();    // 2026
 
 #) The getMonth() Method:
     - In JavaScript, January is month number 0, February is number 1, ... Finally, December is month
@@ -44,6 +52,14 @@ JavaScript Get Date Methods:
             document.getElementById("1").innerHTML = month;
 
 
+#) The getDate() Method:
+    - The getDate() method returns the day of a date as a number (1-31):
+            const d = new Date("2021-03-25");
+            d.getDate();    // 25
+    
+            const d = new Date();
+            d.getDate();
+
 #) The getDay() Method:
     - The getDay() method returns the weekday of a date as a number (0-6).
     - ⚠️ In JavaScript, the first day of the week (day 0) is Sunday. Some countries in the world
@@ -54,8 +70,8 @@ JavaScript Get Date Methods:
 
             const date = new Date("2021-03-25");
             or
-            const date = new Date();
 
+            const date = new Date();
             let day = days[d.getDay()];
             document.getElementById("2").innerHTML = day;
 

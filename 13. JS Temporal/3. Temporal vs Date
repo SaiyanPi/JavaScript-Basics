@@ -1,0 +1,110 @@
+JavaScript Temporal vs Date:
+
+#) Differences Between Date and Temporal:
+    👉 Date mixes date and time zone
+    👉 Date parsing is inconsistent
+    👉 Date is 0-based / Temporal is 1-based
+    👉 Date millisecond / Temporal nanosecond
+
+    - Other features:
+        
+        Feature	                            Date	            Temporal
+        ----------------------------------------------------------------------
+        Created	                            1995	            2026
+        Mutable	                            Yes	                No (Immutable)
+        Time Zone Support	                Limited	            Built-in
+        DTS Safe (Daylight Saving Time)	    No	                Yes
+        Date-Only Type	                    No	                Yes
+        Clear Time Types	                No	                Yes
+        Precisition	                        Milliseconds	    Nanoseconds
+    
+    - ⚠️The JavaScript Date object has been used since 1995.
+    - ⚠️Temporal is the modern replacement designed to fix many of Date's problems.
+
+
+#) Mutation vs Immutability:
+    - Date objects can change. This can cause unexpected side effects.
+        // Create a Date
+        let d = new Date(20126, 5, 1);
+
+        // Add 7 days
+        d.setDate(d.getDate() + 7);
+
+        // Here original date is gone
+    
+    - Temporal objects cannot change. Operations return a new value instead.
+        // Create a Date
+        let d = Temporal.PlainDate.from("2026-05-1");
+
+        // Add 7 days
+        let next = d.add({ days: 7 });
+
+        // Here original date is kept
+
+
+#) Date and Time Zone:
+    - new Date(2026, 4, 1) creates a timestamp of your local time zone at midnight.
+    - ⚠️This means it can "shift" when you format it in UTC or in another zone.
+        // Months are 0-based (4 = May)
+        const d = new Date(2026, 4, 1);
+
+        // Might be 2026-04-30T22:00:00.000Z in some time zones:
+        d.toISOString();
+
+    - Temporal.PlainDate is not a timestamp. It is just "2026-05-01" with no time and no time zone,
+        so there can not be any shifting.
+
+
+#) Handling Time Zones:
+    - Date mixes local time and UTC. This makes time zone handling confusing.
+        let d = new Date();
+        console.log(d.toString());      // 2026-02-25T04:12:10.446Z
+        console.log(d.toUTCString());   // Wed Feb 25 2026 09:57:10 GMT+0545 (Nepal Time)
+    
+    - Temporal uses clear types for time zones. ZonedDateTime always includes a time zone.
+        let zdt = Temporal.Now.zonedDateTimeISO();
+        console.log(zdt);               // 2026-02-25T15:51:28.973985107+05:45[Asia/Katmandu]
+
+
+#) Date Parsing is Inconsistent:
+    - new Date("2026-05-01") parses as an instant (often treated as UTC by spec in modern JS), but
+        historically it has been a minefield of different formats, browser quirks and locale surprises.
+    - Temporal avoids this by:
+        -> defining strict parsing rules for ISO strings
+        -> using Temporal.Instant.from() for clearly-typed conversions
+
+
+#) Temporal is 1-Based:
+    - ⚠️ Date: January = 0
+    - ⚠️ Temporal: January = 1 (much more human-friendly)
+            // Feb 1:
+            new Date(2026, 1, 1)
+
+            // Jan 1:
+            new Temporal.PlainDate(2026, 1, 1)
+
+
+#) Date Math:
+    - Date math with Date often requires manual calculations.
+            let start = new Date("2026-05-17");
+            start.setDate(start.getDate() + 30);
+    
+    - Temporal has built-in date arithmetic.
+            let start = Temporal.PlainDate.from("2026-05-17");
+            let result = start.add({ days: 30 });
+
+
+#) Nanosecond Precision:
+    - Unlike the Date object which uses milliseconds, Temporal.Instant offers 1000 times higher
+        nanosecond precision.
+
+
+#) Clear Separation of Types:
+    - Date represents both a date and a time in one object.
+    - Temporal separates different use cases into different types.
+        👉 Temporal.Instant - Exact moment in time (UTC).
+        👉 Temporal.PlainDate - Date only.
+        👉 Temporal.PlainDateTime - Date and time without time zone.
+        👉 Temporal.ZonedDateTime - Date and time with time zone.
+        👉 Temporal.Duration - Length of time.
+        This makes code easier to read and less error-prone.

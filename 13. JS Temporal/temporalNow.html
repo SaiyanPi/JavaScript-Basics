@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporal.Now</title>
+</head>
+<body>
+    <div>
+        <h3>1. Get the Current Instant</h3>
+        <p id="1"></p>
+        <h3>2. Get the Current Date (ISO)</h3>
+        <p id="2"></p>
+        <h3>3. Get the Current Date and Time (No Time Zone)</h3>
+        <p id="3"></p>
+        <h3>4. Get the Current Date and Time with Time Zone</h3>
+        <p id="4"></p>
+  
+        <script>
+            let date1 = Temporal.Now.instant();
+            document.getElementById("1").innerHTML = `<b>Temporal.Now.instant()</b>: ${date1}`;
+
+            let date2 = Temporal.Now.plainDateISO();
+            document.getElementById("2").innerHTML = `<b>Temporal.Now.plainDateISO()</b>: ${date2}`;
+
+            let date3 = Temporal.Now.plainDateTimeISO();
+            document.getElementById("3").innerHTML = `<b>Temporal.Now.plainDateTimeISO()</b>: ${date3}`;
+
+            let date4 = Temporal.Now.zonedDateTimeISO();
+            document.getElementById("4").innerHTML = `<b>Temporal.Now.zonedDateTimeISO()</b>: ${date4}`;
+        </script>
+    </div>
+    
+</body>
+</html>

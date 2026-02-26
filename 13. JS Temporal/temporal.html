@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Temporal example</title>
+</head>
+<body>
+    <div>
+        <h3>With Temporal, you can get today's date and add days in a clear and safe way.</h3>
+        <p id="1"></p>
+        <p id="2"></p>
+
+        <script>
+            let today = Temporal.Now.plainDateISO();
+            let nextWeek = today.add({ days: 7 });
+
+            document.getElementById("1").innerHTML = today;
+            document.getElementById("2").innerHTML = nextWeek;
+
+        </script>
+    </div>
+
+    <div>
+        <h3></h3>
+        <p id="3"></p>
+        <p id="4"></p>
+
+        <script>
+            let d = new Date();
+            document.getElementById("3").innerHTML = d.toISOString();
+            document.getElementById("4").innerHTML = d.toString();
+        </script>
+    </div>
+    
+</body>
+</html>

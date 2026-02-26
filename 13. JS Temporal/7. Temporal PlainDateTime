@@ -1,0 +1,53 @@
+JS Temporal PlainDateTime:
+
+- A Temporal.PlainDateTime represents a date and time without a time zone.
+
+
+#) Create a PlainDateTime
+    - 1️⃣ You can create a PlainDateTime from a string.
+            const dateTime = Temporal.PlainDateTime.from("2026-05-17T10:00:00");    // 2026-05-17T10:00:00
+    
+    - 2️⃣ You can also create one using numeric values.
+            const dateTime = new Temporal.PlainDateTime(2026, 5, 17, 10, 0);    // 2026-05-17T10:00:00
+
+
+#) Get the Current Date and Time:
+    - Use Temporal.Now.plainDateTimeISO() to get the current date and time.
+            const now = Temporal.Now.plainDateTimeISO();    // 2026-02-25T20:27:22.013469971
+
+
+#) Temporal.PlainTime();
+    - ⚠️ The Temporal PlainTime() method creates a time object with no date.
+    - It returns an ISO 8601 wall-clock time without a date or time zone.
+            const date = new Temporal.PlainTime(10, 30);    // 10:30:00
+
+
+#) Add or Subtract Time:
+    - You can safely add or subtract time.
+    -💡The original value does not change.
+
+            const dateTime = Temporal.PlainDateTime.from("2026-05-17T10:00:00");    // 2026-05-17T10:00:00 
+            const earlier = dateTime.subtract({ minutes: 30 });                     // 2026-05-17T09:30:00
+            const later = dateTime.add({ hours: 2 });                               // 2026-05-17T12:00:00
+
+
+#) Compare PlainDateTime Values:
+    - 💡You can use equals().
+            const a = Temporal.PlainDateTime.from("2026-05-17T10:00:00");
+            const b = Temporal.PlainDateTime.from("2026-05-17T10:00:00");
+
+            document.getElementById("demo").innerHTML = a.equals(b);    // true
+
+
+#) Convert to ZonedDateTime:
+    - As we know now, a PlainDateTime does not include time zone information.
+    - 💡 but You can convert it to a ZonedDateTime if needed.
+            const dateTime = Temporal.PlainDateTime.from("2026-05-17T10:00:00");    // 2026-05-17T10:00:00
+            const zoned = dateTime.toZonedDateTime("Asia/Kathmandu");   // 2026-05-17T10:00:00+05:45[Asia/Kathmandu]
+
+
+#) When to Use PlainDateTime:
+    👉 Local event scheduling.
+    👉 Appointments without international time zone handling.
+    👉 Forms that collect date and time.
+    👉 Applications where time zone conversion is not required.

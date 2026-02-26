@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporal Duration</title>
+</head>
+<body>
+    <div>
+        <h3>1. You can create a Duration using an object.</h3>
+        <p id="1"></p>
+        <h3>2. You can create a Duration using numeric values</h3>
+        <p id="2"></p>
+        <script>
+            const duration1 = Temporal.Duration.from({ days: 7, hours: 2 });
+            document.getElementById("1").innerHTML = 
+                `<b>Temporal.Duration.from({ days: 7, hours: 2 })</b>: ${duration1}`;
+
+            const duration2 = new Temporal.Duration(0, 0, 0, 7);
+            document.getElementById("2").innerHTML = 
+                `<b>new Temporal.Duration(0, 0, 0, 7)</b>: ${duration2}`
+        </script>
+    </div>
+
+    <div>
+        <h3>You can add/subtract a Duration to a date or date-time.</h3>
+        <p id="3"></p>
+        <p id="4"></p>
+        <p id="5"></p>
+
+        <script>
+            const date = Temporal.PlainDate.from("2026-03-17");
+            const duration = Temporal.Duration.from({ days: 7 });
+
+            const result = date.add(duration);
+
+            document.getElementById("3").innerHTML = `Original Temporal: ${date}`;
+            document.getElementById("4").innerHTML = `Duration: ${duration}`;
+            document.getElementById("5").innerHTML = `Temporal after duration add: ${result}`;
+        </script>
+    </div>
+
+    <div>
+        <h3>until() method calculates the duration between two temporal date/time values.</h3>
+        <p id="6"></p>
+
+        <script>
+            const wedding = Temporal.PlainDate.from('2026-05-17');
+            const today = Temporal.Now.plainDateISO();
+
+            const duration3 = today.since(wedding);
+            document.getElementById("6").innerHTML = duration3;
+        </script>
+    </div>
+
+    <div>
+        <h3>until() method calculates the duration between two temporal date/time values.</h3>
+        <p id="7"></p>
+
+        <script>
+            const birthday = Temporal.PlainDate.from('2026-05-17');
+            const today1 = Temporal.Now.plainDateISO();
+
+            const duration4 = today.until(birthday);
+            document.getElementById("7").innerHTML = duration4;
+        </script>
+    </div>
+    
+</body>
+</html>

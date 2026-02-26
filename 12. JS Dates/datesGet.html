@@ -24,14 +24,16 @@
     <div>
         <h3>The getDay() Method: You can use an array of names, and getDay() to return weekday as a name</h3>
         <p id="2"></p>
+        <p id="77"></p>
         <script>
             const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
             // const date = new Date("2021-03-25");
             const date = new Date();
-            let day = days[d.getDay()];
+            let day = days[date.getDay()];
 
             document.getElementById("2").innerHTML = day;
+            document.getElementById("77").innerHTML = date;
         </script>
     </div>
 

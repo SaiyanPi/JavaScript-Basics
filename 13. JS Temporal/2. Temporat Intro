@@ -1,0 +1,73 @@
+#) What is JavaScript Temporal?
+    - Temporal is the new standard for date and time in JavaScript.
+    - Temporal is a built-in JavaScript API that provides date and time objects that are easier and
+        safer to use than Date.
+    - New Temporal objects was designed to replace the old Date object.
+    - Unlike legacy Date, Temporal objects are immutable(meaning they cannot be changed after they
+        are created) and provide first-class support for time
+        zones, daylight saving time (DST), date math and non-Gregorian calendars.
+    - Temporal separates date and time into distinct classes to prevent "wall-clock" errors.
+
+        Feature	                    Date	        Temporal
+    -------------------------------------------------------------------
+        Mutable (can change)	    Yes	            No
+        Time zone handling	        Limited	        Built-in
+        DST safe math	            No	            Yes
+        Modern API design	        No	            Yes
+
+
+#) Why Was Temporal Created?
+    - The Date object was created in 1995 and has some design issues that still cause bugs today.
+    - For example, ⚠️ months in Date are zero-based, which is confusing.
+            let d = new Date(2026, 0, 17); // Month 0 = January
+    
+    - ⚠️Another problem is that many Date methods change the same object (mutation), which can create
+        unexpected results.
+            let d = new Date(); // current date: Tue Feb 24 2026 20:10:55 GMT+0545 (Nepal Time)
+            d.setDate(d.getDate() + 7); // getDate returns the day of a date as a number (1-31) i.e, 24
+                                            setDate sets the day of the date object so new day will be
+                                            24+7 = 31
+    
+    - 💡Temporal was created to solve these issues with clearer object types and predictable behavior.
+
+
+#) A Simple Temporal Example:
+    - With Temporal, you can get today's date and add days in a clear and safe way.
+            let today = Temporal.Now.plainDateISO();
+            let nextWeek = today.add({ days: 7 });
+
+
+#) DST-Safe Arithmetic:
+    - DST-safe arithmetic ensures time calculations (addition and subtraction) remain accurate across
+        Daylight Saving Time (DST) transitions, preventing 1-hour errors.
+    - It involves using timezone and calendar-aware objects (ZonedDateTime) that understand local
+        clock shifts.
+
+
+#) RFC 5545 iCalendar:
+    - RFC 5545, titled iCalendar (Internet Calendaring and Scheduling Core Object Specification), is
+        the industry standard for exchanging calendar and scheduling information.
+    - It allows different systems (like Google Calendar, Apple Calendar, and Microsoft Outlook) to
+        communicate seamlessly.
+
+
+#) When Should You Use Temporal?
+    - Use Temporal when you need reliable date and time handling.
+        👉 You need correct time zone support.
+        👉 You want safe date arithmetic (add or subtract days, months, years).
+        👉 You want to avoid DST bugs.
+        👉 You want predictable and readable code.
+
+    - You may still use Date for very simple tasks, or when you must support environments where Temporal is
+        not available.
+
+
+#) Temporal Object Types
+    - Temporal includes several object types for different kinds of date and time values:
+        💡 Temporal.Instant - An exact moment in time (UTC timestamp).
+        💡 Temporal.PlainDate - A date only (year, month, day).
+        💡 Temporal.PlainDateTime - Date and time without a time zone.
+        💡Temporal.ZonedDateTime - Date and time with a time zone.
+        💡 Temporal.Duration - A length of time (days, hours, minutes).
+
+    - Later, you will learn how each type works and when to use it.

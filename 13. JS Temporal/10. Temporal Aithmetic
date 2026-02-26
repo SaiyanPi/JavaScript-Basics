@@ -1,0 +1,156 @@
+JS Temporal Date Arithmetic:
+
+- Temporal provides safe and clear methods for date arithmetic.
+- You can add or subtract days, months, years, and more without modifying the original value.
+
+#) Add Days:
+    - Use the add() method to add days.
+    - 💡The original date is not changed.
+        // Create a Temporal object
+        const myDate = Temporal.PlainDate.from('2026-05-17');
+
+        // Add a duration
+        const newDate = myDate.add({ days: 7 });    // 2026-05-24
+
+
+#) Subtract Days:
+    - Use subtract() to subtract time.
+        // Create a Temporal object
+        const myDate = Temporal.PlainDate.from('2026-05-17');
+
+        // Subtract a duration
+        const newDate = myDate.subtract({ days: 10 });   // 2026-05-07
+
+
+#) JavaScript Temporal add():
+    - The add() method returns a new date moved forward by a given duration.
+    - Syntax: temporal.add(duration)
+
+        // Create a Temporal object
+        const myDate = Temporal.PlainDate.from('2026-05-17');
+        // Add a duration
+        const newDate = myDate.add({ days: 10 });   // 2026-05-27
+
+        // Create a Temporal object
+        const today = Temporal.Now.plainDateISO();  // 2026-02-26
+        // Add a duration
+        const nextWeek = today.add({ days: 7 });    // 2026-03-05
+
+        // Create a Temporal object
+        const today = Temporal.Now.plainDateISO();  // 2026-02-26
+        // Add multiple units
+        const newDate = today.add({ years: 1, months: 2, days: 15 });   // 2027-05-11
+    
+    - 💡You can add or subtract various time units using a duration object:
+            years
+            months
+            weeks
+            days
+            hours
+            minutes
+            seconds
+            milliseconds
+            microseconds
+            nanoseconds
+    - 💡Unlike the legacy Date object, Temporal objects are immutable.
+        Methods like until(), add(), or with() always return a new instance rather than modifying the
+        existing one.
+
+
+#) JavaScript Temporal subtract():
+    - The subtract() method returns a new temporal object representing this date moved backward by a
+        given duration.
+    - Syntax: temporal.subtract(duration)
+    - ✅From a Temporal.PlainDate (a date without a time zone) you can subtract a full duration:
+            // Create a Temporal object
+            const myDate = Temporal.PlainDate.from('2026-05-17');
+            // Subtract a duration
+            const newDate = myDate.subtract({ days: 10 });   // 2026-05-07
+
+            // Create a Temporal object
+            const today = Temporal.Now.plainDateISO();      // 2026-02-26
+            // Subtract a duration
+            const lastWeek = today.subtract({ days: 6 });   // 2026-02-20
+    
+    - ❌From a Temporal.Instant you can only subtract a fixed duration (hours, minutes, seconds) but
+        not calendar durations like months or years, as their length can vary depending on the time
+        zone and the calendar.
+            // Create a Temporal.Instant object
+            const now = Temporal.Instant.fromEpochMilliseconds(Date.now()); // 2026-02-26T13:06:01.239Z
+            // Subtract 5 hours and 30 minutes
+            const fiveHalfHoursAgo = now.subtract({ hours: 5, minutes: 30 });   // 2026-02-26T07:39:16.647Z
+
+
+#) Add Months:
+    - Temporal automatically handles different month lengths.
+            const date = Temporal.PlainDate.from("2026-01-31");
+            const result = date.add({ months: 1 });     // 2026-02-31
+    
+    - If the next month has fewer days, Temporal adjusts automatically.
+
+
+#) Add Years:
+    - Adding years works correctly, even for leap years.
+            const date = Temporal.PlainDate.from("2024-02-29");
+            const result = date.add({ years: 1 });      // 2025-02-28
+    
+    - Temporal handles leap year adjustments automatically.
+
+
+#) The width() Method:
+    - The width() method returns a new date with specific fields replaced.
+            // Create a Temporal object
+            const date = Temporal.PlainDate.from("2026-05-17"); 
+            // Replace month and day
+            const customDate = date.with({ month:12, day:25 }); // 2026-12-25
+
+
+#) The compare() Method:
+    - The compare() method returns -1 if the first date is earlier, 1 if it is later, and 0
+        if they are equal:
+            // Create two Temporal objects
+            const date1 = Temporal.PlainDate.from("2026-05-17");
+            const date2 = Temporal.PlainDate.from("2024-12-25");
+            // Compare the dates
+            result = Temporal.PlainDate.compare(date1, date2);  // 1
+    
+    - The compare() method is designed to be passed directly into the JavaScript Array.sort() method:
+            // Create an Array of dates
+            const dates = [
+                Temporal.PlainDate.from("2026-05-17"),
+                Temporal.PlainDate.from("2022-01-01"),
+                Temporal.PlainDate.from("2024-12-25")
+            ];
+            // Sort chronologically
+            dates.sort(Temporal.PlainDate.compare); // 2022-01-01,2024-12-25,2026-05-17
+    
+    - ⚠️Always use the equals() or compare() methods rather than standard equality operators.
+
+
+#) The equals() Method:
+    - returns true or false.
+            // Create two Temporal objects
+            const date1 = Temporal.PlainDate.from('2026-05-17');
+            const date2 = Temporal.PlainDate.from('2026-05-17');
+            let result = date1.equals(date2);   // true
+
+
+#) Date Arithmetic with ZonedDateTime:
+    - ZonedDateTime handles daylight saving time (DST) safely.
+            const start = Temporal.ZonedDateTime.from("2026-03-29T00:00:00+01:00[Europe/Oslo]");
+            const nextDay = start.add({ days: 1 }); // 2026-03-30T00:00:00+02:00[Europe/Oslo]
+    
+    - If a DST change occurs, Temporal adjusts automatically.
+
+
+#) Compare with Date Arithmetic:
+    - Date modifies the original object and may cause DST-related issues.
+            const start = new Date("2026-02-17");
+            start.setDate(start.getDate() + 10);    // Wed May 27 2026 05:45:00 GMT+0545 (Nepal Time)
+
+
+#) Best Practices:
+    👉 Use PlainDate for date-only arithmetic.
+    👉 Use ZonedDateTime for time zone-aware calculations.
+    👉 Avoid manual millisecond calculations.
+    👉 Prefer immutable operations.

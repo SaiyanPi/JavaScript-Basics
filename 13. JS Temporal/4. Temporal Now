@@ -1,0 +1,51 @@
+JavaScript Temporal.Now:
+
+- The Temporal.Now object provides methods for getting the current date and time.
+- Unlike Date, Temporal lets you choose exactly what type of value you want.
+
+
+#) Get the Current Instant:
+    - An Instant represents an exact moment in time (UTC).
+    - It is similar to a timestamp.
+            let now = Temporal.Now.instant();   // 2026-02-25T10:37:23.209945068Z
+
+    - This returns the current moment in UTC.
+
+
+#) Get the Current Date (ISO):
+    - If you only need today's date (year, month, day), use plainDateISO().
+            let today = Temporal.Now.plainDateISO();    // 2026-02-25
+
+    - This returns a PlainDate object using the ISO calendar.
+
+
+#) Get the Current Date and Time (No Time Zone):
+    - Use plainDateTimeISO() to get the current date and time without a time zone.
+            let dateTime = Temporal.Now.plainDateTimeISO(); // 2026-02-25T16:46:42.71927002
+    
+    - This is useful when you need local date and time but not time zone calculations.
+
+
+#) Get the Current Date and Time with Time Zone:
+    - Use zonedDateTimeISO() when you need time zone information.
+            let zoned = Temporal.Now.zonedDateTimeISO();    // 2026-02-25T16:48:38.77676001+05:45[Asia/Katmandu]
+    
+    - This returns a ZonedDateTime that includes your system's time zone.
+
+
+#) Compare With Date:
+    - With Date, you only get one type of object.
+            let d = new Date(); // Wed Feb 25 2026 16:49:37 GMT+0545 (Nepal Time)
+    
+    - Temporal gives you separate types depending on what you need.
+        👉 Instant - Exact moment in UTC.
+        👉 PlainDate - Date only.
+        👉 PlainDateTime - Date and time without zone.
+        👉 ZonedDateTime - Date and time with zone.
+
+
+#) When to Use Each Method:
+    💡 Use instant() for timestamps and comparisons.
+    💡 Use plainDateISO() for birthdays and calendar dates.
+    💡 Use plainDateTimeISO() for local scheduling.
+    💡 Use zonedDateTimeISO() for international or time zone-aware applications.

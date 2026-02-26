@@ -1,0 +1,184 @@
+JS Temporal Reference:
+
+#) Main Temporal Objects:
+    - Temporal objects are the core part of the Temporal API which aims to replace the old Date
+        object.
+    - All Temporal objects are immutable, which helps prevent bugs related to accidental
+        modification of time values.
+
+        Object	                    Description
+    ---------------------------------------------------------------------------------------
+        Temporal.Now	            The current time
+        Temporal.ZonedDateTime	    Date and time in a specific time zone
+        Temporal.Instant	        A fixed point in time, independent of time zone
+
+
+#) Plain Dates and Times:
+
+        Object	                        Description
+    ---------------------------------------------------------------------------------------
+        Temporal.PlainDate()	        Calendar date only (2026-05-21)
+        Temporal.PlainTime()	        Time of day only (14:30:00)
+        Temporal.PlainDateTime()	    Full date and time (2026-01-24 14:30:00)
+        Temporal.PlainYearMonth()	    Year and month only (2026-05)
+        Temporal.PlainMonthDay()	    Month and day only (05-01)
+
+
+#) The Temporal.Instant Object:
+    - 💡Creating an Instant:
+
+        From	            Code
+    ---------------------------------------------------------------------------------------
+        String	            Temporal.Instant.from('1969-07-20T20:17:00Z')
+        Current time	    Temporal.Now.instant()
+        Epoch millisec	    Temporal.Instant.fromEpochMilliseconds()
+        Epoch nanosec	    Temporal.Instant.fromEpochNanoseconds()
+    
+
+    - 💡Arithmetic and Comparison:
+
+        Method	            Description
+    ----------------------------------------------------------------------------------------
+        add()	            Adds a duration (hours, minutes, seconds) to an instant
+        subtract()	        Subtracts duration (hours, minutes, seconds) to an instant
+        compare()	        Returns -1 if the first date is earlier, 1 if later and 0 if equal
+        equals()	
+
+
+#) The Temporal.PlainDate Object:
+    - The Temporal.PlainDate object has 16 properties of calendar date information.
+    - These include calendar identification, day/month/year details, era information and other
+        calendar metrics:
+
+        Property	        Description
+    ----------------------------------------------------------------------------------------
+        calendarID	        Calendar system identifier ("iso8601")
+        day	                The day as an integer (1-31)
+        dayOfWeek	        The day of the week as an integer (1 = Monday)
+        dayOfYear	        The ordinal day of the year
+        daysInMonth	        The total number of days in that month
+        daysInWeek	        The total number of days in that week
+        daysInYear	        The total number of days in that year
+        era	                The era name of the calendar, if applicable
+        eraYear	            The year within the era, if applicable
+        inLeapYear	        A boolean indicating if the year is a leap year
+        month	            The month as an integer (1-12)
+        monthCode	        A string code for the month ("M01")
+        monthsInYear	    The total number of months in that year
+        weekOfYear	        The week number within the year
+        year	            The year as an integer
+        yearOfWeek	        The year that the week belongs to
+
+    - eg: const date = new Temporal.PlainDate(2026, 5, 1);
+
+
+#) The Temporal.PlainTime Object:
+    - The Temporal.PlainTime object has 6 properties of time information.
+
+        
+        Property	        Description
+    -----------------------------------------------------------------------------------------
+        hour	            The hour as an integer (0-23)
+        microsecond	        The microsecond as an integer (0-999)
+        millisecond	        The millisecond as an integer (0-999)
+        minute	            The minute as an integer (0-59)
+        nanosecond	        The nanosecond as an integer (0-999)
+        second	            The second as an integer (0-59)
+    
+    - eg: const date = new Temporal.PlainTime(10, 30);
+
+
+#) The Temporal.PlainDateTime Object:
+    - The Temporal.PlainDateTime has 22 properties of calendar date information.
+    - These include calendar id, day/month/year/time, era information and various calendar metrics:
+
+        Property	        Description
+    ------------------------------------------------------------------------------------------
+        calendarID	        Calendar system identifier ("iso8601")
+        day	                The day as an integer (1-31)
+        dayOfWeek	        The day of the week as an integer (1 = Monday)
+        dayOfYear	        The ordinal day of the year
+        daysInMonth	        The total number of days in that month
+        daysInWeek	        The total number of days in that week
+        daysInYear	        The total number of days in that year
+        era	                The era name of the calendar, if applicable ("gregory")
+        eraYear	            The year within the era, if applicable
+        hour	            The hour as an integer (0-23)
+        inLeapYear	        A boolean indicating if the date falls in a leap year
+        microsecond	        The microsecond as an integer (0-999)
+        millisecond	        The millisecond as an integer (0-999)
+        minute	            The minute as an integer (0-59)
+        month	            The month as an integer (1-12)
+        monthCode	        A calendar-specific string code for the month ("M01")
+        monthsInYear	    The total number of months in that year
+        nanosecond	        The nanosecond as an integer (0-999)
+        second	            The second as an integer (0-59)
+        weekOfYear	        The week number within the year
+        year	            The year as an integer
+        yearOfWeek	        The year that the week belongs to
+    
+    - eg: const date = new Temporal.PlainDateTime(2026, 5, 1, 12, 30);
+
+
+#) The Temporal.PlainYearMonth Object:
+    - The Temporal.PlainYearMonth has 10 properties of calendar date information.
+
+        Property	        Description
+    -----------------------------------------------------------------------------------------
+        calendarID	        Calendar system identifier ("iso8601")
+        daysInMonth	        The total number of days in that month
+        daysInYear	        The total number of days in that year
+        era	                The era name of the calendar, if applicable ("gregory")
+        eraYear	            The year within the era, if applicable
+        inLeapYear	        A boolean indicating if the date falls in a leap year
+        month	            The month as an integer (1-12)
+        monthCode	        A calendar-specific string code for the month ("M01")
+        monthsInYear	    The total number of months in that year
+        year	            The year as an integer
+    
+    - eg: const date = new Temporal.PlainYearMonth(2026,5);
+
+
+#) The Temporal.PlainMonthDay Object:
+    - The Temporal.PlainMonthDay has 3 properties of calendar date information.
+
+        Property	        Description
+    -----------------------------------------------------------------------------------------
+        calendarID	        Calendar system identifier ("iso8601")
+        day	                The day as an integer (1-31)
+        monthCode	        A calendar-specific string code for the month ("M01")
+    
+    - eg: const date = new Temporal.PlainMonthDay(5, 17);
+
+
+#) Temporal Arithmetic:
+    
+        Method	                Returns
+    -------------------------------------------------------------------------------------------
+        temporal.add()	        New temporal representing a date moved forward by a duration
+        temporal.subtract()	    New temporal representing a date moved backward by a duration
+        temporal.since()	    The duration between two temporal objects
+        temporal.until()	    The duration between two temporal objects
+        temporal.with()	        New temporal with fields replaced (change a day)
+
+
+#) Temporal Comparison:
+
+        Method	                        Description
+    --------------------------------------------------------------------------------------------
+        Temporal.PlainDate.compare()	Static method useful for sorting arrays of 
+                                            dates (returns -1, 0, or 1)
+
+        temporal.equals()	            Returns true if two dates (and their calendars) are identical
+
+        Temporal.Duration	            The difference between two time points
+
+
+#) Temporal Calendars:
+    - 1️⃣ new Temporal.PlainDate(...) defaults to ISO 8601.
+    - If you want a specific calendar, you CAN add a calendrer parameter:
+        eg: new Temporal.PlainDate(2026, 5, 1, 'iso8601')
+    
+    - 2️⃣ .from(...) defaults to ISO 8601.
+    - You CANNOT add a calendar parameter, but if the input string includes a calendar, it is used:
+        eg: Temporal.PlainDate.from('2026-05-01[u-ca=iso8601]')
