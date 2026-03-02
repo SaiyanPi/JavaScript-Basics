@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map.groupBy()</title>
+</head>
+<body>
+    <div>
+        <h3>The Map.groupBy() method groups elements of an object according to string values returned from a callback function.</h3>
+        <p id="1"></p>
+        <h3>The Map.groupBy() method does not change the original object.</h3>
+        <p id="2"></p>
+
+        <script>
+            // Create an Array
+            const fruits = [
+                {name:"apples", quantity:300},
+                {name:"bananas", quantity:500},
+                {name:"oranges", quantity:200},
+                {name:"kiwi", quantity:150}
+            ];
+
+            // callback function to group by quantity
+            function callback({quantity}) {
+                return quantity > 300 ? "high" : "low";
+            }
+
+            // group the array elements using Map.groupBy()
+            const grouped = Map.groupBy(fruits, callback);
+
+            // display the result
+            let text = "";
+            for(let x of grouped.get("low")) {
+                text += x.name + " (" + x.quantity + ")<br>";
+            }
+            document.getElementById("1").innerHTML = "Grouped by quantity(low): <br> " + text;
+            document.getElementById("2").innerHTML = "Original array: <br>" + JSON.stringify(fruits);
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeakMap</title>
+</head>
+<body>
+    <div>
+        <h3>A JavaScript WeakMap is a collection of key/value pairs where the keys must be objects. <br>
+        A WeakMap holds weak references to its keys.</h3>
+        <p id="demo"></p>
+
+        <script>
+            // 1️⃣ Create a WeakMap
+            let fruits = new WeakMap();
+
+            // 2️⃣ Create an Object
+            let apple = {name:"Apples", place: "Mustang"};
+            let banana = {name:"Bananas", place: "Hetauda"};
+
+            // 3️⃣ Set a WeakMap value
+            fruits.set(apple, 200);
+            fruits.set(banana, 150);
+
+            // 4️⃣ Get the WeakMap value
+            let price = fruits.get(apple);
+
+            // 5️⃣ Remove the reference to the banana object
+            banana = null;
+
+            // ⚠️ now banana(and its value) in fruits can be garbage collected
+
+            // display
+            document.getElementById("demo").innerHTML = "Price of mustang apple is " + price;
+        </script>
+    </div>
+    
+</body>
+</html>

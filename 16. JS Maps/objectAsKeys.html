@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects as Keys</title>
+</head>
+<body>
+    <div>
+        <h3>Being able to use objects as keys is an important Map feature.</h3>
+        <p id="1"></p>
+
+        <script>
+            // create object
+            const apples = {name: "apples"};
+            const bananas = {name: "bananas"};
+
+            // create a Map
+            const fruits = new Map();
+
+            // add new element to the map
+            fruits.set(apples, 500);    // ⚠️ Remember: The key is an object (apples), not a string ("apples"):
+            fruits.set(bananas, 300);
+
+            fruits.get("apples");   // ❌ undefined
+            fruits.get(apples);   // 500
+            document.getElementById("1").innerHTML = `The number of apples is: ${fruits.get(apples)} <br>`;
+        </script>
+    </div>
+    
+</body>
+</html>

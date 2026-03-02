@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Visitor</title>
+</head>
+<body>
+    <div>
+        <h3>The entries in a WeakMap are weakly held: if the object key becomes unreachable, its mapping is removed automatically.
+            <br>
+        This is perfect for tracking data about objects without preventing garbage collection.</h3>
+        <p id="1"></p>
+    </div>
+
+    <script>
+        let text = "";
+
+        // Create a WeakMap to store visit counts
+        const visitsCount = new WeakMap();
+
+        // Create Visitor Objects
+        const John = {name:"John", age:40};
+        const Paul = {name:"Paul", age:41};
+        const Ringo = {name:"Ringo", age:42};
+        const George = {name:"George", age:43};
+
+        // Track visits
+        track(Paul);
+        track(Ringo);
+        track(Paul);
+        track(Paul);
+        track(John);
+
+        // function to track visitors
+        function track(visitor) {
+            let count = visitsCount.get(visitor) || 0;
+            count++;
+            visitsCount.set(visitor, count);
+            text += visitor.name + " has visited " + count + " times.<br>";
+        }
+
+        document.getElementById("1").innerHTML = text;
+    </script>
+    
+</body>
+</html>

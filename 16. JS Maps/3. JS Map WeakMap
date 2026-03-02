@@ -1,0 +1,167 @@
+JavaScript WeakMap:
+
+- A JavaScript WeakMap is a collection of key/value pairs where the keys must be objects.
+- A WeakMap holds weak references to its keys.
+
+    // 1️⃣ Create a WeakMap
+    let fruits = new WeakMap();
+
+    // 2️⃣ Create an Object
+    let apple = {name:"Apples", place: "Mustang"};
+
+    // 3️⃣ Set a WeakMap value
+    fruits.set(apple, 200);
+
+    // 4️⃣ Get the WeakMap value
+    let price = fruits.get(apple);
+
+    // display
+    displaydocument.getElementById("demo").innerHTML = "Price of mustang apple is " + type; 
+
+    // o/p: Price of mustang apple is 200
+
+
+#) Garbage Collection:
+    - JavaScript employs a memory management mechanism known as Garbage Collection.
+    - The primary functions are:
+        -> Ensuring efficient use of memory resources
+        -> Reclaim memory occupied by variables that are no longer in use
+        -> Preventing memory leaks
+
+
+#) Weak References:
+    - Unlike a regular Map, a WeakMap does not prevent its keys from being garbage collected.
+    - If a key (an object) has no references to it in a program, it becomes eligible for garbage
+        collection.
+    - When the key is garbage collected, its key-value pair is removed from the WeakMap.
+
+        
+         // 1️⃣ Create a WeakMap
+        let fruits = new WeakMap();
+
+        // 2️⃣ Create an Object
+        let apple = {name:"Apples", place: "Mustang"};
+        let banana = {name:"Bananas", place: "Hetauda"};
+
+        // 3️⃣ Set a WeakMap value
+        fruits.set(apple, 200);
+        fruits.set(banana, 150);
+
+        // 4️⃣ Get the WeakMap value
+        let price = fruits.get(apple);
+
+        // 5️⃣ Remove the reference to the banana object
+        banana = null;
+
+        // ⚠️ now banana(and its value) in fruits can be garbage collected
+
+
+#) Keys Must Be Objects:
+    - Primitive values cannot be used as keys in a WeakMap.
+    - The keys must be objects or non-registered symbols.
+    - This restriction is tied to the garbage collection mechanism; primitives are not garbage collected
+        in the same way as objects.
+
+
+#) Tracking Objects:
+    - The entries in a WeakMap are weakly held: if the object key becomes unreachable, its mapping is
+        removed automatically.
+    - This is perfect for tracking data about objects without preventing garbage collection.
+        
+        let text = "";
+
+        // Create a WeakMap to store visit counts
+        const visitsCount = new WeakMap();
+
+        // Create Visitor Objects
+        const John = {name:"John", age:40};
+        const Paul = {name:"Paul", age:41};
+        const Ringo = {name:"Ringo", age:42};
+        const George = {name:"George", age:43};
+
+        // Track visits
+        track(Paul);
+        track(Ringo);
+        track(Paul);
+        track(Paul);
+        track(John);
+
+        // function to track visitors
+        function track(visitor) {
+            let count = visitsCount.get(visitor) || 0;
+            count++;
+            visitsCount.set(visitor, count);
+            text += visitor.name + " has visited " + count + " times.<br>";
+        }
+
+        document.getElementById("1").innerHTML = text;
+
+        o/p:    Paul has visited 1 times.
+                Ringo has visited 1 times.
+                Paul has visited 2 times.
+                Paul has visited 3 times.
+                John has visited 1 times.
+
+
+#) Automatic Cleanup:
+    - If you remove all references to a visitor object:
+        John = null;
+        // The entry for John is now removed from the WeakMap (persons)
+
+
+#) Not Iterable:
+    - 💡 WeakMaps are not enumerable.
+    - 💡 You cannot iterate over the keys and values with for loops, forEach(), or keys().
+    - 💡 You cannot access the size.
+
+
+#) Limited Methods:
+    - WeakMap provides a limited set of methods:
+
+        new WeakMap()	    Creates a new WeakMap object
+        get(key)	        Gets the value for a key in a WeakMap
+        set(key, value)	    Sets the value for a key in a WeakMap
+        delete(key)	        Removes an element specified by a key
+        has(key)	        Returns true if a key exists in a WeakMap
+
+
+#) Weak Map Secret Data:
+        <p id="demo"></p>
+        <script>
+            const id = new WeakMap();
+
+            class Student {
+                constructor(name) {
+                    id.set(this, {secret: "hidden info"});
+                    this.name = name;
+                }
+                getSecret() {
+                    return id.get(this).secret;
+                }
+            }
+
+            const student1 = new Student("John");
+            const student2 = new Student("Paul");
+
+            secret1 = student1.getSecret();
+            secret2 = student2.getSecret();
+
+            document.getElementById("demo").innerHTML = "Student 1 secret: " + secret1 + "<br>" + "Student 2 secret: " + secret2;
+        </script>
+
+        o/p:    Student 1 secret: hidden info
+                Student 2 secret: hidden info
+    
+    - Explanation ✅
+        A WeakMap does not allow iteration.
+        Outside code can not "discover" what objects are stored inside a WeakMap(id).
+        To get the secret, you need the this reference that was used in the constructor.
+        External code has access to student1 and id, but not to the this reference inside myMap, unless
+        you explicitly expose it, like via getSecret(), the secret value is unreachable.
+
+
+#) Privacy:
+    - WeakMap was intentionally designed for privacy: you can set, get, has, and delete using an object
+        key, but not inspect what is inside.
+    - This was a great tool for simulating private properties in JavaScript classes (before #private
+        fields were added to the language).

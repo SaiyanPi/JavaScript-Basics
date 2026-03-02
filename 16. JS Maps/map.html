@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a  Map</title>
+</head>
+<body>
+    <div>
+        <h3>1. Create a new Map and add elements with Map.set()</h3>
+        <p id="1"></p>
+        <h3>2. Passing an existing Array to the new Map() constructor</h3>
+        <p id="2"></p>
+        <h3>3. Maps are objects</h3>
+        <p id = "3"></p>
+        <h3>4. Map.forEach(): Maps are iterable</h3>
+        <p id = "4"></p>
+
+        <script>
+            // 1️⃣ Create a map
+            const fruits = new Map();
+            
+            // 2️⃣ Add map values   
+            fruits.set("apples", 500);
+            fruits.set("bananas", 300);
+
+            // 3️⃣ Get value of a key in a map and display it
+            const appleCount = fruits.get("apples");
+            document.getElementById("1").innerHTML = `The number of apples is: ${appleCount} <br>`;
+
+            // 4️⃣ Changing the value of a key in a map
+            fruits.set("apples", 600);
+            document.getElementById("1").innerHTML += `The number of apples after update is: ${fruits.get("apples")} <br>`;
+            
+
+            // ------------------------------------------------------------------------
+            // 1) Pass an Array to the new Map() constructor:
+            const cars = new Map([
+                ["BMW", 3],
+                ["Mercedes", 2],
+                ["Audi", 4]
+            ]);
+
+            // 2) Add map values
+            cars.set("Tesla", 5);
+            document.getElementById("2").innerHTML = `The number of Tesla cars is: ${cars.get("Tesla")} <br>`;
+
+            // 3) Changing the map values
+            cars.set("BMW", 4);
+
+            // 4) Get value of a key in a map and display it
+            document.getElementById("2").innerHTML += `The number of BMW cars after update is: ${cars.get("BMW")} <br>`;
+            
+
+            // ------------------------------------------------------------------------
+            // maps are objects
+            document.getElementById("3").innerHTML = `The type of the 'fruits' map is: ${typeof fruits} <br>`;
+
+            // instanceof Map returns true
+            document.getElementById("3").innerHTML += `Is 'fruits' an instance of Map? ${fruits instanceof Map} <br>`;
+
+            // Map.forEach(): display map
+            let text = "";
+            cars.forEach((value, key) => {
+                text += `${key}: ${value} <br>`;
+            });
+            document.getElementById("4").innerHTML = `Displaying the cars map: <br> ${text}<br>`;
+</script>
+    </div>
+    
+</body>
+</html>
