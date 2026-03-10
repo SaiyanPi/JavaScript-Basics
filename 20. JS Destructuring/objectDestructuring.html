@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Destructuring</title>
+</head>
+<body>
+    <div>
+        <h3>JS Destructuring</h3>
+        <p id="1"></p>
+        <ul>
+            <li>💡 The order of the properties does not matter</li>
+            <li>💡 Destructuring is not destructive. </li>
+            <li>💡 Destructuring does not change the original object.</li>
+        </ul>   
+        <hr>
+
+        <script>
+            // create object
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                age: 30,
+            };
+
+            // destructuring 
+            let { firstName, lastName } = person;  
+            
+            document.getElementById("1").innerHTML =
+                "First Name: " + firstName + ", Last Name: " + lastName; 
+                // First Name: John, Last Name: Doe
+        </script>
+    </div>
+
+    <div>
+        <h3>Object Default Values</h3>
+        <i>For potentially missing properties we can set default values:</i>
+        <p id="2"></p>
+        
+        <script>
+            // create object
+            const cars = {
+                company: "Toyota",
+                model: "Hilux",
+            };
+
+            // Destructuring
+            let { company, model, country = "Nepal" } = cars;  
+
+            document.getElementById("2").innerHTML +=
+                "<br>Company: " + company + ", Model: " + model + ", Country: " + country; 
+                // Company: Toyota, Model: Hilux, Country: Nepal
+        </script>
+    </div>
+
+    <div>
+        <h3>Object Property Alias</h3>
+        <i>For potentially missing properties we can set default values:</i>
+        <p id="3"></p>
+        
+        <script>
+            // create object
+            const phones = {
+                brand: "Apple",
+                year: "2025",
+            };
+
+            // Destructuring
+            let { year: date } = phones;  
+
+            document.getElementById("3").innerHTML = "Year: " + date; 
+                // Brand: Apple, Year: 2025
+        </script>
+    </div>
+    
+</body>
+</html>

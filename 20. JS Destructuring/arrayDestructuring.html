@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Destructuring</title>
+</head>
+<body>
+    <div>
+        <h3>Array Destructuring</h3>
+        <i>We can pick up array variables into our own variables:</i>
+        <p id = "1"></p>
+
+        <script>
+            // Create an Array
+            const fruits = ["Bananas", "Oranges", "Apples", "Mangos"];
+
+            // Destructuring
+            let [fruit1, fruit2] = fruits;  // we can pick up array variables into our own variables
+
+            document.getElementById("1").innerHTML = "Fruit 1: " + fruit1 + ", Fruit 2: " + fruit2;
+        </script>
+    </div>
+    
+    <hr>
+    <div>
+        <i>We can skip array values using two or more commas:</i>
+        <p id = "2"></p>
+
+        <script>
+            // Create an Array
+            const cars = ["Toyota", "BYD", "Hyuandai", "Proton"];
+
+            // Destructuring
+            let [car1,,,car2] = cars;
+
+            // Display Primitive Values
+            document.getElementById("2").innerHTML = "Car 1: " + car1 + ", Car 2: " + car2;
+        </script>
+    </div>
+
+    <hr>
+    <div>
+        <i>We can pick up values from specific index locations of an array:</i>
+        <p id = "3"></p>
+
+        <script>
+            // Create an Array
+            const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+            // Destructuring
+            let { [0]: digits1, [1]: digits2 } = digits;
+
+            // Display Primitive Values
+            document.getElementById("3").innerHTML = "Digit 1: " + digits1 + ", Digit 2: " + digits2;
+        </script>
+    </div>
+
+    <hr>
+    <div>
+        <i>You can end a destructuring syntax with a rest property.</i>
+        <p id = "4"></p>
+
+        <script>
+            // Create an Array
+            const romans = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+
+            // Destructuring
+            const [ a,b, ...rest ] = romans;
+
+            // Display Values
+            document.getElementById("4").innerHTML = 
+                "a is: " + a +"<br>" + "b is: " + b + "<br>" + "rest is: " + rest;
+        </script>
+    </div>
+</body>
+</html>

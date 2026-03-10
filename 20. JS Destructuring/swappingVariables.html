@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swapping JavaScript Variables
+</title>
+</head>
+<body>
+    <div>
+        <h3>Swapping JavaScript Variables</h3>
+        <i>You can swap the values of two variables using a destructuring assignment:</i>
+        <p id = "1"></p>
+        <p id = "2"></p>
+
+        <script>
+            let firstName = "John";
+            let lastName = "Doe";
+            
+            document.getElementById("1").innerHTML = 
+                "Before Swapping: <br> first name: " + firstName + "<br> last name: " + lastName + "<br><hr><br>";
+
+            // Destructing
+            [firstName, lastName] = [lastName, firstName];
+
+    
+            document.getElementById("2").innerHTML = 
+                "After Swapping: <br> first name: " + firstName + "<br> last name: " + lastName ;
+        </script>
+    </div>
+    
+</body>
+</html>

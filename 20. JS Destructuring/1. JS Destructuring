@@ -1,0 +1,149 @@
+JavaScript Destructuring:
+
+- 💡 Destructuring can be used with any iterables.
+- The destructuring assignment syntax can unpack objects into variables:
+    let {firstName, lastName} = person;
+
+
+#) Object Destructuring
+
+        // create object
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 30,
+        };
+
+        // destructuring 
+        let { firstName, lastName } = person;  
+        document.getElementById("1").innerHTML = "First Name: " + firstName + ", Last Name: " + lastName; 
+            // First Name: John, Last Name: Doe
+    
+    -> 💡 The order of the properties does not matter
+    -> 💡 Destructuring is not destructive.
+    -> 💡 Destructuring does not change the original object.
+
+
+    ✅ Object Default Values:
+        - For potentially missing properties we can set default values:
+        - eg:
+            // create object
+            const cars = {
+                company: "Toyota",
+                model: "Hilux",
+            };
+
+            // Destructuring
+            let { company, model, country = "Nepal" } = cars;  
+            document.getElementById("2").innerHTML +=
+                "<br>Company: " + company + ", Model: " + model + ", Country: " + country; 
+                // Company: Toyota, Model: Hilux, Country: Nepal
+
+
+    ✅ Object Property Alias:
+
+            // create object
+            const phones = {
+                brand: "Apple",
+                year: "2025",
+            };
+
+            // Destructuring
+            let { year: date } = phones;  
+
+            document.getElementById("3").innerHTML = "Year: " + date;   // Brand: Apple, Year: 2025
+
+
+#) String Destructuring:
+    - One use for destructuring is unpacking string characters.
+
+            let name = "W3Schools";
+            // Destructuring
+            let [a1, a2, a3, a4, a5] = name;
+            // Display Value
+            document.getElementById("1").innerHTML = a1;    // W
+
+
+#) Array Destructuring:
+    - We can pick up array variables into our own variables:
+
+            // Create an Array
+            const fruits = ["Bananas", "Oranges", "Apples", "Mangos"];
+            // Destructuring
+            let [fruit1, fruit2] = fruits;  // we can pick up array variables into our own variables
+            document.getElementById("1").innerHTML = "Fruit 1: " + fruit1 + ", Fruit 2: " + fruit2;
+                // Fruit 1: Bananas, Fruit 2: Oranges
+    
+    ✅ Skipping Array Values:
+        - We can skip array values using two or more commas:
+
+            // Create an Array
+            const cars = ["Toyota", "BYD", "Hyuandai", "Proton"];
+            // Destructuring
+            let [car1,,,car2] = cars;
+            // Display Primitive Values
+            document.getElementById("2").innerHTML = "Car 1: " + car1 + ", Car 2: " + car2;
+                // Car 1: Toyota, Car 2: Proton
+    
+    ✅ Array Position Values:
+        - We can pick up values from specific index locations of an array:
+
+            // Create an Array
+            const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            // Destructuring
+            let { [0]: digits1, [1]: digits2 } = digits;
+            // Display Primitive Values
+            document.getElementById("3").innerHTML = "Digit 1: " + digits1 + ", Digit 2: " + digits2;
+                // Digit 1: 0, Digit 2: 1
+    
+    ✅ The Rest Property:
+        - 💡You can end a destructuring syntax with a rest property.
+        - This syntax will store all remaining values into a new array:
+
+
+#) Destructuring Maps:
+
+        // Create a Map
+        const fruits = new Map([
+        ["apples", 500],
+        ["bananas", 300],
+        ["oranges", 200]
+        ]);
+
+        // Destructing
+        let text = "";
+        for (const [key, value] of fruits) {
+            text += "<p>" + key + " is " + value;
+        }
+
+        // Display the Values
+        document.getElementById("1").innerHTML = text;
+
+        o/p:    apples is 500
+                bananas is 300
+                oranges is 200
+
+
+#) Swapping JavaScript Variables:
+    - You can swap the values of two variables using a destructuring assignment:
+
+        let firstName = "John";
+        let lastName = "Doe";
+        
+        document.getElementById("1").innerHTML = 
+            "Before Swapping: <br> first name: " + firstName + "<br> last name: " + lastName + "<br><hr><br>";
+
+        // Destructing
+        [firstName, lastName] = [lastName, firstName];
+
+
+        document.getElementById("2").innerHTML = 
+            "After Swapping: <br> first name: " + firstName + "<br> last name: " + lastName ;
+
+        o/p:    Before Swapping:
+                first name: John
+                last name: Doe    
+            
+                After Swapping:
+                first name: Doe
+                last name: John
