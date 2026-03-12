@@ -1,6 +1,6 @@
 # JavaScript Basics 
 
-![JS Logo](https://www.clipartmax.com/png/middle/470-4707396_javascript-icon-html-css-js-icons.png)
+<img src="https://www.clipartmax.com/png/middle/470-4707396_javascript-icon-html-css-js-icons.png" alt="Generator Flow" width="400"/>
 This repository documents my journey learning JavaScript fundamentals.
 It contains examples, experiments, and notes for core concepts such as:
 
