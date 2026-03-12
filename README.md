@@ -1,11 +1,12 @@
 # JavaScript Basics 
 
-<img src="https://www.clipartmax.com/png/middle/470-4707396_javascript-icon-html-css-js-icons.png" alt="Generator Flow" width="400"/>
+<img src="https://www.clipartmax.com/png/middle/470-4707396_javascript-icon-html-css-js-icons.png" alt="Generator Flow" width="100"/>
 This repository documents my journey learning JavaScript fundamentals.
 It contains examples, experiments, and notes for core concepts such as:
 
-📁 3. JS Variables
-📁 4. JS Operators
+- 📁 3. JS Variables
+- 📁 4. JS Operators
+- 
   .
   .
   .
