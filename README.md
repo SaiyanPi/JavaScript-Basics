@@ -1,8 +1,8 @@
 <img src="https://www.clipartmax.com/png/middle/470-4707396_javascript-icon-html-css-js-icons.png" alt="Generator Flow" length="50" width="50"/>
 
-## JavaScript 
+# JavaScript 
 
-This repository documents my journey learning JavaScript fundamentals.
+This repository documents my journey learning JavaScript.
 It contains examples, experiments, and notes for core concepts such as:
 
 - 📁 3. JS Variables
