@@ -1,0 +1,40 @@
+JavaScript Silent Errors:
+
+- JavaScript can fail siently. A silent error will not stop your program. The execution will continue.
+- The reason for silent errors is historical: The first version of JavaScript did not have
+    catch...try exceptions.
+- ☠️ Silent errors are issues that do not throw exceptions or stop execution, but still cause logic
+    bugs, unexpected behavior, or failures that are easy to miss.
+    eg:
+        let x = 1 / 0;
+        document.getElementById("demo").innerHTML = x;  // Infinity
+
+        let result = "Not Active.";
+        let isActive = false;
+        if (isActive = true) {   // ❌ Assignment, not comparison
+            let result = "Active!";
+        }
+        document.getElementById("demo").innerHTML = result; // Not Active.
+
+- Many numeric operations that fail produce NaN (not an exception).
+    JavaScript will not crash. It just quietly gives you NaN and keeps going.
+
+        const result = parseInt("abc");
+        // NaN - no error, just wrong data
+        document.getElementById("demo").innerHTML = result;     // NaN
+
+- Accessing a missing property just returns undefined silently.
+
+        const user = {};
+        let result = user.name;
+        document.getElementById("demo").innerHTML = result;     // undefined
+
+- JavaScript coerces types differently per operator. Type coercion hides bugs. Program continues,
+    but logic is wrong.
+
+        let result1 = ('5' + '2');
+        let result2 = ('5' - '2');
+        document.getElementById("demo").innerHTML = result1 + "<br>" + result2;
+
+        o/p:    52
+                3
