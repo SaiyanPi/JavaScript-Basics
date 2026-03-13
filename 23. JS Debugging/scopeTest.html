@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope Panel</title>
+</head>
+<body>
+    <div>
+        <h3>The Scope Panel</h3>
+        <p>1️⃣ The Scope panel displays the variables and their values in the current scope during debugging.</p>
+        <p>2️⃣It helps you understand where variables live.</p>
+        <ul>
+            <li>Local variables exist inside a function.</li>
+            <li>Global variables exist everywhere.</li>
+        </ul>
+        <p id="demo"></p>
+        <script>
+            let x = 10;
+
+            function test() {
+                let y = 5;
+                document.getElementById("demo").innerHTML =
+                    "x(outside function) + y(inside function) = " + (x + y);
+            }
+
+            test();
+        </script>
+    </div>
+    
+</body>
+</html>

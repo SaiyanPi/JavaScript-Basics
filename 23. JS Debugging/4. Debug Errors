@@ -1,0 +1,57 @@
+JavaScript Debugging Errors:
+
+- JavaScript error messages look scary, but most of them mean very simple things.
+- This page explains the most common errors in beginner-friendly language.
+- Do not ignore errors.
+- ⚠️Fix the first error before moving on.
+
+#) How to Read an Error Message:
+    - An error message usually has three important parts.
+        1. The error type.
+        2. A short explanation.
+        3. A line number.
+    - Click the line number in the console to jump to the exact line of code.
+
+#) ReferenceError:
+    - A ReferenceError means a variable or function name does not exist.
+    - This is often caused by a misspelling or a missing declaration.
+        
+        console.log(myValue);
+    
+    - JavaScript says it cannot find myValue.
+    - Check spelling and make sure the variable is declared with let or const.
+
+
+#) TypeError:
+    - A TypeError means you used a value in an invalid way.
+    - This usually happens with undefined or null.
+
+        let x;
+        console.log(x.length);
+    
+    - The variable exists, but it has no value.
+    - You cannot read properties from undefined.
+    - Log the value before using it.
+
+
+#) SyntaxError:
+    - A SyntaxError means JavaScript cannot understand your code.
+    - This is often caused by missing brackets or parentheses.
+
+        if (x == 5 {
+            console.log("Hello");
+        }
+    
+    - The closing parenthesis is missing.
+    - ⚠️ Syntax errors stop the script from running.
+
+
+#) NaN Errors:
+    - NaN means Not a Number.
+    - This happens when JavaScript cannot perform valid math.
+
+        let result = "abc" * 5;
+        console.log(result);
+    
+    - The result is NaN.
+    - Check that both values are numbers before doing math.

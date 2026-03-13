@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h3>Stepping Through Code</h3>
+        <ul>
+            <li>Step Over runs the next line.</li>
+            <li>Step Into enters a function.</li>
+            <li>Step Out exits the current function.</li>
+        </ul>
+        <p id="demo"></p>
+
+        <script>
+            function add(a, b) {
+                let sum = a + b;
+                return sum;
+            }
+
+            function calculate() {
+                let x = 5;
+                let y = 3;
+
+                let result = add(x, y);   // ← assume breakpoint here
+
+                document.getElementById("demo").innerHTML = "The result is: " + result;
+            }
+
+            calculate();
+        </script>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,91 @@
+JavaScript Debugging Async:
+
+- Async bugs are the hardest bugs for beginners.
+- The code looks correct, but nothing seems to happen.
+
+#) Why Async Code Is Hard to Debug?
+    - Async code runs later.
+    - This makes errors feel invisible.
+    - Common beginner problems include missing data and silent failures.
+    - ⚠️ Async code does not run top to bottom. It runs when something finishes.
+
+
+#) Debugging fetch():
+    - The fetch() function is asynchronous.
+    - It does not return data immediately.
+
+        fetch("data.json")
+            .then(response => response.json())
+            .then(data => console.log(data));
+    
+    - If nothing appears, check the console first.
+    - Always log the response before using the data.
+    - Improved debugging ✅:
+
+        fetch("data.json")
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
+            .then(data => console.log(data));
+
+
+#) Check the Network Tab:
+    - Async bugs are often network problems.
+    - The Network tab shows if a request failed.
+        -> Check the request status.
+        -> Check the file path.
+        -> Check if the server returned an error.
+
+
+#) Debugging async and await:
+    - async and await make async code easier to read.
+    - This is still asynchronous.
+
+        async function loadData() {
+            let response = await fetch("data.json");
+            let data = await response.json();
+            console.log(data);
+        }
+        loadData();
+    
+    - ⚠️ You can set breakpoints on await lines. Step through async code the same way as normal code.
+
+
+#) Handling Async Errors:
+    - Async errors must be handled explicitly.
+    - Otherwise they fail silently.
+
+        async function loadData() {
+            try {
+                let response = await fetch("wrong.json");
+                let data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+    - ⚠️ Errors inside async functions must be caught.
+
+
+#) Promises That Never Resolve:
+    - Sometimes async code never finishes.
+    - ⚠️ This usually means a missing return.
+    - eg mistake:
+
+        function getData() {
+            fetch("data.json")
+            .then(response => response.json());
+        }
+    
+    - The promise result is never returned.
+    - ⚠️ Always return promises when chaining.
+
+
+#) Debugging Checklist for Async Code:
+    - Check the console for errors.
+    - Check the Network tab.
+    - Log responses before using them.
+    - Use try...catch with async functions.
+    - Set breakpoints on await lines.

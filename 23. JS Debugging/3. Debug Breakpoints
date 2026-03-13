@@ -1,0 +1,76 @@
+JavaScript Debugging Breakpoints:
+
+#) What Is a Breakpoint?
+    - A breakpoint pauses code execution on a specific line.
+    - When the code stops, you can inspect variables and step through the code line by line.
+    - Breakpoints are set inside the browser developer tools.
+    - 💡 You do not guess values when using breakpoints. You see them.
+
+
+#) Setting a Breakpoint:
+    - In the debugger window, you can set breakpoints in the JavaScript code.
+    - At each breakpoint, JavaScript will stop executing, and let you examine JavaScript values.
+    - After examining values, you can resume the execution of code (typically with a play button).
+    - steps:    1. Open your webpage.
+                2. Press F12 (or Ctrl + Shift + I).
+                3. Go to the Sources tab.
+                4. Find your JS file.
+                5. Click the line number where you want execution to pause.
+    - 💡see breakpoint.png image
+
+
+#) The debugger Keyword:
+    - The debugger keyword stops the execution of JavaScript, and calls (if available) the
+        debugging function.
+    - This has the same function as setting a breakpoint in the debugger.
+    - If no debugging is available, the debugger statement has no effect.
+    - With the debugger turned on, this code will stop executing before it executes the third line.
+
+        <p id="demo"></p>
+        <script>
+            let x = 15 * 5;
+            debugger;
+            document.getElementById("demo").innerHTML = x;
+        </script>
+
+
+#) Stepping Through Code:
+    - When execution is paused, you can control how the code runs by clicking one of the following
+        1️⃣ Step Over runs the next line.
+        2️⃣ Step Into enters a function.
+        3️⃣ Step Out exits the current function.
+
+        (see steppingThroughCode.png)
+    
+    - 💡 Run the steppingTest.html file, add the breaking point in the line 28 and check slowly if the
+        above points are true for the each buttons.
+
+
+#) The Scope Panel:
+    - The Scope panel shows which variables are available at the current line.
+    - It helps you understand where variables live.
+        1️⃣ Local variables exist inside a function.
+        2️⃣ Global variables exist everywhere.
+
+        let x = 10;
+        function test() {
+            let y = 5;
+            console.log(x + y);
+        }
+        test();
+
+        At the breakpoint, y exists only inside the function.
+
+
+#) Watching Variables
+    - The Watch panel lets you track variable values live.
+    - This is useful when values change many times.
+    - Add a variable name to the Watch panel.
+    - The value updates automatically as you step through the code.
+    - Watch variables instead of adding many console.log() calls.
+
+
+#) When to Use Breakpoints?
+    1️⃣ When values change unexpectedly.
+    2️⃣ When code runs but produces wrong results.
+    3️⃣ When debugging complex logic.
