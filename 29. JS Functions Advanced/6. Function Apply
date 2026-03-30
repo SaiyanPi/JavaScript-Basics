@@ -1,0 +1,122 @@
+JavaScript Function apply():
+
+- ⚠️Make sure you understand this and call() before continuing.
+
+- The apply() method lets you write a method that can be used on different objects.
+- 💡The apply() method is used to call a function with a specific this.
+- 💡The apply() method is similar to call(), but it passes arguments in an array.
+
+
+#) Basic apply() Syntax:
+    - 💡The apply() method is used to call a function with an object as an argument.
+    - The apply() method takes this as the first argument.
+    - 💡The second argument is an array of values passed to the function.
+    - 💡The apply() method is similar to the call() method (previous chapter).
+    - Syntax:
+                functionName.apply(this, [arg1, arg2, ...]);
+
+
+#) Using apply() to Set this:
+    - similar to call(), When you use apply(), you can decide what this should refer to.
+    - When you use apply(), you decide that this should be the person3 object.
+
+        const person1 = { name: "John" };
+        const person2 = { name: "Paul" };
+        const person3 = { name: "Ringo" };
+
+        function greet(greeting) {
+            return greeting + " " + this.name;
+        }
+
+        greet.apply(person3, ["Hello"]);
+
+
+#) Borrowing a Method from Another Object:
+    - similar to call()You can use apply() to borrow a method from another object:
+    - eg: Apply the fullName method of person on person1:
+
+        // Create a person Object
+        const person = {
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+
+        // Create a person1 Object
+        const person1 = {
+            firstName:"John",
+            lastName: "Doe"
+        }
+
+        // Create a person2 Object
+        const person2 = {
+            firstName:"Mary",
+            lastName: "Doe"
+        }
+
+        let name = person.fullName.apply(person1);   // John Doe
+    
+
+💡) The Difference Between call() and apply():
+    - 💡The only difference between apply() and call() is how arguments are passed.
+        -> 💡The call() method takes arguments separately.
+        -> 💡The apply() method takes arguments as an array.
+    - 💡Use apply() when your arguments are already stored in an array.
+
+        greet.call(person, "Hello");
+        greet.apply(person, ["Hello"]);
+
+
+#) The apply() Method with Arguments:
+    - 💡As we know by now, The apply() method accepts arguments in an array.
+    - All arguments must be placed inside an array, in the correct order.
+
+        const person = {
+            fullName: function(city, country) {
+                return this.firstName + " " + this.lastName + "," + city + "," + country;
+            }
+        }
+
+        const person1 = {
+            firstName:"John",
+            lastName: "Doe"
+        }
+
+        person.fullName.apply(person1, ["Oslo", "Norway"]);
+
+
+#) Simulate Array Methods with apply():
+    - 💡A common use case for apply() is working with Math functions on arrays.
+    - 💡JavaScript Arrays do not have a max() method, but you can simulate it with the apply method.
+        Math.max() method returns the highest number in a list of number arguments.
+
+        const numbers = [4, 8, 5, 1];
+
+        Math.max.apply(null, numbers);  // 8
+    
+    - In the example above, null is used as this, because Math.max() does not need a this value.
+        These examples will give the same result:
+
+        Math.max.apply(" ", numbers);
+        or,
+        Math.max.apply(0, numbers);
+
+
+
+#) JavaScript Strict Mode:
+    - In JavaScript strict mode, if the first argument of the apply() method is not an object, it
+        becomes the owner (object) of the invoked function. In "non-strict" mode, it becomes the global
+        object.
+
+
+#) apply() Does Not Create a New Function:
+    - The call() method and the apply() method runs the function immediately. They do not return a new
+        function.
+    - Example:
+        function sum(a, b) {
+            return a + b;
+        }
+
+        sum.apply(null, [4, 5]);
+
+    - 💡If you want a function that can be called later with the same this, use bind() instead.

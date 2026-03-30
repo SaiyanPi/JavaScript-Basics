@@ -1,0 +1,134 @@
+Advanced Functions Quiz:
+
+
+Question 1:
+What does person.getName() return?
+    
+    const person = {
+        name: "John",
+        getName: function() {
+            return this.name;
+        }
+    };
+    person.getName();
+
+    A. "John"   ✅
+    B. undefined
+    C. "person"
+
+-------------------------------------------------------------------------------------------------------
+Question 2
+What is the value of this when calling getName() like this?
+
+    const getName = person.getName;
+    getName();
+
+    A. It is still the person object
+    B. It depends on how the function is called ✅
+    C. It is always undefined
+
+-------------------------------------------------------------------------------------------------------
+Question 3
+Which line correctly calls getName with person as this?
+
+    const person = { name: "John" };
+    function getName() { return this.name; }
+
+    A. getName(person)
+    B. getName.call(person) ✅
+    C. getName.apply = person
+
+-------------------------------------------------------------------------------------------------------
+Question 4
+What is the main difference between call() and apply()?
+
+    A. call() returns a value, apply() does not
+    B. call() takes arguments as a list, apply() takes arguments as an array    ✅
+    C. apply() is faster than call()
+
+-------------------------------------------------------------------------------------------------------
+Question 5
+What does this code return?
+
+    function add(a, b) {
+        return a + b;
+    }
+
+    add.apply(null, [4, 5]);
+
+    A. 9    ✅
+    B. [4, 5]
+    C. null
+
+-------------------------------------------------------------------------------------------------------
+Question 6
+What does bind() do?
+
+    A. Calls a function immediately
+    B. Creates a new function with a fixed this value   ✅
+    C. Converts a function into an arrow function
+
+-------------------------------------------------------------------------------------------------------
+Question 7
+What is stored in getJohn?
+
+    function greet() {
+        return "Hello " + this.name;
+    }
+
+    const person = { name: "John" };
+    const getJohn = greet.bind(person);
+
+    A. The string "Hello John"
+    B. A new function   ✅
+    C. The person object
+
+-------------------------------------------------------------------------------------------------------
+Question 8
+What does this code return on the second call?
+
+    function counter() {
+        let count = 0;
+        return function() {
+            count++;
+            return count;
+        };
+    }
+
+    const c = counter();
+    c();
+    c();
+
+    A. 1
+    B. 2    ✅
+    C. 0
+
+-------------------------------------------------------------------------------------------------------
+Question 9
+Which statement best describes a closure?
+
+    A. A function that runs immediately
+    B. A function that remembers variables from its outer scope ✅
+    C. A function that always returns an object
+
+-------------------------------------------------------------------------------------------------------
+Question 10
+What is the difference between passing a function and calling a function?
+
+    function sayHello() { return "Hello"; }
+
+    function run(fn) { return fn(); }
+
+    run(sayHello);
+
+    A. sayHello is passed, sayHello() is called ✅
+    B. sayHello() is passed, sayHello is called
+    C. There is no difference
+
+-------------------------------------------------------------------------------------------------------
+Question 11
+What is an IIFE used for?
+
+    A. To delay code execution
+    B. To create a private scope    ✅
+    C. To repeat code automatically

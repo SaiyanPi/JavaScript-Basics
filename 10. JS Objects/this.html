@@ -57,7 +57,9 @@
                 }
             }
            
-            document.getElementById("4").innerHTML = 
+            document.getElementById("4").innerHTML += 
+                "this in the object method = " + typeof(vase) + "<br>"; // object
+            document.getElementById("4").innerHTML += 
                 "this in the object method = " + vase.desc(); // [object Object]
             document.getElementById("5").innerHTML = 
                 "this in the object method(stringified) = " + JSON.stringify(vase.desc()); 

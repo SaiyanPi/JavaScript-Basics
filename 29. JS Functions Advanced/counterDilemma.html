@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Dilemma</title>
+</head>
+<body>
+    <h2>Counter Dilemma</h2>
+    <p id="demo">0</p>
+
+    <!-- <script>
+        // Initiate counter
+        let counter = 0;
+
+        // Function to increment counter
+        function add() {
+            counter += 1;
+        }
+
+        // Call add() 3 times
+        add();
+        add();
+        add();
+
+        // The counter should now be 3
+        document.getElementById("demo").innerHTML = "The counter is: " + counter;
+    </script> -->
+
+    <!-- <script>
+        // Initiate counter
+        let counter = 0;
+
+        // Function to increment counter
+        function add() {
+            let counter = 0;
+            counter += 1;
+        }
+
+        // Call add() 3 times
+        add();
+        add();
+        add();
+
+        // The counter should now be 3. But it is 0
+        document.getElementById("demo").innerHTML = "The counter is: " + counter;
+    </script> -->
+
+    <!-- <script>
+        // Function to increment counter
+        function add() {
+            let counter = 0;
+            counter += 1;
+            return counter;
+        }
+
+        let x = 0;
+        // Call add() 3 times
+        x = add();
+        x = add();
+        x = add();
+
+        // The counter should now be 3. But it is 1.
+        document.getElementById("demo").innerHTML = "The counter is: " + x;
+    </script> -->
+
+    <!-------------------------------------Closure --------------------------------------------->
+    <button id="count">Count</button>
+    <p id="1"></p>
+    <script>
+        const countBtn = document.getElementById("count");
+
+        function myCounter() {
+            let counter = 0;
+            return function plus() {
+                counter ++;
+                return counter;
+            }
+        }
+        const add = myCounter();
+
+        countBtn.addEventListener("click", function() {
+            document.getElementById("demo").innerHTML = add();
+        });
+
+    </script>
+</body>
+</html>

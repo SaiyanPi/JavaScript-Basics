@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function</title>
+</head>
+<body>
+    <h2>Arrow Function 1:</h2>
+    <p id="demo1"></p>
+    <h2>Arrow Function 2:</h2>
+    <p id="demo2"></p>
+    <h2>Arrow Function 3:</h2>
+    <p id="demo3"></p>
+
+    <script>
+        let one = document.getElementById("demo1");
+        let two = document.getElementById("demo2");
+        let three = document.getElementById("demo3");
+
+        const person = {
+            fname: "John",
+            bio: () => `person name is ${this.fname}`
+        }
+        one.innerHTML = person.bio();
+
+
+        //-------------------------------------------------
+
+        const guy = {
+            fname: "John",
+            bio: function() {
+                const text = () => `Guy's name is ${this.fname}`;
+                return text();
+            }
+        }
+        two.innerHTML = guy.bio();
+
+        //--------------------------------------------------
+
+        const individual = {
+            fname: "John",
+            bio: function() {
+                return () => `Individual's name is ${this.fname}`;
+            }
+        }
+        three.innerHTML += individual.bio() + "<br>";       // () => `Individual's name is ${this.fname}`
+        three.innerHTML += individual.bio()() + "<br>";     // Individual's name is John
+    </script>
+</body>
+</html>
+<!-- 
+    Instead of doing individual.bio()(), we can do
+        
+        let text = individual.bio();
+        text();
+
+    and then
+
+        three.innerHTML += text() -->

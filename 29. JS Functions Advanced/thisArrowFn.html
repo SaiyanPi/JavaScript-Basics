@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arroFn</title>
+</head>
+<body>
+    <h2>this in Arrow Function</h2>
+    <p id="demo1"></p>
+
+    <script>
+        let a = document.getElementById("demo1");
+
+        const person = {
+            fName: "John",
+            lName: "Rai",
+            age: 30,
+            country: {
+                cName: "Nepal",
+                continent: "Asia",
+                desc: () => `${this.lName} is one of the many indigenous perople from ${this.cName} <br>`
+                    // o/p: undefined is one of the many indigenous perople from undefined
+                    // “outer scope = person object” ❌
+                
+            }
+        }
+        a.innerHTML += person.country.desc();
+
+        const mountain = {
+            name: "Everest",
+            location: {
+                country: "Nepal",
+                desc: function() {
+                    const intro = () => `Mt. ${this.name} lies in ${this.country}`;
+                    return intro();
+
+                    // Mt. undefined lies in Nepal
+                    // “outer scope = where the function is written in code” ✅
+                }
+            }
+        }
+        a.innerHTML += mountain.location.desc();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+JavaScript Function Reference:
+
+
+#) Function Object Methods & Properties:
+    - Revised December 2025
+
+        Name	        Description
+    ---------------------------------------------------------------------------------------------
+        apply()	        Calls a function with a specified this value and an array of arguments
+        bind()	        Returns a function with a specified this value
+        call()	        Calls a function with a specified this value and individual arguments
+        length	        Returns the number of (expected) parameters of a function
+        name	        Returns the name of the function(see nameProperty.html)
+        toString()	    Returns a string representation of the function's source.
+
+
+#) What is this?
+    - In JavaScript, the this keyword refers to an object.
+    - The this keyword refers to different objects depending on how it is used:
+
+    💡 Alone, this refers to the global object.
+    💡 In a function, this refers to the global object.
+    💡 In a function, in strict mode, this is undefined.
+    💡 In an object method, this refers to the object.
+    💡 In an event, this refers to the element that received the event.
+    💡 In methods like call(), apply() and bind(), this can refer to any object.
+
+
+
+#) this Precedence:
+    - Use the following precedence of order to determine which object this refers to:
+
+        Order	Object	            Because
+    ------------------------------------------------------------------------------------------
+        1	    bind()	            this is in a function being called using bind()
+        2	    apply()	            this is in a function being called using apply()
+        2	    call()	            this in is a function being called using call()
+        3	    Object method	    this in is an object function (method)
+        4	    Global scope	    this in isa function in the global scope
+
+
+        aBBBABBBBAB

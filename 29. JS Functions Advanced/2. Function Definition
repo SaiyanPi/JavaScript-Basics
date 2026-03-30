@@ -1,0 +1,178 @@
+JavaScript Function Definitions:
+
+#) Function Definitions vs Function Declarations:
+    - Function definition is a general term for defining a function.
+    - Function declaration is one specific way to define a function.
+    - Examples of function definitions include:
+        👉 Function declarations
+        👉 Function expressions
+        👉 Arrow functions
+
+        // Function Declaration
+        function myFunction(x, y) {
+            return x * y;
+        }
+
+        // Function Expression (Named)
+        const myFunction = function name(x, y) {
+            return x * y;
+        };
+
+        // Function Expression (Anonymous)
+        const myFunction = function (x, y) {
+            return x * y;
+        };
+
+        // Arrow Function
+        const myFunction = (x, y) => x * y;
+
+        // Function Constructor
+        const myFunction = new Function("x", "y", "return x * y");
+
+        // Object Method
+        const obj = {
+            myFunction(x, y) {
+                return x * y;
+            },
+        };
+
+
+#) Function Declarations:
+    - A function declaration uses the function keyword and a function name.
+
+        function functionName(parameters) {
+            // code to be executed
+        }
+    
+    - eg:   function myFunction(a, b) {return a * b}
+            
+            or, more common
+            
+            function myFunction(a, b) {
+                return a * b;
+            }
+    
+    - Declared functions are not executed immediately. They are "saved for later use", and will be
+        executed later, when they are invoked (called upon).
+    - You can call a function before or after it is declared in the code.
+        Before:
+                let x = myFunction(4, 3);
+                function myFunction(a, b) {
+                    return a * b;
+                }
+        
+        After:
+                function myFunction(a, b) {
+                    return a * b;
+                }
+                let x = myFunction(4, 3);
+
+
+#) Function Expressions:
+    - A function expression stores a function inside a variable.
+    - The function can be anonymous (without a name).
+    - Function expressions are executed only when the code reaches them.
+
+        const x = function (a, b) {return a * b};
+    
+    - 💡After a function expression has been stored in a variable, the variable can be used as
+        a function:
+        
+        const x = function (a, b) {return a * b};
+        let z = x(4, 3);
+
+
+#) Hoisting:
+    - Function declarations are hoisted to the top of their scope.
+    - Function expressions are not hoisted in the same way.
+    - 💡Function declarations can be called before they are defined.
+
+        const sum = add(2, 3); // ✅ Will work
+        function add(a, b) {return a + b;}
+
+    - 💡Function expressions can not be called before they are defined.
+
+        const sum = add(2, 3); // ❌ Will generate error
+        const add = function (a, b) {return a + b;};
+
+
+#) Function Declaration	vs Function Expression:
+
+    Function Declaration	                    Function Expression
+---------------------------------------------------------------------------------------------------
+    Syntax:                                     Syntax:
+    A statement starting with the function      A part of an expression or assignment, and can be 
+    keyword, followed by a required name.	    anonymous (without a name).
+    
+    Hoisting:                                   Hoisting:
+    The function is moved to the top of its     The variable holding the function might be 
+    scope before code execution, allowing       hoisted (depending on var, let, or const), but the 
+    you to call it from anywhere within         function assignment itself is not. You can only 
+    that code scope, even before its            call it after it has been defined in the code scope.
+    definition
+    
+    Flexibility:                                Flexibility:
+    Primarily used for general-purpose          Can be used in various contexts, such as arguments 
+    functions that need to be available         to other functions (callbacks), immediately 
+    globally or in a specific scope.            invoked function expressions, and assigned to object
+                                                properties.
+
+
+#) Functions Stored in Variables:
+    - A function stored in a variable can be used like any other value:
+
+        function myFunction(a, b) {
+            return a * b;
+        }
+        let x = myFunction(4, 3);
+    
+    - 💡JavaScript functions can be used in expressions:
+
+        function myFunction(a, b) {
+            return a * b;
+        }
+        let x = myFunction(4, 3) * 2;
+
+
+#) The Function() Constructor:
+    - 💡Functions can also be defined with the JavaScript Function() constructor, but this is
+        rarely used.
+        
+        const myFunction = new Function("a", "b", "return a * b");
+        let x = myFunction(4, 3);
+    
+    - 💡💡You actually don't have to use the function constructor. The example above is the
+        same as writing:
+
+        const myFunction = function (a, b) {return a * b};
+        let x = myFunction(4, 3);
+
+
+#) Functions are Objects:
+    - ⚠️The typeof operator in JavaScript returns function for functions.
+    - ⚠️But, JavaScript functions can best be described as objects.
+
+        function add(a, b) {
+            return a + b;
+        }
+        document.getElementById("demo").innerHTML = typeof(add);    // function
+    
+    - 💡💡JavaScript functions have both properties and methods.
+        👉 The arguments.length property returns the number of arguments received by the function:
+
+            function multiply(a, b) {
+                return arguments.length;
+            }
+            document.getElementById("demo2").innerHTML = 
+            `Numbers of arguments in multiply() are: ${multiply()} <br>             // 0  
+            Numbers of arguments in multiply(5, 3) are: ${multiply(5, 3)} <br>      // 2
+            Numbers of arguments in multiply(5, 3, 4) are: ${multiply(5, 3, 4)}`;   // 3   
+        
+        👉 The toString() method returns the function as a string:
+
+            function add(a, b) {
+                return a + b;
+            }
+            document.getElementById("demo").innerHTML = add.toString();
+            
+            o/p:    function add(a, b) { return a + b; }

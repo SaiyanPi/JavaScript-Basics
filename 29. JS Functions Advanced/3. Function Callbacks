@@ -1,0 +1,165 @@
+JavaScript Callbacks:
+
+- "I will call back later!"
+- A JavaScript callback is a function passed as an argument to another function, which is then
+    executed (or "called back") at a later point in time to complete a specific task.
+- This mechanism is fundamental to JavaScript's event-driven and asynchronous programming model.
+
+
+#) What is a Callback Function?
+    - 💡A callback function is a function passed as an argument into another function.
+    - 💡A callback function is intended to be executed later.
+    - 💡Later is typically when a specific event occurs or an asynchronous operation completes.
+    - 💡The name "callback" stems from the idea that the outer function will "call you back"
+        later when it has finished its task
+
+
+#) Types of Callbacks:
+    1️⃣ Asynchronous Callbacks:
+        -> Asynchronous callbacks are executed at a later time, allowing the main program to
+            continue running without waiting.
+        -> This is essential for preventing the application from freezing during long-running
+            tasks like network requests.
+    
+    2️⃣ Synchronous Callbacks:
+        -> Synchronous Callbacks are executed immediately within the outer function, blocking
+            further operations until completion
+        -> Array methods like map(), filter(), and forEach() use synchronous callbacks.
+
+
+#) Event Handling:
+    - Callbacks are often used in JavaScript, especially in event handling.
+    - User interactions, such as button clicks or key presses, can be handled by providing a
+        callback function to an event listener:
+
+        eg: document.getElementById("myButton").addEventListener("click", displayDate);
+
+        -> In the example above, displayDate is a callback function passed as an argument to
+            the addEventListener() method.
+        -> displayDate will be called when a user clicks the button with id="myButton".
+    
+    - ⚠️When you pass a function as an argument, remember not to use parenthesis.
+        displayDate     ✅
+        displayDate()   ❌
+
+
+#) Asynchronous Operations:
+    - Windows functions like setTimeout() use callbacks to execute code after a specified delay.
+
+        setTimeout(myFunction, 3000);
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "I love You !!";
+        }
+
+        -> In the example above, myFunction is a callback function passed as an argument to
+            setTimeout().
+        -> 3000 is the number of milliseconds before myFunction will be called.
+
+
+#) Array Methods:
+    - 💡Many built-in array methods like map(), filter(), and forEach() accept callback functions
+        to define the action performed on each element.
+    - eg: 💡The forEach() method calls a function (a callback function) once for each array element.
+
+        const numbers = [45, 4, 9, 16, 25];
+        let txt = "";
+        numbers.forEach(myFunction);
+
+        function myFunction(value) {
+            txt += value + "<br>";
+        }
+    
+    - eg: 💡The map() method creates a new array by performing a function on each array element.
+            (see JS Iterations to know more about map() method)
+
+        const numbers1 = [45, 4, 9, 16, 25];
+        const numbers2 = numbers1.map(myFunction);
+
+        function myFunction(value) {
+            return value * 2;
+        }
+
+
+#) Sequence Control:
+    - Sometimes you would like to have better control over when to execute a function.
+    - Suppose you want to do a calculation, and then display the result.
+    - 💡You could first call the calculator function myCalculator, and then call the display
+        function myDisplayer:
+
+            // Funtion to display something
+            function myDisplayer(some) {
+                document.getElementById("demo").innerHTML = some;
+            }
+
+            // Function to calculate a sum
+            function myCalculator(num1, num2) {
+                let sum = num1 + num2;
+                return sum;
+            }
+
+            // Call the calculator
+            let result = myCalculator(5, 5);
+
+            // Call the displayer
+            myDisplayer(result);
+    
+    - 💡Or, you could call the calculator function myCalculator, and let the calculator function
+        call the display function myDisplayer:
+
+            // Funtion to display something
+            function myDisplayer(some) {
+                document.getElementById("demo").innerHTML = some;
+            }
+
+            // Function to calculate a sum
+            function myCalculator(num1, num2) {
+                let sum = num1 + num2;
+                myDisplayer(sum);
+            }
+
+            // Call the calculator
+            myCalculator(5, 5);
+
+    - Analysis 🔍:
+        1️⃣ The problem with the first example above, is that you have to call two functions to display
+            the result.
+        2️⃣ The problem with the second example, is that you cannot prevent the calculator function
+            from displaying the result.
+        3️⃣ Now it is time to bring in a callback:
+            Using a callback, you could call the calculator function (myCalculator) with a callback
+            (myCallback), and let the calculator function run the callback after the calculation is
+            finished:
+
+                // Function to display some data
+                function myDisplayer(some) {
+                    document.getElementById("demo").innerHTML = some;
+                }
+
+                // Function to calculate a sum
+                function myCalculator(num1, num2, myCallback) {
+                    let sum = num1 + num2;
+                    myCallback(sum);
+                }
+
+                myCalculator(5, 5, myDisplayer);
+
+            -> In the example above, myDisplayer is used as a callback function.
+            -> It is passed to myCalculator() as an argument.
+
+
+#) Callback Key Concepts:
+    - Function as an Argument:
+        Because functions in JavaScript can be treated like any other variable or object, you can
+        pass them as arguments to other functions.
+    
+    - Deferred Execution:
+        -> The key benefit of a callback is that it allows for deferred execution, meaning the
+            callback function does not run immediately.
+        -> Instead, it runs later, after a specific condition is met, an event occurs, or an
+            asynchronous operation completes.
+                👉 Run Immediately (synchronous) ✅ ← example above
+                👉 Run Later (asynchronous) ✅ ← setTimeout, API calls, events
+
+        -> This mechanism ensures that the program can continue to execute other code while
+            waiting for long-running tasks (like fetching data from a server, reading a file, or
+            waiting for a user click) to complete

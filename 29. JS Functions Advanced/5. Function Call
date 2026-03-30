@@ -1,0 +1,119 @@
+JavaScript Function call():
+
+- ⚠️⚠️Make sure you understand this before continuing:
+
+#) The JavaScript call() Method:
+    - 💡The call() method can be used to call a function with a specific this.
+    - 💡The call() method lets an object use a method belonging to another object.
+    - In this way, the same method can be used on different objects.
+
+
+#) Basic call() Syntax:
+    - The call() method is used to call a function with an object as an argument.
+    - The call() method takes this as the first argument.
+    - Additional arguments are passed as a comma-separated list.
+
+        💡Syntax: functionName.call(this, arg1, arg2, ...);
+
+
+💡💡) Using call() to Set this:
+    - 💡When you use call(), you can decide what this should refer to.
+    - In the example below, the greet function returns a greeting + this.name.
+    - 💡When you use call(), you decide that this should be the person3 object.
+
+        const person1 = { name: "John" };
+        const person2 = { name: "Paul" };
+        const person3 = { name: "Ringo" };
+
+        // Function to return a greeting
+        function greet(greeting) {
+            return greeting + " " + this.name;
+        }
+
+        let message = greet.call(person3, "Hello");     // Hello Ringo
+    
+
+💡💡) Borrowing a Method from Another Object:
+    - 💡You can use call() to borrow a method from another object:
+    - eg: Calls the fullName method of person, using it on person1:
+
+        // Create a person Object
+        const person = {
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+
+        // Create a person1 Object
+        const person1 = {
+            firstName:"John",
+            lastName: "Doe"
+        }
+
+        // Create a person2 Object
+        const person2 = {
+            firstName:"Mary",
+            lastName: "Doe"
+        }
+
+        let name = person.fullName.call(person1);   // John Doe
+
+
+#) The call() Method with Arguments:
+    - The call() method can accept arguments.
+    - Arguments are passed normally, separated by commas:
+        
+        const person = {
+            fullName: function(city, country) {
+                return this.firstName + " " + this.lastName + "," + city + "," + country;
+            }
+        }
+
+        const person1 = {
+            firstName:"John",
+            lastName: "Doe"
+        }
+
+        person.fullName.call(person1, "Oslo", "Norway");
+
+
+#) call() vs Normal Function Call:
+    
+        function showName() {
+            return this.name;
+        }
+
+        const person = { name: "John" };
+
+        showName();
+        showName.call(person);
+    
+    -> 💡Without call(), this is not the person object.
+    -> 💡With call(), this is set explicitly.
+
+
+💡💡) call() Does Not Create a New Function:
+    - 💡The call() method executes the function immediately. It does not return a new function.
+
+        function sayHello() {
+            return "Hello " + this.name;
+        }
+
+        const person = { name: "John" };
+
+        sayHello.call(person);
+    
+    - ⚠️If you need a new function that remembers this, use bind() instead.
+
+
+
+☠️⚠️
+Common Mistakes:
+    Forgetting that call() Runs Immediately
+        -> call() does not return a reusable function.
+
+    Passing Arguments as an Array
+        -> call() requires arguments to be listed one by one. Use apply() for arrays.
+        
+    Using call() Without Understanding this
+        -> Always know what this should refer to.

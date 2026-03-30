@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind()</title>
+</head>
+<body>
+    <h2>bind()</h2>
+    <b>bind() method is similar to call() and apply() methods, but it returns a new function with the
+        specified this value and arguments.</b>
+    <p id="demo"></p>
+    <b>Without bind(), the this value may be lost:</b>
+    <p id="demo2"></p>
+    <b>When a function is used as a callback, this is lost:</b>
+    <p id="demo3"></p>
+    <b>bind() method solves this problem:</b>
+    <p id="demo4"></p>
+    <b>bind() does not change the original function:</b>
+    <p id="demo5"></p>
+
+    <script>
+        // Create person Object
+        const person = {
+            firstName:"John",
+            lastName: "Doe",
+            fullName: function () {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+
+        // Create member Object
+        const member = {
+            firstName:"Hege",
+            lastName: "Nilsen"
+        }
+
+        // Bind the fullName method to the member Object
+        let fullName = person.fullName.bind(member);    // new function fullName() will return "Hege Nilsen"
+        let bio = person.fullName.bind(person);
+
+        // Later call fullName()
+        document.getElementById("demo").innerHTML += fullName() + "<br>";
+        document.getElementById("demo").innerHTML += bio();
+
+        //------------------------------------------------------------------------------------------
+        // Without bind(), the this value may be lost:
+        let getFullName = person.fullName;
+        document.getElementById("demo2").innerHTML = getFullName(); // This will not work as expected
+
+        //------------------------------------------------------------------------------------------
+        const individual = {
+            firstName: "Jane",
+            lastName: "Smith",
+            fullName: function() {
+                let x = document.getElementById("demo3");
+                x.innerHTML = this.firstName + " " + this.lastName;
+            }
+        }
+        setTimeout(individual.fullName, 5000); // This will not work as expected
+
+        //------------------------------------------------------------------------------------------
+        const guy = {
+            firstName: "Mike",
+            lastName: "Johnson",
+            fullName: function() {
+                let x = document.getElementById("demo4");
+                x.innerHTML = this.firstName + " " + this.lastName;
+            }
+        }
+        // setTimeout(guy.fullName.bind(guy), 5000); 
+        // or,
+        let displayFullName = guy.fullName.bind(guy);
+        setTimeout(displayFullName, 5000);
+
+        //------------------------------------------------------------------------------------------
+        const car = {
+            brand: "Toyota",
+            model: "Corolla",
+            getCarInfo: function() {
+                return this.brand + " " + this.model;
+            }
+        }
+
+        const car1 = {
+            brand: "Honda",
+            model: "Civic"
+        }
+
+        let carInfo = car.getCarInfo.bind(car1);
+        document.getElementById("demo5").innerHTML += carInfo() + "<br>"; 
+        document.getElementById("demo5").innerHTML += "Original function: " + car.getCarInfo(); 
+    </script>
+</body>
+</html>

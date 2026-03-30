@@ -1,0 +1,144 @@
+iife(Immediately Invoked Function Expression)/Self-Invoking Functions:
+
+- An IIFE is short for an Immediately Invoked Function Expression.
+- An IIFE is a function that invokes itself when defined.
+- An IIFE runs automatically when the JavaScript engine reads it (compiles it).
+- Syntax:
+        (function () {
+            // Code to run immediately
+        })();
+
+- eg:
+        (function () {
+            let text = "Hello! I called myself.";
+        })();
+
+- 💡An IIFE function is defined and executed at the same time.
+- When is IIFE Used?
+    👉 To create a private scope
+    👉 To run setup code once
+    👉 In older JavaScript code
+
+
+#) Avoid Polluting the Global Scope:
+    - ⚠️Everything inside an IIFE is private to that function.
+    - ⚠️Variables inside an IIFE cannot be accessed from outside.
+
+        (function () {
+            let x = 10;
+        })();
+
+        // x is not accessible here
+
+        (function () {
+            let hidden = 42;
+        })();
+        let result = hidden; // ⛔ Error: hidden is not defined
+
+
+#) How an IIFE Works:
+    - Function expressions can be made self-invoking.
+    - A self-invoking function expression is invoked (started) automatically, without being called.
+
+        Function:   function () {
+                        // Code to run
+                    };
+        
+        Expression:
+        -> 💡Parentheses around the function tell JavaScript to treat the function as an expression.
+
+                    (function () {
+                        // Code to run
+                    });
+    
+    - 💡Function expressions will execute automatically if the expression is followed by ().
+
+        IIFE:   (function () {
+                    // Code to run
+                })();
+
+
+#) IIFE with Parameters:
+    - You can pass arguments into an IIFE.
+
+        (function (name) {
+            let text = "Hello " + name;
+        })("John Doe");
+
+
+#) IIFE with Return Value:
+    - An IIFE can return a value, which can be stored in a variable.
+
+        let result = (function () {
+            return 5 + 5;
+        })();
+
+
+#) Arrow Function IIFE:
+    - Arrow functions can also be used as IIFEs.
+
+        (() => {
+            let text = "Hello! I called myself.";
+        })();
+
+
+#) Arrow Function IIFE with Parameter:
+
+        ((name) => {
+            let text = "Hello " + name;
+        })("John Doe");
+
+
+#) IIFE in Modern JavaScript:
+    - Today, JavaScript modules often replace the need for IIFEs.
+    - Modules have their own scope by default.
+
+            <script type="module">
+                let x = 10;
+            </script>
+    
+        -> ⚠️The variable x is scoped to the module and not global.
+
+
+#) Named Function Expression IIFE:
+    - You can give an IIFE a name:
+
+            (function greet() {
+                let text = "Hello! I called myself.";
+            })();
+            greet(); // ⛔ ReferenceError
+
+        -> But, the name greet exists only inside the function itself, not in the outer/global scope.
+    - Why use a named IIFE?
+        -> For self-recursion functions (calling itself repeatedly):
+
+            (function factorial(n) {
+                if (n <= 1) return 1;
+                return n * factorial(n - 1); // recursive call
+            })(5);
+
+
+#) IIFE as a Module (Private Variables):
+
+        const counter = (function () {
+            let value = 2;
+            return {
+                increment() { value++; },
+                get() { return value; }
+            };
+        })();
+
+        counter.increment();
+        let x = counter.get();
+
+        document.getElementById("demo").innerHTML = x;  // 3
+
+
+💡
+- Self Invocing Functions were heavily used before ECMAScript 6
+- Today, JavaScript let, const, and modules have reduced the need for them.
+- But they can still be useful for:
+    👉 Running setup code that should immediately
+    👉 Creating private variables and private scope
+    👉 Avoiding global scope pollution
+    👉 Working with older JavaScript code that rely on them

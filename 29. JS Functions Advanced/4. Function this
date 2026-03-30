@@ -1,0 +1,197 @@
+The JavaScript this Keyword:
+
+#) What is this?
+    - 💡When the this keyword is used in a function, it refers to an Object.
+    - 💡Which Object, is not decided when the function is written.
+    - 💡The value of this is decided when the function is called.
+    - see this.html from chapter 10. JS Objects
+    - ⚠️Make sure you understand basic JavaScript functions before continuing.
+
+
+#) Functions are Object Methods:
+    - 💡All JavaScript functions are object methods.
+    - 💡A function can be:
+        👉 A method of a JavaScript object
+        👉 A method of the global object
+
+
+1️⃣ this in an Object Method:
+    - When a function is an object method:
+    - 💡this refers to the object that owns the method.
+
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                fullName: function() {
+                    return this.firstName + " " + this.lastName;
+                }
+            };
+            person.fullName();
+        
+        -> 💡In the example above, this refers to the person object.
+        -> this.firstName means the firstName property of person.
+        -> 💡this.firstName is the same as person.firstName.
+
+
+2️⃣ this in a Function (Default):
+    - By default, when this is used in a regular function, this refers to the global object.
+
+            function myFunction() {
+                return this;
+            }
+            document.getElementById("1").innerHTML = `this is = ${myFunction()}`; // [object Window]
+
+        -> ⚠️In the example above, this is the global object.
+
+
+3️⃣ this in a Function (Strict Mode):
+    - JavaScript strict mode does not allow default binding.
+    - ⚠️In strict mode, this used inside a function is undefined.
+
+            "use strict";
+            function myFunction() {
+                return this;
+            }
+            document.getElementById("1").innerHTML = `this is = ${myFunction()}`;   // undefined
+        
+        -> In the example above, this is undefined.
+
+
+4️⃣ this Alone:
+    - When used outside a function, this always refers to the global object.
+    - In a browser window the global object is [object Window]:
+
+            let x = this;
+            document.getElementById("demo").innerHTML = "This is: " + x;    // [object Window]
+
+    - ⚠️⚠️In strict mode, when used outside a function, this also refers to the global object:
+
+            "use strict";
+            let x = this;
+            document.getElementById("demo").innerHTML = "This is: " + x;    // [object Window]
+    
+    - In both the examples above, this is the global object. It is so because , 💡this is in the global
+        scope.
+
+
+5️⃣ JavaScript globalThis:
+    - In JavaScript, globalThis is a special built-in object that provides a standard way to access the
+        global object, regardless of the environment your code runs in - whether it is a browser,
+        Node.js, a Web Worker, or another JS runtime.
+    - 💡The global object is the top-level object in a JavaScript environment:
+        👉 In browsers, it is window.
+        👉 In Node.js, it is global.
+        👉 In Web Workers, it is self.
+    
+    - ⚠️Each environment used to have its own name for this object. This caused compatibility issues for
+        code meant to run everywhere.
+    - 💡globalThis was introduced in ECMAScript 2020 (ES11) to solve that problem. It is a unified
+        reference to the global object, no matter the environment.
+
+            globalThis === window; // true in browsers
+            globalThis === global; // true in Node.js
+
+
+6️⃣ this in Event Handlers:
+    - 💡In HTML event handlers, this refers to the HTML element that received the event:
+
+            <button onclick="this.innerHTML='I was Clicked!'">Click Me!</button>
+            or,
+            <button onclick="this.style.display='none'">Click to Remove Me!</button>
+
+
+7️⃣ this in Arrow Functions:
+    - Arrow functions do not have their own this. They inherit this from the surrounding scope.
+    - In regular functions the this keyword represents the object that called the function, which could
+        be the window, the document, a button or whatever.
+    - 💡With arrow functions the this keyword always represents the object that defined the arrow
+        function.
+    - see thisArrowFn.html
+
+
+#) This Precedence:
+    - Use the following precedence of order to determine which object this refers to:
+
+        Order	Object	        Because
+    ---------------------------------------------------------------------------------------
+        1	    bind()	        this is in a function being called using bind()
+        2	    apply()	        this is in a function being called using apply()
+        2	    call()	        this is in a function being called using call()
+        3	    Object method	this is in an object function (method)
+        4	    Global scope	this is in a function in the global scope
+
+
+#) Examples:
+    - Below are two examples that call the same method twice:
+
+    1️⃣ With a regular function: returns two different objects (window and button)
+        
+        <button id="btn">Click Me!</button>
+        <p id="demo"></p>
+
+        <script>
+            // Regular function:
+            const hello = function() {
+                document.getElementById("demo").innerHTML += "<br>This is: " + this;
+            }
+
+            //The window object calls the function:
+            window.addEventListener("load", hello);
+
+            //A button object calls the function:
+            document.getElementById("btn").addEventListener("click", hello);
+        </script>
+
+    2️⃣ With an arrow function this represents the owner of the function: returns the window object twice,
+        because the window object is the "owner" of the function.
+
+        <button id="btn">Click Me!</button>
+        <p id="demo"></p>
+
+        <script>
+            // Arrow function
+            const hello = () => {
+                document.getElementById("demo").innerHTML += "<br>This is: " + this;
+            }
+
+            //The window object calls the function:
+            window.addEventListener("load", hello);
+
+            //A button object calls the function:
+            document.getElementById("btn").addEventListener("click", hello);
+        </script>
+
+
+#) Arrow Functions in Methods:
+    - 💡With arrow functions there are no binding of this.
+    - 💡They are not well suited for defining object methods.
+
+        <p id="demo"></p>
+        <script>
+            // Create an object:
+            const person = {
+                firstName: "John",
+                // Arrow function as a method
+                sayHello : () => {
+                    return this.firstName;
+                }
+            };
+
+            // Display sayHello:
+            document.getElementById("demo").innerHTML = person.sayHello();  // undefined
+        </script>
+    
+    - ⚠️The example above does not work as expected because thisdoes not refer to the person object.
+
+    - 💡💡Arrow functions can be useful inside methods when you want to keep the same this value.
+
+        const person = {
+            firstName: "John",
+            sayHello: function() {
+                return () => this.firstName;
+            }
+        };
+
+        document.getElementById("demo").innerHTML = person.sayHello()();  // John
+
+        ⚠️⚠️ see arrowFn.html for clarity in above code specially person.sayHello()(); part

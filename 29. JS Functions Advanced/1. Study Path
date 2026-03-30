@@ -1,0 +1,57 @@
+Advanced Functions Study Path:
+
+- These chapters are best after you understand basic functions (calling, parameters, return values,
+    expressions, and arrows).
+- If you are not comfortable with JavaScript functions yet, start here: chapter 9. JS Function
+
+    Step 1 Advanced
+        -> JavaScript Definitions
+        -> Function declarations
+        -> Function Expression
+        -> Arrow Functions
+        -> Function Constructors
+
+    Step 2 Advanced
+        -> JavaScript Callbacks
+        -> A JavaScript callback is a function passed as an argument to another function, which is
+        -> then executed (or "called back") at a later point in time to complete a specific task.
+
+
+    Step 3 Advanced
+        -> The this Keyword
+        -> How this works (especially inside objects).
+        -> How this is decided by how it is called.
+
+
+    Step 4 Advanced
+        -> The call() Method
+        -> Call a function with a chosen this.
+        -> Pass a list of arguments.
+
+
+    Step 5 Advanced
+        -> The apply() Method
+        -> Call a function with a chosen this.
+        -> Pass an array of arguments.
+
+
+    Step 6 Advanced
+        -> The bind() Method
+        -> Call a function with a chosen this.
+        -> Use bind() when you need a function to run later with the same this.
+
+
+    Step 7 Advanced
+        -> Self Invoked - IIFE
+        -> Self-starting functions.
+
+
+    Step 8 Advanced
+        -> JavaScript Closures
+        -> Functions that remember their scope
+        -> Learn how functions can remember variables after the outer function finishes.
+
+
+    Step 9Advanced
+        -> Function References
+        -> Function Object Methods & Properties.

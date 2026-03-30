@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call()</title>
+</head>
+<body>
+    <h2>Using call() to Set this:</h2>
+    <b>When you use call(), you decide what this refers to. In this example this refers to object person1:</b>
+    <p id="demo1"></p>
+    <h2>Borrowing a method from another object:</h2>
+    <b>Here, we borrow the fullName method from the person object and use it with person1 as the context:</b>
+    <p id="demo2"></p>
+    <h2>call() Method with Arguments:</h2>
+    <b>Arguments are passed normally, separated by commas.</b>
+
+    <p id="demo3"></p>
+    <script>
+        const person1 = {
+            firstName: "John",
+            lastName: "Doe",
+        }
+
+        const person2 = {
+            firstName: "Jane",
+            lastName: "Smith",
+        }
+
+        function getFullName(greeting) {
+            return greeting + " " + this.firstName + " " + this.lastName;
+        }
+
+        // Here, this refers to object person1
+        let message = getFullName.call(person1, "Hello"); // Hello John Doe
+        document.getElementById("demo1").innerHTML = message;
+
+        //---------------------------------------------------------------------------------
+        const person = {
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+
+        let fullName = person.fullName.call(person1); // John Doe
+        document.getElementById("demo2").innerHTML = fullName;
+
+        //---------------------------------------------------------------------------------
+        const individual = {
+            detail: function getDetails(age, city) {
+                return this.firstName + " " + this.lastName + " is " + age + " years old and lives in " + city;
+            }
+        }
+        let details = individual.detail.call(person2, 30, "New York"); // Jane Smith is 30 years old and lives in New York
+        document.getElementById("demo3").innerHTML = details;
+    </script>
+</body>
+</html>

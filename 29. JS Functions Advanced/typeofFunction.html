@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typeof Function</title>
+</head>
+<body>
+    <div>
+        <h3>typeof function</h3>
+        <p id="demo1"></p>
+        <p id="demo2"></p>
+
+        <script>
+            function add(a, b) {
+                return a + b;
+            }
+            document.getElementById("demo1").innerHTML = 
+            `typeof(function_name): ${typeof(add)} <br>
+            function_name.toString(): ${add.toString()}`;    
+
+            function multiply(a, b) {
+                return arguments.length;
+            }
+            document.getElementById("demo2").innerHTML = 
+            `Numbers of arguments in multiply() are: ${multiply()} <br>             
+            Numbers of arguments in multiply(5, 3) are: ${multiply(5, 3)} <br>
+            Numbers of arguments in multiply(5, 3, 4) are: ${multiply(5, 3, 4)}`;    
+        </script>
+    </div>
+    
+</body>
+</html>
