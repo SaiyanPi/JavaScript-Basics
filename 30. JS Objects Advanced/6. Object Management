@@ -1,0 +1,166 @@
+JavaScript Object Management:
+
+- Property Management Methods:
+    // Adding or changing an object property
+    Object.defineProperty(object, property, descriptor)
+
+    // Adding or changing object properties
+    Object.defineProperties(object, descriptors)
+
+    // Accessing a Property
+    Object.getOwnPropertyDescriptor(object, property)
+
+    // Accessing Properties
+    Object.getOwnPropertyDescriptors(object)
+
+    // Returns all properties as an array
+    Object.getOwnPropertyNames(object)
+
+    // Accessing the prototype
+    Object.getPrototypeOf(object)
+
+
+1️⃣ JavaScript Object.defineProperty():
+    -> The Object.defineProperty() method can be used to:
+        👉 Adding a new property to an object including getters and setters
+        👉 Changing property values
+        👉 Changing property metadata
+        👉 Changing object getters and setters
+    
+    -> Syntax:
+        Object.defineProperty(object, property, descriptor)
+    
+    -> ✅Adding a new Property:
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            language: "Nepali",
+        };
+
+        //1. add a new property to an object
+        Object.defineProperty(person, "country", {
+            value: "Nepal"
+        });
+        document.getElementById("demo1").innerHTML += person.country + "<br>";   // Nepal
+        Object.defineProperty(person, "fullName", {
+            get: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        });
+        document.getElementById("demo1").innerHTML += person.fullName;   // John Doe
+
+    -> ✅Changing a Property Value:
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            language: "Nepali",
+        };
+
+        //2. changing a property value
+        Object.defineProperty(person, "lastName", {
+            value: "Rai"
+        });
+        document.getElementById("demo2").innerHTML = person.lastName;   // Rai
+    
+    -> ✅Changing Meta Data:
+        👉 All properties have a name. In addition they also have a value. The value is one of the
+            property's attributes.
+        👉 Other attributes are: enumerable, configurable, and writable.
+        👉 These attributes define how the property can be accessed (is it readable?, is it writable?)
+        👉 In JavaScript, all attributes can be read, but only the value attribute can be changed
+            (and only if the property is writable).
+        👉 The following property meta data can be changed:
+            writable : true      // Property value can be changed
+            enumerable : true    // Property can be enumerated
+            configurable : true  // Property can be reconfigured
+        
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            language: "Nepali",
+        };
+
+        //3. changing meta data
+        Object.defineProperty(person, "firstName", {
+            writable: false
+        });
+        person.firstName = "Bob";
+        document.getElementById("demo3").innerHTML = person.firstName;  // John
+
+    -> ✅ Getters and setters can also be changed:
+        
+        const person = {
+            language: "Nepali",
+            age: "",
+            // defining a getter
+            get: function() {
+                return this.language;
+            },
+            // defining a setter
+            set: function(age) {
+                this.age = age;
+            }
+        };
+
+        //4. Changing Object getters and setters
+            // makes language read-only
+        Object.defineProperty(person, "language", {
+            writable: false
+        });
+        person.language = "English";
+        document.getElementById("demo4").innerHTML += person.get() + "<br>";    // Nepali
+
+            // makes age read-only
+        person.set(30);
+        Object.defineProperty(person, "age", {
+            writable: false
+        });
+        person.set(31);
+        document.getElementById("demo4").innerHTML += " " + person.age;  // 30
+
+
+2️⃣ JavaScript getOwnPropertyNames():
+    -> The Object.getOwnPropertyNames() method can:
+        👉 List object properties
+
+    -> Syntax:
+        Object.getOwnPropertyNames(object)
+
+    -> 💡Object.getOwnPropertyNames() will also list properties that is not enumerable:
+    -> ✅ List all Object Properties:
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            country: "Nepal"
+        };
+    
+        document.getElementById("demo1").innerHTML = Object.getOwnPropertyNames(person);  
+        // firstName,lastName,country
+
+        Object.defineProperty(person, "firstName", {
+            enumerable: false
+        });
+        document.getElementById("demo2").innerHTML += Object.getOwnPropertyNames(person) + "<br>"; 
+        // firstName,lastName,country
+
+
+    -> ⚠️ List Enumerable Object Properties:
+        👉 Object.keys() method list enumerable object properties. 
+        👉 Syntax:
+            Object.keys(object)
+
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                country: "Nepal"
+            };
+            Object.defineProperty(person, "firstName", {
+                enumerable: false
+            });
+            document.getElementById("demo2").innerHTML += Object.getOwnPropertyNames(person) + "<br>"; 
+            // firstName,lastName,country
+            document.getElementById("demo2").innerHTML += Object.keys(person);  
+            // lastName,country

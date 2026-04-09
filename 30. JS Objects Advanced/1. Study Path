@@ -1,0 +1,59 @@
+Advanced Learning Path:
+
+    Step 1 Advanced
+
+        - Object Definitions
+            -> Using an Object Literal
+            -> Using the new Keyword
+            -> Using an Object Constructor
+            -> Using Object.assign()
+            -> Using Object.create()
+            -> Using Object.fromEntries()
+
+
+    Step 2 Advanced
+
+        - Object this
+            -> When used in an object method, this refers to the object.
+
+
+    Step 3 Advanced
+
+        - Object Iterations
+            -> Object.entries(object)
+            -> Object.keys(object)
+            -> Object.values(object)
+            -> Object.groupBy(object, callback)
+
+
+    Step 4 Advanced
+
+        - Object Get & Set
+            -> Getters and setters allow you to define Object Accessors (Computed Properties).
+
+
+    Step 5 Advanced
+
+        - Object Management
+            -> Accessing property descriptors
+            -> Adding or changing properties
+
+    Step 6 Advanced
+
+        - Object Protection
+            -> Prevents changes to an object
+            -> Prevents adding properties
+            -> Prevents deleting properties
+
+
+    Step 7 Advanced
+
+        - Object Prototypes
+            -> JavaScript objects inherit properties and methods from a prototype
+
+
+    Step 8 Advanced
+
+        - Object Reference
+            -> All Object Methods and Properties
+            -> Revised July 2025

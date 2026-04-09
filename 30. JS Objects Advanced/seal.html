@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.seal()</title>
+</head>
+<body>
+    <h2>
+        <ul>The Object.seal() method prevents additions or deletions of new properties.</ul>
+        <ul>The Object.seal() method makes existing properties non-configurable.</ul>
+        <ul>The Object.isSealed() method can be used to check if an object is sealed.</ul>
+    </h2>
+    <p id="demo"></p>
+
+    <script>
+        "use strict";
+
+        const person = {
+            name: "John",
+            age: 30
+        };
+
+        // Seal Object
+        Object.seal(person);
+
+        // This will throw an error
+        let text = "";
+        try {
+            person.email = "john@example.com";
+            // delete person.name;
+            // Object.defineProperty(person, "name", {
+            //     configurable: true
+            // });
+        } catch (error) {
+            text = "Error: " + error.message;
+        }
+
+        document.getElementById("demo").innerHTML = text;
+    </script>
+</body>
+</html>

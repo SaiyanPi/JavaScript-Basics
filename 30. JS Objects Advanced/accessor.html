@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Getters and Setters</title>
+</head>
+<body>
+    <h2>JS Getter</h2>
+    <p id="demo1"></p>
+    <h2>JS Setter</h2>
+    <p id="demo2"></p>
+
+    <script>
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            get fullName() {
+                return this.firstName + " " + this.lastName;
+            },
+            language: "",
+            set lang(lan) {
+                this.language = lan;
+            }
+        };
+
+        document.getElementById("demo1").innerHTML = person.fullName;  // getter
+
+        person.lang = "English";  // setter
+        document.getElementById("demo2").innerHTML = person.language;  // accessing
+    </script>
+    
+</body>
+</html>

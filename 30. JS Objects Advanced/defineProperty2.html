@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineProperty()</title>
+</head>
+<body>
+    <h3>The Object.defineProperty() method can also be used to add Getters and Setters:</h3>
+    <p>Perfect for creating counters:</p>
+    <p id="demo"></p>
+
+    <script>
+        // create object
+        const obj = {
+            counter: 0
+        };
+
+        // define getters and setters
+        Object.defineProperty(obj, "reset", {
+            get: function() { this.counter = 0; }
+        });
+        Object.defineProperty(obj, "increment", {
+            get: function() { this.counter++; }
+        });
+        Object.defineProperty(obj, "decrement", {
+            get: function() { this.counter--; }
+        });
+        Object.defineProperty(obj, "add", {
+            set: function(value) { this.counter += value; }
+        });
+        Object.defineProperty(obj, "subtract", {
+            set: function(value) { this.counter -= value; }
+        });
+
+        // play with counter
+        obj.increment; 
+        document.getElementById("demo").innerHTML += obj.counter + "<br>";  // 1
+
+        obj.decrement;
+        document.getElementById("demo").innerHTML += obj.counter + "<br>";  // 0
+
+        obj.add = 5;
+        document.getElementById("demo").innerHTML += obj.counter + "<br>";  // 5
+
+        obj.reset;
+        document.getElementById("demo").innerHTML += obj.counter + "<br>";  // 0
+
+        obj.increment;  // 1
+        obj.increment;  // 2
+        obj.increment;  // 3
+        obj.subtract = 1;   // 2
+        document.getElementById("demo").innerHTML += obj.counter + "<br>";  // 2
+
+    </script>
+</body>
+</html>

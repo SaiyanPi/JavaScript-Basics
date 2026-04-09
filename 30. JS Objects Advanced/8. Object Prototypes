@@ -1,0 +1,107 @@
+JavaScript Object Prototypes:
+
+
+#) Prototype Inheritance:
+    - 💡All JavaScript objects inherit properties and methods from a prototype:
+        👉 Date objects inherit from Date.prototype
+        👉 Array objects inherit from Array.prototype
+    - 💡The Object.prototype is on the top of the prototype inheritance chain.
+    - Date objects, Array objects, and all other objects inherit from Object.prototype.
+
+
+#) Adding Properties and Methods to Objects:
+    - Sometimes you want to add new properties (or methods) to all existing objects of a given type.
+    - Sometimes you want to add new properties (or methods) to an object constructor.
+    - Previously(Chapter 10, section 7) you have learned learned how to use an object constructor:
+
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+
+        const myFather = new Person("John", "Doe", 50, "blue");
+        const myMother = new Person("Sally", "Rally", 48, "green");
+
+        document.getElementById("demo").innerHTML =
+        "My father is " + myFather.age + ". My mother is " + myMother.age;
+
+        o/p:    My father is 50. My mother is 48
+    
+    - ⚠️You cannot add a new property to an existing object constructor:
+
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+
+        Person.nationality = "English";
+
+        const myFather = new Person("John", "Doe", 50, "blue");
+        const myMother = new Person("Sally", "Rally", 48, "green");
+
+        document.getElementById("demo").innerHTML =
+        "The nationality of my father is " + myFather.nationality; 
+
+        o/p:    The nationality of my father is undefined
+    
+    - 💡To add a new property to a constructor, you must add it to the constructor function:
+
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+            this.nationality = "English";
+        }
+
+        const myFather = new Person("John", "Doe", 50, "blue");
+        const myMother = new Person("Sally", "Rally", 48, "green");
+
+        document.getElementById("demo").innerHTML =
+        "The nationality of my father is " + myFather.nationality + 
+        ". The nationality of my mother is " + myMother.nationality;
+
+        o/p:    The nationality of my father is English. The nationality of my mother is English
+
+
+#) Using the prototype Property:
+    - 💡The JavaScript prototype property allows you to add new properties to object constructors:
+
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+
+        Person.prototype.nationality = "English";   👈
+
+        const myFather = new Person("John", "Doe", 50, "blue");
+        document.getElementById("demo").innerHTML =
+        "The nationality of my father is " + myFather.nationality; 
+
+        o/p:    The nationality of my father is English
+    
+    - 💡The JavaScript prototype property also allows you to add new methods to object constructors:
+
+        function Person(firstName, lastName, age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+        }
+    
+        Person.prototype.fullName = function() {
+            return this.firstName + " " + this.lastName;
+        };
+
+        const person2 = new Person("Jane", "Doe", 25);
+        document.getElementById("demo2").innerHTML = "person2 full name is " + person2.fullName();
+
+        o/p:    person2 full name is Jane Doe
+
+
+- ⚠️ Only modify your own prototypes. Never modify the prototypes of standard JavaScript objects.

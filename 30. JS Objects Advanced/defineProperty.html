@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.defineProperty()</title>
+</head>
+<body>
+    <h2>1. Add a new property to an object.</h2>
+    <p id="demo1"></p>
+    <h2>2. Changing a property value.</h2>
+    <p id="demo2"></p>
+    <h2>3. Changing Meta Data.</h2>
+    <p id="demo3"></p>
+    <h2>4. Changing Object Getters and Setters.</h2>
+    <p id="demo4"></p>
+
+    <script>
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            language: "Nepali",
+            age: "",
+            // defining a getter
+            get: function() {
+                return this.language;
+            },
+            // defining a setter
+            set: function(age) {
+                this.age = age;
+            }
+        };
+
+        //1. add a new property to an object
+        Object.defineProperty(person, "country", {
+            value: "Nepal"
+        });
+        document.getElementById("demo1").innerHTML += person.country + "<br>";   // Nepal
+            // adding getter
+        Object.defineProperty(person, "fullName", {
+            get: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        });
+        document.getElementById("demo1").innerHTML += person.fullName;   // John Doe
+
+        //2. changing a property value
+        Object.defineProperty(person, "lastName", {
+            value: "Rai"
+        });
+        document.getElementById("demo2").innerHTML = person.lastName;   // Rai
+
+        //3. changing meta data
+        Object.defineProperty(person, "firstName", {
+            writable: false
+        });
+        person.firstName = "Bob";
+        document.getElementById("demo3").innerHTML = person.firstName;  // John
+
+        //4. Changing Object getters and setters
+            // makes language read-only
+        Object.defineProperty(person, "language", {
+            writable: false
+        });
+        person.language = "English";
+        document.getElementById("demo4").innerHTML += person.get() + "<br>";    // Nepali
+
+            // makes age read-only
+        person.set(30);
+        Object.defineProperty(person, "age", {
+            writable: false
+        });
+        person.set(31);
+        document.getElementById("demo4").innerHTML += " " + person.age;  // 30
+    </script>
+</html>

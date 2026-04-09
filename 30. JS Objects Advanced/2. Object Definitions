@@ -1,0 +1,171 @@
+JavaScript Object Definitions:
+
+
+- Objects written as name value pairs are similar to:
+    -> Associative arrays in PHP
+    -> Dictionaries in Python
+    -> Hash tables in C
+    -> Hash maps in Java
+    -> Hashes in Ruby and Perl
+
+- Methods for Defining JavaScript Objects
+    👉 Using an Object Literal
+    👉 Using the new Keyword
+    👉 Using an Object Constructor
+    👉 Using Object.assign()
+    👉 Using Object.create()
+    👉 Using Object.fromEntries()
+
+
+1️⃣ Using an Object Literal:
+    - An object literal is a list of property key:values inside curly braces { }.
+    - eg:
+            // Create an Object
+            const person = {
+                firstName: "John",
+                lastName: "Doe",
+                age: 50,
+                eyeColor: "blue"
+            };
+
+
+2️⃣ Using the new Keyword:
+
+        // Create an Object
+        const person = new Object({
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        });
+    
+    - The examples above do exactly the same. But, there is no need to use new Object().
+    - 💡For readability, simplicity and execution speed, use the object literal method.
+
+
+3️⃣ JavaScript Object.create():
+    - The Object.create() method creates an object from an existing object.
+
+        // Create an Object:
+        const person = {
+            firstName: "John",
+            lastName: "Doe"
+        };
+
+        // Create new Object
+        const man = Object.create(person);
+        man.firstName = "Peter";
+
+
+4️⃣ JavaScript Object fromEntries():
+    - ES2019 added the Object method fromEntries() to JavaScript.
+    - The fromEntries() method creates an object from iterable key / value pairs.
+
+        const fruits = [
+            ["apples", 300],
+            ["pears", 900],
+            ["bananas", 500]
+        ];
+
+        const myObj = Object.fromEntries(fruits);
+
+
+5️⃣ JavaScript Object.assign():
+    - The Object.assign() method copies properties from one or more source objects to a target object.
+
+        // Create Target Object
+        const person1 = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        };
+
+        // Create Source Object
+        const person2 = {firstName: "Anne",lastName: "Smith"};
+
+        // Assign Source to Target
+        Object.assign(person1, person2);
+
+        // Display Target
+        let text = Object.entries(person1);
+        document.getElementById("demo").innerHTML = text;
+
+
+        o/p: firstName,Anne,lastName,Smith,age,50,eyeColor,blue
+
+
+6️⃣ Using an Object Constructor:
+    - see chapter 10. JS Objects/section 7 Object Constructors
+
+
+🔥) In JavaScript, Objects are King.
+    - If you Understand Objects, you Understand JavaScript.
+    - In JavaScript, almost "everything" is an object.
+        👉 Objects are objects
+        👉 Maths are objects
+        👉 Functions are objects
+        👉 Dates are objects
+        👉 Arrays are objects
+        👉 Maps are objects
+        👉 Sets are objects
+
+    - All JavaScript values, except primitives, are objects.
+
+
+#) JavaScript Primitives:
+    - A primitive data type is data type that can only store a single primitive value.
+    - JavaScript defines 7 types of primitive data types:
+        
+            Type	        Example value
+        --------------------------------------------
+            string	        "Hello"
+            number	        3.14
+            boolean	        true
+            bigint	        12345678901234
+            null	        null
+            undefined	    undefined
+            symbol	        symbol
+    
+    -💡Primitive values are immutable (they are hardcoded and cannot be changed).
+    - if x = 3.14, you can change the value of x, but you cannot change the value of 3.14.
+
+            
+            Value	        Type	        Comment
+        -------------------------------------------------------------------------
+            "Hello"	        string	        "Hello" is always "Hello"
+            3.14	        number	        3.14 is always 3.14
+            true	        boolean	        true is always true
+            false	        boolean	        false is always false
+            null	        null	        null is always null
+            undefined	    undefined	    undefined is always undefined
+
+
+#) JavaScript Objects are Mutable:
+    - Objects are mutable: They are addressed by reference, not by value.
+    - If person is an object, the following statement will not create a copy of person:
+
+            const x = person;
+        
+        -> ⚠️The object x is not a copy of person. The object x is person.
+        -> ⚠️The object x and the object person share the same memory address.
+        -> ⚠️Any changes to x will also change person:
+
+        // Create an Object
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age:50,
+            eyeColor: "blue"
+        };
+
+        // Try to create a Copy
+        const x = person;
+
+        // This will change age in person !!!
+        x.age = 10;
+
+        document.getElementById("demo").innerHTML =
+        person.firstName + " is " + person.age + " years old.";
+
+        o/p: John is 10 years old.

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.preventExtensions()</title>
+</head>
+<body>
+    <h2>The Object.preventExtensions() method prevents adding properties to an object.</h2>
+    <p id="demo"></p>
+    <h2>Since arrays are objects, arrays can be prevented from extensions too:</h2>
+    <p id="demo2"></p>
+    <script>
+        const person = {
+            name: "John",
+            age: 30
+        };
+
+        // Prevent adding new properties to the person object
+        Object.preventExtensions(person);
+
+        // This will not add a new property
+        person.email = "john@example.com";
+
+        document.getElementById("demo").innerHTML =
+        "Is person extensible? " + Object.isExtensible(person) + "<br>" + 
+        "Person object: " + JSON.stringify(person);
+
+        //--------------------------------------------------------------------
+        const myArray = [1, 2, 3];
+
+        // Prevent adding new properties to the myArray object
+        Object.preventExtensions(myArray);
+
+        let text = "";
+        try{
+            // This will not add a new property, instead error will be thrown
+            myArray.push(4);
+        } catch (error) {
+            text = "Error: " + error.message;
+        }
+
+        document.getElementById("demo2").innerHTML =
+        "Is myArray extensible? " + Object.isExtensible(myArray) + "<br>" + 
+        "MyArray object: " + JSON.stringify(myArray) + "<br>" +
+        text;
+
+    </script>
+</body>
+</html>

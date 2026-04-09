@@ -1,0 +1,76 @@
+JavaScript Object Accessors:
+
+- Getters and setters allow you to define Object Accessors (Computed Properties).
+
+1️⃣ JavaScript Getter (The get Keyword):
+    - This example uses a lang property to get the value of the language property.
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            get fullName() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        document.getElementById("demo1").innerHTML = person.fullName;  // John Doe
+
+2️⃣ JavaScript Setter (The set Keyword):
+    - This example uses a lang property to set the value of the language property.
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            language: "",
+            set lang(lan) {
+                this.language = lan;
+            }
+        };
+
+        person.lang = "English"; 
+        document.getElementById("demo2").innerHTML = person.language;  // English
+
+
+#) JavaScript Function or Getter?
+    - JS Function:
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            fullName: function() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        document.getElementById("demo").innerHTML = person.fullName();
+    
+    - JS getter:
+
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            get fullName() {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+
+        document.getElementById("demo1").innerHTML = person.fullName;
+    
+    - JS getter provides a simpler syntax
+
+
+#) Data Quality:
+    - 💡JavaScript can secure better data quality when using getters and setters.
+
+
+#) Why Using Getters and Setters?
+    👉 It gives simpler syntax
+    👉 It allows equal syntax for properties and methods
+    👉 It can secure better data quality
+    👉 It is useful for doing things behind-the-scenes
+
+    - ⚠️Avoid getters or setters if you only need simple values (prevents overuse).
+
+
+💡) Object.defineProperty():
+    - 💡The Object.defineProperty() method can also be used to add Getters and Setters:

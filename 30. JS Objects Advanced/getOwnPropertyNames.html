@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getOwnPropertyNames()</title>
+</head>
+<body>
+    <h2>Object.getOwnPropertyNames() method can: List object properties</h2>
+    <p id="demo1"></p>
+    <h2>Object.getOwnPropertyNames() will also list properties that is not enumerable:</h2>
+    <p id="demo2"></p>
+
+    <script>
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            country: "Nepal"
+        };
+    
+        document.getElementById("demo1").innerHTML = Object.getOwnPropertyNames(person);  
+        // firstName,lastName,country
+
+        Object.defineProperty(person, "firstName", {
+            enumerable: false
+        });
+        document.getElementById("demo2").innerHTML += Object.getOwnPropertyNames(person) + "<br>"; 
+        // firstName,lastName,country
+        document.getElementById("demo2").innerHTML += Object.keys(person);  
+        // lastName,country
+    </script>
+</body>
+</html>
