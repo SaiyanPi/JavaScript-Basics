@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <h2>When you have a class, you can use the class to create objects:</h2>
+    <p id="demo"></p>
+
+    <script>
+        class Car {
+            constructor(name, year) {
+                this.name = name;
+                this.year = year;
+            }
+        }
+
+        const myCar1 = new Car("Ford", 2014);
+        const myCar2 = new Car("Audi", 2019);
+
+        document.getElementById("demo").innerHTML =
+        "My car is a " + myCar1.name + " from " + myCar1.year;
+
+
+        //-------------------------------------------------------------------------------------
+
+        class Person {
+            constructor(name, birthYear) {
+                this.name = name;
+                this.birthYear = birthYear;
+            }
+
+            // age() {
+            //     const date = new Date();
+            //     return date.getFullYear() - this.birthYear;
+            // }
+
+            age(x) {
+                return x - this.birthYear;
+            }
+        }
+
+        const person1 = new Person("John", 1990);
+        let currentYear = new Date().getFullYear();
+
+        document.getElementById("demo").innerHTML +=
+        "<br>" + person1.name + " is " + person1.age(currentYear) + " years old.";
+    </script>
+</body>
+</html>

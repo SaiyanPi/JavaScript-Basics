@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+</head>
+<body>
+    <h2>To add getters and setters in the class, use the get and set keywords.</h2>
+    <p id="demo"></p>
+
+    <script>
+        class Car {
+            constructor(brand) {
+                this.carname = brand;
+            }
+
+            get cname() {
+                return this.carname;
+            }
+
+            set cname(x) {
+                this.carname = x;
+            }
+        }
+
+        const myCar = new Car("Ford");
+        myCar.cname = "Volvo";  // setter
+        document.getElementById("demo").innerHTML = myCar.cname;    // Volvo
+    </script>
+</body>
+</html>
