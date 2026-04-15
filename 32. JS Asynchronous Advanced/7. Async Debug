@@ -1,0 +1,132 @@
+Debugging Async JavaScript:
+
+
+- Async bugs are difficult because the code runs later.
+- 💡Async debugging is about finding where the code stops. Then you find why it stopped.
+
+
+
+#) Why Async Bugs Feel Invisible:
+    - Async code often fails after your function has already returned.
+    - This makes it feel like nothing happened.
+
+        async function loadData() {
+            let response = await fetch("missing.json");
+            let data = await response.json();
+            console.log(data);
+        }
+
+        loadData();
+        console.log("Done");
+    
+    - ⚠️The Done message prints even if the fetch fails later.
+
+
+
+#) Async Debugging Rules:
+
+    1️⃣ Always Handle Errors:
+        - Unhandled promise rejections confuse beginners.
+        - Handle errors early and clearly.
+        - 💡This catches network errors and JSON parsing errors.
+
+            async function loadData() {
+                try {
+                    let response = await fetch("missing.json");
+                    let data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+    
+
+    2️⃣ Check response.ok:
+        - Fetch does not reject on HTTP errors like 404.
+        - You must check response.ok.
+        - 💡This separates HTTP errors from network errors.
+
+            async function loadData() {
+                try {
+                    let response = await fetch("missing.json");
+
+                    if (!response.ok) {
+                    console.log("HTTP Error:", response.status);
+                    return;
+                    }
+
+                    let data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log("Network error");
+                }
+            }
+    
+
+    3️⃣ Log the Right Things:
+        - 💡Logging a promise is not the same as logging the data.
+        - 💡Log the response and status first.
+        - 💡 This tells you if the server returned what you expected.
+
+            async function loadData() {
+                let response = await fetch("data.json");
+                console.log(response.status);
+                console.log(response.headers.get("content-type"));
+            }
+
+
+    4️⃣ Use the Network Tab:
+        - The Network tab shows every request.
+        - This is the fastest way to debug fetch problems.
+            -> Check the request URL.
+            -> Check the status code.
+            -> Check the response body.
+            -> Check the response content type.
+
+        - Most fetch bugs are not JavaScript bugs.
+        - They are URL and server response bugs.
+    
+
+    5️⃣ Breakpoints on await:
+        - You can set breakpoints on await lines.
+        - This lets you inspect values before and after async steps.
+
+            async function loadData() {
+                let response = await fetch("data.json");
+                let data = await response.json();
+                console.log(data);
+            }
+        
+        - Set a breakpoint on the first await line.
+        - Step over and inspect response.
+
+
+#) Common Async Errors:
+    - ⚠️Forgetting await is the most common beginner mistake.
+
+        async function loadData() {
+            let response = await fetch("data.json");
+            let data = response.json();
+            console.log(data);
+        }
+    
+    - ⚠️This logs a promise, not the JSON.
+
+
+#) Debugging Promise Chains:
+    - Promises can fail anywhere in the chain.
+    - Add logs between steps to find where it fails.
+
+        fetch("data.json")
+        .then(function(response) {
+            console.log("Got response");
+            return response.json();
+        })
+        .then(function(data) {
+            console.log("Got data");
+            console.log(data);
+        })
+        .catch(function(error) {
+            console.log("Failed");
+            console.log(error);
+        });

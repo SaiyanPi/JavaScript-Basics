@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body>
+    <h2>Loading data.json using a Callback</h2>
+    <p id="demo1"></p>
+
+    <h2>Loading data.json using a Callback</h2>
+    <p id="demo1"></p>
+
+    <script>
+        // ----------------------------------- Using a Callback -----------------------------------
+        function loadFile(callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "data.json", true);
+            xhr.onload = function() {
+                if(this.status == 200) {
+                    callback(null, JSON.parse(xhr.responseText));
+                } else {
+                    callback("HTTP Error: " + xhr.status, null);
+                }
+            };
+            xhr.onerror = function() {
+                callback("Network Error", null);
+            };
+            xhr.send();
+        }
+
+        loadFile(function(error, data) {
+            if(error) {
+                console.log(error);
+                return;
+            }
+            console.log(data);
+        });
+
+        // ----------------------------------- Using Fetch ----------------------------------------
+        async function loadFile() {
+            try{
+                let response = await fetch("data.json");
+
+                if(!response.ok) {
+                    throw new Error("HTTP error: " + response.status);
+                }
+
+                let data = await response.json();
+                console.log(data);
+            } catch(error) {
+                console.log(error);
+            }
+        }
+
+        loadFile();
+    </script>
+    
+</body>
+</html>

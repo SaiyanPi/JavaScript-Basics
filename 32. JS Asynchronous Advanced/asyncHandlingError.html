@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Errors</title>
+</head>
+<body>
+    <h2>Handling Errors</h2>
+    <h3>Promises use catch() for errors but async and await use try...catch.</h3>
+    <p id="demo"></p>
+
+    <script>
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        function fail() {
+            return Promise.reject("Something went wrong");
+        }
+
+        async function run() {
+            try {
+                let value = await fail();
+                myDisplayer(value);
+            } catch (error) {
+                myDisplayer(error);
+            }
+        }
+
+        run();
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+JavaScript async and await:
+
+- async and await make promises easier
+- You still use promises, but you write the code like normal step by step code.
+- 💡async makes a function return a Promise
+- 💡await makes a function wait for a Promise
+
+
+#) Why async and await Exist?
+    - Promise chains can become long.
+    - 💡async and await were created to reduce nesting and improve readability.
+
+        // Three functions to run in steps
+        function step1() {
+            return Promise.resolve("A");
+        }
+        function step2(value) {
+            return Promise.resolve(value + "B");
+        }
+        function step3(value) {
+            return Promise.resolve(value + "C");
+        }
+
+        // Run the three functions in steps
+        step1()
+        .then(function(value) {
+            return step2(value);
+        })
+        .then(function(value) {
+            return step3(value);
+        })
+        .then(function(value) {
+            myDisplayer(value);
+        });
+    
+    - 💡The same flow with async and await is easier to read.
+
+        // Function to run the three functions in steps
+        async function run() {
+            let v1 = await step1();
+            let v2 = await step2(v1);
+            let v3 = await step3(v2);
+            myDisplayer(v3);
+        }
+
+        run();
+
+
+#) The async Keyword:
+    - 💡The async keyword before a function makes the function return a promise.
+    - 💡This is true even if you return a normal value.
+    - eg:
+            async function myFunction() {
+                return "Hello";
+            }
+        
+        is same as the
+
+            function myFunction() {
+                return Promise.resolve("Hello");
+            }
+        
+        The result is handled with then() because it is a promise:
+
+            myFunction().then(
+                function(value) { /* code if successful */ },
+                function(value) { /* code if some error */ }
+            );
+    
+    - full example:
+
+            function myDisplayer(some) {
+                document.getElementById("demo").innerHTML = some;
+            }
+
+            async function greet() {
+                return "Hello";
+            }
+
+            greet().then(
+                function(value) {myDisplayer(value);},
+                function(value) {myDisplayer(value);}
+            );
+
+        Or simpler, since you expect a normal value (a normal response, not an error):
+
+            function myDisplayer(some) {
+                document.getElementById("demo").innerHTML = some;
+            }
+
+            async function greet() {
+                return "Hello";
+            }
+
+            greet().then(
+                function(value) {myDisplayer(value);}
+            );
+
+
+#) The await Keyword:
+    - 💡The await keyword makes a function pause the execution and wait for a resolved promise
+        before it continues:
+
+        let value = await promise;
+    
+    - ⚠️The await keyword can only be used inside an async function:
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        function step1() {
+            return Promise.resolve("A");
+        }
+
+        async function run() {
+            let value = await step1();
+            myDisplayer(value);
+        }
+
+        run();
+
+
+#) Handling Errors with try...catch:
+    - As we know from the previous section, Promises use catch() for errors.
+    - ⚠️async and await use try...catch.
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        function fail() {
+            return Promise.reject("Something went wrong");
+        }
+
+        async function run() {
+            try {
+                let value = await fail();
+                myDisplayer(value);
+            } catch (error) {
+                myDisplayer(error);
+            }
+        }
+
+        run();
+
+    - 💡Errors from awaited promises are caught like normal errors.
+
+
+#) Sequential vs Parallel:
+    1️⃣ Sequential:
+        - 💡Awaiting one by one runs tasks in sequence.
+        - 💡This is correct when one step depends on the previous step.
+
+            async function run() {
+                let a = await step1();
+                let b = await step2();
+                console.log(a, b);
+            }
+    
+    2️⃣ Parallel:
+        - 💡If tasks do not depend on each other, you can run them in parallel.
+        - 💡Use Promise.all() to wait for both.
+        - 💡If you write await multiple times, it does NOT mean parallel.
+        - 💡Start the promises first.
+        - 💡Await them together.
+
+            async function run() {
+                let p1 = step1();
+                let p2 = step2();
+                let values = await Promise.all([p1, p2]);
+                console.log(values);
+            }
+        
+        - see sequentialParallenAsyncAwait.html for code.
+
+
+#) Real Example with fetch:
+    - 💡💡fetch() returns a promise.
+    - This makes it a perfect example for async and await.
+
+            async function loadData() {
+                try {
+                    let response = await fetch("data.json");
+                    let data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            loadData();
+
+        -> This is promise-based async code written in a synchronous style.
+
+
+💀) Common Beginner Mistakes:
+    - ⚠️Using await outside an async function causes an error.
+    - ⚠️Forgetting try...catch can hide async errors.
+    - 💡When async code fails, check the console and the Network tab.
+
+
+#) More Examples:
+
+        async function myDisplay() {
+            let myPromise = new Promise(function(resolve, reject) {
+                resolve("I love You !!");
+            });
+            document.getElementById("demo").innerHTML = await myPromise;
+        }
+
+        myDisplay();
+    
+    -> 💡The two arguments (resolve and reject) are pre-defined by JavaScript.
+    -> 💡We will not create them, but call one of them when the executor function is ready.
+    -> 💡Very often we will not need a reject function.
+
+        async function myDisplay() {
+            let myPromise = new Promise(function(resolve) {
+                resolve("I love You !!");
+            });
+            document.getElementById("demo").innerHTML = await myPromise;
+        }
+
+        myDisplay();
+    
+    - Waiting for a Timeout:
+
+        async function myDisplay() {
+            let myPromise = new Promise(function(resolve) {
+                setTimeout(function() {resolve("I love You !!");}, 3000);
+            });
+            document.getElementById("demo").innerHTML = await myPromise;
+        }
+
+        myDisplay();

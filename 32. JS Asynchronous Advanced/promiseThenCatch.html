@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promises</title>
+</head>
+<body>
+    <h3>Promises then and catch methods</h3>
+    <ul>
+        <li>.then(onFulfilled, onRejected): <br>
+            This method attaches handlers for both the fulfillment and rejection cases. It returns
+                a new promise, which enables method chaining.
+        </li> <br>
+        <li>.catch(onRejected): <br>
+            This is a shorthand for .then(null, onRejected) and is typically used to handle errors
+                at the end of a promise chain.
+        </li>
+    </ul>
+    <p id="demo"></p>
+
+    <script>
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        let myPromise = Promise.resolve("OK");
+
+        myPromise
+        .then(function(value) { 
+            console.log(value);     // This will get executed because the promise is resolved/success
+        })
+        .catch(function(value) {    
+            myDisplayer(value);
+        });
+
+        // Note:
+        // 1️⃣ we already know that the .then method can accept 2 arguments; one callback function for
+        // success and another for failure. But we can add a callback function for success or failure
+        // only. In the above code we only passed one argument so it'd be for a callback function for
+        // success. This means if the the result is success console.log(value) will get executed.
+
+        // 2️⃣ .catch method is typically used to handle errors at the end of a promise chain. It is a
+        // shorthand for .then(null, onRejected). This means if the result is failure, myDisplayer(value)
+        // will get executed.
+
+        // 3️⃣ Since we put the promise as resolve in the code above, .then method with success callback
+        // will get executed
+        
+        // 4️⃣ What if we pass both success and failure callback functions to .then method and promise
+        // is rejected like:
+        //                  let myPromise = Promise.reject("Error");
+        //                  myPromise
+        //                  .then(
+        //                      function(value) {console.log(value);},  // success
+        //                      function(value) {console.log(value);}   // failure
+        //                  )
+        //                  .catch(function(value) {  
+        //                      myDisplayer(value);
+        //                  });
+
+        // In that case, failure callback of the .then method will get executed and .catch method will
+        // be ignored. 
+
+        // 💡 Promise.resolve("OK"); is equivalent to new Promise((resolve) => resolve("OK"));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callbackErrorHandling</title>
+</head>
+<body>
+    <h2> Callback Error Handling</h2>
+    <h3> Callbacks often use an error-first pattern</h3>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+
+    <script>
+        // function to display data or error
+        function myDisplayer(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+
+        // function to get a data
+        function getData1(callback) {
+            let ok = true; // Simulating a successful operation
+
+            if(ok) {
+                callback(null, "Data retrieved successfully!"); 
+            } else {
+                callback("Error: Failed to retrieve data", null);
+            }
+        }
+
+        // Example usage
+        getData1(function(error, data) {
+            if (error) {
+                myDisplayer(error);
+            } else {
+                myDisplayer(data);
+            }
+        });
+    </script>
+</body>
+</html>

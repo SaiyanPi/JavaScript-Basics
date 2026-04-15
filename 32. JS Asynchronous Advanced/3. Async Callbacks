@@ -1,0 +1,213 @@
+JavaScript Callbacks:
+
+- "I will call back later!"
+- A callback is a function that runs later.
+- A callback runs after something has finished.
+- 💡The name "callback" stems from the idea that the function will "call you back" later when it has
+    finished its task.
+- 💡Callbacks were the first JavaScript solution for handeling asynchronous results that could not be
+    available immediately. This page explains what callbacks are and why they can cause some problems.
+
+
+#) What is a Callback Function?
+    - A callback function is a function passed as an argument into another function.
+    - The callback function is intended to be executed later, typically when a specific event occurs
+        or an asynchronous operation completes.
+    - This pattern keeps your function flexible.
+    - This is how many older JavaScript APIs worked.
+    - 💡Callbacks are often used in JavaScript, especially in event handling:
+    - User interactions, such as button clicks or key presses, can be handled by providing a
+        callback function to an event listener.
+
+            <button id="myButton">The Time is?</button>
+            <p id="demo"></p>
+
+            <script>
+                let btn = document.getElementById("myButton");
+                btn.addEventListener("click", displayDate);
+                function displayDate() {
+                    document.getElementById("demo").innerHTML = Date();
+                }
+            </script>
+        
+        -> 💡Here, displayDate is a callback function passed as an argument to the addEventListener()
+            method.
+        -> displayDate will be called when a user clicks the button with id="myButton".
+
+
+#) Asynchronous Operations:
+    - 💡Windows functions like setTimeout() use callbacks to execute code after a specified delay.
+
+            setTimeout(myFunction, 3000);
+            function myFunction() {
+                document.getElementById("demo").innerHTML = "I appear after 3 seconds!";
+            }
+
+        -> 💡In the example above, myFunction is a callback function passed as an argument to setTimeout().
+        -> 3000 is the number of milliseconds before myFunction will be called.
+
+
+#) The Timing Problem:
+    - Asynchronous code finishes later. This means you cannot return the result right away (before they
+        are finished).
+
+            let result;
+            setTimeout(function() {
+                result = 5;
+            }, 1000);
+            document.getElementById("demo").innerHTML = result;  // undefined
+        
+        -> 💀⚠️ The result is undefined because the async code has not finished yet.
+    
+    - ⚠️You cannot solve this problem by waiting in JavaScript. Waiting would freeze the page.
+
+
+#) The Callback Idea:
+    - The solution to the problem above, is to run the code after the result is ready.
+    - You must give JavaScript a callback function to call later.
+    - A callback is a function passed as an argument to another function.
+    - This technique allows a function to call another function.
+
+        function myDisplayer(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+        
+        function done(x) {
+            myDisplayer(x);
+        }
+        
+        setTimeout(function() {done(5)}, 1000); // 5
+
+
+#) Sequence Control:
+    - Sometimes you would like to have better control over when to execute a function.
+    - Suppose you want to do a calculation, and then display the result.
+        You could first call the calculator function myCalculator, and then call the display function
+        myDisplayer:
+
+        // Funtion to display something
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        // Function to calculate a sum
+        function myCalculator(num1, num2) {
+            let sum = num1 + num2;
+            return sum;
+        }
+
+        // Call the calculator
+        let result = myCalculator(5, 5);
+
+        // Call the displayer
+        myDisplayer(result);
+    
+    - 💡Or, you could call the calculator function myCalculator, and let the calculator function call
+        the display function myDisplayer:
+
+        // Funtion to display something
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        // Function to calculate a sum
+        function myCalculator(num1, num2) {
+            let sum = num1 + num2;
+            myDisplayer(sum);
+        }
+
+        // Call the calculator
+        myCalculator(5, 5);
+    
+    - Analysis 🤔
+        ⚠️ The problem with the first example above, is that you have to call two functions to display
+            the result.
+        ⚠️ The problem with the second example, is that you cannot prevent the calculator function from
+            displaying the result.
+        ✅ Now it is time to bring in a callback.
+
+    - Using a callback, you could call the calculator function (myCalculator) with a callback
+        (myCallback), and let the calculator function run the callback after the calculation is
+        finished:
+
+            function myDisplayer3(some) {
+                document.getElementById("demo3").innerHTML = some;
+            }
+
+            function myCalculator3(num1, num2, myCallback) {
+                let sum = num1 + num2;
+                myCallback(sum);
+            }
+
+            myCalculator3(5, 5, myDisplayer3);
+        
+        -> 💡In the example above, myDisplayer is used as a callback function. It is passed to
+            myCalculator() as an argument.
+
+
+💡) Callback Error Handling:
+    - ⚠️Async code can fail.
+    - Callbacks often use an error-first pattern:
+
+        // function to display data or error
+        function myDisplayer(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+
+        // function to get a data
+        function getData1(callback) {
+            let ok = true; // Simulating a successful operation
+
+            if(ok) {
+                callback(null, "Data retrieved successfully!");
+            } else {
+                callback("Error: Failed to retrieve data", null);
+            }
+        }
+
+        // Example usage
+        getData1(function(error, data) {
+            if (error) {
+                myDisplayer(error);
+            } else {
+                myDisplayer(data);
+            }
+        });
+    
+    -> In the example above, the getData function is called with a callback.
+    -> 💡💡The callback function has two parameters. The first parameter is the error, and the second
+        parameter is the result.
+            
+            callback(error, result)
+
+    -> ⚠️This pattern is common in older JavaScript code.
+
+
+#) Callback Drawbacks:
+    - While essential for JavaScript programming, deeply nested callbacks can lead to complex,
+        hard-to-read code known as "callback hell" or the "pyramid of doom".
+
+        step1(function(r1) {
+            step2(r1, function(r2) {
+                step3(r2, function(r3) {
+                    console.log(r3);
+                });
+            });
+        });
+    
+    - When callbacks get deep, debugging becomes difficult.
+    - The logic moves from left to right and becomes difficult to follow.
+
+
+💡) Callback Alternatives:
+    - Asynchronous callback solutions are difficult to write and difficult to debug.
+    - 💡Because of this, modern asynchronous JavaScript do not use callbacks.
+    - 💡Modern JavaScript offers superior alternatives for handling asynchronous operations, using
+        Promises and the async/await syntax, which provide a cleaner flow and better error handling.
+
+
+💡) When to Use a Callback?
+    - Callbacks are still important to understand.
+    - 💡Where callbacks really shine are in asynchronous functions, WHERE ONE FUNCTION HAS TO WAIT FOR
+        ANOTHER FUNCTION (LIKE WAITING FOR A FILE TO LOAD).
+

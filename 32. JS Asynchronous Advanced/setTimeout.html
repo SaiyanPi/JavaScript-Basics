@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous</title>
+</head>
+<body>
+    <h2>The setTimeout() method schedules a function to run after a delay in milliseconds.</h2>
+    <p id="demo"></p>
+    
+    <script>
+        setTimeout(myFunction, 3000);
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "I appear after 3 seconds!";
+        }
+
+        //-------------------------------------------------------------------------------
+
+        setTimeout(function() {
+            document.getElementById("demo").innerHTML += "<br>I appear after 5 seconds!";
+        }, 5000);
+
+        //-------------------------------------------------------------------------------
+
+        setTimeout(function() {
+            myFunction1("I appear after 7 seconds!");
+        }, 7000);
+
+        function myFunction1(x) {
+            document.getElementById("demo").innerHTML += "<br>" + x;
+        }
+    </script>
+</body>
+</html>

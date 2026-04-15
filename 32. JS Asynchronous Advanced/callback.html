@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calback</title>
+</head>
+<body>
+    <h3>1️⃣ Approach 1: calling two functions(calculator function and displayer function)</h3>
+    <p id="demo1"></p>
+
+    <h3>2️⃣ Approach 2: calling the displayer function from inside the calculator function</h3>
+    <p id="demo2"></p>
+
+    <h3>3️⃣ Approach 3: using a callback function <br>(call the calculator function with a callback and let
+        the calculator function run the callback after the calculation is finished)</h3>
+    <p id="demo3"></p>
+
+    <script>
+        //------------------------------- Approach 1 -------------------------------------------
+        function myDisplayer1(some) {
+            document.getElementById("demo1").innerHTML = some;
+        }
+
+        function myCalculator1(num1, num2) {
+            let sum = num1 + num2;
+            return sum;
+        }
+
+        let result1 = myCalculator1(5, 5);
+
+        myDisplayer1(result1);
+
+
+        //--------------------------------- Approach 2 -------------------------------------------
+        function myDisplayer2(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+
+        function myCalculator2(num1, num2) {
+            let sum = num1 + num2;
+            myDisplayer2(sum);
+        }
+
+        myCalculator2(5, 5);
+
+
+        //--------------------------------- Approach 3 -------------------------------------------
+        function myDisplayer3(some) {
+            document.getElementById("demo3").innerHTML = some;
+        }
+
+        function myCalculator3(num1, num2, myCallback) {
+            let sum = num1 + num2;
+            myCallback(sum);
+        }
+
+        myCalculator3(5, 5, myDisplayer3);
+
+    </script>
+</body>
+</html>

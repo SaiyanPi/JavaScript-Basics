@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>async await</title>
+</head>
+<body>
+    <h2>Using Promise</h2>
+    <p id="demo1"></p> <br>
+    <h2>Using async await:</h2>
+    <h3>async and await were created to reduce nesting and improve readability.</h3>
+    <p id="demo2"></p>
+
+    <script>
+        function step1() {
+            return Promise.resolve("A");
+        }
+        function step2(value) {
+            return Promise.resolve(value + "B");
+        }
+        function step3(value) {
+            return Promise.resolve(value + "C");
+        }
+
+        // ----------------------- using Promises --------------------
+        
+        function myDisplayer1(some) {
+            document.getElementById("demo1").innerHTML = some;
+        }
+        
+        step1()
+        .then(function(value) {
+            return step2(value)
+        })
+        .then(function(value) {
+            return step3(value)
+        })
+        .then(function(value) {
+            myDisplayer1(value);
+        })
+
+        // ----------------------- using async and await --------------------
+        
+        function myDisplayer2(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+
+        async function run() {
+            let v1 = await step1();
+            let v2 = await step2(v1);
+            let v3 = await step3(v2);
+            myDisplayer2(v3);
+        }
+
+        run();
+    </script>
+</body>
+</html>

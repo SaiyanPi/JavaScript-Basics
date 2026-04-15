@@ -1,0 +1,311 @@
+JavaScript Promise Reference:
+
+- This page is a reference for JavaScript promises.
+- 💡Use it to look up promise methods and common patterns.
+
+
+#) The Promise Object:
+    - The Promise Object represents the completion or failure of an asynchronous operation.
+    - A Promise can have 3 states:
+
+            pending	            initial state
+            rejected	        operation failed
+            fulfilled	        operation completed
+
+
+#) Promise Object Methods: (Revised December 2025)
+    
+    - Instance Methods:
+        
+        Method	                        Description
+    --------------------------------------------------------------------------------------------------------
+        .catch(onRejected)	            Provides a function to run when a promise is rejected
+        .finally(onFinally)	            Provides a function to run when a promise is fulfilled or rejected
+        .then(onFulfilled, onRejected)	Provides two functions to run when a promise is fulfilled
+    
+
+    - Static Methods:
+
+        Method	                    Description
+    -----------------------------------------------------------------------------------------------------
+        Promise.all()	            Returns a single Promise from a list of promises When all promises 
+                                    fulfill
+        
+        Promise.allSettled()	    Returns a single Promise from a list of promises When all promises
+                                    sette
+        
+        Promise.any()	            Returns a single Promise from a list of promises When any promise
+                                    fulfills
+        
+        Promise.race()	            Returns a single Promise from a list of promises When the faster 
+                                    promise settles
+        
+        Promise.reject()	        Returns a Promise rejected with a given value
+
+        Promise.resolve()	        Returns a Promise resolved with a given value
+
+        Promise.then()	            Provides two callbacks:
+                                    - One funtion to run when a promise is fulfilled.
+                                    - One funtion to run when a promise is rejected.
+
+        Promise.try()	            Executes a function and wraps its result in a promise.
+
+        Promise.withResolvers()	    Returns an object containing a new Promise object and two functions to
+                                    resolve or reject it.
+
+
+
+#) Promise.resolve():
+    - The Promise.resolve() method returns a Promise object resolved with a value.
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        let promise = Promise.resolve("Resolved OK");
+
+        promise
+        .then(function(value) {
+            myDisplayer(value);
+        })
+        .catch(function(value) {
+            myDisplayer(value);
+        });
+
+        o/p: Resolved OK
+
+
+
+#) Promise.reject():
+    - The Promise.reject() method returns a Promise object rejected with a value.
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        let promise = Promise.reject("Something went wrong");
+
+        promise
+        .then(function(value) {
+            myDisplayer(value);
+        })
+        .catch(function(value) {
+            myDisplayer(value);
+        });
+
+        o/p: Something went wrong
+
+
+
+#) Promise.all():
+    - 💡The Promise.all() method returns a single Promise from a list of promises, when all promises
+        fulfill (or rejects when one promise rejects).
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += some;
+        }
+
+        // Create a Promise
+        const myPromise1 = Promise.resolve("King");
+
+        // Create another Promise
+        const myPromise2 = Promise.resolve("Queen");
+
+        // Settle All
+        Promise.all([myPromise1, myPromise2])
+        .then(function(values) {
+            myDisplayer(values);
+        });
+
+        o/p:    King,Queen
+
+
+
+#) Promise.allSettled():
+    - 💡Promise.allSettled() returns an array of results for all promises.
+    - 💡Each result contains a status and a value or reason.
+
+        1️⃣
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += some;
+        }
+
+        let p1 = Promise.resolve("A");
+        let p2 = Promise.reject("X");
+
+        Promise.allSettled([p1, p2])
+        .then(function(values) {
+            myDisplayer(JSON.stringify(values));
+        });
+
+        o/p:    [{"status":"fulfilled","value":"A"},{"status":"rejected","reason":"X"}]
+
+        2️⃣
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += some;
+        }
+
+        // Create a Promise
+        const myPromise1 = new Promise((resolve, reject) => {
+            setTimeout(resolve, 200, "King");
+        });
+
+        // Create another Promise
+        const myPromise2 = new Promise((resolve, reject) => {
+            setTimeout(resolve, 100, "Queen");
+        });
+
+        // Settle All
+        Promise.allSettled([myPromise1, myPromise2])
+        .then(function(values) {
+            myDisplayer(JSON.stringify(values));
+        });
+
+        o/p:    [{"status":"fulfilled","value":"King"},{"status":"fulfilled","value":"Queen"}]
+
+
+
+#) Promise.race():
+    - 💡Promise.race() settles when the first promise settles.
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += some;
+        }
+
+        let p1 = new Promise(function(resolve) {
+            setTimeout(function() { resolve("First"); }, 500);
+        });
+        let p2 = new Promise(function(resolve) {
+            setTimeout(function() { resolve("Second"); }, 1000);
+        });
+
+        Promise.race([p1, p2])
+        .then(function(value) {
+            myDisplayer(value);
+        });
+
+        o/p:    First
+
+
+#) Promise.any():
+    - 💡Promise.any() resolves when the first promise is fulfilled.
+    - 💡It rejects only if all promises reject.
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += some;
+        }
+
+        // Create a Promise
+        const myPromise1 = new Promise((resolve, reject) => {
+            setTimeout(resolve, 200, "King");
+        });
+
+        // Create another Promise
+        const myPromise2 = new Promise((resolve, reject) => {
+            setTimeout(resolve, 100, "Queen");
+        });
+
+        // Run when Any promise fulfills
+        Promise.any([myPromise1, myPromise2])
+        .then((value) => {
+            myDisplayer(value);
+        });
+
+        o/p:    Queen
+    
+    - 💡💡Promise.any() is useful when multiple sources can provide the same result.
+
+
+
+#) JavaScript Promise.withResolvers():
+    - Promise.withResolvers() is a static method that simplifies the creation and management of Promises.
+    - Promise.withResolvers() provides a more convenient way to access the resolve and reject functions
+        associated with a Promise outside of its executor function.
+    - Instead of the traditional new Promise((resolve, reject) => { ... }) constructor pattern,
+        Promise.withResolvers() returns an object containing:
+        -> promise: The newly created Promise instance
+        -> resolve: A function to fulfill the promise with a value
+        -> reject: A function to reject the promise with a reason (error)
+
+            function myDisplayer(some) {
+                document.getElementById("demo").innerHTML += "<br>" + some;
+            }
+
+            const {promise, resolve, reject} = Promise.withResolvers();
+
+            // Simulate async work
+            setTimeout(() => {
+                const success = Math.random() > 0.5;
+                if (success) {
+                    resolve("Operation successful!");
+                } else {
+                    reject("Operation failed!");
+                }
+            }, 2000);
+
+            // Update the UI when the promise finishes
+            promise
+            .then((value) => {
+                myDisplayer(value);
+            })
+            .catch((value) => {
+                myDisplayer(value);
+            });
+
+            o/p: after 2 secs, Operation failed! or Operation successful!
+        
+        🔍Explanation:
+            👉 After 1 second, the promise resolves or rejects
+
+
+    - 💡simplified code:
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML += "<br>" + some;
+        }
+
+        const {promise, resolve, reject} = Promise.withResolvers();
+
+        // Simulate async work
+        setTimeout(() => {
+            Math.random() > 0.5
+            ? resolve("Operation successful!")
+            : reject("Operation failed!");
+        }, 2000);
+
+        // Set text in then/catch, update DOM in finally
+        promise
+        .then((message) => text = message)
+        .catch((error) => text = error)
+        .finally(() => {myDisplayer(text)});
+    
+
+    - 💡Even better code:
+
+        const myDisplayer = some =>
+            document.getElementById("demo").innerHTML += "<br>" + some;
+
+        const {promise, resolve, reject} = Promise.withResolvers();
+
+        // Simulate async work
+        setTimeout(() => {
+            Math.random() > 0.5
+            ? resolve("Operation successful!")
+            : reject("Operation failed!");
+        }, 2000);
+
+        // Use async/await to handle the promise
+        (async () => {
+            try {
+                text = await promise;  // Wait for resolve
+            } catch (err) {
+                text = err;            // Handle reject
+            }
+            // Update the UI after promise finishes
+            myDisplayer(text);
+        })();
+
+        🔍Explanation:
+            👉 async/await makes asynchronous code look synchronous
+            👉 The DOM is updated after the promise resolves or rejects
+            👉 The UI updates in one place (no duplicated innerHTML calls)

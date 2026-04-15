@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous</title>
+</head>
+<body>
+    <h2>Callbacks are often used in JavaScript, especially in event handling:</h2>
+    <button id="myButton">The Time is?</button>
+    <p id="demo"></p>
+
+    <script>
+        let btn = document.getElementById("myButton");
+        btn.addEventListener("click", displayDate);
+        function displayDate() {
+            document.getElementById("demo").innerHTML = Date();
+        }
+    </script>
+</body>
+</html>

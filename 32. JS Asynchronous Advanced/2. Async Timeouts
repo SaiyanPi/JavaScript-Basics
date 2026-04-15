@@ -1,0 +1,50 @@
+JavaScript Timeouts:
+
+#) The setTimeout() Method:
+    - 💡The setTimeout() method schedules a function to run after a delay in milliseconds.
+    - It is an async operation used to delay code execution without freezing the browser.
+
+        setTimeout(myFunction, 3000);
+
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "I appear after 3 seconds!";
+        }
+
+        -> 💡In the example above, myFunction is passed to setTimeout() as an argument.
+        -> 💡3000 is the number of milliseconds before myFunction will be called.
+    
+    - ⚠️When you pass a function as an argument, remember not to use parenthesis.
+        ✅ Right: setTimeout(myFunction, 3000);
+        ❌ Wrong: setTimeout(myFunction(), 3000);
+    
+    - Instead of passing a function name as an argument to another function, you can always pass the
+        whole function instead:
+
+        setTimeout(function() {
+            document.getElementById("demo").innerHTML = "I appear after 5 seconds!";
+        }, 5000);
+
+        or,
+
+         setTimeout(function() {
+            myFunction("I appear after 7 seconds!");
+        }, 7000);
+
+        function myFunction(x) {
+            document.getElementById("demo").innerHTML = x;
+        }
+
+
+#) The setInterval() Method:
+    - 💡When using the setInterval() method, you can specify function to be executed for each interval:
+
+        setInterval(myTime, 1000);
+
+        function myTime() {
+            let d = new Date();
+            document.getElementById("demo").innerHTML = 
+            d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        }
+
+        -> 💡In the example above, myFunction is passed to setInterval() as an argument.
+        -> 💡1000 is the number of milliseconds between every time myFunction will be called.

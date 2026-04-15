@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sequential vs parallel</title>
+</head>
+<body>
+    <h2>Sequential</h2>
+    <p>Awaiting one by one runs tasks in sequence. This is correct when one step depends on the previous step.</p>
+    <p id="demo1"></p>
+
+    <h2>Parallel</h2>
+    <p>Use Promise.all() to wait for both. If tasks do not depend on each other, you can run them in parallel.</p>
+    <p id="demo2"></p>
+
+    <script>
+        function delay(ms, value) {
+            return new Promise(resolve => {
+                setTimeout(function() {
+                    resolve(value);
+                }, ms);
+            });
+        }
+        
+        // ------------------------ sequential ---------------------------
+        function myDisplayer1(some) {
+            document.getElementById("demo1").innerHTML = some;
+        }
+
+        async function sequential() {
+            console.time("sequential");
+            let a = await delay(1000, "A");
+            let b = await delay(1000, "B");
+            let c = await delay(1000, "C");
+
+            console.log(a, b, c);
+            myDisplayer1(a + b + c);
+            console.timeEnd("sequential");
+        }
+
+        sequential();
+        
+        // ------------------------ parallel ---------------------------
+        function myDisplayer2(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+
+        async function parallel() {
+            console.time("parallel");
+            let p1 = delay(1000, "A");
+            let p2 = delay(1000, "B");
+            let p3 = delay(1000, "C");
+
+            // let a = await p1;
+            // let b = await p2;
+            // let c = await p3;
+            let values = await Promise.all([p1, p2, p3]);
+
+            // console.log(a, b, c);
+            // myDisplayer2(a + b + c);
+            console.log(values);
+            myDisplayer2(values);
+            console.timeEnd("parallel");
+        }
+
+        parallel();
+    </script>
+</body>
+</html>

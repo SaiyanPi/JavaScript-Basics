@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promises</title>
+</head>
+<body>
+    <h3>Promises become powerful when you return a promise from then(). This creates a clean chain.</h3>
+    <p id="demo"></p>
+    
+    <script>
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        function step1() {
+            return Promise.resolve("A");
+        }
+        function step2(value) {
+            return Promise.resolve(value + "B");
+        }
+        function step3(value) {
+            return Promise.resolve(value + "C");
+        }
+
+        // Run the three functions in steps
+        step1()
+        .then(function(value) {
+            return step2(value);
+        })
+        .then(function(value) {
+            return step3(value);
+        })
+        .then(function(value) {
+            myDisplayer(value);  // This will display "ABC"
+        })
+        .catch(function(error) {
+            myDisplayer(error);
+        });
+    </script>
+</body>
+</html>

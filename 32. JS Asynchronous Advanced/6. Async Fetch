@@ -1,0 +1,183 @@
+JavaScript fetch API:
+
+- 💡fetch() is the modern way to request data from a server
+- 💡fetch() is asynchronous and returns a promise
+- Modern apps use async code to get data
+- fetch() is the most common example
+
+
+#) fetch Returns a Promise:
+    - ⚠️fetch() does not return the data.
+    - ⚠️It returns a promise that becomes a response later.
+
+        fetch("data.json")
+        .then(function(response) {
+            console.log(response);
+        });
+
+    - ⚠️The result is a Response object, not the JSON data.
+
+
+#) Getting JSON Data:
+    - ⚠️To get JSON, you must read the response body.
+    - ⚠️response.json() returns a promise.
+
+        fetch("data.json")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        });
+    
+    - The above is a promise chain.
+
+
+#) fetch with async and await:
+    - 💡async and await make fetch code easier to read.
+    - 💡This is the recommended way for beginners.
+
+        async function loadData() {
+            let response = await fetch("data.json");
+            let data = await response.json();
+            console.log(data);
+        }
+
+        loadData(); 
+
+
+#) Important: HTTP Errors:
+    - 💀A common beginner mistake is expecting fetch to fail on 404 or 500.
+    - ⚠️Fetch only rejects on network errors.
+    - ⚠️A 404 response is not a rejected promise. You must check response.ok.
+
+        async function loadData() {
+            let response = await fetch("missing.json");
+
+            if (!response.ok) {
+                console.log("HTTP Error:", response.status);
+                return;
+            }
+
+            let data = await response.json();
+            console.log(data);
+        }
+
+        loadData();
+    
+    - handles HTTP errors correctly.
+
+
+#) Network Errors:
+    - 💡A network error happens when the request cannot be completed.
+    - 💡This includes offline mode and DNS errors.
+    - 💡Network errors reject the promise.
+
+        async function loadData() {
+            try {
+                let response = await fetch("data.json");
+                let data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log("Network error");
+            }
+        }
+
+
+#) Common fetch Mistakes:
+    - 💀⚠️Forgetting await gives you a promise instead of data.
+
+        Incorrect ❌:
+            async function loadData() {
+                let response = await fetch("data.json");
+                let data = response.json();     ❌
+                console.log(data);              👈 This logs a promise
+            }
+        
+        Correct ✅:
+            async function loadData() {
+                let response = await fetch("data.json");
+                let data = await response.json();
+                console.log(data);
+            }
+
+
+#) Debugging Tip:
+    - If fetch is not working, check the console.
+    - Then check the Network tab.
+        👉 Is the file path correct.
+        👉 Is the status code 200.
+        👉 Is the response JSON.
+    
+    - 💡Most fetch bugs are not JavaScript bugs. They are path and response problems.
+
+
+#) Callback vs Fetch:
+
+        // ----------------------------------- 1️⃣ Using a Callback -----------------------------------
+        function loadFile(callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "data.json", true);
+            xhr.onload = function() {
+                if(this.status == 200) {
+                    callback(null, JSON.parse(xhr.responseText));
+                } else {
+                    callback("HTTP Error: " + xhr.status, null);
+                }
+            };
+            xhr.onerror = function() {
+                callback("Network Error", null);
+            };
+            xhr.send();
+        }
+
+        loadFile(function(error, data) {
+            if(error) {
+                console.log(error);
+                return;
+            }
+            console.log(data);
+        });
+
+    - 🔍 Explanation:
+        -> loadFile() does not return the data.
+        -> It accepts a callback.
+        -> The callback runs when the file is loaded.
+        -> Errors must be handled manually.
+        -> Nesting increases if you add more steps.
+
+
+        // ----------------------------------- 2️⃣ Using Fetch ----------------------------------------
+        async function loadFile() {
+            try{
+                let response = await fetch("data.json");
+
+                if(!response.ok) {
+                    throw new Error("HTTP error: " + response.status);
+                }
+
+                let data = await response.json();
+                console.log(data);
+            } catch(error) {
+                console.log(error);
+            }
+        }
+
+        loadFile();
+    
+    - 🔍 Explanation:
+        -> fetch() returns a promise.
+        -> await pauses inside the function.
+        -> Errros are handled with try...catch.
+        -> the flow reads top to bottom.
+        -> no nested callbacks.
+    
+    
+    - 💡Main Differences:
+
+            Callback	                                    Promise / async-await
+        ----------------------------------------------------------------------------------
+            You pass a function to run later	            You wait for a promise
+            Manual error-first pattern	                    Built-in error flow
+            Can become nested	                            Reads like normal code
+            Hard to chain steps	                            Easy to chain steps

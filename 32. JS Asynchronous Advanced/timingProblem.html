@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous</title>
+</head>
+<body>
+    <h3>Timing Problem</h3>
+    <p id="demo1"></p>
+    <h3>The solution to the problem above, is to run the code after the result is ready.
+        You must give JavaScript a callback function to call later.</h3>
+    <p id="demo2"></p>
+    <script>
+        let number;
+
+        setTimeout(function() {
+            number = 5;
+        }, 100);
+
+        document.getElementById("demo1").innerHTML = number;     // undefined
+
+        // solution ---------------------------------------------------------------
+
+        function myDisplayer(some) {
+            document.getElementById("demo2").innerHTML = some;
+        }
+        
+        function done(x) {
+            myDisplayer(x);
+        }
+        
+        setTimeout(function() {done(5)}, 1000);
+       
+    </script>
+</body>
+</html>
