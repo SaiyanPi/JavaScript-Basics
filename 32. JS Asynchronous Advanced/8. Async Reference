@@ -163,7 +163,21 @@ JavaScript Promise Reference:
 
         o/p:    [{"status":"fulfilled","value":"King"},{"status":"fulfilled","value":"Queen"}]
 
+    - 💡Note:
 
+            const myPromise1 = new Promise((resolve, reject) => {
+                setTimeout(resolve, 200, "King");
+            }); 
+
+        is equivalent to 
+       
+            const myPromise1 = new Promise(function(resolve, reject) {
+                setTimeout(function() {
+                    resolve("King");
+                }, 200);
+            })
+
+            
 
 #) Promise.race():
     - 💡Promise.race() settles when the first promise settles.
@@ -214,7 +228,7 @@ JavaScript Promise Reference:
         o/p:    Queen
     
     - 💡💡Promise.any() is useful when multiple sources can provide the same result.
-
+    
 
 
 #) JavaScript Promise.withResolvers():

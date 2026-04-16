@@ -180,4 +180,4 @@ JavaScript fetch API:
             You pass a function to run later	            You wait for a promise
             Manual error-first pattern	                    Built-in error flow
             Can become nested	                            Reads like normal code
-            Hard to chain steps	                            Easy to chain steps
+            Hard to chain steps	                            Easy to chain step  

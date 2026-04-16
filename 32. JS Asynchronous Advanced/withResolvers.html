@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.withResolvers()</title>
+</head>
+<body>
+    <h2>Promise.withResolvers() is a static method that simplifies the creation and management of Promises</h2>
+    <p>
+        Promise.withResolvers() returns an object containing:
+        <ul>
+            <li>promise: The newly created Promise instance </li>
+            <li>resolve: A function to fulfill the promise with a value</li>
+            <li>reject: A function to reject the promise with a reason (error)</li>
+        </ul>
+    </p>
+    <p id="demo"></p>
+
+    <script>
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        const { promise, resolve, reject } = Promise.withResolvers();
+
+        // // Simulate an asynchronous operation
+        // setTimeout(function() {
+        //     success = Math.random() > 0.5; // Randomly determine success or failure
+        //     if (success) {
+        //         resolve("Operation succeeded!");
+        //     } else {
+        //         reject("Operation failed.");
+        //     }
+        // }, 2000);
+
+        // // update the UI when the promise finishes
+        // promise
+        // .then( function(value) {
+        //     myDisplayer(value);
+        // })
+        // .catch(function(value) {
+        //     myDisplayer(value);
+        // });
+
+        // ------------------------------------- Better Code ---------------------------------------------------
+
+        setTimeout(() => {
+            Math.random() > 0.5 ? resolve("Operation succeeded!") : reject("Operation failed."
+        )}, 2000);
+
+        //Use async/await to handle the promise
+        // async function run() {
+        //     try{
+        //         text = await promise;
+        //     } catch(error) {
+        //         text = error;
+        //     }
+        //    myDisplayer(text);
+        // }
+        // run();
+
+        // IIFE
+        (async () => {
+            try{
+                text = await promise;
+            } catch(error) {
+                text = error;
+            }
+           myDisplayer(text);
+        })();
+    </script>
+</body>
+</html>
