@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script type="module">
+        import { add } from './math.js';
+
+        let result = add(5, 10);
+        document.getElementById('demo').textContent = `The result of add(5, 10) is: ${result}`;
+    </script>
+</body>
+</html>

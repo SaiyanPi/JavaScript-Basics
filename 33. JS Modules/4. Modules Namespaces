@@ -1,0 +1,138 @@
+JS Module Namespace:
+
+- When you use the syntax: import * as name from "module";
+    -> JavaScript creates a module namespace object.
+    -> This is an immutable object that contains all the exported bindings from that module.
+
+- eg: The math module namespace object bundles all the exports (PI, add, multiply):
+
+        // math_module.js
+        export const PI = 3.14159;
+        export function add(a, b) {
+            return a + b;
+        }
+        export function multiply(a, b) {
+            return a * b;
+        }
+    
+    Import math_module.js into a namespace object:
+
+        import * as math from "./math_module.js";
+
+        // Now you can use the math namespace object:
+        let myPi = math.PI
+        let result1 = math.add(2, 3);
+        let result2 = math.multiply(2, 3);
+
+
+
+#) Module Namespace Support:
+    - Module namespace support refers to the mechanism that allows you to import all exports from a
+        module into a single namespace object.
+    - The Module Namespace feature is a part of the ES Modules introduced in ECMAScript 2015 to help
+        organize and access modules in a consistent way.
+
+
+#) Module Namespace Features:
+    - 💡Provides a way to access all exports from a module through a single object.
+    - 💡The namespace object is immutable, meaning you cannot modify its properties.
+    - 💡Allows for better organization and avoids naming conflicts when importing multiple items from a
+        module.
+
+            Feature	        Description
+        ----------------------------------------------------------------------------------------------
+            Namespace	    A special object containing all exports from a module
+
+            Syntax	        import * as name from module
+
+            Purpose	        Organize, access, and reference module exports safely
+
+            Read Only	    You can access exports but not reassign them
+
+            Live Binding	If an exported value changes in the module, the namespace reflects that
+                            change automatically
+
+            Enumerable	    Its properties are enumerable and correspond to named exports
+
+            Prototype	    The namespace is a plain object with no prototype
+                            (Object.getPrototypeOf(math) === null).
+
+
+#) Related Syntax:
+    import { add } from "./math_module.js";
+
+    import math from "./math_module.js";
+
+    import * as math from "./math_module.js";
+
+
+#) Namespace Export:
+    - Normally, you import all of a module's exports into a module namespace object like this:
+
+            import * as math from "./math_module.js";
+
+            let myPi = math.PI;
+            let result = math.add(2, 3);
+
+        The math module namespace object bundles all the exports (PI, add, multiply):
+
+            // math_module.js
+            export const PI = 3.14159;
+            export function add(a, b) {
+                return a + b;
+            }
+            export function multiply(a, b) {
+                return a * b;
+            }
+    
+    - 💡With module namespace exports, you can re-export that entire namespace from your own module
+        - without having to import it first:
+
+            // math_module.js
+            export const PI = 3.14159;
+            export function add(a, b) {
+                return a + b;
+            }
+            export function multiply(a, b) {
+                return a * b;
+            }
+        
+        👉 Now, you can create a new module that re-exports this whole namespace:
+
+            // utilities.js
+            export * from "./math_module.js";
+        
+        👉 Then in another file
+
+            // namespaceExport.html
+            <p id="demo"></p>
+
+            <script type="module">
+                import * as math from "./utilities.js";
+
+                let myPi = math.PI;
+                let result = math.add(2, 3);
+
+                document.getElementById("demo").innerHTML = "myPi is: " + myPi + "<br>Result is: " + result;
+            </script>
+        
+        o/p:    myPi is: 3.14159
+                Result is: 5
+    
+    - The syntax export * as name from "module" was added in ECMAScript 2020.
+
+
+#) Syntax Overview:
+
+        Syntax	                            Result
+    -----------------------------------------------------------------------------------------------------
+        export * from "module"	            Re-export all named exports individually (not as a namespace)
+        export * as name from "module"	    Re-export all exports grouped under a single namespace
+        export { name } from "module"	    Re-export specific exports
+
+
+
+#) Aggregator Scripts:
+    - 💡💡An aggregator script is a script used only to import and re-export items from other modules.
+    - Instead of filling your top module with many import statements, you can use a single aggregator
+        script to do it all.

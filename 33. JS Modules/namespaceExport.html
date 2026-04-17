@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namespace Export</title>
+</head>
+<body>
+    <h2>With module namespace exports, you can re-export that entire namespace from your own module - without having to import it first:</h2>
+    <p id="demo"></p>
+
+    <script type="module">
+        import * as math from "./utilities.js";
+
+        let myPi = math.PI;
+        let result = math.add(2, 3);
+
+        document.getElementById("demo").innerHTML = "myPi is: " + myPi + "<br>Result is: " + result;
+    </script>
+</body>
+</html>

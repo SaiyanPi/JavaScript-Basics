@@ -1,0 +1,163 @@
+JavaScript Modules Export:
+
+
+#) The Export Keyword:
+    - A module uses the export keyword to share values with other files.
+    - A module can have many named exports.
+    - 💡A module can (optionally) have one default export.
+
+
+#) Named Exports:
+    - A named export gives a name to each item.
+    - 💡Items can be exported individually, or wrapped in { } at the bottom:
+    - eg: name and age exported individually:
+
+            // export name and age
+            export const name = "Jesse";
+            export const age = 40;
+    
+    - eg: name and age exported at once at the bottom:
+
+            const name = "Jesse";
+            const age = 40;
+
+            // export name and age
+            export { name, age };
+    
+    - You import named exports by wrapping them in { }.
+    - 💡⚠️The names must match exactly.
+
+            <script type="module">
+
+                // Import name and age
+                import { name, age } from "./person.js";
+
+            </script>
+    
+    - 💡Named exports enforce correct naming. If you misspell a name, you get an error.
+        eg: Here, PI, add, subtract, multiply, and divide are named exports:
+
+            (Module File "math.js")
+            export const PI = 3.14159;
+
+            export function add(a, b) {
+                return a + b;
+            }
+            export function subtract(a, b) {
+                return a - b;
+            }
+            export function multiply(a, b) {
+                return a * b;
+            }
+            export function divide(a, b) {
+                return a / b;
+            }
+
+
+            (Module Script)
+            <script type="module">
+
+                import { add, subtract, PI } from './math.js';
+
+            </script>
+
+
+#) Toolbox Utilities (Helpers):
+    - Utilities work best with named exports if they contain multiple helpers:
+        -> math.js
+        -> sringUtils.js
+        -> domHelpers.js
+        -> dateHelpers.js
+    
+    - Named exports are perfect for "toolbox" modules containing many utilities.
+
+
+#) Tree-Shaking:
+    - Named exports enable bundlers to remove unused code (tree-shaking).
+    - In this example PI, subract, multiply, and divide is removed:
+
+        import { add } from './math.js';
+
+
+#) When to Use Named Export?
+
+        Cases	                Why Named Export
+    -----------------------------------------------------------------
+        Many functions	        Clearly lists all functions
+        Strictness needed	    Prevents name typos
+        Big projects	        Improves consistency
+        Utility sets	        Matches module structure
+        Tree-shaking	        Removes unused code automatically
+
+______________________________________________________________________________________________________________
+
+
+#) Default Exports:
+    - 💡Default Export exports one main value from a module.
+    - This gives a clear intent about what the module's primary functionality is.
+    - 💡If a file is meant to expose one primary function, class, or value, default export makes that
+        explicit:
+
+        export default function calculateSum() { ... }
+
+
+#) Default is Flexible:
+    - 💡Default exports let you import using any name:
+        
+            import calc from './calculateSum.js';
+        
+        -> The name calc does not need to match the original.
+        -> Compared to named exports, where the name must match exactly:
+
+            import { calculateSum } from './calculateSum.js';
+    
+    - eg: (Module File "message.js")
+            const message = () => {
+                const name = "Jesse";
+                const age = 40;
+                return name + ' is ' + age + 'years old.';
+            };
+
+            export default message;
+
+
+            (Module Script 1)
+            <script type="module">
+                import message from "./message.js";
+            </script>
+
+
+            (Module Script 2)
+            <script type="module">
+                import text from "./message.js";
+            </script>
+
+
+#) Default is CleanDefault is Clean
+    - Many libraries expose a single feature as the default:
+
+        import React from 'react';
+
+
+💡) Combining Default + Named:
+    - A module can provide one main function plus some helpers:
+
+        (Module File)
+        export default function parse() { ... }
+
+        export function validate() { ... }
+        export function format() { ... }
+
+
+        (Module Script)
+        import parse, { validate, format } from './parser.js';
+
+
+#) When to Use Default Export?
+
+        When	                Why
+    -------------------------------------------------------------------------------
+        One main purpose	    Good for modules with a primary function
+        Flexible naming	        Importers can choose any name
+        Cleaner imports	        Shorter and simpler import syntax
+        Common pattern	        Frameworks use it for the main API

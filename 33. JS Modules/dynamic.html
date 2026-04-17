@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic import</title>
+</head>
+<body>
+    <h2>Dynamic Modules use modern async/await:</h2>
+    <p id="demo"></p>
+
+    <script>
+        async function run() {
+            const module = await import('./math.js');
+            let result = module.add(5, 10);
+            document.getElementById('demo').textContent =result;
+        }
+        run();
+    </script>
+</body>
+</html>

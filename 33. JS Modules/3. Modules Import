@@ -1,0 +1,90 @@
+JavaScript Modules Import:
+
+- You can import modules in two ways, based on if they are named exports or default exports.
+    
+    1️⃣ Named imports are constructed using curly braces:
+
+        import { name, age } from "./person.js";
+    
+    2️⃣ Default exports are not:
+
+        import message from "./message.js";
+
+
+#) Named Imports:
+    - Named imports match named exports in a module.
+    - 💡They let you import one or more explicitly named variables or functions from a module.
+    - ⚠️You must use the exact names enclosed in curly { } braces:
+    - eg: Import the named exports name and age from the file person.js:
+
+            import { name, age } from "./person.js";
+
+        Import the named exports add, subtract, and PI from the file math.js:
+
+            import { add, subtract, PI } from './math.js';
+
+
+#) Named Import Rules:
+    - 💡Import names must match export names:
+        import { addd } from './math.js'; // ❌ Error (name mismatch)
+    
+    - 💡You can import multiple items at once:
+        import { add, PI } from './math.js';
+    
+    - 💡💡You can rename them using as:
+        import { add as addition } from './math.js';
+
+
+#) Default Import:
+    - Default import is the way to import the primary exported value from a module - the one that was
+        exported using export default
+    - Defalt imports are the counterpart to default exports.
+    - 💡You can give a default export any name you like, during import, without using curly braces
+    - eg: Import a default export from the file message.js:
+
+            import text from "./message.js";
+
+            import message from "./message.js";
+
+
+#) Default Import Rules:
+    - Default import imports single default exports
+    - 💡You can give the imported value any name you like:
+        
+        import text from "./message.js"; // ✅ Valid (name can be anything)
+        or,
+        import message from "./message.js"; // ✅ Valid (name can be anything)
+
+
+💡) Default + Named Import:
+    - A module can provide one main function plus some helpers:
+
+        (Module File)
+        export default function parse() { ... }
+
+        export function validate() { ... }
+        export function format() { ... }
+
+
+        (Module Script)
+        import parse, { validate, format } from './parser.js';
+
+
+💡) Importing All:
+    - 💡You can import all named exports from a module as a single object using the * syntax.
+
+        // Import all named exports from person.js
+        import * as person from "./person.js";
+
+        // Import all named exports from math.js
+        import * as math from "./math.js";
+
+
+#) Default Import vs Named:
+
+        Feature	                Default Import	                        Named Import
+    ---------------------------------------------------------------------------------------------------
+        Typical use case	    One main feature per module	            Multiple features
+        Matches export name?	No (you choose)	                        Yes (must match)
+        Can rename freely?	    Always	                                Only with as
+        Export count	        Only one default export allowed	        Multiple exports allowed
