@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>virtual properties</title>
+</head>
+<body>
+    <h2>virtual properties</h2>
+    <p id="demo"></p>
+
+    <script>
+        const person = {
+            first: "John",
+            last: "Doe"
+        };
+
+        const virtual = new Proxy(person, {
+            get(target, prop) {
+                if(prop === "fullName") {
+                    return target.first + " " + target.last;
+                }
+                return Reflect.get(target, prop);
+            }
+        });
+
+        let text = virtual.fullName // John Doe
+        document.getElementById("demo").innerHTML = text;
+    </script>
+</body>
+</html>

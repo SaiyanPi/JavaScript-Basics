@@ -1,0 +1,80 @@
+Reflect & Proxy Reference:
+
+
+- Complete Reflect Reference(Revised December 2025):
+
+        Method	                                Description
+    -------------------------------------------------------------------------------------
+        Reflect.apply()	                        Call a function
+        Reflect.construct()	                    Create object (like new)
+        Reflect.defineProperty()	            Define a property
+        Reflect.deleteProperty()	            Delete a property
+        Reflect.get()	                        Get a property
+        Reflect.getOwnPropertyDescriptor()	    Get property descriptor
+        Reflect.getPrototypeOf()	            Get the prototype of an object
+        Reflect.has()	                        Check if property exists
+        Reflect.isExtensible()	                Check if object can grow
+        Reflect.ownKeys()	                    Get all keys (incl. symbols)
+        Reflect.preventExtensions()	            Stop object from growing
+        Reflect.set()	                        Set a property
+        Reflect.setPrototypeOf()	            Set the prototype of an object
+
+- Why Reflect?
+    👉 Reflect is safe and flexible, especially when used inside a Proxy.
+
+
+- Complete Proxy Handler Reference(Revised December 2025):
+
+        Method	                                Description
+    ---------------------------------------------------------------------------------------
+        handler.apply()	                        Call a function
+        handler.construct()	                    Create object (like new)
+        handler.defineProperty()	            Define a property
+        handler.deleteProperty()	            Delete a property
+        handler.get()	                        Get a property
+        handler.getOwnPropertyDescriptor()	    Get property descriptor
+        handler.getPrototypeOf()	            Get the prototype of an object
+        handler.has()	                        Check if property exists
+        handler.isExtensible()	                Check if object can grow
+        handler.ownKeys()	                    Get all keys (incl. symbols)
+        handler.preventExtensions()	            Stop object from growing
+        handler.set()	                        Set a property
+        handler.setPrototypeOf()	            Set the prototype of an object
+
+
+- JavaScript Internal Methods
+    👉 All JavaScript objects have 13 internal methods. Each method has a corresponding Proxy trap:
+
+        Internal Operation	                    Proxy trap
+    -----------------------------------------------------------------------------------------
+        [[Construct]]	                        construct()
+        [[Call]]	                            apply()
+        [[Get]]	                                get()
+        [[Set]]	                                set()
+        [[HasProperty]]	                        has()
+        [[Delete]]	                            deleteProperty()
+        [[DefineProperty]]	                    defineProperty()
+        [[GetOwnProperty]]	                    getOwnProperty()
+        [[OwnPropertyKeys]]	                    ownPropertyKeys()
+        [[IsExstensible]]	                    isExtensible()
+        [[PreventExstensions]]	                preventExtensions()
+        [[GetPrototypeOf]]	                    getPrototypeOf()
+        [[SetPrototypeOf]]	                    setPrototypeOf()
+    
+    👉 Every Proxy trap has a Reflect method with the same name and signature.
+
+        Internal Operation	                    Reflect Method
+    ------------------------------------------------------------------------------------------
+        [[Construct]]	                        Reflect.construct()
+        [[Call]]	                            Reflect.apply()
+        [[Get]]	                                Reflect.get()
+        [[Set]]	                                Reflect.set()
+        [[HasProperty]]	                        Reflect.has()
+        [[Delete]]	                            Reflect.deleteProperty()
+        [[DefineProperty]]	                    Reflect.defineProperty()
+        [[GetOwnProperty]]	                    Reflect.getOwnProperty()
+        [[OwnPropertyKeys]]	                    Reflect.ownPropertyKeys()
+        [[IsExstensible]]	                    Reflect.isExtensible()
+        [[PreventExstensions]]	                Reflect.preventExtensions()
+        [[GetPrototypeOf]]	                    Reflect.getPrototypeOf()
+        [[SetPrototypeOf]]	                    Reflect.setPrototypeOf()

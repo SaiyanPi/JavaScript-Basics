@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy with Reflect</title>
+</head>
+<body>
+    <h2>Proxy with Reflect</h2>
+    <p id="demo"></p>
+
+    <script>
+        const user = {
+            name: "John",
+            age: 30
+        };
+
+        const proxy = new Proxy(user, {
+            get(target, property) {
+                log("Getting: " + property); 
+                // Safe forwarding with Reflect
+                return Reflect.get(target, property);
+            },
+
+            set(target, property, value) {
+                log("Setting: " + property);    
+                // Safe forwarding with Reflect
+                return Reflect.set(target, property, value);
+            }
+        });
+
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            document.getElementById("demo").innerHTML += `[${time}] ${message} <br>`
+        }
+
+        proxy.name = "John";
+        proxy.age = 42;
+
+        let text1 = proxy.name;
+        let text2 = proxy.age;
+    </script>
+</body>
+</html>

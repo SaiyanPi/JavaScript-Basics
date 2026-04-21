@@ -1,0 +1,580 @@
+JavaScript Proxy:
+
+ 
+- A Proxy is a JavaScript object that can wrap other objects.
+- A Proxy lets you control operations on other objects.
+- 💡A Proxy can trap and intercept code when someone is:
+    👉 Reading a property (get)
+    👉 Setting a property (set)
+    👉 Deleting a property (deleteProperty)
+    👉 Checking if a property exists (has)
+    👉 Calling a function (apply)
+    👉 Constructing an object (construct)
+
+- 💡💡A Proxy lets you run your own code when someone interacts with an object.
+- 💡💡A Proxy Can be a middleman between your code and a JavaScript object.
+- Proxy Syntax:
+    const proxy = new Proxy(target, handler);
+    
+    -> target - the original object or function
+    -> handler - an object with trap methods
+
+- eg:   const myObject = {name: "Jan"};
+
+        const proxy = new Proxy(myObject, {
+            get(target, prop) {
+                return target[prop];
+            }
+        });
+
+
+#) Proxy Logging:
+    - A typical Proxy example is logging of object changes.
+    - Below is a demo that:
+        👉 Wraps an object in a Proxy
+        👉 Logs whenever a property is read or written
+        👉 Logs each get and set operation in real time
+
+        <script>
+            const user = {
+                name: "John",
+                age: 40
+            };
+
+            const proxy = new Proxy(user, {
+                get(target, property) {
+                    log("Getting: " + property);
+                    return target[property];
+                },
+
+                set(target, property, value) {
+                    log("Setting: " + property);
+                    return target[property];
+                }
+            });
+
+            function log(message) {
+                const time = new Date().toLocaleTimeString();
+                document.getElementById("demo").innerHTML += `[${time}] ${message} <br>`
+            }
+
+            proxy.name = "John";
+            proxy.age = 42;
+
+            let text1 = proxy.name;
+            let text2 = proxy.age;
+        </script>
+
+        o/p:    [10:12:33 AM] Setting: name
+                [10:12:33 AM] Setting: age
+                [10:12:33 AM] Getting: name
+                [10:12:33 AM] Getting: age
+
+
+
+#) Proxy with Reflect (Most Common):
+    - Below is a demo that:
+        👉 Wraps an object in a Proxy
+        👉 Logs whenever a property is read or written
+        👉 Uses Reflect.get() and Reflect.set() inside the Proxy handlers
+        👉 get trap uses Reflect.get(target, property, receiver)
+        👉 set trap uses Reflect.set(target, property, value, receiver)
+        👉 Reflect makes the Proxy behavior match the normal object behavior
+
+        <script>
+            const user = {
+                name: "John",
+                age: 30
+            };
+
+            const proxy = new Proxy(user, {
+                get(target, property) {
+                    log("Getting: " + property); 
+                    // Safe forwarding with Reflect
+                    return Reflect.get(target, property);
+                },
+
+                set(target, property, value) {
+                    log("Setting: " + property);    
+                    // Safe forwarding with Reflect
+                    return Reflect.set(target, property, value);
+                }
+            });
+
+            function log(message) {
+                const time = new Date().toLocaleTimeString();
+                document.getElementById("demo").innerHTML += `[${time}] ${message} <br>`
+            }
+
+            proxy.name = "John";
+            proxy.age = 42;
+
+            let text1 = proxy.name;
+            let text2 = proxy.age;
+        </script>
+
+        o/p:    [11:44:23 AM] Setting: name
+                [11:44:23 AM] Setting: age
+                [11:44:23 AM] Getting: name
+                [11:44:23 AM] Getting: age
+
+
+
+#) Proxy with Reflect Flow:
+    - The flow below is the essence of JavaScript metaprogramming with Proxy + Reflect.
+                                            
+                                Your JavaScript
+                            (reading/writing obj)
+                                    |
+                                    |
+                                    v
+                                    Proxy
+                            (intercepts action)
+                                |           |
+                                |           | (trap (get, set, ....))
+                                |           |
+                                |           v
+                                |        Your Code
+                                | (logging, validation, reactivity)
+                                |           |
+                                |           |
+                                v           v
+                                    Reflect
+                        (forwards operation correctly)
+                                        |
+                                        |
+                                        v
+                            Target Object/ Real Operation
+    
+    - Flow Explanation:
+        👉 Your code interacts with an object
+        👉 Proxy intercepts the operation
+        👉 Your trap code decides what to do
+        👉 Reflect forwards the operation safely
+        👉 The target object receives the real action
+
+
+
+#) Why Proxies?
+    - Proxies allow you to:
+        👉 Add logging
+        👉 Validate changes
+        👉 Auto-generate properties
+        👉 Protect sensitive data
+        👉 Create virtual or computed objects
+        👉 Intercept function calls
+        👉 Create reactive systems (like Vue.js)
+
+
+
+#) Proxy Validation:
+
+        <script>
+            user = {
+                name: "Johnny",
+                age: 45
+            };
+
+            const proxy = new Proxy(user, {
+                set(target, prop, value) {
+                    if(prop === "age" && value < 0) {
+                        text = "Age cannot be negative!";
+                        document.getElementById("demo").innerHTML = text;
+                    }
+                    return Reflect.set(target, prop, value);
+                }
+            });
+
+            proxy.age = 50; // OK
+            proxy.age = -5; // Error
+        </script>
+
+
+
+#) Virtual Properties:
+
+        <script>
+            const person = {
+                first: "John",
+                last: "Doe"
+            };
+
+            const virtual = new Proxy(person, {
+                get(target, prop) {
+                    if(prop === "fullName") {
+                        return target.first + " " + target.last;
+                    }
+                    return Reflect.get(target, prop);
+                }
+            });
+
+            let text = virtual.fullName // John Doe
+            document.getElementById("demo").innerHTML = text;
+        </script>
+
+
+
+#) Dynamic Functions:
+
+        <script>
+            const fn = new Function("a", "b", "return a + b");
+            let result = fn(3, 2);
+
+            document.getElementById("demo").innerHTML = result + "<br>";
+
+            // -------------------------- another example -----------------------------------------------------
+
+            function buildOperation(operation) {
+                return new Function("a", "b", `return a ${operation} b`);
+            }
+
+            const op = "*";
+            const func = buildOperation(op);
+
+            let result1 = func(3, 2);
+
+            document.getElementById("demo").innerHTML += result1;
+        </script>
+    
+    - Metaprogramming lets JavaScript:
+        Intercept behavior
+        Modify behavior
+        Define new behavior
+        Generate behavior dynamically
+        It gives developers deep control over the language's inner workings.
+
+
+
+#) Proxy Traps:
+    - 💡A trap is a function inside a Proxy handler.
+    - 💡It runs whenever a specific operation is performed on the Proxy.
+    - Below is a complete and accurate explanation of every JavaScript Proxy trap, what triggers them, their
+        parameters, and what they are expected to return.
+
+                Trap Name	                Triggered when
+            -------------------------------------------------------------------------
+                get	                        A property is read
+                set	                        A property is changed
+                has	                        Using the in operator
+                deleteProperty	            A property is deleted
+                apply	                    A function is called
+                construct	                An object is cretated (with new)
+                getOwnPropertyDescriptor	A property descriptor is retrieved
+                defineProperty	            A property is defined
+                getPrototypeOf	            A prototype is retrieved
+                setPrototypeOf	            A prototype is set
+                isExtensible	            Extensibility is checked
+                preventExtensions	        Existenibility is prevented
+                ownKeys	                    Properties are listed
+        
+        -> The list above is 2025-accurate and includes all 13 Proxy traps defined in ECMAScript.
+        -> Each trap handler is decribed below.
+    
+
+    1) handler.get():
+        - Triggered when a property is read:
+
+            get(obj, prop, receiver) {
+                return Reflect.get(obj, prop, receiver);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property being accessed
+            👉 receiver - the this value for getters (usually the proxy itself)
+
+        - Triggered by:
+            👉 proxy.property
+            👉 proxy["property"]
+            👉 object.property()
+        
+        - Must Return
+            👉 The property value
+    
+
+    2) handler.set():
+        - Triggered when a property is changed:
+
+            set(obj, prop, value, receiver) {
+                return Reflect.set(obj, prop, value, receiver);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property being set
+            👉 value - the new value for the property
+            👉 receiver - the this value for setters (usually the proxy itself)
+
+        - Triggered by:
+            👉 proxy.property = value
+            👉 proxy["property"] = value
+        
+        - Must Return
+            👉 true if the assignment succeeded, false otherwise
+    
+
+    3) handler.has():
+        - Triggered when using the in operator:
+
+            has(obj, prop) {
+                return Reflect.has(obj, prop);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property being checked
+
+        - Triggered by:
+            👉 "property" in proxy
+        
+        - Must Return
+            👉 true if the property exists, false otherwise
+    
+
+    4) handler.deleteProperty():
+        - Triggered when a property is deleted:
+
+            deleteProperty(obj, prop) {
+                return Reflect.deleteProperty(obj, prop);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property being deleted
+
+        - Triggered by:
+            👉 delete proxy.property
+        
+        - Must Return
+            👉 true if the property was successfully deleted, false otherwise
+    
+
+    5) handler.apply():
+        - Triggered when a function is called:
+
+            apply(func, thisArg, argumentsList) {
+                return Reflect.apply(func, thisArg, argumentsList);
+            }
+        
+        - Parameters
+            👉 func - the target function
+            👉 thisArg - the this value for the function call
+            👉 argumentsList - an array of arguments for the function call
+
+        - Triggered by:
+            👉 proxy()
+            👉 proxy.call()
+            👉 proxy.apply()
+        
+        - Must Return
+            👉 The return value of the function
+
+
+    6) handler.construct():
+        - Triggered when an object is created with new:
+
+            construct(obj, argumentsList, newTarget) {
+                return Reflect.construct(obj, argumentsList, newTarget);
+            }
+        
+        - Parameters
+            👉 obj - the target constructor object
+            👉 argumentsList - an array of arguments for the constructor
+            👉 newTarget - the constructor that was directly invoked (usually the proxy itself)
+
+        - Triggered by:
+            👉 new proxy()
+        
+        - Must Return
+            👉 An object created by the constructor(the new instance)
+    
+
+    7) handler.getOwnPropertyDescriptor():
+        - Triggered when a property descriptor is retrieved:
+
+            getOwnPropertyDescriptor(obj, prop) {
+                return Reflect.getOwnPropertyDescriptor(obj, prop);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property whose descriptor is being retrieved
+
+        - Triggered by:
+            👉 Object.getOwnPropertyDescriptor(obj, prop)
+        
+        - Must Return
+            👉 A property descriptor object or undefined if the property does not exist
+    
+
+    8) handler.defineProperty():
+        - Triggered when a property is defined:
+
+            defineProperty(obj, prop, descriptor) {
+                return Reflect.defineProperty(obj, prop, descriptor);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 prop - the property being defined
+            👉 descriptor - a property descriptor
+
+        - Triggered by:
+            👉 Object.defineProperty()
+        
+        - Must Return
+            👉 true if the property was successfully defined, false otherwise
+    
+
+    9) handler.getPrototypeOf():
+        - Triggered when a prototype is retrieved:
+
+            getPrototypeOf(obj) {
+                return Reflect.getPrototypeOf(obj);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+
+        - Triggered by:
+            👉 Object.getPrototypeOf()
+        
+        - Must Return
+            👉 An Object or null
+    
+
+    10) handler.setPrototypeOf():
+        - Triggered when a prototype is set:
+
+            setPrototypeOf(obj, proto) {
+                return Reflect.setPrototypeOf(obj, proto);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+            👉 proto - the new prototype object or null
+
+        - Triggered by:
+            👉 Object.setPrototypeOf()
+        
+        - Must Return
+            👉 true if the prototype was successfully set, false otherwise
+    
+
+    11) handler.isExtensible():
+        - Triggered when extensibility is checked:
+
+            isExtensible(obj) {
+                return Reflect.isExtensible(obj);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+
+        - Triggered by:
+            👉 Object.isExtensible()
+        
+        - Must Return
+            👉 true if the object is extensible, false otherwise
+    
+
+    12) handler.preventExtensions():
+        - Triggered when extensibility is prevented:
+
+            preventExtensions(obj) {
+                return Reflect.preventExtensions(obj);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+
+        - Triggered by:
+            👉 Object.preventExtensions()
+        
+        - Must Return
+            👉 true if the object was successfully made non-extensible, false otherwise
+    
+
+    13) handler.ownKeys():
+        - Triggered when properties are listed (property names or symbols):
+
+            ownKeys(obj) {
+                return Reflect.ownKeys(obj);
+            }
+        
+        - Parameters
+            👉 obj - the target object
+
+        - Triggered by:
+            👉 Object.getOwnPropertyNames()
+            👉 Object.getOwnPropertySymbols()
+            👉 Object.keys()
+        
+        - Must Return
+            👉 An array of property keys (strings and symbols) with no duplicates
+
+
+
+#) Proxy Traps Map Reflect Methods:
+    - A Proxy trap represents one of JavaScript's internal operations:
+        [[Construct]]
+        [[Call]]
+        [[Get]]
+        [[Set]]
+        [[HasProperty]]
+        [[Delete]]
+        [[DefineProperty]]
+        [[GetOwnProperty]]
+        [[OwnPropertyKeys]]
+        [[GetPrototypeOf]]
+        [[SetPrototypeOf]]
+        [[PreventExtensions]]
+        [[IsExtensible]]
+        
+    - These internal operations are what JavaScript uses (inside the engine) when you access or modify objects.
+    - When a Proxy intercepts one of these operations, they should be forwarded correctly:
+
+            get(target, property, receiver) {
+                return Reflect.get(target, property, receiver);
+            }
+
+        -> Reflect is used because Reflect methods are 1-to-1 mirrors of the internal operations.
+            👉 They produce correct return values (true/false/descriptor)
+            👉 They avoid throwing errors that would break Proxy rules
+            👉 They make the Proxy behave like normal JavaScript objects (unless modified)
+            👉 This is why every Proxy trap has a Reflect method with the same name and signature.
+
+
+
+#) JavaScript Internals Became Reflect:
+    - Before ES6 (2015), many fundamental operations did not exist as functions:
+
+        Operation	        Before E6	                        Problem
+    -------------------------------------------------------------------------------------------------------
+        get property	    obj[prop]	                        Not callable as a function
+        set property	    obj[prop] = value	                Not callable as a function
+        delete property	    delete obj[prop]	                Operator, not a function
+        check property	    "prop" in obj	                    Operator, not a function
+        construct (new)	    new Foo()	                        Not callable generically
+        get prototypes	    Object.getPrototypeOf(obj)	        Throws on non-objects
+        define property	    Object.defineProperty()         	Returns object instead of boolean
+        own keys	        Object.keys()	                    Not complete (misses symbols)
+    
+    - These were incomplete and inconsistent for Proxy forwarding.
+    - So ES6 (2015) added Reflect:
+
+            Internal Operation	            Reflect Method
+        ---------------------------------------------------------------------
+            [[Construct]]	                Reflect.construct()
+            [[Call]]	                    Reflect.apply()
+            [[Get]]	                        Reflect.get()
+            [[Set]]	                        Reflect.set()
+            [[HasProperty]]	                Reflect.has()
+            [[Delete]]	                    Reflect.deleteProperty()
+            [[DefineProperty]]	            Reflect.defineProperty()
+            [[GetOwnProperty]]	            Reflect.getOwnProperty()
+            [[OwnPropertyKeys]]	            Reflect.ownPropertyKeys()
+            [[IsExstensible]]	            Reflect.isExtensible()
+            [[PreventExstensions]]	        Reflect.preventExtensions()
+            [[GetPrototypeOf]]	            Reflect.getPrototypeOf()
+            [[SetPrototypeOf]]	            Reflect.setPrototypeOf()

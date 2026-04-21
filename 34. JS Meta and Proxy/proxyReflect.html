@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy with Reflect</title>
+</head>
+<body>
+    <h2>Reflect makes Proxy behavior match normal object behavior</h2>
+    <p id="demo"></p>
+
+    <script>
+        // Create an Object
+        const user = {
+            name: 'John',
+            age: 30
+        };
+
+        // Wrap the Object in a Proxy
+        const proxy = new Proxy(user, {
+            // use a set trap
+            set(target, property, value) {
+                // log changes
+                log(property + " : " + value);
+                // safe forwarding with Reflect
+                return Reflect.set(target, property, value);
+            }
+        });
+
+        // function for logging messages
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            document.getElementById('demo').innerHTML += `[${timestamp}] ${message}<br>`;
+        }
+
+        // change properties
+        proxy.name = 'Jane';
+        proxy.age = 25;
+        proxy.name = "Bob";
+    </script>
+</body>

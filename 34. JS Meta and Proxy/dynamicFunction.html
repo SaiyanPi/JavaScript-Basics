@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dynamic function</title>
+</head>
+<body>
+    <h2>Dynamic Function</h2>
+    <p id="demo"></p>
+
+    <script>
+        const fn = new Function("a", "b", "return a + b");
+        let result = fn(3, 2);
+
+        document.getElementById("demo").innerHTML = result + "<br>";
+
+        // -------------------------- another example -----------------------------------------------------
+
+        function buildOperation(operation) {
+            return new Function("a", "b", `return a ${operation} b`);
+        }
+
+        const op = "*";
+        const func = buildOperation(op);
+
+        let result1 = func(3, 2);
+
+        document.getElementById("demo").innerHTML += result1;
+    </script>
+</body>
+</html>

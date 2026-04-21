@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Metaprogramming</title>
+</head>
+<body>
+    <h2>Proxy can be used to intercept property operations like reading or writing.</h2>
+    <ul>
+        <li>A user object is wrapped in a Proxy</li>
+        <li>The Proxy uses a set() trap to log whenever a property is set</li>
+    </ul>
+    <p id="demo"></p>
+
+    <script>
+        // create a user object
+        const user = {
+            name: 'John',
+            age: 30
+        };
+
+        // Wrap an object in a Proxy
+        const proxy = new Proxy(user, {
+            // use a set trap
+            set(target, property, value) {
+                // log changes
+                log(property + " : " + value);
+                return target[property];
+            }
+        });
+
+        // function for logging messages
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            document.getElementById('demo').innerHTML += `[${timestamp}] ${message}<br>`;
+        }
+
+        // change properties
+        proxy.name = 'Jane';
+        proxy.age = 25;
+        proxy.name = "Bob"
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+JavaScript Reflect:
+
+
+#) The Reflect Object:
+    - 💡Reflect is a object with methods for low-level operations on JavaScript objects.
+    - 💡With the Reflect object you can get, set, delete, and check object properties in a consistent way.
+        i.e, Reflect makes Proxy behavior match normal object behavior
+    - Reflect was added to JavaScript in ES6 (2015).
+    - 💡Reflect is a toolbox for working with objects in a safe and consistent way.
+
+    - Before Reflect: Before Reflect, object operations were scattered:
+        -> Using operators like in and delete
+        -> Using methods like Object.defineProperty
+        -> Using language mechanisms like [[Get]] and [[Set]]
+    
+    - After Reflect: Reflect brings all object operations into clean methods:
+        -> Reflect methods unifies object operations
+        -> Reflect methods are more predictable than operators (in/delete)
+        -> Reflect methods provides standard return values instead of errors
+        -> Reflect methods are cleaner and safer for meta-programming
+        -> Reflect methods are tailored for the Proxy object
+    
+    - eg:
+        With Reflect.has(), you get the in operator as a function.
+        With Reflect.delete(), you get the delete operator as a function.
+    
+    - 💡Why Reflect?
+        -> Reflect is safe and flexible, especially when used inside a Proxy.
+
+
+
+1️⃣ Reflect.has():
+    - 💡The Reflect.has() method checks if an object has a specific property.
+    - 💡The Reflect.has() method is similar to the in operator.
+    - 💡Syntax:
+            Reflect.has(obj, prop)
+
+        👉 Properties:
+            obj - the target object
+            prop - the property to check
+
+        👉 Returns:
+            true - if true
+            false if false
+
+        👉 Exeptions:
+            TypeError thrown if obj is not an object
+    
+    - eg:
+
+            // Create an Object
+            const person = {name: "John", lastname: "Doe"};
+
+            // Is name a Property?
+            let answer = Reflect.has(person, "name");
+
+            document.getElementById("demo").innerHTML = answer;  // true
+        
+        - Same as using the in operator:
+
+            // Create an Object
+            const person = {name: "John", lastname: "Doe"};
+
+            // Is name in Object
+            let answer = "name" in person;
+
+            document.getElementById("demo").innerHTML = answer; // true
+
+
+
+2️⃣ Reflect.deleteProperty():
+    - 💡The Reflect.deleteProperty() method deletes a property from an object.
+    - 💡The Reflect.deleteProperty() method is similar to the delete operator.
+    - 💡Syntax:
+            Reflect.deleteProperty(obj, prop)
+
+        👉 Properties:
+            obj - the target object
+            prop - the property to delete
+
+        👉 Returns:
+            true - if true
+            false if false
+
+        👉 Exeptions:
+            TypeError thrown if obj is not an object
+    
+    - eg: 
+            // Create an Object
+            const person = {name: "John", lastname: "Doe"};
+
+            // Delete the name Property
+            Reflect.deleteProperty(person, "name");
+
+            document.getElementById("demo").innerHTML = Object.keys(person);    // lastname
+        
+        - Same as using the delete operator:
+
+            // Create an Object
+            const person = {name: "John", lastname: "Doe"};
+
+            // Delete the name Property
+            delete person.name;
+
+            document.getElementById("demo").innerHTML = Object.keys(person);    // lastname
+
+
+
+3️⃣ Reflect.get():
+    - 💡The Reflect.get() method retrieves the value of a property:
+    - 💡Syntax:
+            Reflect.get(obj, propertyKey, receiver)
+
+        👉 Properties:
+            obj - the target object
+            propertyKey - the property to get
+            receiver - the this value if it is a getter(optional)
+
+        👉 Returns:
+            The value of the property if it exists, undefined otherwise
+
+        👉 Exeptions:
+            TypeError thrown if obj is not an object
+    
+    - eg:
+            // Create an Object
+            const user = {name:"Jan", age:40};
+
+            // Get the value of age
+            let age = Reflect.get(user, "age");
+
+            document.getElementById("demo").innerHTML = age;    // 40
+        
+        - Same as using dot notation:
+
+            user.age;    // 40
+
+
+4️⃣ Reflect.set():
+    - 💡The Reflect.set() method sets the value of a property:
+    - 💡Syntax:
+        Reflect.set(obj, propertyKey, value, receiver)
+
+        👉Properties:
+            obj - the target object
+            propertyKey - the property to set
+            value - the value to set
+            receiver - the this value if it is a setter(optional)
+
+        👉 Returns:
+            true - for success
+            false - if not
+
+        👉 Exceptions:
+            TypeError thrown if obj is not an object
+    
+    - eg:
+            // Create an Object
+            const user = {name: "Jan", age: 40};
+
+            // Set the value of a Property
+            Reflect.set(user, "age", 41);
+
+            document.getElementById("demo").innerHTML = user.age;   // 41
+        
+        - Same as using dot notation:
+
+            user.age = 41; 
+            document.getElementById("demo").innerHTML = user.age;   // 41
+
+
+5️⃣ Reflect.apply():
+    - 💡The Reflect.apply() method calls a function with a this value and an argument array.
+    - 💡Syntax:
+        Reflect.apply(function, this, arguments)
+
+        👉Properties:
+            function - target object (function)
+            this - the value of this calling the target
+            arguments - array-like object of function arguments
+
+        👉 Returns:
+            The return value from the function
+
+        👉 Exceptions:
+            TypeError thrown if function is not a function or arguments is not an object
+    
+    - eg:
+            // Create a Function
+            function greet(message) {
+                return message + ", " + this.name;
+            }
+
+            // Create an Object
+            const person = {name: "Jan"};
+
+            // Apply the Function to the Object
+            let msg = Reflect.apply(greet, person, ["Hello"]);
+
+            document.getElementById("demo").innerHTML = msg;    // Hello, Jan
+        
+        - same as using greet.apply(): (see chapter 29/section 6. Function Apply)
+
+            // Create a Function
+            function greet(message) {
+                return message + ", " + this.name;
+            }
+
+            // Create an Object
+            const person = {name: "Jan"};
+
+            // Apply the Function to the Object
+            let msg = greet.apply(person, ["Hello"]);
+
+            document.getElementById("demo").innerHTML = msg;    // Hello, Jan
+    
+    - 💡Reflect.apply() is preferred when:
+        -> You are doing meta-programming
+        -> You are inside a Proxy handler
+        -> You want consistent behaviors (no silent errors)
+        -> You want to mirror JavaScript's internal operations
+
+
+6️⃣ Reflect.construct():
+    - 💡The Reflect.construct() method acts like the new operator, creating a new instance of target with
+        the provided arguments. newTarget allows for custom new.target values for subclassing.
+    - 💡Syntax:
+        Reflect.construct(obj, args, newTarget)
+        
+        👉 Properties:
+            obj - the constructor object
+            args - an array-like object of arguments to be passed
+            newTarget - the constructor whose prototype should be used for new object(optional)
+
+        👉 Returns:
+            A new object constructed from the argumets list
+
+        👉 Exeptions:
+            TypeError thrown if obj or newTarget is not a constructor, or if args is not an object
+    
+    - eg:
+            // Create an Array
+            const colors = Reflect.construct(Array, ["red", "green", "blue"]);
+
+            document.getElementById("demo").innerHTML = colors; // red,green,blue
+        
+        - same as using the new operator:
+
+            const colors = new Array(["red", "green", "blue"]);
+
+            document.getElementById("demo").innerHTML = colors; // red,green,blue
+
+
+7️⃣ Reflect.defineProperty():
+    - 💡The Reflect.defineProperty() defines or modifies a property.
+    - 💡Syntax:
+        Reflect.defineProperty(obj, prop, attributes)
+
+        👉 Properties:
+            obj - the target object
+            prop - the property to define
+            attributes - an array-like object of the property attributes
+
+        👉 Exeptions:
+            TypeError thrown if obj is not an object or attributes is not an object
+    
+    - eg:
+            // Create an Object
+            const user = {};
+
+            // Define a new Propery
+            Reflect.defineProperty(user, "id", {
+                value: 123,
+                writable: false
+            });
+
+            document.getElementById("demo").innerHTML = user.id;    // 123
+        
+        - same as using Object.defineProperty():
+
+            // Create an Object
+            const user = {};
+
+            // Add a Property
+            Object.defineProperty(user, "id", {
+                value: 123,
+                writable: false
+            });
+
+            document.getElementById("demo").innerHTML = user.id;    // 123
+        
+        - 💡Reflect.defineProperty() must be used in Proxy
+        - 💡If used in a Proxy, the defineProperty trap must return true or false.
+            -> Object.defineProperty() returns the target object
+            -> Reflect.defineProperty() returns true or false
+
+
+#) Reflect.ownKeys():
+    - 💡The Reflect.ownKeys(obj) method returns an array of an object's own property keys (string and
+        Symbol based), similar to combining Object.getOwnPropertyNames() and
+        Object.getOwnPropertySymbols().
+    - 💡Syntax:
+        Reflect.ownKeys(obj)
+
+        👉 Properties:
+            obj - the target object
+        
+        👉 Returns:
+            An Array of the object's own property keys, including strings and symbols
+
+        👉 Exceptions:
+            TypeError thrown if obj is not an object
+    
+    - eg:
+            const sym = Symbol("secret");
+            const obj = { a: 1, [sym]: 2 };
+
+            let keys = Reflect.ownKeys(obj);
+            let text = "Object keys: <br>";
+
+            keys.forEach(myFunction);
+
+            function myFunction(value, index, array) {
+                let typ = typeof array[index];
+                let add = typ + " ";
+                if (typ != "symbol") {
+                    add += value;
+                } else {
+                    add += "secret"
+                };
+                text += add + "<br>";
+            }
+
+            document.getElementById("demo").innerHTML = text;
+
+            o/p:    Object keys:
+                    string a
+                    symbol secret
+        
+        - almost the same as using Object.keys():
+
+            const sym = Symbol("secret");
+            const obj = { a: 1, [sym]: 2 };
+
+            let keys = Object.keys(obj);
+            let text = "Object keys: <br>";
+
+            keys.forEach(myFunction);
+
+            function myFunction(value, index, array) {
+                let typ = typeof array[index];
+                let add = typ + " ";
+                if (typ != "symbol") {
+                    add += value;
+                } else {
+                    add += "secret"
+                };
+                text += add + "<br>";
+            }
+
+            document.getElementById("demo").innerHTML = text;
+
+            o/p:    Object keys:
+                    string a
+    
+    - 💡Why Using Reflect?
+        -> Reflect.ownKeys() also returns symbols.
+        -> Object.keys() does not.

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proxy validation</title>
+</head>
+<body>
+    <h2>Proxy Validation</h2>
+    <p id="demo"></p>
+
+    <script>
+        user = {
+            name: "Johnny",
+            age: 45
+        };
+
+        const proxy = new Proxy(user, {
+            set(target, prop, value) {
+                if(prop === "age" && value < 0) {
+                    text = "Age cannot be negative!";
+                    document.getElementById("demo").innerHTML = text;
+                }
+                return Reflect.set(target, prop, value);
+            }
+        });
+
+        proxy.age = 50; // OK
+        proxy.age = -5; // Error
+    </script>
+</body>
+</html>
