@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endianness (Byte Order)
+</title>
+</head>
+<body>
+    
+    <ul>
+        <li>Little-endian: Least significant byte first (most common on PCs).</li>
+        <li>Big-endian: Most significant byte first (common in some protocols).</li>
+    </ul>
+    <h3>Most DataView numeric methods have an optional littleEndian parameter:</h3>
+    <ul>
+        <li>true = little-endian.</li>
+        <li>false (or omitted) = big-endian.</li>
+    </ul>
+
+    <script>
+        const buffer1 = new ArrayBuffer(4);
+        const view1 = new DataView(buffer1);
+      
+        view1.setUint32(0, 0x12345678, true); // little-endian
+
+        console.log(new Uint8Array(buffer1));
+        // Example output: Uint8Array(4) [120, 86, 52, 18] (0x78, 0x56, 0x34, 0x12)
+
+        // ----------------------------------------------------------------------------------------------
+
+        const buffer2 = new ArrayBuffer(4);
+        const view2 = new DataView(buffer2);
+     
+        view2.setUint32(0, 0x12345678, false); // big-endian
+
+        console.log(new Uint8Array(buffer2));
+        // Example output: Uint8Array(4) [18, 52, 86, 120] (0x12, 0x34, 0x56, 0x78)
+    </script>
+</body>
+</html>

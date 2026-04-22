@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atomics</title>
+</head>
+<body>
+    <h2>Atomic Add and Subtract</h2>
+    <h3>Atomics.add() and Atomics.sub() change a value and return the old value.</h3>
+    
+    <script>
+        if(Window.crossOriginIsolated) {
+            buffer = new  SharedArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        } else {
+            buffer = new ArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        }
+
+        // Shared integer array with 4 elements
+        const sharedArray = new Int32Array(buffer);
+
+        // Initialize the array
+        sharedArray[0] = 5;
+
+        var oldValue = Atomics.add(sharedArray, 0, 3);
+
+        console.log("Old:", oldValue);  // Old: 5
+        console.log("New:", sharedArray[0]);    // New: 5 + 3 = 8
+    </script>
+
+</body>
+</html>

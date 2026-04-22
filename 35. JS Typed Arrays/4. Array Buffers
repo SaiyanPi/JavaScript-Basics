@@ -1,0 +1,270 @@
+JavaScript ArrayBuffer:
+
+
+- 💡An ArrayBuffer is fixed a block of memory, often used to store typed arrays.
+- On top of this block, you can create different views that interpret the bits as numbers, bytes, or other data
+    types
+
+
+#) Creating an ArrayBuffer:
+    - 💡Use new ArrayBuffer() to create a new ArrayBuffer.
+    - eg: Create a 16-byte ArrayBuffer:
+
+        // Create an ArrayBuffer
+        const myBuf = new ArrayBuffer(16);
+
+        // Get the length in bytes
+        let len = myBuf.byteLength;
+
+        document.getElementById("demo").innerHTML = "Number of bytes are " + len;   // 16
+    
+    - 💡The size of an ArrayBuffer is specified in bytes.
+    - 💡The byteLength property represents the size.
+    - ⚠️Once created, the size can not be changed.
+
+
+#) Accessing an ArrayBuffer:
+    - 💡The ArrayBuffer does not have methods to read and write data.
+    - 💡You must always use a view to access the data.
+    - 💡Typed Arrays and DataViews provide a way to read and write numeric values to an ArrayBuffer.
+        Common typed arrays are:
+            -> Uint8Array - 8-bit unsigned integers
+            -> Int16Array - 16-bit signed integers
+            -> Int32Array - 32-bit signed integers
+            -> Float32Array - 32-bit floating point numbers
+            -> Float64Array - 64-bit floating point numbers
+    
+
+#) Using an Uint8Array:
+    - ⚠️Each Uint8 uses 1 byte. (values for writing range from 0 to 255)
+
+        <script>
+            // create 8-byte ArrayBuffer
+            const myBuf = new ArrayBuffer(8)
+
+            // create a Uint8Array view
+            const view = new Uint8Array(myBuf);
+
+            // 💡write max 8 values (since Uint8 uses 1 byte, we can write 8 Uint8 values in 8 byte memory)
+            view[0] = 10;
+            view[2] = 128;
+            view[1] = 255;
+            view[3] = 300;  // ⚠️300 is more than 1 byte
+
+            // read values
+            let r0 = view[0];
+            let r1 = view[1];
+            let r2 = view[2];
+            let r3 = view[3];
+
+            // display values
+            document.getElementById('demo').innerHTML = `The values are ${r0}, ${r1}, ${r2}, ${r3}`;
+        </script>
+
+        o/p:    The values are 10, 255, 128, 44
+
+        💡⚠️ 300 is not a valid write value since it is more that 1 byte. But JS does not throw an error.
+            It silently forces the value into 1 byte(8 bits).
+            So why 44?
+
+                300 = 100101100 (9 bits)
+
+            But a Uint8Array only keeps 8 bits → it drops the leftmost bit:
+
+                00101100   (8 bits)  = 44
+
+
+#) Using an Int32Array:
+    - 💡Each Int32 uses 4 bytes. 
+        <script>
+            // Create an 12-byte ArrayBuffer
+            const myBuf2 = new ArrayBuffer(12);
+
+            // Create an Int32Array view
+            const view2 = new Int32Array(myBuf2);
+
+            // 12 bytes = Max 3 Int32 values (since Int32 uses 4 byte, we can write 3 Int32 values in a 12 byte memory)
+            view2[0] = 100000;
+            view2[1] = 200000;
+            view2[2] = -300000;
+
+
+            // Read values
+            let v0 = view2[0];
+            let v1 = view2[1];
+            let v2 = view2[2];
+
+            // Display values
+            document.getElementById("demo2").innerHTML = `Values are ${v0}, ${v1}, ${v2}`;
+        </script>
+
+
+#) Using a DataView:
+    - A DataView is a more flexible view for an ArrayBuffer.
+    - 💡A DataView lets you read and write values of different types (Int8, Uint16, Float32, etc.).
+    - 💡A DataView also lets you read and write values at any byte offset.
+
+        <script>
+            // Create an ArrayBuffer
+            const myBuf = new ArrayBuffer(8);
+
+            // Create a DataView
+            const view = new DataView(myBuf);
+
+            // Write a 32-bit integer at byte offset 0
+            view.setInt32(0, 123456);
+
+            // Write a 16-bit integer at byte offset 4
+            view.setInt16(4, 32000);
+
+            // Read the values
+            let v1 = view.getInt32(0);
+            let v2 = view.getInt16(4);
+
+            // Display values
+            document.getElementById("demo").innerHTML = "Values are " + v1 + ", " + v2;  
+        </script>
+
+        o/p:    Values are 123456, 32000
+
+
+#) Slicing an ArrayBuffer:
+    - 💡You can make a copy of a part of an ArrayBuffer using the slice() method. It returns a new ArrayBuffer
+        calwith bytes from the specified range.
+
+            <script>    
+                const myBuf = new ArrayBuffer(8);
+
+                // create a Uint8Array view
+                const view = new Uint8Array(myBuf);
+
+                // fill with value 0 to 7
+                for (let i = 0; i < view.length; i++) {
+                    view[i] = i;
+                }
+
+                // create a copy of bytes from 2 to 5 (not including 5)
+                const sliced = myBuf.slice(2, 5);
+                const sliceView = new Uint8Array(sliced);
+
+                document.getElementById('demo').innerHTML = view + "<br> sliced: " + sliceView;
+            </script>
+
+            o/p:    0,1,2,3,4,5,6,7
+                    sliced: 2,3,4
+    
+    - The slice() method creates a new buffer.
+    - 💡The slice() method does not share memory with the original buffer.
+
+
+#) Converting Strings:
+    - 1️⃣ Converting a string to an ArrayBuffer (UTF-8):
+
+        <script>
+            function stringToArrayBuffer(string) {
+                // Create an object that knows how to convert strings into bytes using UTF-8
+                let encoder = new TextEncoder();
+                return encoder.encode(string).buffer;
+            }
+
+            const myBuf = stringToArrayBuffer("Hello");
+
+            const myView = new Uint8Array(myBuf);
+            let len1 = myBuf.byteLength;
+
+            document.getElementById("demo1").innerHTML = 
+            "ArrayBuffer: " + myView + " <br> length(in bytes):  " + len1;
+        </script>
+
+        o/p:    ArrayBuffer: 72,101,108,108,111
+                length(in bytes): 5
+        
+        -> 💡Converted ArrayBuffer is the ASCII (decimal) representation of letters in a string
+    
+
+    - 2️⃣ Converting an ArrayBuffer to a String (UTF-8):
+
+        <script>
+            function arrayBufferToString(buffer) {
+                // Create an object that knows how to convert bytes into string using UTF-8
+                const decoder = new TextDecoder();
+                return decoder.decode(new Uint8Array(buffer));
+            }
+
+            const encoder = new TextEncoder();
+            const myBuff = encoder.encode("Hello ArrayBuffer").buffer;
+
+            let text = arrayBufferToString(myBuff);
+
+            document.getElementById("demo2").innerHTML = "String is: " + text;
+        </script>
+
+        o/p:    String is: Hello ArrayBuffer
+
+
+#) Sharing ArrayBuffer (SharedArrayBuffer):
+    - 💡An ArrayBuffer is not shared between threads by default.
+    - 💡To share memory between workers, JavaScript provides SharedArrayBuffer.
+    - 💡It behaves like ArrayBuffer, but its contents can be shared and used with Atomics.
+
+        <script>
+            if (Window.crossOriginIsolated) {
+                buffer = new SharedArrayBuffer(16);
+            } else {
+                buffer = new ArrayBuffer(16);
+            }
+
+            const sharedView = new Int32Array(buffer);
+
+            sharedView[0] = 42;
+
+            let numb = sharedView[0];
+
+            document.getElementById("demo").innerHTML = "Shared is " + numb;
+        </script>
+    
+    - ⚠️Browsers may require special security headers to enable SharedArrayBuffer (COOP/COEP).
+
+
+
+#) Summary:
+    👉 ArrayBuffer is a low-level object representing a fixed-size block of memory
+    👉 You cannot read or write directly to an ArrayBuffer
+    👉 You use views (typed arrays or DataView) to access an ArrayBuffer
+    👉 Typed arrays are good for uniform numeric data
+    👉 DataView is good for mixed or structured data
+    👉 Use slice() to copy parts of an ArrayBuffer
+    👉 Use a SharedArrayBuffer and Atomics for shared-memory concurrency
+
+
+#) Common Use Cases:
+    👉 Working with binary data from files (e.g., images, videos, audio).
+    👉 Handling binary network protocols (WebSockets, WebRTC, etc.).
+    👉 Performing performance-critical numeric computations.
+    👉 Interoperability with WebAssembly or other low-level APIs.
+
+
+#) ArrayBuffer Reference(Revised December 2025):
+
+        Property / Method	        Description
+    -------------------------------------------------------------------------------------------------------
+        new ArrayBuffer()	        Creates a new ArrayBuffer
+        arrayBuffer.byteLength	    The length of the buffer in bytes
+        arrayBuffer.slice()	        Returns a new ArrayBuffer as a copy of a portion of this buffer
+        ArrayBuffer.isView()	    Returns true if argument is a view on an ArrayBuffer
+
+        
+        Common Views:
+
+        View	                    Description	                    Bytes
+    -------------------------------------------------------------------------------
+        Int8Array	                8-bit signed integer	        1
+        Uint8Array	                8-bit unsigned integer	        1
+        Uint8ClampedArray	        8-bit clamped integer	        1
+        Int16Array	                16-bit signed integer	        2
+        Uint16Array	                16-bit unsigned integer	        2
+        Int32Array	                32-bit signed integer	        4
+        Uint32Array	                32-bit unsigned integer	        4
+        Float32Array	            32-bit floating point	        4
+        Float64Array	            64-bit floating point	        8
+        DataView	                Generic view (all types)

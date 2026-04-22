@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    var buffer = new SharedArrayBuffer(4);
+    var sharedArray = new Int32Array(buffer);
+
+    sharedArray[0] = 0;
+
+    var worker = new Worker("worker.js");
+
+    // Send the shared buffer to the worker
+    worker.postMessage(buffer);
+
+    // Simulate some work, then set the value and notify the worker
+    setTimeout(function() {
+      Atomics.store(sharedArray, 0, 1);
+      Atomics.notify(sharedArray, 0, 1); // wake 1 worker
+    }, 1000);
+  </script>
+</body>
+</html>

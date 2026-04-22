@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>One of the main advantages of DataView is that you can mix different types in a single buffer. For example:</h2>
+    <ul>
+        <li>1 byte for a flag</li>
+        <li>2 bytes for a length</li>
+        <li>4 bytes for a float</li>
+    </ul>
+
+    <script>
+        const buffer = new ArrayBuffer(12);
+        const view = new DataView(buffer);
+
+        // Byte 0: a flag (0 or 1)
+        view.setUint8(0, 1);
+
+        // Bytes 1-2: a 16-bit length (little-endian)
+        view.setUint16(1, 500, true);
+
+        // Bytes 4-11: a 64-bit float (skip byte 3 for alignment)
+        view.setFloat64(4, 3.14159, true);
+
+        // Read the values back
+        const flag = view.getUint8(0);
+        const length = view.getUint16(1, true);
+        const value = view.getFloat64(4, true);
+
+        console.log("Flag:", flag);
+        console.log("Length:", length);
+        console.log("Value:", value);
+    </script>
+</body>
+</html>

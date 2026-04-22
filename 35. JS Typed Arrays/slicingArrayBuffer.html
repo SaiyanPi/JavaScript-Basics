@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayBuffer.slice()</title>
+</head>
+<body>
+    <h3>You can make a copy of a part of an ArrayBuffer using the slice() method.
+        It returns a new ArrayBuffer with bytes from the specified range.</h3>
+        <p id="demo"></p>
+
+        <script>    
+            const myBuf = new ArrayBuffer(8);
+
+            // create a Uint8Array view
+            const view = new Uint8Array(myBuf);
+
+            // fill with value 0 to 7
+            for (let i = 0; i < view.length; i++) {
+                view[i] = i;
+            }
+
+            // create a copy of bytes from 2 to 5 (not including 5)
+            const sliced = myBuf.slice(2, 5);
+            const sliceView = new Uint8Array(sliced);
+
+            document.getElementById('demo').innerHTML = view + "<br> sliced: " + sliceView;
+        </script>
+</body>
+</html>

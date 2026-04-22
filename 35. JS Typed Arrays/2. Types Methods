@@ -1,0 +1,114 @@
+Typed Array Methods:
+
+1️⃣ The from() Method:
+    - The from()method creates a new typed array from any iterable object(strings are iterable):
+    - egs:
+        1) The from()method creates a new typed array from any iterable object:
+
+            const myArr = Int16Array.from("1234567890");
+            document.getElementById("demo").innerHTML = myArr;  // 1,2,3,4,5,6,7,8,9,0
+        
+        2) create a typed array from an array:
+
+            const myArr = Int16Array.from([1,2,3,4,5,6,7,8,9,0]);
+            document.getElementById("demo").innerHTML = myArr;  // 1,2,3,4,5,6,7,8,9,0
+
+2️⃣ The of() Method:
+    - The of() method creates a new typed array from a number of arguments.
+    - egs:
+        1) The of() method creates a new typed array from a number of arguments:
+
+            const myArr = Int32Array.of(1,2,3,4,5,6)
+            document.getElementById("demo").innerHTML = myArr;  // 1,2,3,4,5,6
+
+
+#) The constructor.name Property:
+    - 💡The constructor.name property returns the name (type) of a typed array:
+
+        const myArr = new Int32Array(10);
+        document.getElementById("demo").innerHTML = myArr.constructor.name; // Int32Array
+
+
+#) The BYTES_PER_ELEMENT Property:
+    - 💡BYTES_PER_ELEMENT returns the number of bytes used to store each array element:
+
+        const myArr = new Int32Array(10);
+        document.getElementById("demo").innerHTML = myArr.BYTES_PER_ELEMENT;    // 4
+
+
+#) Common Array Methods:
+    - Typed Arrays share many methods with Standard Arrays:
+        👉 Iteration: forEach(), map(), filter(), reduce(), reduceRight(), every(), some(), find(), findIndex(), 
+                        findLast(), findLastIndex().
+
+        👉 Searching: includes(), indexOf(), lastIndexOf().
+        👉 Manipulation: at(), copyWithin(), fill(), reverse(), set(), slice(), sort(), subarray().
+        👉 Conversion: join(), toLocaleString(), toString().
+        👉 Non-mutating methods: toReversed(), toSorted(), with().
+
+
+3️⃣ The fill() Method:
+    - 💡The fill() method changes all elements in a typed array to a value:
+
+        const myArr = new Int16Array(10);
+
+        // Fill the Array
+        myArr.fill(200);
+
+        document.getElementById("demo").innerHTML = myArr;  // 200,200,200,200,200,200,200,200,200,200
+
+    - The fill() method takes two optional arguments: start index and end index:
+
+        const myArr = new Int16Array(10);
+
+        // Fill some Array elements with the value
+        myArr.fill(200, 0, 3);
+
+        document.getElementById("demo").innerHTML = myArr;  // 200,200,200,0,0,0,0,0,0,0
+
+
+4️⃣ The find() Method:
+    - 💡The find() method returns the first element that satisfies a test function:
+        
+        const myArr = Int16Array.from([10,15,20,25,30,35,40,45,50]);
+        document.getElementById("demo").innerHTML = myArr.find((x) => x > 18);  // 20
+
+
+5️⃣ The some() Method:
+    - 💡The some() method returns true if an some element for which a provided function returns true:
+
+        const myArr = Int16Array.from([10,15,20,25,30,35,40,45,50]);
+        document.getElementById("demo").innerHTML = myArr.some((x) => x > 18);  // true
+
+
+
+#) Not Available Array Methods:
+    - Some array methods are NOT available for typed array.
+    - 💡This is due to the fixed-length nature and the lack of fixed structure.
+
+        Method	        Array	    Typed Array
+    ----------------------------------------------
+        pop()	        Yes	        NO
+        push()	        Yes	        NO
+        shift()	        Yes	        NO
+        unshift()	    Yes	        NO
+        splice()	    Yes	        NO
+        flat()	        Yes	        NO
+        flatMap()	    Yes	        NO
+        concat()	    Yes	        NO
+        toSpliced()	    Yes	        NO
+
+
+#) Browser APIs Supporting Typed Arrays:
+    - Fetch API Example:
+
+        fetch(url)
+        .then(request => request.arrayBuffer())
+        .then(arrayBuffer =>...);
+
+    - Canvas Example:
+
+        const canvas = document.getElementById('my_canvas');
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const uint8ClampedArray = imageData.data;

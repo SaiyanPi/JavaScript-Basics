@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomics</title>
+</head>
+<body>
+    <h2>Basic Atomics Usage</h2>
+    <p id="demo"></p>
+
+    <script>
+        if(Window.crossOriginIsolated) {
+            buffer = new  SharedArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        } else {
+            buffer = new ArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        }
+
+        // Shared integer array with 4 elements
+        const sharedArray = new Int32Array(buffer);
+
+        // Initialize the array
+        sharedArray[0] = 10;
+        sharedArray[1] = 20;
+        sharedArray[2] = 30;
+        sharedArray[3] = 40;
+
+        document.getElementById("demo").innerHTML = sharedArray;
+    </script>
+</body>
+</html>
+
+<!-- Explanation:
+
+    Int32Array.BYTES_PER_ELEMENT = 4 bytes(because Int32 = 32 bits = 4 bytes)
+
+    so, 4 * Int32Array.BYTES_PER_ELEMENT = 4 * 4 = 16 bytes
+
+    -  16 bytes of SharedArrayBuffer or ArrayBuffer can hold 4 Int32 value
+    or 16 bytes of SharedArrayBuffer or ArrayBuffer can hold 4 32 bits value
+    or 16 bytes of SharedArrayBuffer or ArrayBuffer can hold 4 4 bytes value -->

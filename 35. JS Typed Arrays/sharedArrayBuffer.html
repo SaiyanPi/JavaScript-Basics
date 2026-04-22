@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Sharing ArrayBuffer (SharedArrayBuffer)</h3>
+    <p id="demo"></p>
+    
+    <script>
+        if (Window.crossOriginIsolated) {
+            buffer = new SharedArrayBuffer(16);
+        } else {
+            buffer = new ArrayBuffer(16);
+        }
+
+        const sharedView = new Int32Array(buffer);
+
+        sharedView[0] = 42;
+
+        let numb = sharedView[0];
+
+        document.getElementById("demo").innerHTML = "Shared is " + numb;
+    </script>
+</body>
+</html>

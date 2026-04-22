@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DataView</title>
+</head>
+<body>
+    <h2>JS DataView</h2>
+    <p id="demo"></p>
+    <h2>JS DataView that starts at a specific offset and has a limited length</h2>
+    <p id="demo2"></p>
+
+    <script>
+        // Create a 16 bytes ArrayBuffer
+        const buffer = new ArrayBuffer(16);
+
+        // Create a new DataView
+        const view = new DataView(buffer);
+
+        // Display byte lengths and offset
+        let len1 = buffer.byteLength;
+        let len2 = view.byteLength;
+        let off1 = view.byteOffset;
+
+        document.getElementById("demo").innerHTML = 
+        "Buffer lengths are " + len1 + " and " + len2 + ", offset is " + off1;
+
+        // ----------------------  DataView that starts at a specific offset and has a limited length -----------
+
+        // Create a 16 bytes ArrayBuffer
+        const buffer2 = new ArrayBuffer(16);
+
+        // Create a new DataView
+        const view2 = new DataView(buffer, 4, 8);
+
+        // Display byte lengths
+        let leng1 = buffer2.byteLength;
+        let leng2 = view2.byteLength;
+        let offs1 = view2.byteOffset;
+
+        document.getElementById("demo2").innerHTML = 
+        "Buffer lengths are " + leng1 + " and " + leng2 + ", offset is " + offs1;
+    </script>
+</body>
+</html>

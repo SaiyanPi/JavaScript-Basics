@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic</title>
+</head>
+<body>
+    <h2>Atomic Read and Write</h2>
+    <h3>Use Atomics.load() to read and Atomics.store() to write an element in a shared typed array.</h3>
+    <p id="demo"></p>
+
+    <script>
+        if(Window.crossOriginIsolated) {
+            buffer = new  SharedArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        } else {
+            buffer = new ArrayBuffer(4 * Int32Array.BYTES_PER_ELEMENT);
+        }
+
+        // Shared integer array with 4 elements
+        const sharedArray = new Int32Array(buffer);
+
+        // Store a value atomically
+        Atomics.store(sharedArray, 0, 123);
+
+        // Load the value atomically
+        var value = Atomics.load(sharedArray, 0);
+
+        document.getElementById("demo").innerHTML = value;
+    </script>
+</body>
+</html>

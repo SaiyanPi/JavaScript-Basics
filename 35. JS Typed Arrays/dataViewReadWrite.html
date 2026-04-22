@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataView Values</title>
+</head>
+<body>
+    <h2>Reading and Writing DataView Values</h2>
+    <h3>1) getInt32() and setInt32()</h3>
+    <p id="demo1"></p>
+    <h3>2) getFloat64() and setFloat64()</h3>
+    <p id="demo2"></p>
+
+    <script>
+        const buffer1 = new ArrayBuffer(8);
+        const view1 = new DataView(buffer1);
+
+        // Write a 32-bit signed integer at byte offset 0
+        view1.setInt32(0, 123456);
+
+        // read it back
+        const value1 = view1.getInt32(0);
+
+        document.getElementById("demo1").innerHTML = value1;  // 123456
+
+        // ---------------------------------------------------------------------------------------------
+
+        const buffer2 = new ArrayBuffer(16);
+        const view2 = new DataView(buffer2);
+
+        view2.setFloat64(0, Math.PI);
+        view2.setFloat64(8, Math.E);
+
+        // read it back
+        const pi = view2.getFloat64(0);
+        const e = view2.getFloat64(8);
+
+        document.getElementById("demo2").innerHTML = "PI: " + pi + "<br> E: " + e;
+    </script>
+</body>
+</html>

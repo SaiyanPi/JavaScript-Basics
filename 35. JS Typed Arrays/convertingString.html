@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>converting string</title>
+</head>
+<body>
+    <h3>1) Converting a string to an ArrayBuffer (UTF-8)</h3>
+    <p id="demo1"></p>
+    <h3>2) Converting an ArrayBuffer to a string (UTF-8)</h3>
+    <p id="demo2"></p>
+
+    <script>
+        function stringToArrayBuffer(string) {
+            // Create an object that knows how to convert strings into bytes using UTF-8
+            let encoder = new TextEncoder();   
+            return encoder.encode(string).buffer;
+        }
+
+        const myBuf = stringToArrayBuffer("Hello");
+
+        const myView = new Uint8Array(myBuf);
+        let len1 = myBuf.byteLength;
+
+        document.getElementById("demo1").innerHTML = "ArrayBuffer: " + myView + " <br> length(in bytes):  " + len1;
+        
+        //-------------------------------------------------------------------------------------------------------
+
+        function arrayBufferToString(buffer) {
+            // Create an object that knows how to convert bytes into string using UTF-8
+            const decoder = new TextDecoder();
+            return decoder.decode(new Uint8Array(buffer));
+        }
+
+        const encoder = new TextEncoder();
+        const myBuff = encoder.encode("Hello ArrayBuffer").buffer;
+
+        let text = arrayBufferToString(myBuff);
+
+        document.getElementById("demo2").innerHTML = "String is: " + text;
+    </script>
+</body>
+</html>

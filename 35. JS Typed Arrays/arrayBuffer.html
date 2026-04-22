@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayBuffer</title>
+</head>
+<body>
+    <h2>Accessing an ArrayBuffer</h2>
+    <h3>1) Using an Uint8Array</h3>
+    <p id="demo"></p>
+    <h3>2) Using an Int32Array</h3>
+    <p id="demo2"></p>
+
+    <script>
+        // create 8-byte ArrayBuffer
+        const myBuf = new ArrayBuffer(8)
+
+        // create a Uint8Array view
+        const view = new Uint8Array(myBuf);
+
+        // write max 8 values (since Uint8 uses 1 byte, we can write 8 Uint8 values in 8 byte memory)
+        view[0] = 10;
+        view[2] = 128;
+        view[1] = 255;
+        view[3] = 300;  // 300 is more than 1 byte
+
+        // read values
+        let r0 = view[0];
+        let r1 = view[1];
+        let r2 = view[2];
+        let r3 = view[3];
+
+        // display values
+        document.getElementById('demo').innerHTML = `The values are ${r0}, ${r1}, ${r2}, ${r3}`;
+
+        //----------------------------------------------------------------------------------------------
+
+        // Create an 12-byte ArrayBuffer
+        const myBuf2 = new ArrayBuffer(12);
+
+        // Create an Int32Array view
+        const view2 = new Int32Array(myBuf2);
+
+        // 12 bytes = Max 3 Int32 values (since Int32 uses 4 byte, we can write 3 Int32 values in a 12 byte memory)
+        view2[0] = 100000;
+        view2[1] = 200000;
+        view2[2] = -300000;
+
+
+        // Read values
+        let v0 = view2[0];
+        let v1 = view2[1];
+        let v2 = view2[2];
+        let v3 = view2[3];
+
+        // Display values
+        document.getElementById("demo2").innerHTML = `Values are ${v0}, ${v1}, ${v2}`;
+    </script>
+</body>
+</html>

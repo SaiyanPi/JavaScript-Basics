@@ -1,0 +1,239 @@
+JavaScript DataView:
+
+
+- 💡The DataView Object lets you read and write multiple numeric types in an ArrayBuffer, at any byte offset,
+    with optional control over endianness (byte order).
+
+- 💡A DataView is a view on top of an ArrayBuffer.
+- 💡A DataView does not store data by itself; instead, it lets you interpret the bytes in the buffer as
+    different types:
+    -> 8-bit, 16-bit, 32-bit integers (signed and unsigned)
+    -> 32-bit and 64-bit floating point numbers
+    -> At arbitrary byte offsets in the buffer
+    -> With configurable little-endian or big-endian order
+
+- 💡Use DataView when:
+    -> You have a binary format with fields of different types and sizes.
+    -> You need to control byte order (endianness).
+    -> Typed arrays like Uint8Array or Float32Array are not flexible enough.
+
+- 💡Use DataView when you work with binary data where you need full control over byte layout and types
+    (for example network packets, file formats, or interoperability with other languages).
+
+
+#) Creating a DataView:
+    - To create a DataView, you need an ArrayBuffer.
+    - 💡Then you pass the ArrayBuffer to the new DataView() constructor:
+
+        <script>
+            // Create a 16 bytes ArrayBuffer
+            const buffer = new ArrayBuffer(16);
+
+            // Create a new DataView
+            const view = new DataView(buffer);
+
+            // Display byte lengths and offset
+            let len1 = buffer.byteLength;
+            let len2 = view.byteLength;
+            let off1 = view.byteOffset;
+            
+            document.getElementById("demo").innerHTML = 
+            "Buffer lengths are " + len1 + " and " + len2 + ", offset is " + off1;
+        </script>
+
+        o/p:    Buffer lengths are 16 and 16, offset is 0
+    
+    - 💡You can also create a DataView that starts at a specific offset and has a limited length:
+
+        <script>
+            // Create a 16 bytes ArrayBuffer
+            const buffer2 = new ArrayBuffer(16);
+
+            // Create a new DataView
+            const view2 = new DataView(buffer, 4, 8);
+
+            // Display byte lengths
+            let leng1 = buffer2.byteLength;
+            let leng2 = view2.byteLength;
+            let offs1 = view2.byteOffset;
+
+            document.getElementById("demo2").innerHTML = 
+            "Buffer lengths are " + leng1 + " and " + leng2 + ", offset is " + offs1;
+        </script>
+
+        o/p:    Buffer lengths are 16 and 8, offset is 4
+    
+    - 💡💡Multiple DataView and typed array views can share the same ArrayBuffer.
+
+
+#) Reading and Writing DataView Values:
+    - 💡DataView uses getXxx() and setXxx() methods to read and write values:
+        -> getInt8(), setInt8()
+        -> getUint16(), setUint16()
+        -> getInt32(), setInt32()
+        -> getFloat32(), setFloat32()
+        -> and more
+    
+    - eg: getInt32() and setInt32()
+
+        <script>
+            const buffer1 = new ArrayBuffer(8);
+            const view1 = new DataView(buffer1);
+
+            // Write a 32-bit signed integer at byte offset 0
+            view1.setInt32(0, 123456);
+
+            // read it back
+            const value = view1.getInt32(0);
+
+            document.getElementById("demo").innerHTML = value;  // 123456
+        </script>
+    
+    - eg: getFloat64() and setFloat64()
+
+        <script>
+            const buffer2 = new ArrayBuffer(16);
+            const view2 = new DataView(buffer2);
+
+            view2.setFloat64(0, Math.PI);
+            view2.setFloat64(8, Math.E);
+
+            // read it back
+            const pi = view2.getFloat64(0);
+            const e = view2.getFloat64(8);
+
+            document.getElementById("demo2").innerHTML = "PI: " + pi + "<br> E: " + e;
+        </script>
+
+        o/p:    PI: 3.141592653589793
+                E: 2.718281828459045
+    
+    - 💡Note: 
+        The first argument is always the byte offset from the start of the underlying buffer (or the byteOffset
+        of the view).
+
+
+#) Endianness (Byte Order):
+    - Many binary formats specify whether multi-byte numbers are stored as little-endian or big-endian.
+        💡Little-endian: Least significant byte first (most common on PCs).
+        💡Big-endian: Most significant byte first (common in some protocols).
+    
+    - 💡Most DataView numeric methods have an optional littleEndian parameter:
+        👉 true = little-endian
+        👉 false (or omitted) = big-endian
+    
+    - Example: Writing with Little-Endian and Big-Endian
+
+        <script>
+            const buffer1 = new ArrayBuffer(4);
+            const view1 = new DataView(buffer1);
+        
+            view1.setUint32(0, 0x12345678, true); // little-endian
+
+            console.log(new Uint8Array(buffer1));
+            // Example output: Uint8Array(4) [120, 86, 52, 18] (0x78, 0x56, 0x34, 0x12)
+
+            // ----------------------------------------------------------------------------------------------
+
+            const buffer2 = new ArrayBuffer(4);
+            const view2 = new DataView(buffer2);
+        
+            view2.setUint32(0, 0x12345678, false); // big-endian
+
+            console.log(new Uint8Array(buffer2));
+            // Example output: Uint8Array(4) [18, 52, 86, 120] (0x12, 0x34, 0x56, 0x78)
+        </script>
+    
+    - Tip: Always check the documentation for your file format or protocol to know which endianness to use.
+
+
+#) Mixed Types in One Buffer:
+    - 💡One of the main advantages of DataView is that you can mix different types in a single buffer. For example:
+        -> 1 byte for a flag
+        -> 2 bytes for a length
+        -> 4 bytes for a float
+
+        <script>
+            const buffer = new ArrayBuffer(12);
+            const view = new DataView(buffer);
+
+            // Byte 0: a flag (0 or 1)
+            view.setUint8(0, 1);
+
+            // Bytes 1-2: a 16-bit length (little-endian)
+            view.setUint16(1, 500, true);
+
+            // Bytes 4-11: a 64-bit float (skip byte 3 for alignment)
+            view.setFloat64(4, 3.14159, true);
+
+            // Read the values back
+            const flag = view.getUint8(0);
+            const length = view.getUint16(1, true);
+            const value = view.getFloat64(4, true);
+
+            console.log("Flag:", flag);
+            console.log("Length:", length);
+            console.log("Value:", value);
+        </script>
+
+
+#) Summary:
+    👉 DataView is a flexible way to read and write multiple numeric types in an ArrayBuffer.
+    👉 Use getXxx() and setXxx() methods with a byte offset (and optional endianness).
+    👉 Great for binary protocols, file formats, and interoperability with other languages.
+    👉 Combine DataView with typed arrays to inspect individual bytes easily.
+
+
+#) Common Use Cases:
+    👉 Parsing binary file formats (images, audio, custom formats).
+    👉 Implementing binary network protocols on top of WebSocket or WebRTC.
+    👉 Interop with WebAssembly or native code where layout matters.
+    👉 Re-implementing C/C++ style structs and unions in JavaScript.
+
+
+#) DataView Reference (Revised December 2025):
+
+    👉 Constructor:
+        Syntax	                                        Description
+        -------------------------------------------------------------------------------------------------------
+        new DataView(buffer)	                        View on entire ArrayBuffer.
+        new DataView(buffer, byteOffset)	            View starting at byteOffset to the end.
+        new DataView(buffer, byteOffset, byteLength)	View of length byteLength starting at byteOffset.
+
+
+    👉 Properties:
+        Property	                                    Description
+        --------------------------------------------------------------------------------------------------------
+        dataView.buffer	                                The underlying ArrayBuffer.
+        dataView.byteLength	                            Number of bytes in this view.
+        dataView.byteOffset	                            Offset (in bytes) of this view from the start of the buffer.
+    
+
+    👉 Read Methods (get):
+        Method	                                        Description
+        -------------------------------------------------------------------------------------------------
+        getInt8(byteOffset)	                            Reads an 8-bit signed integer.
+        getUint8(byteOffset)	                        Reads an 8-bit unsigned integer.
+        getInt16(byteOffset, littleEndian?)	            Reads a 16-bit signed integer.
+        getUint16(byteOffset, littleEndian?)	        Reads a 16-bit unsigned integer.
+        getInt32(byteOffset, littleEndian?)	            Reads a 32-bit signed integer.
+        getUint32(byteOffset, littleEndian?)	        Reads a 32-bit unsigned integer.
+        getFloat32(byteOffset, littleEndian?)	        Reads a 32-bit floating point number.
+        getFloat64(byteOffset, littleEndian?)	        Reads a 64-bit floating point number.
+        getBigInt64(byteOffset, littleEndian?)	        Reads a 64-bit signed integer as BigInt.
+        getBigUint64(byteOffset, littleEndian?)	        Reads a 64-bit unsigned integer as BigInt.
+
+
+    👉 Write Methods (set):
+        Method	                                            Description
+        --------------------------------------------------------------------------------------------------
+        setInt8(byteOffset, value)	                        Writes an 8-bit signed integer.
+        setUint8(byteOffset, value)	                        Writes an 8-bit unsigned integer.
+        setInt16(byteOffset, value, littleEndian?)	        Writes a 16-bit signed integer.
+        setUint16(byteOffset, value, littleEndian?)	        Writes a 16-bit unsigned integer.
+        setInt32(byteOffset, value, littleEndian?)	        Writes a 32-bit signed integer.
+        setUint32(byteOffset, value, littleEndian?)	        Writes a 32-bit unsigned integer.
+        setFloat32(byteOffset, value, littleEndian?)	    Writes a 32-bit floating point number.
+        setFloat64(byteOffset, value, littleEndian?)	    Writes a 64-bit floating point number.
+        setBigInt64(byteOffset, value, littleEndian?)	    Writes a 64-bit signed integer BigInt.
+        setBigUint64(byteOffset, value, littleEndian?)	    Writes a 64-bit unsigned integer BigInt.
