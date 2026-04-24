@@ -1,0 +1,73 @@
+JavaScript Window Navigator:
+
+- 💡The navigator object contains information about the visitor's browser.
+- 💡It can be written with or without the window prefix like: windows.navigator or just navigator
+
+
+1️⃣ Browser Cookies:
+    - 💡The cookieEnabled property returns true if cookies are enabled, otherwise false:
+
+        document.getElementById("demo").innerHTML = "cookiesEnabled is " + navigator.cookieEnabled;
+
+2️⃣ Is The Browser Online?
+    - 💡The onLine property returns true if the browser is online:
+
+        document.getElementById("demo").innerHTML = navigator.onLine;
+
+3️⃣ Browser Application Name:
+    - 💡The appName property returns the application name of the browser:
+
+        document.getElementById("demo").innerHTML = "navigator.appName is " + navigator.appName;
+
+4️⃣ Browser Application Code Name:
+    - 💡The appCodeName property returns the application code name of the browser:
+
+        document.getElementById("demo").innerHTML = "navigator.appCodeName is " + navigator.appCodeName;
+    
+    - ⚠️This property is removed (deprecated) in the latest web standard.
+    - ⚠️Most browsers (Chrome, Edge, Firefox, Safari) returns Mozilla as appCodeName.
+
+5️⃣ The Browser Engine:
+    - 💡The product property returns the product name of the browser engine:
+
+        document.getElementById("demo").innerHTML = "navigator.product is " + navigator.product;
+    
+    - ⚠️This property is removed (deprecated) in the latest web standard.
+    - ⚠️Most browsers returns Gecko as product.
+
+6️⃣ The Browser Version:
+    - 💡The appVersion property returns version information about the browser:
+
+        document.getElementById("demo").innerHTML = navigator.appVersion;
+    
+    - ⚠️This property is removed (deprecated) in the latest web standard.
+    - ⚠️Do not rely on appVersion to return the correct browser version.
+
+7️⃣ The Browser Agent:
+    - 💡The userAgent property returns the user-agent header sent by the browser to the server:
+
+        document.getElementById("demo").innerHTML = navigator.userAgent;
+
+
+- ⚠️The information from the navigator object can often be misleading.
+- ⚠️The navigator object should not be used to detect browser versions because:
+    👉 Different browsers can use the same name
+    👉 The navigator data can be changed by the browser owner
+    👉 Some browsers misidentify themselves to bypass site tests
+    👉 Browsers cannot report new operating systems, released later than the browser
+
+8️⃣ The Browser Platform:
+    - 💡The platform property returns the browser platform (operating system):
+
+        document.getElementById("demo").innerHTML = navigator.platform;
+    
+    - ⚠️This property is removed (deprecated) in the latest web standard.
+    - Do not rely on platform to return the correct browser platform in all browsers.
+
+9️⃣ Is Java Enabled?
+    - 💡The javaEnabled() method returns true if Java is enabled:
+
+        document.getElementById("demo").innerHTML = navigator.javaEnabled();
+    
+    - ⚠️This method is removed (deprecated) in the latest web standard.
+    - ⚠️javaEnabled() always returns false.

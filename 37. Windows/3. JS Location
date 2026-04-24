@@ -1,0 +1,71 @@
+JavaScript Window Location:
+
+- 💡The window.location object can be used to get the current page address (URL) and to redirect the browser to
+    a new page.
+- The window.location object can be written without the window prefix.
+- Some examples:
+    👉 window.location.href returns the href (URL) of the current page
+    👉 window.location.hostname returns the domain name of the web host
+    👉 window.location.pathname returns the path and filename of the current page
+    👉 window.location.protocol returns the web protocol used (http: or https:)
+    👉 window.location.assign() loads a new document
+
+1️⃣ Window Location Href:
+    - 💡The window.location.href property returns the URL of the current page.
+
+        document.getElementById("demo").innerHTML = "The full URL of this page is:<br>" + window.location.href;
+
+        o/p The full URL of this page is: http://127.0.0.1:5500/37.%20Windows/location.html
+
+2️⃣ Window Location Hostname:
+    - 💡The window.location.hostname property returns the name of the internet host (of the current page).
+
+        document.getElementById("demo").innerHTML += "Page hostname is: " + window.location.hostname;
+
+        o/p:    Page hostname is: 127.0.0.1
+
+3️⃣ Window Location Pathname:
+    - 💡The window.location.pathname property returns the pathname of the current page.
+
+        document.getElementById("demo").innerHTML = "Page path is: " + window.location.pathname;
+
+        o/p:    Page path is: /37.%20Windows/location.html
+
+4️⃣ Window Location Protocol:
+    - 💡The window.location.protocol property returns the web protocol of the page.
+
+        document.getElementById("demo").innerHTML = "The page protocol is: " + window.location.protocol;
+
+        o/p:    The page protocol is: http:
+
+5️⃣ Window Location Port:
+    - 💡The window.location.port property returns the number of the internet host port (of the current page).
+
+        document.getElementById("demo").innerHTML = 
+        "The URL port number of the current page is: " + window.location.port;
+
+        o/p:    The URL port number of the current page is: 5500
+    
+    - 💡If the port number is default (80 for http and 443 for https), most browsers will display 0 or nothing.
+
+6️⃣ Window Location Assign:
+    - 💡The window.location.assign() method loads a new document.
+
+        <!DOCTYPE html>
+        <html>
+            <body>
+
+                <h2>JavaScript</h2>
+
+                <h3>The window.location object</h3>
+
+                <input type="button" value="Load new document" onclick="newDoc()">
+
+                <script>
+                    function newDoc() {
+                        window.location.assign("https://www.w3schools.com")
+                    }
+                </script>
+
+            </body>
+        </html>
